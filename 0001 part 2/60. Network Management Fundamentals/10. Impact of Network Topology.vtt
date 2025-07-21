@@ -1,0 +1,81 @@
+WEBVTT
+
+0
+00:00.240 --> 00:06.690
+Another important topic to discuss is the impact of the network topology on your network monitoring
+
+1
+00:07.560 --> 00:14.460
+if an interface goes down, does it impact the ability of the NMS to collect data from your network
+
+2
+00:14.460 --> 00:15.180
+devices?
+
+3
+00:16.230 --> 00:23.010
+So as an example, if you viewed the network topology in something as simple as Visio or within one
+
+4
+00:23.010 --> 00:29.550
+of your management tools, how would an outage affect the ability of your network management system
+
+5
+00:29.550 --> 00:32.490
+to collect data from devices in your network?
+
+6
+00:33.370 --> 00:39.820
+If you had devices at a remote site and you wanted to collect statistics from those devices, how will
+
+7
+00:39.820 --> 00:43.810
+a link down affect your ability to get to those statistics?
+
+8
+00:44.680 --> 00:50.770
+If there was only a single link to the remote site and you had a central network management system and
+
+9
+00:50.770 --> 00:56.680
+the link went down, the NMS would no longer be able to access those devices to collect data.
+
+10
+00:57.650 --> 01:05.030
+So you may need to deploy a network management collector on the remote site to collect data remotely
+
+11
+01:05.030 --> 01:07.970
+rather than trying to collect everything from a central site.
+
+12
+01:08.920 --> 01:14.410
+So this would mean, as an example, that you deploy a distributed network management architecture rather
+
+13
+01:14.410 --> 01:18.070
+than having a single centralized network management system.
+
+14
+01:19.010 --> 01:22.070
+This is especially true where you have multiple data centers.
+
+15
+01:22.970 --> 01:29.960
+In that case, you might want to deploy multiple copies of NPM one in each data center that then forwards
+
+16
+01:29.960 --> 01:33.720
+data to an enterprise operation console or EOC.
+
+17
+01:34.580 --> 01:38.210
+So remember, if you can't get to it, you can't monitor it.
+
+18
+01:39.150 --> 01:44.160
+So it's important that you keep track of your network topology because you need to ensure that you have
+
+19
+01:44.160 --> 01:46.950
+reachability status when the topology changes.

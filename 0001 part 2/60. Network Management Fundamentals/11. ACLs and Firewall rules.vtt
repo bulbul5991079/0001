@@ -1,0 +1,137 @@
+WEBVTT
+
+0
+00:00.210 --> 00:07.860
+Things that may affect your network reachability are access control lists or ACLs and firewall rules.
+
+1
+00:08.920 --> 00:15.430
+In many networks that aren't actively being managed, you'll find that security engineers have blocked
+
+2
+00:15.430 --> 00:18.190
+protocols such as SNMP and ICMP.
+
+3
+00:19.090 --> 00:25.690
+Those two protocols are very important network management protocols, but for security reasons, they
+
+4
+00:25.690 --> 00:31.000
+may have been blocked in various points in the network by security-conscious engineers.
+
+5
+00:31.600 --> 00:38.770
+So it's important that when you're starting to audit the network in preparation to a NMS rollout that
+
+6
+00:38.770 --> 00:43.390
+you pay special attention to where traffic is allowed and where it's denied.
+
+7
+00:44.140 --> 00:51.490
+Now, from a best practice point of view, it's ideal to deploy a management VLAN which is separate
+
+8
+00:51.670 --> 00:54.310
+to the VLANs used for user traffic.
+
+9
+00:55.390 --> 01:02.410
+So a separate network or separate VLAN is created and network management traffic is permitted on that
+
+10
+01:02.410 --> 01:02.950
+VLAN.
+
+11
+01:03.790 --> 01:11.500
+So ACLs and firewall rules on network devices would allow network management protocols on that VLAN
+
+12
+01:11.800 --> 01:15.490
+and allow an NMS to access the loopback of a router
+
+13
+01:15.490 --> 01:22.240
+as an example, just be aware that if you limit access to network devices from only specific IP addresses.
+
+14
+01:22.660 --> 01:27.970
+So as an example, you only allow the IP address of the network management system to access the routers
+
+15
+01:27.970 --> 01:30.340
+loopback interface using SNMP.
+
+16
+01:31.490 --> 01:38.090
+When you change things in your network, such as expanding the network management applications, you
+
+17
+01:38.090 --> 01:43.660
+may need to go back and adjust your access lists or adjust your firewall rules.
+
+18
+01:44.210 --> 01:50.930
+So it may be simpler to permit a subnet access to your network devices rather than locking it down to
+
+19
+01:50.930 --> 01:52.340
+an individual IP address.
+
+20
+01:53.030 --> 01:58.750
+In the same way, when discussing security, you need to pay attention to different security zones.
+
+21
+01:59.120 --> 02:05.720
+That customer may have an outside interface on a firewall and inside interface and a DMZ interface
+
+22
+02:05.990 --> 02:07.130
+on their firewall.
+
+23
+02:07.790 --> 02:11.430
+These security zones can impact your network management systems.
+
+24
+02:11.990 --> 02:18.830
+So you need to understand how are you going to deploy the NMS and how security rules and firewall
+
+25
+02:18.830 --> 02:25.560
+zones are going to affect overall reachability and the management strategy that you deploy. Now
+
+26
+02:25.580 --> 02:31.190
+last but not least, you need to think about overlapping and non-routable addresses in your network.
+
+27
+02:32.060 --> 02:37.430
+Overlapping and unreadable addresses can be a real headache when deploying network management systems.
+
+28
+02:38.240 --> 02:44.030
+You should audit your network and understand which addresses are reachable and from where in the network
+
+29
+02:44.420 --> 02:51.560
+and take that into account as you start documenting the systems and decide where to roll out your network
+
+30
+02:51.560 --> 02:52.400
+management system.
+
+31
+02:53.210 --> 02:59.090
+In many cases, if you have overlapping address space and you have devices on each of those overlapping
+
+32
+02:59.090 --> 03:06.770
+subnets that you need to monitor, you'll need to create a separate polling engine for NPM for each
+
+33
+03:06.770 --> 03:08.960
+duplicate address space zone.

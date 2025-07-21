@@ -1,0 +1,57 @@
+WEBVTT
+
+0
+00:00.210 --> 00:06.660
+Another key area of network management planning is knowing how to build and leverage reports.
+
+1
+00:07.600 --> 00:14.710
+Now, the NPM report writer makes it quite easy to create various types of reports, but it's worthwhile
+
+2
+00:14.710 --> 00:21.100
+having a look at seeing which reports are available for you and how you can customize those for different
+
+3
+00:21.100 --> 00:22.240
+business requirements.
+
+4
+00:23.110 --> 00:29.680
+Now, baselines are important when you're doing capacity planning or doing service level agreement or
+
+5
+00:29.680 --> 00:31.120
+SLA management.
+
+6
+00:32.090 --> 00:38.810
+You also want to think about things such as availability, which means how much a network is up during
+
+7
+00:38.810 --> 00:40.160
+that period of measurement.
+
+8
+00:41.110 --> 00:47.560
+You also want to think about performance and capacity planning as an example, with availability, you
+
+9
+00:47.560 --> 00:52.240
+need to understand the term 5 9s or 4 9s.
+
+10
+00:53.050 --> 00:59.980
+What 5 9s simply means is that during the period of a year, as an example, the network is up 
+
+11
+00:59.980 --> 01:03.970
+99.999% of the time.
+
+12
+01:04.390 --> 01:06.910
+In other words, there are five nines in that number.
+
+13
+01:07.860 --> 01:11.450
+That equates to about five minutes of downtime per year.

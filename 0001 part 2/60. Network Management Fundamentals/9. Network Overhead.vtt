@@ -1,0 +1,149 @@
+WEBVTT
+
+0
+00:00.300 --> 00:05.970
+When you deploy a network management system, it's typically going to add an overhead to your network.
+
+1
+00:06.690 --> 00:12.930
+This is especially true if you're using a query-based system that's polling the network using a very
+
+2
+00:12.930 --> 00:13.860
+short interval.
+
+3
+00:14.670 --> 00:20.610
+So you should determine the scope and impact on the network that the network management system will
+
+4
+00:20.610 --> 00:21.000
+have.
+
+5
+00:21.910 --> 00:27.970
+So, as mentioned, one of the things you need to think about is polling frequency, this means how
+
+6
+00:27.970 --> 00:31.350
+often you're going to poll devices to collect data.
+
+7
+00:32.200 --> 00:37.540
+The more often that you poll devices, the more granular and the more detailed your statistics are
+
+8
+00:37.540 --> 00:38.050
+going to be.
+
+9
+00:39.020 --> 00:45.650
+However, on the flip side, that means that it's going to have a larger impact on your network because
+
+10
+00:45.650 --> 00:47.990
+there's more traffic being transmitted on the network.
+
+11
+00:48.800 --> 00:53.330
+The network management system is polling the network on a more frequent basis, which puts more traffic
+
+12
+00:53.330 --> 00:54.070
+on the network.
+
+13
+00:54.650 --> 01:00.290
+And in addition, there's a higher load on your network devices because they have to reply back to the
+
+14
+01:00.290 --> 01:05.640
+network management station with information that you're trying to gather from that network device.
+
+15
+01:06.590 --> 01:14.840
+So more polling equates to more detail and quicker detection of issues, but it puts a higher load on
+
+16
+01:14.840 --> 01:17.870
+both the network and the devices in your network.
+
+17
+01:18.710 --> 01:25.610
+Now, once again, the advantage of more polling is that you have more detail and it's quicker to detect
+
+18
+01:25.610 --> 01:26.120
+issues.
+
+19
+01:26.700 --> 01:30.920
+However, on the flip side, it can create extra traffic on the network.
+
+20
+01:31.850 --> 01:38.810
+Now, most modern network management systems and a lot of modern network devices can handle a larger
+
+21
+01:38.810 --> 01:43.190
+amount of network management traffic than was possible in the past.
+
+22
+01:44.000 --> 01:49.760
+The processing power of your network devices and the speed of interfaces are a lot greater today than
+
+23
+01:49.760 --> 01:50.990
+they were a few years ago.
+
+24
+01:51.880 --> 01:55.330
+So it's not as much of a problem as it may have once been.
+
+25
+01:56.300 --> 02:01.400
+This is another reason that you want to leverage both event-based network management protocols, as
+
+26
+02:01.400 --> 02:07.970
+well as query-based network management protocols, event-based protocols once again offer real-time
+
+27
+02:07.970 --> 02:11.480
+unsolicited feedback from your network devices.
+
+28
+02:11.990 --> 02:15.560
+A router is going to inform the network management station
+
+29
+02:15.560 --> 02:22.760
+when an interface goes down with polling-based or query-based protocols, there's a query and response.
+
+30
+02:23.570 --> 02:29.660
+In other words, the NMS is querying a device for information, and it's responding or answering
+
+31
+02:29.660 --> 02:31.430
+back to that query.
+
+32
+02:32.330 --> 02:40.910
+Now, less polling equates to less bandwidth utilization, but in addition equates to smaller storage
+
+33
+02:40.910 --> 02:44.540
+requirements, which is another important thing to think about.
+
+34
+02:45.540 --> 02:51.000
+If you're collecting a large amount of data, you need to think about your disk requirements for your SQL
+
+35
+02:51.000 --> 02:58.980
+Server, which is where NPM stores data, large amounts of data equate to bigger SQL databases, which
+
+36
+02:58.980 --> 03:01.080
+in turn means that you need more disk space.
