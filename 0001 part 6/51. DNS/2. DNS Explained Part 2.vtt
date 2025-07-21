@@ -1,0 +1,533 @@
+WEBVTT
+
+0
+00:03.220 --> 00:10.210
+Now, on this Windows computer, I'm going to change the DNS server to the Cisco router.
+
+1
+00:13.700 --> 00:16.670
+So go to the Ethernet settings.
+
+2
+00:18.840 --> 00:29.070
+Rather than using Google as the DNS server and CloudFlare, I'm only going to specify my local router
+
+3
+00:29.400 --> 00:30.630
+as the DNS server.
+
+4
+00:31.730 --> 00:37.640
+Now, in this example, I've configured the router to accept a DNS queries and answer them, and if
+
+5
+00:37.640 --> 00:40.490
+it doesn't know the answer to forward it to Google.
+
+6
+00:41.430 --> 00:46.810
+This is once again a Cisco it, but to your home router probably does something very, very similar.
+
+7
+00:47.490 --> 00:53.280
+So if I type show run pipe include, which basically allows me to look for a command and search for
+
+8
+00:53.280 --> 01:00.150
+DNS you can see that I've enabled IP DNS server so the router will act like a DNS server.
+
+9
+01:00.960 --> 01:08.470
+Show IP Route shows us that it has a default route to a router physically in my local network.
+
+10
+01:08.490 --> 01:13.200
+That's another Cisco router that actually physically connects me out onto the Internet.
+
+11
+01:14.490 --> 01:17.970
+This device can ping google.com.
+
+12
+01:18.390 --> 01:20.430
+So if I type show
+
+13
+01:20.430 --> 01:22.260
+run type include name.
+
+14
+01:24.470 --> 01:32.150
+Typically, I would have IP name server, something like this, but it actually got to that because
+
+15
+01:32.660 --> 01:40.010
+the outside interface, in other words, the interface connecting this device to the Internet is using
+
+16
+01:40.010 --> 01:40.970
+DHCP.
+
+17
+01:41.760 --> 01:48.310
+So through DHCP, it learnt the default gateway it also learnt the DNS server information.
+
+18
+01:48.740 --> 01:52.070
+So once again, it could ping DavidBombal.com as an example.
+
+19
+01:52.790 --> 02:03.380
+Now the PC won't be able to ping r1.home.com as an example because the router isn't
+
+20
+02:03.380 --> 02:07.160
+configured with that information. On the Cisco router
+
+21
+02:07.880 --> 02:12.380
+If I try and ping r1.home.com
+
+22
+02:12.680 --> 02:18.500
+that's not going to work because it doesn't know about that domain notice
+
+23
+02:18.500 --> 02:23.810
+it's actually trying to get to the Internet router to try and find out what that domain is
+
+24
+02:24.620 --> 02:34.970
+but if I type IP host and specify a hostname like r1.home.com and then specify an IP address
+
+25
+02:35.930 --> 02:43.250
+of, let's say, 10.1.1.254 the local router, this router will be able to ping itself.
+
+26
+02:43.760 --> 02:50.780
+It's done a name resolution locally and the PC will also be able to ping that domain.
+
+27
+02:52.020 --> 03:03.450
+I'm going to flush the DNS cache so it doesn't have any cached entries locally and then in gns3
+
+28
+03:03.450 --> 03:05.820
+I'll run a Wireshark capture here
+
+29
+03:07.440 --> 03:10.800
+and what will filter for is DNS.
+
+30
+03:12.040 --> 03:17.860
+So basically, we'll see a DNS request from the PC going to the router and the router replying if
+
+31
+03:17.860 --> 03:29.770
+it does a DNS request. So ping R1.home.com that works in Wireshark, we can see the DNS request
+
+32
+03:30.010 --> 03:34.450
+from another random or ephemeral port going to Port 53
+
+33
+03:34.690 --> 03:45.190
+but the DNS Service 10.1.1.254, which is the local router, it's asking for the IP address
+
+34
+03:45.190 --> 03:55.060
+of this domain name and the route replying back, saying the IP address of that domain name is 10.1
+
+35
+03:55.060 --> 03:56.250
+.1.254.
+
+36
+03:56.710 --> 04:00.100
+So standard query for an A record because this is IPv4
+
+37
+04:00.430 --> 04:03.230
+but in this case, the query went to the router.
+
+38
+04:04.030 --> 04:09.730
+Now the routers gonna forward on DNS queries that it doesn't know the answer to, and we can prove
+
+39
+04:09.730 --> 04:14.620
+that by running a Wireshark capture between the router and the internet
+
+40
+04:14.620 --> 04:15.780
+so on this link.
+
+41
+04:16.690 --> 04:22.300
+So we're seeing a whole bunch of traffic because that is bridged to my physical network.
+
+42
+04:22.870 --> 04:31.320
+But once again, what I'll do here is filter for DNS can see some other DNS queries already taking place.
+
+43
+04:32.450 --> 04:39.650
+On the Windows PC I'll ping davidbombal.com once again, you don't have to use ping you
+
+44
+04:39.650 --> 04:42.070
+could use nslookup, so let me show you that as well
+
+45
+04:42.350 --> 04:48.710
+but notice it did get resolved and it looks like it didn't get forwarded.
+
+46
+04:51.780 --> 05:00.420
+So let's do an nslookup for a different domain, let's say Cisco.com resolution is this IP
+
+47
+05:00.420 --> 05:00.810
+address.
+
+48
+05:02.730 --> 05:11.660
+So notice, there we go, we've done an nslookup notice in this case, it's a DNS query for both
+
+49
+05:11.670 --> 05:13.390
+the IPv4 address.
+
+50
+05:13.440 --> 05:16.710
+So we've got a query for the A record cisco.com
+
+51
+05:17.460 --> 05:23.280
+and then we've also got a query for the IPv6 IP address.
+
+52
+05:23.940 --> 05:31.800
+So in this case, the reply came back saying this is the IP address of cisco IPv4 and this
+
+53
+05:31.800 --> 05:34.830
+is the IPv6 address
+
+54
+05:35.550 --> 05:41.340
+and we can see that here, IPv6 and IPv4. In our Wireshark capture
+
+55
+05:42.240 --> 05:48.570
+notice that the source IP address is192.168.167, which is actually the router.
+
+56
+05:48.580 --> 05:52.850
+show IP interface brief shows us that that is the IP address of the router.
+
+57
+05:53.160 --> 06:00.570
+So the router is querying another device for the IP address information because it doesn't know it locally.
+
+58
+06:01.000 --> 06:03.230
+So that's the whole idea with DNS.
+
+59
+06:03.240 --> 06:09.390
+If the local DNS server doesn't know the answer, it forwards that query to a more authoritative DNS
+
+60
+06:09.390 --> 06:09.840
+server.
+
+61
+06:10.770 --> 06:16.800
+And in this case, we're getting both the IPv4 IP address as well as the IPv6 IP
+
+62
+06:16.800 --> 06:19.350
+address because I used nslookup.
+
+63
+06:20.070 --> 06:25.320
+Now you need to make sure that the DNS server that you queering is giving you good information.
+
+64
+06:25.710 --> 06:33.870
+As an example, on this router, I could create a hostname for cisco.com and simply pointed to another
+
+65
+06:33.870 --> 06:38.760
+IP address, let's say the local router. On the PC
+
+66
+06:38.970 --> 06:47.420
+I'll flush the DNS cache, so flush DNS and then I'll ping cisco.com.
+
+67
+06:48.270 --> 06:52.200
+Notice the IP address resolved is 10.1.1.254
+
+68
+06:52.350 --> 06:55.530
+it's not to the actual IP address of cisco.
+
+69
+06:58.800 --> 07:04.260
+So if your DNS entries are manipulated or you're  connecting to a false DNS server, you could end up going
+
+70
+07:04.260 --> 07:06.460
+to the incorrect server.
+
+71
+07:07.140 --> 07:11.550
+You may think you're going to cisco.com or another domain, but actually you're being redirected
+
+72
+07:11.550 --> 07:12.120
+somewhere else.
+
+73
+07:12.660 --> 07:20.250
+So hackers will often target DNS servers, have rogue DNS servers which allow them to push your traffic
+
+74
+07:20.250 --> 07:21.000
+where they want to.
+
+75
+07:21.570 --> 07:27.270
+Again, fortunately, because of Certificate's preloaded on browsers today, you may be warned if you
+
+76
+07:27.270 --> 07:28.980
+go to the wrong server.
+
+77
+07:30.220 --> 07:36.490
+Typically, you're not going to use your cisco.com as a DNS server you might use it to for DNS requests
+
+78
+07:36.490 --> 07:42.810
+onto a DNS serve on the Internet, but you wouldn't want to configure your local router as the DNS server.
+
+79
+07:43.360 --> 07:45.460
+You may in some cases, but typically not.
+
+80
+07:45.730 --> 07:51.640
+What you typically want to use is a Linux server to be the DNS server.
+
+81
+07:52.390 --> 07:58.750
+So in this example, I'm going to show you how to set up a DNS server on a ubuntu computer.
+
+82
+07:59.410 --> 08:01.420
+Now, this is a ubuntu desktop.
+
+83
+08:01.960 --> 08:06.810
+So IF config shows us the IP address of the server, can we ping google.com?
+
+84
+08:07.570 --> 08:15.580
+So IF config shows us the IP address of the server, can we ping google.com?
+
+85
+08:17.290 --> 08:21.160
+Yes, we can, so we're getting a resolution of that domain.
+
+86
+08:22.470 --> 08:30.990
+Now to set up this Ubuntu PC as a DNS server, I need to disable System D resolved because there's
+
+87
+08:30.990 --> 08:32.640
+a conflict on Port 53.
+
+88
+08:33.090 --> 08:38.070
+You cannot have two services listening on Port 53, I want to set up dnsmasq
+
+89
+08:38.070 --> 08:47.340
+So I want to disable this process so that dnsmasq can listen on that port
+
+90
+08:47.340 --> 08:47.760
+number.
+
+91
+08:50.670 --> 08:54.660
+So I'm going to disable system D resolved and then I'm going to stop it.
+
+92
+08:57.900 --> 09:04.430
+I'll put all these commands below this video if you want to access this yourself and see the commands.
+
+93
+09:05.130 --> 09:07.220
+Next thing I'm going to do is edit.
+
+94
+09:07.650 --> 09:11.370
+I'm just going to use nano for that to keep it simple resolve.conf
+
+95
+09:15.340 --> 09:21.430
+name service set to this at the moment. I'm going to set the name server to Google
+
+96
+09:27.290 --> 09:33.470
+and then I'm going to do sudo apt update to update references, it might be a bit slow here because
+
+97
+09:33.470 --> 09:40.170
+I'm going through the gns3 network, going through Cisco devices like this in gns3s very slow,
+
+98
+09:40.450 --> 09:42.860
+so I'll speed the video up if necessary.
+
+99
+09:47.760 --> 09:53.370
+OK, so the references have been updated, so what I'm going to do is install dnsmasq
+
+100
+09:59.110 --> 10:06.520
+And that's now being installed now my Mac is going crazy, there seems to be an issue with VMware Fusion
+
+101
+10:06.520 --> 10:09.370
+and a Mac where the CPU starts acting like mad.
+
+102
+10:09.640 --> 10:14.830
+So I'm sorry if there's a lot of background noise, but hopefully you can hear what I'm saying. Now to
+
+103
+10:14.830 --> 10:16.060
+edit dnsmasq
+
+104
+10:16.060 --> 10:17.260
+It's not that difficult.
+
+105
+10:20.340 --> 10:23.700
+I'm going to edit etc/dnsmasq.conf.
+
+106
+10:24.780 --> 10:28.980
+Now, quite a few options that you can change here, but I'm just going to change some of the basics.
+
+107
+10:29.670 --> 10:31.260
+Set the port to 53
+
+108
+10:31.260 --> 10:32.940
+that is the default.
+
+109
+10:37.890 --> 10:45.300
+For housekeeping and to be a better net citizen, I'm going to uncomment domain needed and bogus
+
+110
+10:45.430 --> 10:53.010
+priv. So we'll never forward plain domain names onto the Internet and non-routable address space.
+
+111
+10:53.850 --> 10:56.280
+And then essentially all I need to do
+
+112
+10:58.390 --> 11:06.760
+is uncomment this because I don't want to use etc resolve, I'm going to put domain names directly
+
+113
+11:06.760 --> 11:07.220
+here.
+
+114
+11:07.990 --> 11:18.790
+So what I could do is simply add domain names like r1.home.com and the IP address and whatever
+
+115
+11:18.790 --> 11:20.870
+other domain names I want to enter.
+
+116
+11:21.460 --> 11:29.620
+So let's say myrouter.home.com, same IP address and then all I need to do is save that file and
+
+117
+11:29.620 --> 11:31.360
+then restart the service.
+
+118
+11:31.570 --> 11:37.600
+So sudo systemctl restart dnsmasq.
+
+119
+11:40.490 --> 11:42.300
+I can look at the status if I want to.
+
+120
+11:45.160 --> 11:53.350
+Can see that this lightweight dhcp and caching DNS server is running, so now on my Windows PC, to prove the
+
+121
+11:53.350 --> 11:59.290
+point, lets configure the DNS server to the ubuntu PC.
+
+122
+12:07.460 --> 12:19.370
+So I'm going to set the DNS server here to 200, which is my Ubuntu PC and click, OK, so let's flush
+
+123
+12:19.370 --> 12:20.120
+the DNS.
+
+124
+12:21.440 --> 12:27.950
+DNS has been flushed do that again, so can I ping r1.home.com?
+
+125
+12:28.550 --> 12:32.750
+Yes, I can, because that's been resolved by the Ubuntu server.
+
+126
+12:33.620 --> 12:36.680
+Now, that was quite a long video, but hopefully you've learned something.
+
+127
+12:36.890 --> 12:41.870
+I've shown you how to capture DNS queries and responses using Wireshark.
+
+128
+12:42.110 --> 12:44.300
+I showed you the source and destination port numbers.
+
+129
+12:44.750 --> 12:50.540
+I showed you how you can configure a Cisco router as a DNS server and how to configure and a n ubuntu
+
+130
+12:50.540 --> 12:52.360
+PC as a DNS server
+
+131
+12:52.580 --> 12:56.250
+And then we tested the queries and made sure that it worked properly.
+
+132
+12:56.930 --> 12:59.480
+I'm David Bumble and I want to wish you all the very best.

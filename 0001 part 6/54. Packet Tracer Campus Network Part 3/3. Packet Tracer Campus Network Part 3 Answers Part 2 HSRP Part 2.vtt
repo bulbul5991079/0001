@@ -1,0 +1,329 @@
+WEBVTT
+
+0
+00:13.570 --> 00:21.610
+So that was the configuration for VLAN 10, that means that for the PC and VLAN 10 we can configure
+
+1
+00:22.210 --> 00:33.250
+the PC to use a default gateway of that HSRP router, the IP address that we need to configure the PC,
+
+2
+00:33.250 --> 00:37.930
+as is shown in the output here, 10.1.10.10, 
+
+3
+00:38.970 --> 00:44.280
+so 10.1.10.10/24 subnet mask.
+
+4
+00:45.590 --> 00:47.450
+So I'll open up a command prompt.
+
+5
+00:49.980 --> 00:57.870
+IP config, that's the IP address of the PC, can it ping its default gateway?
+
+6
+00:57.900 --> 00:58.830
+Yes, it can.
+
+7
+00:59.550 --> 01:08.700
+Now notice the arp cache, notice the Mac address used here for the default gateway is the HSRP router.
+
+8
+01:09.980 --> 01:15.530
+In other words, the virtual Mac address, as we can see over here.
+
+9
+01:16.960 --> 01:24.610
+So once we've got our network configured, we should be able to ping devices in other VLANs. So let's
+
+10
+01:24.610 --> 01:32.470
+complete the configuration of HSRP and both of these core routers and then configure default gateways
+
+11
+01:32.590 --> 01:36.100
+on other devices and test connectivity.
+
+12
+01:37.400 --> 01:49.980
+So configuration on VLAN 10 is as follows, on VLAN 20 this device is not the spanning-tree root.
+
+13
+01:50.980 --> 01:54.940
+So we want core 2 to be
+
+14
+01:55.830 --> 02:02.130
+the HSRP active router for VLAN 20, because it's the root.
+
+15
+02:05.240 --> 02:14.510
+So all we'll do here is use the command standby IP 10.1.20.254 now before I configure switch
+
+16
+02:14.510 --> 02:19.120
+2 I want this device to become the active router.
+
+17
+02:19.820 --> 02:21.260
+So we need to give it some time
+
+18
+02:21.590 --> 02:28.400
+and then I'll show you what happens when the other device comes online with a higher priority and preemption.
+
+19
+02:29.550 --> 02:38.100
+Switch 2 will become the active router once we configure it, but notice now that core 1 is active.
+
+20
+02:38.700 --> 02:40.170
+So if I type show standby
+
+21
+02:42.990 --> 02:51.090
+for VLAN 20, the local router is the active router because the standby router is not known.
+
+22
+02:52.240 --> 02:59.080
+Virtual IP address is this notice the virtual Mac address is the same Mac address, but that's not a
+
+23
+02:59.080 --> 03:06.370
+problem because these devices are in different VLANs, so they don't see each others traffic.
+
+24
+03:07.150 --> 03:13.840
+So devices in one VLAN won't be confused with sending traffic to the wrong device in another VLAN
+
+25
+03:14.290 --> 03:17.170
+because VLANs separate Mac addresses.
+
+26
+03:20.650 --> 03:26.890
+So on the switch interface VLAN 20, standby one IP address.
+
+27
+03:28.080 --> 03:37.770
+is gonna be 10.1.20.254, but now what I'm gonna do is I'm going to force this device to
+
+28
+03:37.770 --> 03:46.470
+have a higher priority and I'm gonna force preemption so that it becomes the active router. Notice
+
+29
+03:46.470 --> 03:48.960
+as soon as I did that, it became active.
+
+30
+03:50.900 --> 03:54.300
+I'll show you in a moment what happens if we don't use preemption.
+
+31
+03:55.230 --> 04:02.910
+So show standby shows us that the local switch is the active router, virtual IP address is
+
+32
+04:02.910 --> 04:05.700
+this, local router is active.
+
+33
+04:06.120 --> 04:09.480
+Standby router is unknown but let's check again.
+
+34
+04:10.200 --> 04:10.860
+There you go.
+
+35
+04:11.190 --> 04:11.670
+Standby
+
+36
+04:11.670 --> 04:13.110
+router is core 1
+
+37
+04:13.710 --> 04:18.030
+and what you'll notice on core 1 is that the state changed to standby.
+
+38
+04:20.130 --> 04:31.470
+So show stand by again for VLAN20 shows us that this router is no longer the active router it is the
+
+39
+04:31.470 --> 04:38.250
+stand by router. Router 2 or Core 2 has become the active router
+
+40
+04:39.510 --> 04:42.330
+and we can see something similar on this side.
+
+41
+04:43.030 --> 04:52.040
+OK, so that's VLAN 20, show spanning-tree VLAN 30 core 1 is the root for VLAN 30.
+
+42
+04:52.560 --> 04:56.100
+So we want core 1 to become the HSRP active.
+
+43
+04:58.410 --> 05:07.740
+But let me show you what happens, firstly, if you don't configure preemption, so I'll specify on core 2 that
+
+44
+05:07.740 --> 05:13.550
+for VLAN 30 the standby router is 10.1.30.254
+
+45
+05:14.100 --> 05:17.700
+that's all I'll configure. Once again
+
+46
+05:20.500 --> 05:28.480
+for VLAN 10 and VLAN 30 we don't want the router to be the active router so all I've configured
+
+47
+05:28.780 --> 05:31.510
+is this command standby one, an IP address.
+
+48
+05:34.250 --> 05:47.570
+Now on core 1 interface VLAN 30 standby 1 IP 10.1.30.254 standby 1 priority
+
+49
+05:48.560 --> 05:49.240
+200.
+
+50
+05:49.820 --> 05:54.220
+So I'm going to change the priority but not configure preemption.
+
+51
+05:54.890 --> 05:56.200
+So notice the difference.
+
+52
+05:56.420 --> 06:00.410
+Show run shows us the output on VLAN 10
+
+53
+06:00.410 --> 06:05.960
+it's configured with preemption, on VLAN 30 it's not configured with preemption
+
+54
+06:06.440 --> 06:09.380
+and notice it became a standby device.
+
+55
+06:09.980 --> 06:12.400
+This device is already the active device.
+
+56
+06:13.160 --> 06:23.270
+So without preemption, if a device is already the active device or active router the other device
+
+57
+06:23.270 --> 06:26.670
+it is not gonna force itself to become the active router.
+
+58
+06:27.350 --> 06:28.730
+So show standby again.
+
+59
+06:29.480 --> 06:31.670
+Local router is the active router.
+
+60
+06:32.210 --> 06:34.460
+Just need to give it some time to sort itself out.
+
+61
+06:35.840 --> 06:37.520
+On this side it's going to stand by.
+
+62
+06:41.520 --> 06:49.470
+So core 1 has learnt that core 2 is the active router and the local device is the standby router.
+
+63
+06:50.850 --> 06:56.610
+On this site that should hopefully sort itself out, that might be a packet tracer issue, but notice
+
+64
+06:56.610 --> 06:58.790
+the local router is the active router.
+
+65
+06:59.520 --> 07:02.580
+We still see standby router as unknown.
+
+66
+07:03.360 --> 07:09.360
+The point is, is that this device, even though it's got a higher priority, has not become active.
+
+67
+07:10.590 --> 07:12.020
+And that's not what we want.
+
+68
+07:12.660 --> 07:20.580
+We want to type stand-by 1, preempt so that we force core 1 to become active and notice
+
+69
+07:20.580 --> 07:23.690
+now that I've done that, it's become the active router.
+
+70
+07:24.270 --> 07:31.950
+So Show Standby shows us that preemption is enabled and it's become the active router
+
+71
+07:32.280 --> 07:37.580
+and core 2 is now the standby router and we can see that in the output here.
+
+72
+07:37.590 --> 07:38.790
+So show standby.
+
+73
+07:39.900 --> 07:41.250
+We can see that the active
+
+74
+07:41.250 --> 07:46.860
+router is core 1 local router or local switch is the standby router.
+
+75
+07:47.900 --> 07:52.080
+So don't forget to specify both a priority and preemption.
+
+76
+07:52.610 --> 07:59.210
+Now, what about for VLAN 100? Show spanning tree and let's do that for VLAN 100.
+
+77
+07:59.930 --> 08:07.790
+In this example, we made switch 2 the route for VLAN 100 that may have been better to make switch
+
+78
+08:07.790 --> 08:09.950
+1 the route for VLAN 100
+
+79
+08:10.400 --> 08:16.940
+but I simply wanted to load the VLANs across the links and we have configured Ether channel here so
+
+80
+08:16.940 --> 08:19.220
+it will improve performance
+
+81
+08:20.360 --> 08:26.300
+but that means we need to configure core 2 as the HSP active router.

@@ -1,0 +1,293 @@
+WEBVTT
+
+0
+00:00.240 --> 00:07.020
+I previously downloaded the NPM software in this case, I'm using a release candidate 1 version of software,
+
+1
+00:07.740 --> 00:09.570
+you'll be using the full release.
+
+2
+00:10.890 --> 00:18.370
+Now that I've downloaded my solar winds software, I need to get it into my virtual machine.
+
+3
+00:18.840 --> 00:24.900
+There are multiple ways of doing this, but in this example, I'm going to go to VM settings, options,
+
+4
+00:25.410 --> 00:27.900
+and I'm going to create a shared folder.
+
+5
+00:28.320 --> 00:35.040
+So I'm going to click add and browse to the folder where I downloaded the software on my physical
+
+6
+00:35.040 --> 00:35.640
+PC.
+
+7
+00:36.420 --> 00:38.670
+Click next, click finish.
+
+8
+00:39.720 --> 00:47.070
+I'm going to make this available as a network drive and click, OK, so now in Windows Explorer, I
+
+9
+00:47.070 --> 00:53.190
+have a shared folder and within that I can see my installation file.
+
+10
+00:53.790 --> 00:59.160
+I'll now be able to install solar winds NPM on my Windows 7 VM.
+
+11
+01:00.840 --> 01:07.440
+So to install NPM, I'm going to double click on the solar winds NPM executable file, this file is
+
+12
+01:07.440 --> 01:15.770
+once again stored on my physical machine, but I'm accessing it via a shared folder.
+
+13
+01:16.230 --> 01:17.220
+I'm going to click Run.
+
+14
+01:18.940 --> 01:20.500
+The install has been verified
+
+15
+01:21.370 --> 01:23.230
+and then files are being extracted.
+
+16
+01:24.410 --> 01:32.330
+I'm going to click yes, to allow the program to make changes to the computer. So the solar winds installer
+
+17
+01:32.690 --> 01:34.280
+is starting the installation.
+
+18
+01:36.860 --> 01:45.020
+Now, I'm told that solarwinds requires Microsoft.net framework version 4.5, if this version
+
+19
+01:45.020 --> 01:52.010
+is not already installed, solarwinds will install the required .net framework version before installing
+
+20
+01:52.190 --> 01:59.690
+your solarwinds application, click install to begin the installation of the Microsoft.net framework.
+
+21
+02:00.380 --> 02:07.220
+So I'm going to click install to install Microsoft.net now to make sure that you don't get bored with
+
+22
+02:07.250 --> 02:08.180
+these videos.
+
+23
+02:08.270 --> 02:16.120
+I'm going to speed up the installation process so some processes are taking a long time to complete.
+
+24
+02:16.460 --> 02:18.620
+I'm going to simply speed them up in the video.
+
+25
+02:19.560 --> 02:27.390
+OK, so Microsoft.net has been installed, I'm now shown the welcome wizard for the Orion Network
+
+26
+02:27.390 --> 02:28.890
+Performance Monitor software.
+
+27
+02:29.520 --> 02:31.440
+So it says, welcome to the install
+
+28
+02:31.450 --> 02:34.320
+wizard for Orion Network Performance Monitor.
+
+29
+02:35.040 --> 02:36.300
+Click next to continue.
+
+30
+02:36.300 --> 02:38.490
+So I'm going to click next to start the installation.
+
+31
+02:39.640 --> 02:41.210
+You need to choose your language.
+
+32
+02:41.710 --> 02:48.880
+In my case, I'm going to select English, I'm told that Orion requires Internet information services
+
+33
+02:49.060 --> 02:54.900
+or IIS, but it's not currently installed after completing the installation.
+
+34
+02:55.210 --> 02:59.140
+The Orion configuration was it can install it automatically.
+
+35
+02:59.590 --> 03:00.590
+Do I want to do this?
+
+36
+03:00.610 --> 03:01.590
+Yes, I do.
+
+37
+03:01.900 --> 03:04.450
+So I'm going to continue with the Orion installation.
+
+38
+03:06.220 --> 03:08.320
+The license agreement is then displayed.
+
+39
+03:09.640 --> 03:15.040
+It's obviously recommended that you read the license agreement before accepting the terms.
+
+40
+03:15.400 --> 03:22.180
+I'm going to accept the terms and then click next and then asked to choose a destination installation
+
+41
+03:22.180 --> 03:22.880
+location.
+
+42
+03:23.290 --> 03:26.050
+I'm going to stick with the default and click next.
+
+43
+03:27.830 --> 03:30.930
+They need to choose the install type.
+
+44
+03:31.590 --> 03:37.980
+I'm not going to use an express install, which is the recommended way of doing it so fully install Orion
+
+45
+03:37.980 --> 03:44.280
+Network Performance Monitor as quickly as possible, or do an advanced installation. In this case
+
+46
+03:44.280 --> 03:47.960
+because I simply want to get the software up and running as quickly as possible.
+
+47
+03:48.270 --> 03:52.050
+I'm going to go for the Express install and click next.
+
+48
+03:52.830 --> 04:01.410
+NPM now supports QOE or quality of experience traffic monitoring, I'm then asked whether I want to
+
+49
+04:01.410 --> 04:05.430
+install thi,s in this case because I want to get it up and running quickly.
+
+50
+04:05.700 --> 04:11.580
+I'm going to select the default values and enable QOE and click next.
+
+51
+04:12.360 --> 04:17.250
+I'm told that the setup has enough information to start copying the files.
+
+52
+04:17.730 --> 04:21.270
+If you want to review or change any settings, click back.
+
+53
+04:21.720 --> 04:23.870
+If you're satisfied, click next.
+
+54
+04:24.420 --> 04:25.440
+I'm happy with that.
+
+55
+04:25.440 --> 04:29.820
+So I'm going to click next and start the NPM installation.
+
+56
+04:30.790 --> 04:37.720
+So NPM is installing various components, including Microsoft Visual C++.
+
+57
+04:39.410 --> 04:41.210
+The installation takes a while.
+
+58
+04:42.140 --> 04:48.170
+I'm going to speed up the video so that you don't have to wait for the full installation taking place
+
+59
+04:48.170 --> 04:49.250
+in real time.
+
+60
+04:53.570 --> 04:57.050
+We're told now that the installation is being completed.
+
+61
+04:58.140 --> 05:05.700
+We're now told that the installation has successfully completed, so the database has been set up,
+
+62
+05:05.700 --> 05:13.050
+the website has been set up, all services are running, and we can launch the Web console by checking
+
+63
+05:13.050 --> 05:15.670
+the check box, which is checked by default.
+
+64
+05:16.440 --> 05:19.770
+I'm going to click finish to exit the configuration
+
+65
+05:19.770 --> 05:20.220
+wizard.
+
+66
+05:22.340 --> 05:32.240
+I can then connect to the local host on Port 8787, and then log in to the solarwinds NPM server,
+
+67
+05:33.050 --> 05:40.700
+notice by default, we can log in with the username of admin and no password. To change the admin password
+
+68
+05:40.850 --> 05:43.910
+to login, click settings, manage accounts.
+
+69
+05:44.990 --> 05:50.210
+So I'm going to log in with the default username of Admin and a blank password.
+
+70
+05:50.780 --> 05:57.820
+So at this point I have successfully installed NPM and I can access the console.
+
+71
+05:58.610 --> 06:02.410
+The next step is to follow the wizard to discover the network.
+
+72
+06:02.750 --> 06:09.410
+But before I do that, I need to configure the virtual machine for integration with GNS3.

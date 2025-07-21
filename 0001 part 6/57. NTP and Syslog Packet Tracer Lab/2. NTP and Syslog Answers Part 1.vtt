@@ -1,0 +1,205 @@
+WEBVTT
+
+0
+00:06.440 --> 00:10.880
+In this lab, we've been told to configure both syslog and NTP.
+
+1
+00:11.570 --> 00:14.780
+The first thing we need to do is configure the syslog server.
+
+2
+00:15.060 --> 00:18.170
+So I'll click on the syslog server, go to services.
+
+3
+00:19.340 --> 00:29.050
+Click syslog and enable the syslog server, the IP address of the syslog server is 10.1.1.200.
+
+4
+00:29.720 --> 00:34.010
+You could also see that by using the IP config command.
+
+5
+00:35.430 --> 00:42.120
+In command prompt on the syslog server we then need to configure both router 1 and switch
+
+6
+00:42.120 --> 00:44.700
+1 to log messages to the syslog server.
+
+7
+00:45.210 --> 00:52.320
+Before I do that, I'll go back to services and ensure that I can see the syslog server.
+
+8
+00:54.170 --> 00:54.710
+Here's router
+
+9
+00:54.740 --> 01:03.620
+1, can I ping the syslog server? It's important to verify that you have IP connectivity to the syslog
+
+10
+01:03.620 --> 01:06.860
+server and we do here, so that's good.
+
+11
+01:09.330 --> 01:14.100
+So what I can do is go to global configuration mode and type logging.
+
+12
+01:15.950 --> 01:21.080
+And specify the host that I'm going to log messages to.
+
+13
+01:22.050 --> 01:30.420
+Which is 10.1.1.200, type End and notice we see messages on the syslog server.
+
+14
+01:31.930 --> 01:35.930
+We can see that this device was configured from the console.
+
+15
+01:36.850 --> 01:40.090
+We can also see that logging has been started.
+
+16
+01:40.990 --> 01:46.750
+So on the router show IP interface brief, this is the IP address of the router.
+
+17
+01:49.270 --> 01:55.850
+That's the device that logged messages to the syslog server and here are the messages that were logged.
+
+18
+01:56.740 --> 01:59.520
+So again, control zed or control Z.
+
+19
+02:00.130 --> 02:06.880
+This message has been logged to the syslog server notice  no time stamps are displayed.
+
+20
+02:07.600 --> 02:09.040
+Now let's configure the switch.
+
+21
+02:12.060 --> 02:19.490
+Something very similar will be done ping 10.1.1.200 we've got IP connectivity to the syslog
+
+22
+02:19.560 --> 02:20.060
+server.
+
+23
+02:20.460 --> 02:25.260
+So logging host 10.1.1.200
+
+24
+02:28.410 --> 02:36.430
+type end, notice these messages are displayed on the console, but they are also displayed on the syslog
+
+25
+02:36.450 --> 02:42.600
+server IP address of the switch is 10.1.1.253.
+
+26
+02:43.110 --> 02:48.240
+We can verify that by using the show IP interface brief command.
+
+27
+02:48.870 --> 02:53.800
+So that device has logged messages to the syslog server.
+
+28
+02:54.810 --> 03:00.570
+Now we can do some additional tests, such as creating a loopback interface on the router, shutting
+
+29
+03:00.720 --> 03:06.810
+that down and re-enabling it, as well as shutting this port down on the switch
+
+30
+03:07.940 --> 03:15.020
+but we can already see that messages are being logged to the syslog server. So on the router,
+
+31
+03:15.290 --> 03:25.070
+conft interface loopback 0, notice we're told that this interface has come up line protocol
+
+32
+03:25.220 --> 03:25.790
+is up.
+
+33
+03:26.850 --> 03:32.910
+In other words, those messages have been logged to the syslog server. I'll create an IP address
+
+34
+03:32.910 --> 03:37.800
+here and I'll shut the interface down.
+
+35
+03:38.490 --> 03:39.780
+Interface has gone down
+
+36
+03:42.190 --> 03:51.280
+and that's what we can see on the syslog server, again, no shut the interface we can see that
+
+37
+03:51.370 --> 03:52.570
+the interface has come up.
+
+38
+03:54.820 --> 03:57.260
+Shut it down, no shut it.
+
+39
+03:57.850 --> 03:59.740
+We can see those log messages.
+
+40
+04:01.470 --> 04:04.290
+On the switch show, IP interface brief.
+
+41
+04:06.770 --> 04:14.960
+This interface is currently up, so interface gigabit 104, shut it down.
+
+42
+04:15.800 --> 04:19.280
+Notice we're told that the interface has gone down.
+
+43
+04:19.820 --> 04:23.440
+It's been administratively shut down again.
+
+44
+04:23.600 --> 04:26.900
+Those messages have been logged to the syslog server.
+
+45
+04:27.320 --> 04:29.900
+No shut it, interfaces come up
+
+46
+04:30.440 --> 04:33.560
+and that's what we can see on the syslog server.
+
+47
+04:34.130 --> 04:39.920
+So I've now completed the configuration and verification of syslog in this lab.
+
+48
+04:40.470 --> 04:47.130
+These two devices, router 1 and switch 1 can log messages to the syslog server.
+
+49
+04:47.750 --> 04:50.120
+Now we need to configure NTP
+
+50
+04:52.420 --> 04:57.040
+because no timestamps are shown on these log messages.

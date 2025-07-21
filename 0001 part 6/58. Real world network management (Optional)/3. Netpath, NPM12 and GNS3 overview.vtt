@@ -1,0 +1,33 @@
+WEBVTT
+
+0
+00:00.210 --> 00:07.350
+In this example, I've got NPM connected to four routers, which in turn are connected to my local
+
+1
+00:07.350 --> 00:14.850
+area network, that means that my virtual GNS3 network is connected to my physical network.
+
+2
+00:15.600 --> 00:23.700
+This allows me to use NPM running within VMware, connected to my GNS3 routers to monitor
+
+3
+00:23.850 --> 00:25.540
+links on the Internet.
+
+4
+00:26.310 --> 00:33.360
+So in this example, I'm monitoring traffic from my local network in the U.K. through British Telecom
+
+5
+00:33.540 --> 00:35.180
+to Salesforce.com.
+
+6
+00:35.850 --> 00:45.030
+So it's possible to get NPM to connect to Jenas three network, but also bridge it to the outside world
+
+7
+00:45.450 --> 00:51.600
+so that you can integrate GNS3 with physical networks and connect to the Internet.

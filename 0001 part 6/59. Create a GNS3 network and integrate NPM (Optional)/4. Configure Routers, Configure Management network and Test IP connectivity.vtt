@@ -1,0 +1,253 @@
+WEBVTT
+
+0
+00:00.950 --> 00:05.330
+So our topology is connected, I'll start up all the devices.
+
+1
+00:06.800 --> 00:11.750
+What you'll notice is NPM is starting, the GNS3 VM is starting.
+
+2
+00:13.920 --> 00:19.650
+So the NPM Windows machine is booted up, the GNS3 VM is booted up
+
+3
+00:20.800 --> 00:25.630
+and what I'll do now is open up a console connection to the routers. 
+
+4
+00:27.340 --> 00:35.290
+So let's start with router 1, what I'm going to do is configure this network as 10.1.1.
+
+5
+00:35.970 --> 00:38.110
+0/24.
+
+6
+00:41.110 --> 00:50.710
+This network will be 10.1.2.0/24, and this one, 10.1.3.0/24.
+
+7
+00:51.980 --> 00:54.890
+I'll also create loop backs on each router
+
+8
+00:55.950 --> 01:02.910
+with an IP address that relates to their name. So quadruple 1 for router 1, 
+
+9
+01:04.570 --> 01:06.880
+quadruple 2 for router 2,
+
+10
+01:08.470 --> 01:11.590
+and quadruple 3 for router 3.
+
+11
+01:13.720 --> 01:20.470
+Loopbacks are great, these are logical interfaces that don't go down on routers and are very useful for
+
+12
+01:20.500 --> 01:25.780
+for management as well as for protocols such as OSPF. So on router 1
+
+13
+01:28.010 --> 01:30.980
+create the loopback interface. So quadruple 1
+
+14
+01:34.550 --> 01:45.860
+go into the first serial interface, serial 0/0 IP address 10.1.1.1/24 no shut it, go on
+
+15
+01:45.860 --> 01:52.850
+to the second interface serial 0/1 IP address 10.1.2.1,
+
+16
+01:54.890 --> 01:56.420
+no shut that interface.
+
+17
+01:59.360 --> 02:05.180
+I'm going to enable my EIGRP, so router EIGRP 100 network
+
+18
+02:07.300 --> 02:16.480
+and I'm going to enable EIGRP in all interfaces and disable automatic summarization. The important
+
+19
+02:16.480 --> 02:21.810
+step from a management point of view is to enable SNMP.
+
+20
+02:22.570 --> 02:30.010
+So I'm going to say SNMP server community and I'm going to specify a community of NPM
+
+21
+02:31.250 --> 02:33.140
+and I'm going to set it to Read-Only
+
+22
+02:34.430 --> 02:42.350
+and then I'm going to save the configuration. Do something similar on router 2, so on router 2
+
+23
+02:42.350 --> 02:44.510
+loopback 0, IP address
+
+24
+02:48.780 --> 02:49.710
+quadruple 2,
+
+25
+02:52.990 --> 03:00.010
+interface serial 0/0, IP address 10.1.1.2
+
+26
+03:01.740 --> 03:09.420
+no shut it, serial 0/1 IP address 10.1.3.2. 
+
+27
+03:11.860 --> 03:23.320
+No shut that interface, router EIGRP 100 network and enable EIGRP in all interfaces and disable
+
+28
+03:23.320 --> 03:24.850
+automatic summarization.
+
+29
+03:26.790 --> 03:28.170
+Last router, router 3
+
+30
+03:31.930 --> 03:33.160
+create a loopback interface
+
+31
+03:37.040 --> 03:37.940
+quadruple 3
+
+32
+03:41.210 --> 03:52.130
+/32 mask, go into the serial interface IP address 10.1.2.3, no shut
+
+33
+03:52.130 --> 03:52.360
+it
+
+34
+03:53.390 --> 03:58.070
+second serial interface IP address 10.1.3.3
+
+35
+03:59.620 --> 04:13.120
+no shut that interface, enable EIGRP on all interfaces, disable automatic summarization, 
+
+36
+04:15.960 --> 04:18.090
+neighbor relationships are being established
+
+37
+04:21.390 --> 04:30.300
+and importantly mustn't forget to type SNMP server community, the community name NPM read-only.
+
+38
+04:31.370 --> 04:34.600
+Need to do that on both router 2 and router
+
+39
+04:34.750 --> 04:47.290
+3 SNMP server community, NPM Read-Only, and I'll save the configurations.
+
+40
+04:49.530 --> 04:58.410
+So that's the initial configuration on our routers, show IP EIGRP neighbors shows me that router
+
+41
+04:58.410 --> 05:00.780
+2 has 2 neighbor relationships, 
+
+42
+05:01.950 --> 05:06.540
+router 1 has 2 neighbor relationships, 
+
+43
+05:09.950 --> 05:19.310
+and so does router 3, router 3 can ping the loopback of router 1 and the loopback of router 2, router 
+
+44
+05:19.310 --> 05:26.090
+1 can ping the loopback of router 2 and the loopback of router 3.
+
+45
+05:27.020 --> 05:34.670
+So I have configured this network with IP addresses on the serial interfaces and the routers can ping each
+
+46
+05:34.670 --> 05:34.990
+other.
+
+47
+05:35.450 --> 05:44.210
+The next step is to enable the management network and get NPM to manage the devices.
+
+48
+05:47.280 --> 05:52.530
+So to configure the management interface, I'm going to go in the FastEthernet interface of router
+
+49
+05:52.530 --> 06:07.140
+1 and give it an IP address of 10.1.100.1/24 mask and save the config, router 2 Fast
+
+50
+06:07.140 --> 06:13.460
+Ethernet interface given address of 10.1.100.2/24 mask
+
+51
+06:15.300 --> 06:16.620
+save this config
+
+52
+06:19.890 --> 06:30.270
+and do something similar on router 3 10.1.100.3/24 mask
+
+53
+06:34.190 --> 06:35.990
+save the configuration.
+
+54
+06:37.820 --> 06:45.140
+So our devices have booted up, we've connected NPM to the topology, let's test connectivity from
+
+55
+06:45.140 --> 06:45.350
+NPM.
+
+56
+06:47.000 --> 07:00.080
+So here's my NPM Windows Machine IP config shows me the IP address of 10.1.100.100, ping 10.101
+
+57
+07:00.830 --> 07:01.430
+that's router
+
+58
+07:01.430 --> 07:06.590
+1 ping succeed, router 2 pings succeed, 
+
+59
+07:07.400 --> 07:10.000
+router 3 pings succeed.
+
+60
+07:10.820 --> 07:18.230
+So NPM has IP connectivity to the three routers using the management network.
+
+61
+07:18.890 --> 07:23.210
+Now let's get NPM to discover the devices.
+
+62
+07:23.600 --> 07:25.310
+In other words, the three routers.

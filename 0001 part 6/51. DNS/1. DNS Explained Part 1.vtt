@@ -1,0 +1,741 @@
+WEBVTT
+
+0
+00:00.150 --> 00:03.490
+What is DNS or domain name system? In this video
+
+1
+00:03.510 --> 00:05.720
+I'm going to explain it in a lot of detail.
+
+2
+00:05.730 --> 00:09.390
+But before we get there, Alexa nslook up
+
+3
+00:09.390 --> 00:15.720
+Amazon.com, the DNS lookup for Amazon.com is 176.32.
+
+4
+00:15.720 --> 00:17.870
+103.205.
+
+5
+00:18.240 --> 00:20.990
+That is an example of what DNS does.
+
+6
+00:21.360 --> 00:28.110
+It's essentially resolving a name, typically a domain name to an IP address.
+
+7
+00:36.470 --> 00:37.660
+They lost.
+
+8
+00:40.690 --> 00:43.000
+nslookup google.com
+
+9
+00:43.510 --> 00:48.930
+the DNS lookup of google.com is 172.217.
+
+10
+00:48.930 --> 00:51.650
+164.142.
+
+11
+00:52.390 --> 00:56.920
+We as humans don't communicate easily using IP addresses.
+
+12
+00:56.920 --> 00:58.240
+We use domain names.
+
+13
+00:58.820 --> 01:04.570
+So if I told you to go to Google's IP address, you probably don't even remember what the IP address
+
+14
+01:04.570 --> 01:07.450
+was, but you'll remember what Google.com is.
+
+15
+01:07.900 --> 01:16.720
+So DNS essentially resolves a human readable name such as Google.com or Amazon.com to a machine
+
+16
+01:16.720 --> 01:18.070
+readable IP address.
+
+17
+01:18.310 --> 01:19.930
+Machines don't use names
+
+18
+01:19.930 --> 01:21.190
+they use IP addresses.
+
+19
+01:21.580 --> 01:26.920
+In IPv4, we use dotted decimal notation IP addresses such as 192.168.
+
+20
+01:26.920 --> 01:33.430
+1.1 IPv6 uses IP addresses such as 2001::123.
+
+21
+01:33.700 --> 01:36.820
+There are many IP addresses out there and many websites.
+
+22
+01:37.060 --> 01:44.350
+It's much easier to remember a domain name once again, like Facebook.com or Amazon.com rather
+
+23
+01:44.350 --> 01:46.720
+than the IP address of a server
+
+24
+01:46.960 --> 01:52.570
+and to further complicate it, like in my example, depending where you are on the world, a domain
+
+25
+01:52.570 --> 01:56.160
+name may resolve to a different IP address for load balancing.
+
+26
+01:56.650 --> 02:02.350
+So if I'm in the UK and I ping Google.com, I may get a different result to you
+
+27
+02:02.350 --> 02:08.320
+if you're in the US or in Singapore or somewhere else in the world. It's much easier to remember the domain
+
+28
+02:08.320 --> 02:11.350
+name than it is to remember an IP address
+
+29
+02:11.350 --> 02:18.370
+but machines use IP addresses and traffic is routed across the Internet using IP addresses, not names.
+
+30
+02:18.640 --> 02:25.390
+DNS is a fundamental building block in networks today without DNS, Internet wouldn't really work very
+
+31
+02:25.390 --> 02:29.140
+well because very few of us are gonna remember IP addresses.
+
+32
+02:29.350 --> 02:36.880
+Now, as an analogy, DNS is like a telephone book, taking a name, converting it to a telephone number,
+
+33
+02:37.060 --> 02:43.330
+but in this case, taking a domain name and converting it to an IP address and the bad old days, I'd
+
+34
+02:43.330 --> 02:49.420
+have to look up someone's number in a book and then I'd have to manually dial their telephone number
+
+35
+02:49.900 --> 02:52.390
+but I don't think any of us do that these days.
+
+36
+02:52.960 --> 02:58.810
+On a phone like an iPhone today, we're not gonna manually type a number like this and then dial
+
+37
+02:58.810 --> 02:59.020
+it.
+
+38
+02:59.230 --> 03:04.900
+We're going to go to our contacts and search for a contact and then just press on the contact to call
+
+39
+03:04.900 --> 03:05.500
+the person.
+
+40
+03:05.830 --> 03:09.130
+I mean, a lot of us probably don't even know our own telephone numbers these days.
+
+41
+03:09.340 --> 03:14.080
+We don't know the telephone numbers of other people because we simply look them up in a directory on
+
+42
+03:14.080 --> 03:14.510
+our phone.
+
+43
+03:14.770 --> 03:16.480
+Now, this is a local directory.
+
+44
+03:16.660 --> 03:22.300
+We can do something very similar on a PC by using what's called a hosts file.
+
+45
+03:22.510 --> 03:26.370
+That is the most basic version of so-called DNS.
+
+46
+03:26.380 --> 03:28.660
+Now, it's not DNS, but it's a local lookup.
+
+47
+03:28.870 --> 03:35.350
+So you could create your own version of DNS locally on your PC by editing the hosts file.
+
+48
+03:35.800 --> 03:42.310
+Taking that a step further, companies may have a local DNS server that resolves names within the organization
+
+49
+03:42.670 --> 03:49.150
+but on the public Internet, we have distributed DNS systems that allow us to resolve names such as
+
+50
+03:49.150 --> 03:51.250
+Google, Facebook, etc..
+
+51
+03:51.790 --> 03:56.290
+Now it's all very good and well talking about DNS, but I want to show you practically how it works.
+
+52
+03:56.740 --> 03:59.260
+I'm gonna show you wireshark captures.
+
+53
+03:59.260 --> 04:05.440
+I'm gonna show you how to set up a DNS server on a Cisco router, how to set it up on a Ubuntu
+
+54
+04:05.440 --> 04:05.950
+server.
+
+55
+04:06.370 --> 04:11.020
+I'll show you basically how you can manipulate a DNS to do anything that you want.
+
+56
+04:11.320 --> 04:14.260
+You need to be careful that you use trusted DNS servers.
+
+57
+04:14.260 --> 04:16.540
+Don't just trust any DNS server out there.
+
+58
+04:17.020 --> 04:25.210
+DNS can be intercepted and you can manipulate the DNS servers used by PCs to get them to go to the incorrect
+
+59
+04:25.210 --> 04:25.840
+domain.
+
+60
+04:26.170 --> 04:31.810
+Fortunately, today a lot of browsers like Chrome have a whole list of certificates preloaded on them.
+
+61
+04:32.080 --> 04:38.470
+So you'll get a warning if you end up going to an incorrect domain such as Microsoft.com or
+
+62
+04:38.470 --> 04:39.400
+Cisco.com.
+
+63
+04:40.340 --> 04:45.290
+OK, so in this topology I've got a Windows 10 computer it's connected to a Cisco switch which
+
+64
+04:45.290 --> 04:49.610
+in turn is connected to Cisco router, which connects us to the Internet.
+
+65
+04:49.880 --> 04:52.150
+This topology is running in GNS3,
+
+66
+04:52.400 --> 04:55.940
+I'm hosting this entire topology on my computer.
+
+67
+04:56.270 --> 04:58.870
+So forgive me if the fan goes a bit crazy.
+
+68
+04:58.880 --> 05:01.330
+It's all running locally on my Mac.
+
+69
+05:01.730 --> 05:06.230
+I also have an Ubuntu PC, which will configure as a DNS server.
+
+70
+05:06.950 --> 05:09.430
+OK, firstly, let's have a look at the Windows computer.
+
+71
+05:09.980 --> 05:11.690
+Here's my Windows PC.
+
+72
+05:11.870 --> 05:13.610
+I'll open up a CMD prompt.
+
+73
+05:14.420 --> 05:15.590
+Make this a bit bigger.
+
+74
+05:16.220 --> 05:24.080
+IP config shows me that this is the IP address of the PC IPv4 default gateways 10.1.1.
+
+75
+05:24.080 --> 05:24.980
+254
+
+76
+05:25.340 --> 05:30.770
+and I should at this point be able to ping my default gateway, which I can. Default
+
+77
+05:30.770 --> 05:36.340
+Gateway is the Cisco router with IP address once again 10.1.1.254.
+
+78
+05:36.560 --> 05:38.330
+The switch is a layer 2 switch
+
+79
+05:38.330 --> 05:42.700
+it's not really doing anything except giving connectivity in the network.
+
+80
+05:43.460 --> 05:54.240
+So back on the PC, IP config /all shows us that this PC has two DNS servers configured 8.8.8.
+
+81
+05:54.320 --> 05:56.480
+8 and 1.1.1.1.
+
+82
+05:56.670 --> 06:02.330
+In other words, Google and Cloudflare are the two DNS servers configured on the PC.
+
+83
+06:02.990 --> 06:10.400
+So I'll start a Wireshark capture between the PC and the switch so that we can see what's actually going
+
+84
+06:10.400 --> 06:10.670
+on.
+
+85
+06:11.390 --> 06:13.880
+Windows sends a lot of traffic into the network.
+
+86
+06:13.880 --> 06:20.930
+So as you can see here, a bunch of traffic is being sent by that Windows computer out into the network
+
+87
+06:21.230 --> 06:25.310
+but I'm going to filter for DNS and then back on the PC.
+
+88
+06:27.460 --> 06:35.350
+What I'll do is ping a domain such as DavidBombal.com and notice we get a reply from the IP address
+
+89
+06:35.350 --> 06:38.420
+217.160.0.69.
+
+90
+06:39.130 --> 06:47.140
+Now the CPU spiking on my PC here, the throughput through a Cisco switch and a Cisco router running
+
+91
+06:47.140 --> 06:48.760
+in GNS3 may be a bit slow
+
+92
+06:49.000 --> 06:53.220
+but the point is, is that I am getting replies back to that domain
+
+93
+06:53.830 --> 07:00.850
+and if we have a look at the Wireshark capture, what you'll notice is we can see that this IP address,
+
+94
+07:00.850 --> 07:10.260
+10 .1.1.1 sent a DNS request to 8.8.8.8 for domain DavidBombal.com.
+
+95
+07:10.450 --> 07:18.460
+So just to confirm on the PC, once again, IP config shows us that this is the IP address of the PC.
+
+96
+07:19.480 --> 07:23.200
+The PC send a request to the DNS server.
+
+97
+07:25.340 --> 07:28.040
+Notice the query is for DavidBombal.com.
+
+98
+07:28.370 --> 07:37.790
+It's a A record, A record is a domain name in IPv4, quadruple A is a domain name in IPv
+
+99
+07:37.790 --> 07:38.230
+6.
+
+100
+07:38.630 --> 07:45.890
+So the PC is asking the DNS server what the IP address is of the domain name.
+
+101
+07:47.750 --> 07:55.460
+Now, going back a step at layer 2 in the OSI model or TCPIP model, if you prefer, we have Ethernet
+
+102
+07:55.460 --> 07:59.570
+2, that's because this network is using Ethernet.
+
+103
+07:59.900 --> 08:01.520
+So it's an Ethernet connection
+
+104
+08:01.520 --> 08:03.830
+from the Windows PC to the Ethernet switch.
+
+105
+08:04.610 --> 08:07.220
+The source Mac address is the PC destination
+
+106
+08:07.220 --> 08:08.780
+Mac address is the router.
+
+107
+08:09.320 --> 08:14.300
+Basically, the traffic is being switched from the PC to the router because that's how it gets onto
+
+108
+08:14.300 --> 08:14.930
+the Internet.
+
+109
+08:15.260 --> 08:18.770
+So at layer 2 source Mac address will be the PC destination
+
+110
+08:18.770 --> 08:22.400
+Mac address will be the router, but at layer 3
+
+111
+08:23.710 --> 08:28.650
+IPv4 source IP address is the PC destination IP address is Google.
+
+112
+08:29.050 --> 08:33.990
+Now, you may notice that this is a RFC 1918 address.
+
+113
+08:34.000 --> 08:35.640
+In other words, it's a private IP address.
+
+114
+08:35.650 --> 08:42.480
+It's non-routable on the Internet, but the router is implementing network address translation or NAT.
+
+115
+08:43.060 --> 08:47.740
+This is very typical of what your route at home will be doing.
+
+116
+08:48.310 --> 08:51.280
+So notice it's NATTING this IP address now.
+
+117
+08:51.280 --> 08:58.660
+It is NATTING it to another RFC 1918 address, but that's because this route is connected to a cloud
+
+118
+08:58.660 --> 09:01.260
+which is actually bridging my PC physically.
+
+119
+09:01.570 --> 09:08.110
+So this PC here onto my physical home network and I have an Internet router that routes this onto the
+
+120
+09:08.110 --> 09:08.620
+Internet.
+
+121
+09:08.890 --> 09:11.230
+So it's actually being nattered multiple times.
+
+122
+09:11.530 --> 09:19.000
+But what's important to point out here is notice the protocol at layer 4 is UDP or user datagram
+
+123
+09:19.060 --> 09:23.290
+protocol. Source port number used is 52749
+
+124
+09:23.500 --> 09:26.320
+that is what's called an ephemeral or random port
+
+125
+09:26.320 --> 09:31.870
+number, destination port number is 53, which is the well-known port number for DNS.
+
+126
+09:32.320 --> 09:38.440
+When a server is configured to host multiple services, it's got to serve a purpose.
+
+127
+09:38.770 --> 09:42.700
+So it's a server that's acting as, let's say, a file server
+
+128
+09:42.940 --> 09:45.760
+when you connect to that server, it's going to give you a file
+
+129
+09:45.940 --> 09:53.440
+but when you connect to it using DNS, it's listening on Port 53 if it's been configured as a DNS server.
+
+130
+09:53.650 --> 10:00.640
+So you send traffic to Port 53, the server is listening on Port 53 it's running an application like which
+
+131
+10:00.640 --> 10:06.950
+I'll show you in a moment, DNS mask, which is a DNS server application, and then it responds back to that
+
+132
+10:06.980 --> 10:10.040
+request on the port number that you chose.
+
+133
+10:10.240 --> 10:15.340
+So if you connect to a DNS server like this PC is doing, you will use a random port number or ephemeral
+
+134
+10:15.340 --> 10:20.470
+port number going to a well-known port number, and then it'll reply back from that well-known port
+
+135
+10:20.470 --> 10:20.890
+number
+
+136
+10:21.610 --> 10:22.860
+and we can see that here.
+
+137
+10:23.770 --> 10:30.640
+Google is replying from a source port number 53, going to the port number that the PC chose.
+
+138
+10:31.030 --> 10:32.650
+The Windows 10 PC chose this port
+
+139
+10:32.650 --> 10:36.850
+number, the Google DNS server replies back to that port
+
+140
+10:36.850 --> 10:37.240
+number.
+
+141
+10:38.520 --> 10:45.030
+So, again, it's UDP destination port number is this, source port number is this digging deeper into
+
+142
+10:45.030 --> 10:48.440
+the DNS information we can see domain name system.
+
+143
+10:48.450 --> 10:52.980
+It's a query, it's a standard query for a name.
+
+144
+10:53.010 --> 10:55.410
+We're trying to resolve a name.
+
+145
+10:56.100 --> 10:59.220
+The name that we're resolving is DavidBombal.com
+
+146
+10:59.580 --> 11:04.890
+and the DNS server replies back saying, this is the answer.
+
+147
+11:05.430 --> 11:11.700
+This domain name has this IP address, 217.160.0.69.
+
+148
+11:12.240 --> 11:17.100
+So back on our Windows PC, that is the IP address that we see.
+
+149
+11:17.790 --> 11:22.530
+So I could copy that IP address, go to a Web browser.
+
+150
+11:23.040 --> 11:28.800
+If I type the domain name, it's going to browse to that server.
+
+151
+11:29.400 --> 11:32.720
+So I'm able to connect to the domain using the domain name
+
+152
+11:33.480 --> 11:36.660
+and this depends on the server.
+
+153
+11:37.110 --> 11:40.470
+I should be able to connect to the IP address of the server.
+
+154
+11:40.800 --> 11:42.830
+In this example, I'm getting a 404 error.
+
+155
+11:43.290 --> 11:47.670
+Now, some servers will not allow you to connect directly on the IP address.
+
+156
+11:48.060 --> 11:52.380
+That's typically because multiple domains are hosted on a single IP address.
+
+157
+11:53.450 --> 11:59.420
+OK, I'll stop the Wireshark capture, and what I want to show you once again is that DNS is essentially
+
+158
+11:59.420 --> 12:06.800
+just a resolution of name to IP address, and you can do that directly on your Windows computer.
+
+159
+12:08.610 --> 12:13.560
+So in windows, I'll open up notepad, I'll run this as an administrator.
+
+160
+12:17.470 --> 12:19.960
+Before I open a file, if I ping router 1
+
+161
+12:22.290 --> 12:25.710
+notice we're told that that domain name is not found.
+
+162
+12:27.670 --> 12:34.210
+The same with router 1 home.com, the ping request times out, I can't ping that domain name,
+
+163
+12:34.900 --> 12:37.420
+but what I could do is open a file
+
+164
+12:38.550 --> 12:48.240
+And what I'm going to do is go to see Windows System 32 Driver's ETSI and I'm going to open the hosts
+
+165
+12:48.240 --> 12:48.680
+file.
+
+166
+12:49.560 --> 12:52.920
+This is a file on the local Windows computer.
+
+167
+12:53.640 --> 12:55.740
+Just zoom in there to make it easier to read.
+
+168
+12:57.970 --> 13:04.570
+And I can edit this so I could say 10.1.1.254 is router 1 and 10.1.1.1.2
+
+169
+13:04.570 --> 13:08.800
+54 was router 1 home.com and save that file.
+
+170
+13:09.730 --> 13:14.340
+So I'm editing a local file that maps hostname to IP addresses.
+
+171
+13:14.800 --> 13:18.280
+So now when I ping router 1 notice that works.
+
+172
+13:20.830 --> 13:27.460
+When I ping r1.home.com, that also works, but if I ping router 2, that fails
+
+173
+13:27.460 --> 13:34.140
+because it's not in the host's file and Google is not replying back with that information.
+
+174
+13:34.870 --> 13:45.220
+So if I said r2 like this and save that file now, ping r2 that resolves.
+
+175
+13:46.140 --> 13:53.370
+Name got resolved to an IP address now in this example, the networks a bit unstable, so the pings
+
+176
+13:53.370 --> 13:54.140
+are timing out.
+
+177
+13:54.180 --> 13:55.110
+They had succeeded
+
+178
+13:55.350 --> 13:59.400
+but the important part is the domain name got resolved.
+
+179
+13:59.610 --> 14:02.550
+That name got resolved to an IP address.
+
+180
+14:03.090 --> 14:09.750
+If I remove these entries from the hosts file and save it.
+
+181
+14:14.400 --> 14:21.360
+I'll clear the screen there when I ping r1 now that's going to time out because
+
+182
+14:23.520 --> 14:27.940
+I don't have an entry for that domain name.
+
+183
+14:28.230 --> 14:30.930
+That's essentially what a DNS server does.
+
+184
+14:31.680 --> 14:36.360
+It takes a domain name and maps it to an IP address.

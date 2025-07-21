@@ -1,0 +1,261 @@
+WEBVTT
+
+0
+00:19.890 --> 00:25.950
+In this vlog, we're going to continue discussing administrative distances and the believability of
+
+1
+00:25.950 --> 00:35.910
+routing protocols. So on router 1 show IP route, why in this topology is this loopback available in 
+
+2
+00:35.910 --> 00:40.840
+the routing table through BGP and why not for this route?
+
+3
+00:41.460 --> 00:48.600
+So this network 2.2.2.2 is available in the routing table and the route was
+
+4
+00:48.600 --> 00:50.040
+learnt via BGP.
+
+5
+00:50.980 --> 00:58.840
+This network was learnt via EIGRP, so why is BGP used for the one network and not the other?
+
+6
+00:59.530 --> 01:01.900
+The first thing you need to look at is look at this
+
+7
+01:01.900 --> 01:03.040
+admin distance here.
+
+8
+01:03.400 --> 01:07.810
+It's 20, so that BGP route has an administrative distance of 20.
+
+9
+01:08.170 --> 01:10.750
+What are the administrative distances of BGP?
+
+10
+01:11.260 --> 01:18.570
+And what you must remember is that you have two versions of BGP, EBGP and IBGP.
+
+11
+01:19.250 --> 01:21.820
+EBGP has an admin distance of 20.
+
+12
+01:22.330 --> 01:28.650
+IBGP has an admin distance of 200 so show IP BGP summary.
+
+13
+01:29.470 --> 01:38.380
+We have a neighbor relationship to router 2 as well as to router 3. Show IP BGP neighbor
+
+14
+01:40.570 --> 01:44.420
+the relationship to router 2 uses EBGP.
+
+15
+01:45.810 --> 01:51.060
+Notice the autonomous system number four router 2 is 2 and scrolling down.
+
+16
+01:51.990 --> 01:59.850
+This neighbor 10.1.2.2 which is router 3 is using IBGP, router 3 is an autonomous
+
+17
+01:59.850 --> 02:00.600
+system one.
+
+18
+02:01.670 --> 02:03.240
+The relationship is established.
+
+19
+02:03.920 --> 02:08.820
+Are we learning the routes through BGP? So show IP BGP
+
+20
+02:09.620 --> 02:16.270
+Yes, we are learning both the loopback of router 2 as well as the loopback of router 3 through BGP.
+
+21
+02:16.940 --> 02:24.170
+So BGP has both routes in the BGP routing table but this route is not being put into the IP routing
+
+22
+02:24.170 --> 02:26.780
+table and we can see that because of this
+
+23
+02:26.780 --> 02:29.110
+R it says rip failure.
+
+24
+02:29.690 --> 02:35.420
+The rip is the routing information base which from a CCNA point of view is the routing table.
+
+25
+02:35.930 --> 02:45.140
+So this route is not put into the IP routing table by BGP and that's because a better route is available
+
+26
+02:45.500 --> 02:46.760
+through EIGRP.
+
+27
+02:47.300 --> 02:53.930
+So 3.3.3.3 and 4.4.4.4 are both not put into the IP routing
+
+28
+02:53.930 --> 02:54.320
+table.
+
+29
+02:55.160 --> 02:59.870
+Show IP BGP, we're not learning quadruple 4 through BGP.
+
+30
+03:00.170 --> 03:05.900
+We are learning about this route, but because of the rip failure it's not put into the routing table.
+
+31
+03:06.200 --> 03:09.980
+Notice here I the route was learned through IBGP
+
+32
+03:11.130 --> 03:19.590
+and the reason why this route is not put into the routing table is because EIGRP has a lower administrative
+
+33
+03:19.590 --> 03:22.070
+distance than IBGP.
+
+34
+03:22.650 --> 03:26.460
+So to prove that, let's remove EIGRP from router 1.
+
+35
+03:27.270 --> 03:38.400
+So rather no router EIGRP 1 show IP route notice the route is now available through BGP.
+
+36
+03:39.090 --> 03:41.370
+Admin distance is 200.
+
+37
+03:41.850 --> 03:45.690
+So remember, IBGP has an administrative distance of 200.
+
+38
+03:46.230 --> 03:52.800
+EBGP has an admin distance of 20. If we shut the neighbor relationship down.
+
+39
+03:53.790 --> 04:00.420
+So neighbor 10.1.1.2 shut down, what we should see
+
+40
+04:01.690 --> 04:07.870
+is that the route is replaced by another routing protocol in this case it's OSPF. So I'm running OSPF
+
+41
+04:08.050 --> 04:14.140
+from router 1 and router 2 and router 1 has learned about that loopback through OSPF previously
+
+42
+04:14.140 --> 04:20.020
+because the route was learned through EBGP the EBGP route took precedence
+
+43
+04:20.590 --> 04:24.150
+but now because we've shut down the neighbor relationship OSPF
+
+44
+04:25.730 --> 04:34.130
+is able to add the route to the routing table. So no neighbor 10.1.1.2 shut down when that  
+
+45
+04:34.130 --> 04:35.740
+relationship comes up.
+
+46
+04:38.430 --> 04:47.130
+Which it has, we should see the routes replaced by BGP route and we can. Now in this example rip took a long
+
+47
+04:47.130 --> 04:48.240
+time to converge
+
+48
+04:48.480 --> 04:56.670
+but notice RIP has been used as the routing protocol to get to this loopback rather than BGP. Rip has
+
+49
+04:56.730 --> 05:02.420
+an admin distance of 120, IBGP has an admin distance of 200, rip is more believable.
+
+50
+05:02.880 --> 05:04.980
+So if we removed rip
+
+51
+05:06.740 --> 05:12.860
+from the router what we should see is the route is now available through BGP.
+
+52
+05:13.250 --> 05:19.350
+So in summary, IBGP has an admin distance of 200, rip has an admin distance of 120, 
+
+53
+05:19.670 --> 05:22.790
+ISIS has an admin distance of 115, 
+
+54
+05:23.150 --> 05:25.640
+OSPF has an admin distance of 110, 
+
+55
+05:25.970 --> 05:29.180
+EIGRP internal routes have an admin distance of 90, 
+
+56
+05:29.600 --> 05:36.800
+static routes to next-hop addresses have a admin distance of 1, static route to directly connected interface
+
+57
+05:36.800 --> 05:38.350
+as an admin distance of 0.
+
+58
+05:38.780 --> 05:42.340
+The lower the number, the more believable the routing protocol.
+
+59
+05:42.920 --> 05:48.620
+Remember with BGP, we have both EBGP and IBGP, 
+
+60
+05:48.830 --> 05:52.970
+EBGP admin distance is 20, IBGP admin distance is 200.
+
+61
+05:53.510 --> 05:55.630
+Make sure you know you administrative distances.
+
+62
+05:56.300 --> 05:57.530
+That concludes this vlog.
+
+63
+05:58.130 --> 05:59.990
+If you've enjoyed the video, please like it
+
+64
+06:00.230 --> 06:06.260
+and very importantly, please subscribe to my YouTube channel. I wish you all the very best.

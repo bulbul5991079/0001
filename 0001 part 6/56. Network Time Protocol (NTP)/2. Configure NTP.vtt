@@ -1,0 +1,345 @@
+WEBVTT
+
+0
+00:00.690 --> 00:09.570
+Before setting up our NTP service, the first thing we want to do is set our time closer to the real
+
+1
+00:09.570 --> 00:14.190
+time so that NTP synchronizes quicker. At the moment
+
+2
+00:15.740 --> 00:23.420
+router 2 as an example, still believes that it's in the year 2030, router 2 is in the year and
+
+3
+00:23.420 --> 00:29.960
+router 3  is in the year 2002.
+
+4
+00:30.650 --> 00:39.200
+Before setting time, however, we want to set a time zone and set summer time because that will affect
+
+5
+00:39.290 --> 00:45.010
+the time and the devices some of the time clock and specify a time zone.
+
+6
+00:45.620 --> 00:53.720
+This can be any name I'm going to specify GMT in this example, there is no hours or minutes offset
+
+7
+00:53.720 --> 00:54.920
+from UTC.
+
+8
+00:55.460 --> 01:02.210
+Fortunately, it's a lot simpler in the UK because Greenwich is based in the UK and other time zones
+
+9
+01:02.420 --> 01:07.070
+are derived from GMT or Greenwich Meridian Time.
+
+10
+01:07.820 --> 01:14.780
+If you are living in the US as an example and let's say you were on the East Coast, you might specify
+
+11
+01:14.780 --> 01:19.850
+EST and the offset would be minus 5 hours.
+
+12
+01:20.390 --> 01:27.200
+EST is five hours behind UTC or universal coordinated time.
+
+13
+01:27.860 --> 01:30.770
+So I'm going to set GMT as my time zone
+
+14
+01:31.370 --> 01:35.060
+but what I need to do now is specify summer time.
+
+15
+01:35.780 --> 01:38.090
+It's summer at the moment in the UK.
+
+16
+01:39.700 --> 01:47.200
+I'm going to specify a name which I'll just specify as British Summer, you can specify when summertime
+
+17
+01:47.200 --> 01:53.830
+starts and stops by using either a date, which is an absolute date, or you can specify a recurring
+
+18
+01:53.830 --> 01:54.340
+value.
+
+19
+01:54.850 --> 02:02.320
+So I'm going to specify recurring being the last Sunday in March
+
+20
+02:04.140 --> 02:15.810
+and summertime will start at 1:00 a.m. and will end in the last Sunday in October at 1:00 a.m..
+
+21
+02:18.370 --> 02:26.110
+So what you'll notice is the time is updated because it's summertime. So what I've done is
+
+22
+02:31.010 --> 02:36.680
+specify the time zone and specify the summer time.
+
+23
+02:37.340 --> 02:43.730
+Now, what's interesting is these two commands are done in global config on a router but the clock is
+
+24
+02:43.730 --> 02:45.650
+set in privilege mode.
+
+25
+02:46.190 --> 02:55.400
+So the correct time at the moment approximately is 23:19 on the 16th of August 2016.
+
+26
+02:56.750 --> 02:57.830
+So show clock
+
+27
+03:00.090 --> 03:04.860
+shows me that date and time now to simplify things.
+
+28
+03:04.890 --> 03:16.440
+I'm going to copy and paste the clock time zone and summertime into the other routers.
+
+29
+03:19.400 --> 03:30.140
+So both router 2 and router 3 are now configured with summertime and a time zone.
+
+30
+03:32.600 --> 03:36.080
+So there we go, router 2, router 3
+
+31
+03:41.580 --> 03:43.020
+and router 1 are configured.
+
+32
+03:46.980 --> 03:51.360
+What I do need to do on both router 2 and router 3 is specify the time.
+
+33
+03:54.000 --> 03:55.370
+Set it to 21
+
+34
+03:57.660 --> 04:01.980
+16TH of August 2016
+
+35
+04:06.170 --> 04:08.950
+and I'll do that on router 3 as well. So there's the clock
+
+36
+04:08.990 --> 04:16.030
+on router 3, here's the clock on router 2 and there's the clock on router 1.
+
+37
+04:16.730 --> 04:20.630
+Now, the clocks are slightly out, so that's close enough for what we're gonna do.
+
+38
+04:21.260 --> 04:25.760
+What I want to do is set up router 3 now as a NTP master.
+
+39
+04:27.170 --> 04:32.360
+So we would do that by using the command NTP master and specifying a stratum level.
+
+40
+04:32.930 --> 04:35.110
+I'm just going to specify stratum level of ten
+
+41
+04:35.660 --> 04:44.960
+and in this example, I'm going to specify the loopback as the source of time, loopbacks are good because
+
+42
+04:44.960 --> 04:47.600
+once again, loopback interfaces don't go down.
+
+43
+04:48.470 --> 04:56.090
+So show IP Interface brief shows me that the router has a loopback configured on quadruple 3 and I've specified
+
+44
+04:56.090 --> 05:01.280
+that NTP use that as the source of time.
+
+45
+05:02.580 --> 05:11.100
+So show NTP associations at the moment, the local router is associated with itself.
+
+46
+05:11.730 --> 05:14.520
+This is just a loopback address on the local router
+
+47
+05:15.210 --> 05:22.710
+as we can see, it's configured and at the moment it's synchronized with the master.
+
+48
+05:23.100 --> 05:27.150
+In other words, itself, show NTP status.
+
+49
+05:30.820 --> 05:37.870
+We can see that the clock is synchronized with a stratum 10 device, which is the local device, show
+
+50
+05:37.870 --> 05:43.060
+NTP status on router 2 shows us that NTP is not enabled.
+
+51
+05:43.930 --> 05:49.750
+So we could use the command NTP server and point it to router 3
+
+52
+05:51.980 --> 05:55.370
+and now we can use the command show NTP status.
+
+53
+05:56.730 --> 05:58.800
+At the moment, the clock is unsynchronized.
+
+54
+06:00.030 --> 06:10.350
+The local stratum is 16, it has no reference clock show NTP associations, it has now associated with
+
+55
+06:10.390 --> 06:11.210
+quadruple three.
+
+56
+06:11.880 --> 06:14.960
+You can see that it is synchronized.
+
+57
+06:15.570 --> 06:17.590
+So let's look at status again.
+
+58
+06:18.210 --> 06:18.770
+There you go.
+
+59
+06:18.780 --> 06:19.920
+The clock is synchronized.
+
+60
+06:20.400 --> 06:25.770
+The local router has a stratum of 11 because we configured
+
+61
+06:29.580 --> 06:36.960
+router 3 with a stratum of 10, the reference device is quadruple 3 we can see what the time is
+
+62
+06:37.380 --> 06:43.440
+and we can see that we are using British summertime. On router 1 show NTP status,
+
+63
+06:46.010 --> 06:53.860
+NTP is not configured, what I'll do here, however, is tell this router to get its time from router 2 not
+
+64
+06:53.870 --> 06:57.140
+router 3. So router 3 got a stratum of 10
+
+65
+06:57.320 --> 06:58.790
+this will have a stratum of 11
+
+66
+06:59.210 --> 07:01.130
+and this will have a stratum of 12.
+
+67
+07:01.550 --> 07:08.600
+Router 1 is getting time from router 2 and router 2 is getting time from router 3, so NTP server 2.
+
+68
+07:08.600 --> 07:13.640
+2.2.2 show NTP status.
+
+69
+07:16.200 --> 07:17.910
+Clock is still unsynchronized.
+
+70
+07:19.880 --> 07:24.020
+Let's look at associations at the moment it's configured
+
+71
+07:26.200 --> 07:27.460
+but it's not synchronized.
+
+72
+07:28.830 --> 07:36.510
+But there you go, it's now synchronized with the master device, so if we look at the status, we can
+
+73
+07:36.510 --> 07:38.040
+see that the clock is synchronized.
+
+74
+07:38.670 --> 07:40.920
+Stratum is now 12 as expected,
+
+75
+07:41.250 --> 07:43.680
+reference device is router 2.
+
+76
+07:45.070 --> 07:46.630
+So show clock,
+
+77
+07:48.400 --> 07:58.390
+show clock, we can see that the time is very close between these devices, just depends how quickly
+
+78
+07:58.390 --> 07:59.140
+I can type
+
+79
+08:01.050 --> 08:08.700
+but we can see that the time is good on the devices, the time is very close.
+
+80
+08:09.480 --> 08:15.450
+So notice 11:25, 11:25, 11:25 which is great.
+
+81
+08:16.750 --> 08:22.390
+Seconds are a little bit odd because I'm typing a bit slow, but you can see that they're very close
+
+82
+08:22.390 --> 08:23.050
+to one another.
+
+83
+08:23.530 --> 08:26.290
+So that's an example of how to set up an NTP server
+
+84
+08:26.500 --> 08:34.870
+and NTP clients that receive time from an NTP server router 2 is acting as an NTP client and
+
+85
+08:35.080 --> 08:36.220
+and NTP server.

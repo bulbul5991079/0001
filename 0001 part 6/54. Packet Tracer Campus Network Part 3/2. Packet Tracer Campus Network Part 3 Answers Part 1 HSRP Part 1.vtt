@@ -1,0 +1,349 @@
+WEBVTT
+
+0
+00:17.730 --> 00:20.920
+OK, so let's see if we can complete this lab together.
+
+1
+00:21.570 --> 00:26.160
+The first thing we need to do is configure and optimize HSRP.
+
+2
+00:31.330 --> 00:40.210
+That means that we are going to configure HSRP on the core switch as in the topology, core 1 and core
+
+3
+00:40.210 --> 00:40.750
+2.
+
+4
+00:48.320 --> 00:56.600
+Core 1 and Core 2 are the switches that are configured with inter VLAN routing, as well as layer
+
+5
+00:56.600 --> 01:00.390
+3 IP addresses for the various VLANs.
+
+6
+01:01.280 --> 01:06.680
+In other words, they have these SVIs or switched virtual interfaces configured.
+
+7
+01:08.510 --> 01:12.680
+So they're going to be used as the default gateway for the PCs.
+
+8
+01:14.290 --> 01:20.260
+Now, we could configure the PCs to use switch 1 as their default gateway
+
+9
+01:21.360 --> 01:24.630
+or they could use switch 2 as their default gateway.
+
+10
+01:25.700 --> 01:31.430
+In other words, we could configure PCs in VLAN 10 to use this IP address as the default gateway
+
+11
+01:31.970 --> 01:37.110
+and perhaps for devices in VLAN 20 this IP address as the default gateway.
+
+12
+01:37.940 --> 01:45.260
+The problem with that is if this PC has core 1 configured as its default gateway and core 1
+
+13
+01:45.260 --> 01:53.660
+goes down, PCs and VLAN 10 will no longer be able to connect to devices and other VLANs because their
+
+14
+01:53.660 --> 01:55.550
+default gateway has gone down.
+
+15
+01:55.940 --> 02:03.680
+So the idea with HSRP or hot standby routing protocol and other protocols such as VRRP or Virtual
+
+16
+02:03.680 --> 02:12.710
+Router Redundancy Protocol and GLBP or Gateway Load Balancing Protocol is that they create a virtual
+
+17
+02:12.740 --> 02:15.470
+router or virtual default gateway.
+
+18
+02:15.980 --> 02:22.310
+So the idea is you run these protocols on the core switches and a virtual router or virtual default
+
+19
+02:22.310 --> 02:25.280
+gateway is created for the PCs.
+
+20
+02:25.970 --> 02:32.480
+If one of the core physical devices goes down, it's not a problem because the other physical device
+
+21
+02:32.480 --> 02:36.270
+will do the routing on behalf of that virtual router.
+
+22
+02:36.710 --> 02:45.170
+So we want to configure HSRP on these two core routers so that we have redundancy in case one of the physical
+
+23
+02:45.170 --> 02:46.220
+routers goes down.
+
+24
+02:47.180 --> 02:51.550
+PCs will still be able to use their virtual default gateway.
+
+25
+02:52.100 --> 03:02.300
+So on core 1 let's start with VLAN 10 the command to use is standby and you specify a number
+
+26
+03:02.840 --> 03:11.530
+you can do load sharing of traffic within a VLAN by using multiple group numbers. For the CCNA course
+
+27
+03:11.540 --> 03:14.210
+however, we're just going to use one group
+
+28
+03:14.210 --> 03:22.120
+number, the group number could be the same number as your VLAN number, but it doesn't have to be.
+
+29
+03:22.520 --> 03:28.940
+I'm simply going to use group number one on all the VLANs to show you that the group number is
+
+30
+03:28.940 --> 03:31.940
+not specific to a VLAN, group
+
+31
+03:31.940 --> 03:33.550
+numbers can be in this range.
+
+32
+03:34.310 --> 03:42.170
+So we type a standby group number 1, IP because we want to have HSRP configured for IPv4
+
+33
+03:42.800 --> 03:45.380
+and we specify a virtual IP address.
+
+34
+03:49.100 --> 03:58.580
+Now in this example, we want to optimize HSRP that means that we want core 1 to be the HSRP
+
+35
+03:58.610 --> 04:05.450
+active router for VLANs where it is the spanning-tree root. Notice for this VLAN
+
+36
+04:05.450 --> 04:10.850
+it's become active because there's no other router or switch configured for HSRP.
+
+37
+04:11.870 --> 04:18.430
+But the idea is the switch is the spanning-tree root for VLANs 1, 10 and 30.
+
+38
+04:19.030 --> 04:24.200
+We are going to want it to be the HSRP primary for those VLANs.
+
+39
+04:24.800 --> 04:33.080
+We don't want this switch to be the HSRP primary or active router for VLAN 10 because it means that traffic
+
+40
+04:33.080 --> 04:37.250
+will traverse across these links to get to the default gateway.
+
+41
+04:37.970 --> 04:44.840
+And in the same way, we don't want switch 1 to be the HSRP active router when switch 2 is the spanning
+
+42
+04:44.840 --> 04:53.450
+tree root for VLAN 20 because traffic would have to traverse this way to get to the HSRP default gateway.
+
+43
+04:54.460 --> 05:04.960
+So hence, we are going to match HSRP active routers to VLANs and a way to ensure that is to change
+
+44
+05:05.050 --> 05:12.730
+the priority of the active router the higher the priority, the more likely that that router or switch will
+
+45
+05:12.730 --> 05:16.660
+become the HSRP active forwarder or active router.
+
+46
+05:17.890 --> 05:27.910
+Default priority is 100, stand by one preempt allows us to force this switch to become the HSRP active
+
+47
+05:27.910 --> 05:29.230
+router when it's up.
+
+48
+05:29.890 --> 05:36.730
+So as an example, if it went down, so you turn off core 1, core 2 would become the HSRP active
+
+49
+05:36.730 --> 05:37.120
+router
+
+50
+05:37.360 --> 05:39.160
+while core 1 is down
+
+51
+05:39.670 --> 05:47.560
+but when you turn on core 1 and it boots up again, preemption will force it to become the HSRP active
+
+52
+05:47.560 --> 05:48.570
+router once again.
+
+53
+05:49.210 --> 05:49.810
+So show
+
+54
+05:49.820 --> 05:50.550
+standby
+
+55
+05:52.130 --> 05:55.190
+we can see that we've got a group configured on VLAN 10.
+
+56
+05:56.140 --> 06:04.320
+State is active, a virtual IP address is this, virtual Mac address is this, now this is the HSRP well
+
+57
+06:04.330 --> 06:05.400
+known Mac address.
+
+58
+06:06.130 --> 06:12.280
+This is the group number, group number is 1 because we created a group of one.
+
+59
+06:13.440 --> 06:20.120
+This is a hexadecimal number, if we had created Group 10, the Mac address would have ended in 0A,
+
+60
+06:20.350 --> 06:22.800
+A being hexadecimal for 10.
+
+61
+06:23.310 --> 06:29.310
+If we had created group 11, it would have been AB, B being hexadecimal for 11.
+
+62
+06:30.290 --> 06:37.850
+Active router is the local router preemption is enabled standby, router is not known yet we haven't configured
+
+63
+06:37.940 --> 06:41.720
+switch 2, so switch 1 doesn't know about another
+
+64
+06:41.930 --> 06:45.440
+HSRP router, priority is 200.
+
+65
+06:46.800 --> 06:55.170
+On this side, if we type show stand by, we see nothing because we haven't configured HSRP on the
+
+66
+06:55.170 --> 07:02.490
+switch yet, so on the same VLAN, VLAN 10, standby, make sure that you use the same number on both
+
+67
+07:02.490 --> 07:03.120
+sides.
+
+68
+07:03.600 --> 07:06.440
+IP same IP address.
+
+69
+07:07.740 --> 07:10.020
+In other words, same virtual IP address.
+
+70
+07:11.000 --> 07:13.630
+Now, we could specify a priority here.
+
+71
+07:16.270 --> 07:23.110
+We don't need to because the default is already 100 but if we type show run and have a look at
+
+72
+07:23.230 --> 07:26.230
+the configuration on VLAN
+
+73
+07:28.630 --> 07:36.670
+10 notice the property is not displayed because it's the default priority the router has become a
+
+74
+07:36.670 --> 07:37.440
+standby.
+
+75
+07:38.020 --> 07:42.620
+I just hope he goes through different states and the state is standby.
+
+76
+07:43.060 --> 07:46.960
+So show standby shows us that for this group.
+
+77
+07:48.630 --> 07:50.580
+The local switch is a standby switch.
+
+78
+07:52.560 --> 07:54.080
+Do the command again here.
+
+79
+07:55.500 --> 07:58.050
+Switch 1 or core 1 is the active router,
+
+80
+07:59.240 --> 08:06.740
+core 2 is the standby router or standby switch, it's a layer 3 switch but it's acting like a router.
+
+81
+08:08.390 --> 08:14.600
+So forgive me if I use the terms interchangeably, a virtual IP address is that notice Mac address is
+
+82
+08:14.600 --> 08:20.270
+the same, standby router is the local router, active router is core
+
+83
+08:20.270 --> 08:22.190
+1 priority is this,
+
+84
+08:22.190 --> 08:23.180
+that is the default.
+
+85
+08:24.370 --> 08:31.720
+On this side, we've got an active router being the local router and it's now learnt about core 2 being
+
+86
+08:31.720 --> 08:32.920
+the standby router.

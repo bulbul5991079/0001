@@ -1,0 +1,49 @@
+WEBVTT
+
+0
+00:16.180 --> 00:22.810
+In this lab, we're going to configure default gateways and ensure that the devices in the network can
+
+1
+00:22.810 --> 00:23.740
+ping one another.
+
+2
+00:24.520 --> 00:29.900
+To do that, we need to configure and optimize HSRP or hot standby routing protocol.
+
+3
+00:30.400 --> 00:35.170
+We're going to enable EIGRP on the core switches and ISR router.
+
+4
+00:35.890 --> 00:42.300
+We're going to configure the PCs and the server with IP addresses as shown here.
+
+5
+00:42.760 --> 00:47.130
+And then we're going to make sure that the PCs can oing each other as well as the server.
+
+6
+00:47.710 --> 00:52.180
+And we need to verify connectivity between the switches and server and PCs.
+
+7
+00:53.230 --> 01:01.870
+So as an example, this PC in VLAN 1 should be able to ping PC 2,PC three, the server and the
+
+8
+01:01.870 --> 01:10.580
+access switches and the router, once this lab is completed. Can you complete this lab yourself? Download
+
+9
+01:10.600 --> 01:13.790
+the attached packet tracer file and try it.
+
+10
+01:14.260 --> 01:18.670
+It's not easy, but see if you can do it and get it working yourself.
+
+11
+01:19.240 --> 01:22.660
+You need to be able to do this for the CCNA exam.

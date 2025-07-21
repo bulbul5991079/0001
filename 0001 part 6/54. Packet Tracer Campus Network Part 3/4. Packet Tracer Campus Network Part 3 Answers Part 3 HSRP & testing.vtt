@@ -1,0 +1,385 @@
+WEBVTT
+
+0
+00:12.510 --> 00:27.650
+So interface VLAN 100 stand by 1 IP 10.1.100.254, stand by 1 priority 200, standby 1 preemption.
+
+1
+00:29.700 --> 00:42.720
+So looking at core 2 show run shows us that this is the configuration on VLAN 100 and the switch has become
+
+2
+00:42.720 --> 00:43.620
+the active router.
+
+3
+00:46.980 --> 00:49.150
+On core 1 we're going to do something similar.
+
+4
+00:50.190 --> 00:55.980
+Standby 1 IP 10.1.100.254
+
+5
+00:58.080 --> 00:58.710
+show
+
+6
+00:58.950 --> 01:08.330
+standby still listening at the moment, but after a while, that should go to active.
+
+7
+01:08.340 --> 01:14.700
+It's now speaking, in other words, sending out HSRP messages and notice it's now gone to stand by.
+
+8
+01:15.480 --> 01:23.070
+So show standby on VLAN 100, the local router is in standby mode, 
+
+9
+01:23.490 --> 01:27.930
+active router is core 2 again local
+
+10
+01:27.930 --> 01:29.640
+router is standby.
+
+11
+01:31.760 --> 01:37.070
+Now the last VLAN to configure and one not to forget is VLAN 1.
+
+12
+01:38.700 --> 01:46.020
+Don't forget to configure VLAN 1, because your layer 2 switch is here at the access layer also
+
+13
+01:46.020 --> 01:47.250
+need a default gateway.
+
+14
+01:48.420 --> 01:59.710
+Show spanning-tree VLAN 1 local switch is the root, so we want to configure it as the HSRP primary.
+
+15
+01:59.760 --> 02:08.160
+So standby 1 IP 10.1.1.254, standby 1 priority
+
+16
+02:09.200 --> 02:12.980
+200 standby 1 preemption.
+
+17
+02:15.390 --> 02:16.350
+So show run
+
+18
+02:17.340 --> 02:22.920
+and we'll look at VLAN 1, that's the configuration.
+
+19
+02:25.490 --> 02:33.140
+Configure core 2 interface VLAN 1 standby 1 IP 10.1.1.254.
+
+20
+02:35.000 --> 02:43.070
+We can see that core 1 has become the active router for VLAN 1, so show standby
+
+21
+02:45.770 --> 02:48.700
+for VLAN 1 core 1 is the active router.
+
+22
+02:49.610 --> 02:53.260
+Same for VLAN 10, same for VLAN 30
+
+23
+02:54.800 --> 03:04.900
+its standby for VLAN 100 and its standby for VLAN 20 on the side show
+
+24
+03:04.910 --> 03:05.690
+standby
+
+25
+03:07.350 --> 03:15.040
+VLAN 1 it's the standby router, standby for VLAN 10, it's active for VLAN 20
+
+26
+03:15.970 --> 03:17.770
+standby for VLAN 30
+
+27
+03:18.760 --> 03:21.190
+active for VLAN 100,
+
+28
+03:22.180 --> 03:22.910
+so that's good.
+
+29
+03:22.930 --> 03:29.590
+I think we've configured HSRP successfully on our core switches.
+
+30
+03:30.070 --> 03:32.320
+Now we need to configure default gateways.
+
+31
+03:33.720 --> 03:45.390
+So we've already configured PC 1 to use 10.1.10.254 as the default gateway, let's configure PC 2.
+
+32
+03:47.160 --> 03:48.960
+So config on PC 2
+
+33
+03:52.950 --> 04:03.840
+gateway will be 10.1.20.254 DNS server will be google, IP address will be 10.1.20.10
+
+34
+04:06.910 --> 04:13.750
+/24 mask. So that's the IP address we need to use 10.1.20.10.
+
+35
+04:17.070 --> 04:26.250
+Go to desktop command prompt IP config shows us that information can it ping its default gateway?
+
+36
+04:26.280 --> 04:27.120
+Yes, it can.
+
+37
+04:28.080 --> 04:30.030
+Can the PC ping
+
+38
+04:31.430 --> 04:32.510
+PC 1?
+
+39
+04:36.480 --> 04:44.550
+OK, so there you go, just took a bit of time, but notice now, PC 2 can ping PC 1. So back on
+
+40
+04:44.550 --> 04:45.330
+PC 1
+
+41
+04:47.540 --> 04:50.180
+can it ping PC 2?
+
+42
+04:50.540 --> 04:51.350
+Yes, it can.
+
+43
+04:53.720 --> 05:02.480
+Notice, if we look at the ARP cache we don't see a Mac address for PC 2 because to get to PC 2 traffic
+
+44
+05:02.480 --> 05:07.250
+is going via the default gateway, which is the HSRP router
+
+45
+05:10.250 --> 05:13.370
+and the same is true on PC 2.
+
+46
+05:15.880 --> 05:25.090
+We need to configure PC 3, so gateway is going to be 10.1.30.254 DNS server is Google
+
+47
+05:27.630 --> 05:32.310
+IP address will be 10.1.30.10/24 mask
+
+48
+05:34.470 --> 05:35.460
+as shown here
+
+49
+05:38.340 --> 05:44.850
+desktop command prompt IP config, that looks good.
+
+50
+05:46.540 --> 05:50.480
+Can we ping PC 1?
+
+51
+05:50.830 --> 05:55.150
+Yes, we can, can we ping PC 2?
+
+52
+05:56.320 --> 05:57.100
+Yes, we can.
+
+53
+05:58.150 --> 05:59.250
+So that looks great.
+
+54
+05:59.980 --> 06:03.210
+But notice we won't be able to ping all switches.
+
+55
+06:03.940 --> 06:06.040
+Why can't we ping the switch
+
+56
+06:09.250 --> 06:11.470
+if we run a debug on that switch?
+
+57
+06:15.800 --> 06:24.440
+So use the come on, debug IP ICMP, we should be able to see if traffic arrives after that switch and
+
+58
+06:24.440 --> 06:30.920
+notice you can see it arriving so the ping gets to the switch, but it doesn't get back again
+
+59
+06:31.760 --> 06:36.950
+and that's because we need to configure a default gateway on the switch.
+
+60
+06:39.690 --> 06:47.730
+And to do that, we use the command IP default gateway and we specify our default gateway, which is
+
+61
+06:47.730 --> 06:56.340
+the HSRP router, and now you can see that pings are succeeding. So I'll turn off debugging here
+
+62
+06:57.850 --> 07:05.860
+command is un-all to turn off debugging, save the config while we're there and notice PC 3 can ping switch
+
+63
+07:05.860 --> 07:15.520
+1 but can't ping switch 2 this switch here because again, we need to configure a default gateway.
+
+64
+07:18.340 --> 07:20.170
+So show IP interface
+
+65
+07:20.290 --> 07:29.710
+brief IP address is 10.1.1.2 show IP route shows us that we don't have a default gateway.
+
+66
+07:30.490 --> 07:33.040
+So IP default gateway
+
+67
+07:34.670 --> 07:36.440
+10.1.1.254
+
+68
+07:39.050 --> 07:45.720
+show IP route default gateway is now configured. So back on PC3
+
+69
+07:46.630 --> 07:50.240
+hopefully we should be able to ping switch 2 which we can.
+
+70
+07:50.750 --> 07:52.000
+Pings are now succeeding.
+
+71
+07:54.800 --> 07:56.090
+We need to do something similar
+
+72
+07:59.150 --> 08:05.600
+on switch 3, access switch 3 IP default gateway
+
+73
+08:11.670 --> 08:13.980
+10.1.1.254
+
+74
+08:16.530 --> 08:23.760
+show IP route shows us that we do have a default gateway configured, I'll save the configuration.
+
+75
+08:25.210 --> 08:29.140
+So on PC 3 can we ping access 3?
+
+76
+08:32.170 --> 08:40.870
+Took a while, but the answer is yes, we can now ping access 3. Can we ping the server, which
+
+77
+08:40.870 --> 08:43.450
+has IP address 10.100.100?
+
+78
+08:45.060 --> 08:47.430
+Answer is no, because we need to configure the server.
+
+79
+08:53.170 --> 09:02.350
+So on the server default gateway will be 10.1.100.254 we'll set to the DNS server to Google,
+
+80
+09:04.670 --> 09:09.740
+IP address will be 10.1.100.100/24 mask.
+
+81
+09:12.240 --> 09:20.740
+Open up a CMD prompt or command prompt IP config shows us the IP address of the server.
+
+82
+09:21.300 --> 09:23.730
+Can it ping PC 1?
+
+83
+09:26.350 --> 09:27.220
+Yes, it can.
+
+84
+09:28.090 --> 09:29.950
+What about PC 2?
+
+85
+09:30.370 --> 09:31.270
+Yes, it can.
+
+86
+09:31.870 --> 09:33.370
+What about PC three?
+
+87
+09:33.550 --> 09:34.460
+Yes, it can.
+
+88
+09:35.350 --> 09:38.020
+Can the PC ping the server?
+
+89
+09:39.370 --> 09:41.530
+Yes, PC 3 can ping the server.
+
+90
+09:42.340 --> 09:44.020
+What about PC 2?
+
+91
+09:46.760 --> 09:47.600
+Yes, it can.
+
+92
+09:48.440 --> 09:50.000
+What about PC 1?
+
+93
+09:52.260 --> 09:53.040
+Yes, it can.
+
+94
+09:54.570 --> 10:02.220
+So we've successfully configured IP connectivity in the campus, we've configured HSRP, but we still
+
+95
+10:02.220 --> 10:08.700
+need to do, however, is configure EIGRP on the core router and on the ISR.

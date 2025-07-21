@@ -1,0 +1,193 @@
+WEBVTT
+
+0
+00:00.840 --> 00:07.800
+The following videos showing you the integration between GNS3 and NPM are based on this how-to
+
+1
+00:07.800 --> 00:14.250
+guide, which you can get from the below links. This may be useful to you after you've attended the training.
+
+2
+00:14.790 --> 00:22.260
+So if you want to set up NPM and GNS3 refer back to this guide which contains a lot of information,
+
+3
+00:22.710 --> 00:28.470
+including how to install both GNS3 and NPM, how to create the initial topology.
+
+4
+00:29.530 --> 00:37.270
+The commands used on the routers, including commands such as setting up SNMP, setting up the IP addresses
+
+5
+00:37.870 --> 00:45.960
+and configuring EIGRP, I'll also include the commands on the routers, on the relevant video in this
+
+6
+00:45.970 --> 00:46.480
+training
+
+7
+00:47.470 --> 00:52.630
+but you may find the integration going to be of benefit to you for reference later.
+
+8
+00:53.900 --> 01:00.020
+In the next few videos, I'm going to show you how to build a topology within GNS3 that consists
+
+9
+01:00.020 --> 01:03.320
+of three routers connected via serial interfaces.
+
+10
+01:04.390 --> 01:10.630
+These are going to be the interfaces monitored by Network Performance Monitor. The three Cisco routers
+
+11
+01:10.630 --> 01:14.180
+are connected to a switch, which in turn is connected to NPM.
+
+12
+01:14.800 --> 01:17.900
+This is our out-of-band network management subnet.
+
+13
+01:18.580 --> 01:23.650
+You don't need a dedicated network for management, but in this example, that's the way we're going
+
+14
+01:23.650 --> 01:25.510
+to configure it. Now
+
+15
+01:25.510 --> 01:29.650
+in GNS3 there are multiple ways to set up your Cisco routers.
+
+16
+01:30.400 --> 01:36.940
+You can either run Cisco iOS routers directly within Windows using what's called the local server,
+
+17
+01:37.450 --> 01:42.280
+or you can use a virtual box VMS or VMware VMS.
+
+18
+01:42.910 --> 01:44.680
+It's up to you which method to use.
+
+19
+01:45.100 --> 01:53.110
+The recommendation is that if you are only going to have Cisco routers and other basic devices such
+
+20
+01:53.110 --> 02:00.610
+as the built-in Ethernet switches in GNS3 you can run GNS3 or locally on your local
+
+21
+02:00.610 --> 02:01.960
+windows, PC or Mac.
+
+22
+02:02.470 --> 02:09.910
+However, if you want to run more complex topologies using iOS layer 2 or other more complex setups,
+
+23
+02:10.060 --> 02:12.910
+then you're going to want to use the GNS3 VM.
+
+24
+02:13.480 --> 02:19.960
+Please refer to the GNS3 installation videos for more detail on how to set up and integrate
+
+25
+02:20.110 --> 02:20.950
+GNS3.
+
+26
+02:22.240 --> 02:28.860
+So in this example, I have a Windows 7 professional virtual machine running within a VMware workstation.
+
+27
+02:29.290 --> 02:36.400
+I've allocated 4 gig of RAM to the 64 bit operating system and I've allocated 2 calls.
+
+28
+02:37.090 --> 02:44.170
+So on the settings of a VMware workstation, you can see that 4 gig of RAM has been allocated.
+
+29
+02:45.620 --> 02:49.010
+At the moment, only one process has been allocated.
+
+30
+02:49.760 --> 02:57.740
+Now some recommendations from solar winds, you can run NPM on Windows 7, Windows 8.1
+
+31
+02:57.740 --> 02:58.910
+and Windows 10.
+
+32
+02:59.390 --> 03:04.840
+It suggested that you use 2 cores and 4 gigs of RAM as the bare minimum.
+
+33
+03:05.390 --> 03:12.320
+It is better, however, to use 8 giga ram and 4 cores, but as a bare minimum use 2 cores
+
+34
+03:12.320 --> 03:13.700
+and 4 gigs of RAM.
+
+35
+03:15.090 --> 03:21.120
+So in this example, I'm going to shut down my virtual machine and I'm going to increase the amount
+
+36
+03:21.120 --> 03:28.800
+of RAM and CPU so that it's a lot quicker when I do the demonstrations.
+
+37
+03:29.280 --> 03:32.640
+Now, that's obviously dependent on what you have available
+
+38
+03:33.520 --> 03:43.240
+on your PC, but I'll set it to use 4 processor cores and 8 gig of ram and I'll power on the virtual
+
+39
+03:43.240 --> 03:44.010
+machine again.
+
+40
+03:45.580 --> 03:50.770
+Now, something I always do, and this is up to you, but I always create snapshots
+
+41
+03:51.830 --> 03:54.800
+of my virtual machines in case something goes wrong.
+
+42
+03:57.500 --> 04:05.330
+So I've created a snapshot with, for example, a new install of Windows 7 with Chrome installed
+
+43
+04:05.780 --> 04:07.460
+and that's where I am at the moment.
+
+44
+04:08.680 --> 04:12.040
+Virtual machine is saying that I need to restart, so I'll do that here.
+
+45
+04:15.670 --> 04:23.590
+So what I'm simply doing here is getting Windows 7 ready so that I can install NPM.
+
+46
+04:26.710 --> 04:35.800
+You may also want to download Windows 2012, so as an example, you can download a VHD file and then
+
+47
+04:35.800 --> 04:42.730
+import that into a virtual box if you want to run NPM on Windows Server 2012.

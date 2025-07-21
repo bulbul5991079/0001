@@ -1,0 +1,161 @@
+WEBVTT
+
+0
+00:14.460 --> 00:18.940
+So here's the router show IP interface brief.
+
+1
+00:20.100 --> 00:25.740
+We don't have any IP addresses configured on the router. So I'll configure the router
+
+2
+00:27.580 --> 00:36.640
+with an IP address of 10.1.1.253/24 mask and no shut the interface.
+
+3
+00:38.820 --> 00:46.560
+So can the router ping the HSRP IP address in VLAN 1 and the answer is yes it can.
+
+4
+00:47.640 --> 00:54.240
+So what I'll do now is enable EIGRP in autonomous system 100 and I'll only enable
+
+5
+00:55.510 --> 00:56.260
+EIGRP
+
+6
+00:58.260 --> 01:10.170
+for network 10. So show IP EIGRP interfaces EIGRP is enabled on gigabit0/0/0.
+
+7
+01:13.100 --> 01:17.590
+So on core 1, I'm going to enable EIGRP as well.
+
+8
+01:19.780 --> 01:26.620
+So router EIGRP, we need to make sure that the autonomous system numbers are the same on this
+
+9
+01:26.620 --> 01:33.430
+side we enabled EIGRP in autonomous system 100
+
+10
+01:36.730 --> 01:42.490
+and here I'll enable it on all interfaces simply by doing that.
+
+11
+01:44.450 --> 01:48.600
+I'll also configure no-auto summary, and I'll do the same over here.
+
+12
+01:50.720 --> 01:56.360
+We don't want automatic summarization on EIGRP, on core 2
+
+13
+01:58.100 --> 02:03.610
+router EIGRP 100 network 10 0/0/0
+
+14
+02:03.980 --> 02:05.360
+no-auto summary.
+
+15
+02:07.170 --> 02:15.540
+Notice we've got a lot of neighbor relationships because we are running EIGRP on multiple interfaces
+
+16
+02:16.020 --> 02:24.990
+on VLAN 1 we have two peers. Show IP EIGRP neighbors notice we have multiple neighbor relationships
+
+17
+02:25.710 --> 02:29.170
+the VLAN numbers are not showing properly on packet tracer
+
+18
+02:29.700 --> 02:37.110
+but what we've got is we've got neighbor relationships to switch 1 or core 1 on multiple VLANs
+
+19
+02:37.890 --> 02:42.210
+and we've got a neighbor relationship to the ISR router.
+
+20
+02:46.190 --> 02:49.920
+On core 1 show IP EIGRP neighbor
+
+21
+02:50.510 --> 02:58.910
+we also have multiple neighbor relationships in core 2 and one relationship to the ISR.
+
+22
+03:00.020 --> 03:09.410
+We have VLAN 1 spanning this link all the way to the ISR, so hence core 1 can have a neighbor relationship
+
+23
+03:09.410 --> 03:11.300
+directly to the ISR.
+
+24
+03:13.830 --> 03:22.560
+So we've configured EIGRP in our network, can the PCs ping the ISR as an example, so can it ping
+
+25
+03:22.860 --> 03:24.820
+10.1.1.253?
+
+26
+03:24.870 --> 03:25.710
+Yes, it can.
+
+27
+03:26.610 --> 03:34.500
+If I configured a loopback on the ISR router, that should be advertised and become available in the
+
+28
+03:34.500 --> 03:35.160
+network.
+
+29
+03:35.880 --> 03:46.290
+So as an example, if I configured a loopback on the ISR of quadruple one and then I went into
+
+30
+03:46.290 --> 03:51.030
+EIGRP and I advertised that network through EIGRP.
+
+31
+03:52.810 --> 04:00.370
+Core 1 should learn about that route, so show IP route shows us that route in the routing table
+
+32
+04:00.700 --> 04:04.660
+and it was learnt via EIGRP.
+
+33
+04:06.920 --> 04:18.080
+Notice the D for EIGRP we can ping that route from core 1 so on a PC such as PC 1, we should be
+
+34
+04:18.080 --> 04:26.870
+able to ping the loopback of the ISR, which we can so EIGRP is successfully configured in
+
+35
+04:26.870 --> 04:27.650
+this network.
+
+36
+04:28.390 --> 04:38.510
+The next step is to configure the ISR router with DHCP on this interface and configure net and verify
+
+37
+04:38.510 --> 04:41.320
+that the PCs can ping cisco.com.
+
+38
+04:41.750 --> 04:49.610
+That means that they need to send a DNS request to the DNS server, which will resolve the IP address
+
+39
+04:49.970 --> 04:53.420
+and tell the PCs the IP address of Cisco.

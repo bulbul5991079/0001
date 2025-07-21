@@ -1,0 +1,257 @@
+WEBVTT
+
+0
+00:00.930 --> 00:01.740
+What time is it?
+
+1
+00:03.150 --> 00:09.990
+I'm sure you agree that time is of great importance in the real world and the same is true for networking.
+
+2
+00:10.580 --> 00:18.270
+If I asked you to have a meeting with me tomorrow at 9 a.m., one of the first questions is 9:00
+
+3
+00:18.330 --> 00:24.170
+AM, in which time zone I'm based in the U.K., but you may be based elsewhere.
+
+4
+00:24.780 --> 00:31.980
+So we're talking about 9:00 a.m. Eastern Time in the US or perhaps Pacific Time or are we talking
+
+5
+00:31.980 --> 00:34.050
+about 9:00 a.m. U.K. time.
+
+6
+00:34.560 --> 00:37.560
+Time is also of great importance when troubleshooting networking.
+
+7
+00:38.070 --> 00:40.350
+In this example, I've got three routers, router
+
+8
+00:40.390 --> 00:41.840
+1, router 2 and router 3.
+
+9
+00:42.750 --> 00:52.410
+And as an example, if I type Conft and then Control zed or control z, notice the time on this router.
+
+10
+00:52.920 --> 00:59.160
+The Syslog message is saying that the router was configured by the console, but this router thinks
+
+11
+00:59.160 --> 01:02.640
+it's in the year 2030, so it's done a bit of time travel.
+
+12
+01:05.290 --> 01:12.760
+This router thinks that it's in the year 2002, so it's stuck in the past. I've got a router with the
+
+13
+01:12.760 --> 01:16.500
+correct time in the UK, but the wrong date.
+
+14
+01:17.350 --> 01:20.220
+This router thinks that it's based in the future.
+
+15
+01:21.100 --> 01:24.840
+This router has the correct time currently in the UK.
+
+16
+01:25.630 --> 01:26.590
+This one doesn't.
+
+17
+01:27.370 --> 01:31.060
+This router, however, has the wrong date and so does this router.
+
+18
+01:33.150 --> 01:40.780
+Now, this becomes even more important when we're trying to troubleshoot an issue on the network. In this
+
+19
+01:40.780 --> 01:50.550
+example, I'll enable OSPF on router 2 it's already enabled on the other routers in the network.
+
+20
+01:56.410 --> 02:04.180
+So we can see that a relationship was formed in the year 2030 and according to this side a neighbor
+
+21
+02:04.180 --> 02:12.070
+relationship was formed in the year 2002, it's going to be very difficult to troubleshoot any kind
+
+22
+02:12.070 --> 02:15.910
+of issue taking place between the router in this network
+
+23
+02:17.160 --> 02:20.970
+because the date and time is not synchronized on the routers.
+
+24
+02:22.170 --> 02:25.910
+Now you can manually configure time on the routers. 
+
+25
+02:26.130 --> 02:31.230
+So I could use the clock command as an example and set the time
+
+26
+02:32.510 --> 02:33.320
+on the routers
+
+27
+02:34.950 --> 02:43.800
+but that's not going to scale very well if I have many, many routers and in addition
+
+28
+02:44.250 --> 02:53.220
+clocks drift, so we ideally want to ensure that all the clocks on all the devices are synchronized to an atomic clock
+
+29
+02:53.220 --> 02:53.580
+somewhere.
+
+30
+02:54.480 --> 03:00.630
+The protocol used for synchronization of time is Network Time Protocol or NTP.
+
+31
+03:01.170 --> 03:10.200
+At the moment, if I type show NTP status on router 1, we can see that NTP is not enabled, NTP is
+
+32
+03:10.230 --> 03:13.020
+not enabled by default on Cisco routers and switches.
+
+33
+03:13.470 --> 03:17.730
+You need to configure the devices to talk to a time source.
+
+34
+03:18.300 --> 03:23.070
+Now in this example, I don't have an atomic clock which I can draw my time from.
+
+35
+03:24.160 --> 03:29.290
+You can, as an example, get NTP from various servers on the Internet.
+
+36
+03:29.980 --> 03:36.730
+Here's some examples of NTP servers available in the United Kingdom just do a search in Google or your
+
+37
+03:36.730 --> 03:43.840
+favorite search engine for various NTP services available online for security reasons, you might prefer
+
+38
+03:43.840 --> 03:50.190
+to get time from a local active directory server in your network rather than directly off the Internet.
+
+39
+03:50.680 --> 03:55.840
+But in this network, what we'll do is configure router 3 as a master or what's called a stratum
+
+40
+03:55.840 --> 03:58.930
+router, NTP has different levels
+
+41
+03:59.350 --> 04:05.260
+the lower the number, the closer you are to a atomic clock source.
+
+42
+04:06.790 --> 04:13.630
+So on router 3, you would use a command, now I'm good right now because I want to set up some other values
+
+43
+04:13.630 --> 04:20.920
+first, but you would specify a stratum value for the router once again, the lower the number,
+
+44
+04:21.070 --> 04:23.440
+the closer you are to an atomic source.
+
+45
+04:24.160 --> 04:33.250
+NTP uses a hierarchy of stratums where a router or a device was stratrum 3 would get its time from
+
+46
+04:33.250 --> 04:40.000
+a device with a lower number like 1 or 2, time would then be pushed across the network to multiple
+
+47
+04:40.000 --> 04:41.860
+devices from one level to another.
+
+48
+04:42.970 --> 04:51.640
+NTP is once again used for clock synchronization between network devices or computer systems over a data
+
+49
+04:51.640 --> 04:55.240
+network such as the Internet or our little network
+
+50
+04:55.240 --> 04:58.210
+in this example, it's been around for a long time.
+
+51
+04:58.540 --> 05:04.930
+So since the 1980s, it uses UDP port or user datagram protocol port
+
+52
+05:04.930 --> 05:12.700
+No one 123 time can be sent using unicast broadcasts or multi costs.
+
+53
+05:13.970 --> 05:22.130
+Here's a picture of a US Naval master clock, which has a stratum of zero.
+
+54
+05:22.130 --> 05:27.860
+providing time to many other devices using a hierarchal system.
+
+55
+05:28.520 --> 05:35.720
+Stratum 0 devices are very high precision time devices that have atomic clocks, GPS clocks or other
+
+56
+05:35.870 --> 05:37.250
+and so forth and so on.
+
+57
+05:37.910 --> 05:45.230
+Stratum 0 devices are very high precision time devices that have atomic clocks, GPS clocks or other
+
+58
+05:45.230 --> 05:46.100
+radio clocks.
+
+59
+05:46.680 --> 05:54.680
+They are known as reference clocks in NTP. Stratum 1 are synchronized to within a few microseconds
+
+60
+05:54.680 --> 05:57.200
+and are attached to stratum 0 devices.
+
+61
+05:57.680 --> 06:03.710
+They are referred to as primary time servers and then time filters down to other devices.
+
+62
+06:04.130 --> 06:11.120
+So stratum 2 devices will carry stratum 1 and stratum 3 will carry stratum 2 and that will
+
+63
+06:11.120 --> 06:13.490
+continue up to the maximum of 15.

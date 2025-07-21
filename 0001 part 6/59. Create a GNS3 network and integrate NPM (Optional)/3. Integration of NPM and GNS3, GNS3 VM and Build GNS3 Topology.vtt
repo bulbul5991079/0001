@@ -1,0 +1,225 @@
+WEBVTT
+
+0
+00:00.830 --> 00:09.770
+Now, to do the integration with GNS3 on my VM and this is my NPM VM, I'm going to change the 
+
+1
+00:09.770 --> 00:15.170
+network adapter to use VM Net1 host only.
+
+2
+00:16.410 --> 00:27.570
+On my physical machine, I have 2 VM net adapters, VM Net1 and VM Net8 previously my virtual
+
+3
+00:27.570 --> 00:34.830
+machine was bridged to the physical adapter, but to allow it to be controlled by GNS3,
+
+4
+00:35.280 --> 00:39.150
+I'm going to change it to VM net1 host only.
+
+5
+00:39.870 --> 00:50.760
+I'm also going to change firewall settings and turn off the firewall so that I can ping the virtual
+
+6
+00:50.760 --> 00:53.820
+machine from my GNS3 routers
+
+7
+00:54.480 --> 00:57.540
+that'll just make it easier in the lab to do testing.
+
+8
+00:59.530 --> 01:06.210
+What I also need to do is shut down the virtual machine so that GNS3 can control it.
+
+9
+01:07.090 --> 01:10.260
+So once again, I've shut the machine down.
+
+10
+01:10.800 --> 01:16.450
+I've gone to network adapter settings and set it to use host-only
+
+11
+01:18.560 --> 01:24.440
+and I've disabled the firewall, what I'll do now is take a snapshot.
+
+12
+01:26.170 --> 01:34.540
+So that I can revert to it if there are any problems, so NPM installed, I did that quickly and made
+
+13
+01:34.540 --> 01:35.170
+a mistake.
+
+14
+01:35.170 --> 01:36.460
+So I'll go to VM
+
+15
+01:37.830 --> 01:43.170
+snapshot manager and change the name to NPM installed.
+
+16
+01:46.290 --> 01:49.680
+So now let's configure GNS3 and do the integration.
+
+17
+01:50.990 --> 01:59.870
+So I'm going to start up GNS3 in windows in this case because I'm using the GNS3 VM it boots
+
+18
+02:02.190 --> 02:08.700
+So you can see my VM is booting up, it's now successfully booted up and GNS3 then tells me 
+
+19
+02:08.700 --> 02:13.320
+I can create a project, so I'm going to call this NPM 1.
+
+20
+02:16.450 --> 02:24.310
+Now, to integrate the NPM virtual machine with GNS3, I need to go to edit preferences in GNS
+
+21
+02:24.730 --> 02:25.090
+3
+
+22
+02:26.520 --> 02:33.640
+and I'm going to select VMware VMs because I'm using VMware workstation rather than virtual box.
+
+23
+02:34.020 --> 02:35.100
+I'm going to click new,
+
+24
+02:37.590 --> 02:44.400
+and in the VM list I can see my NPM virtual machine, I'm going to click finish and now I'm going
+
+25
+02:44.400 --> 02:45.300
+to click edit.
+
+26
+02:47.710 --> 02:55.600
+Go to network and check this option, allow login is free to use any configured VMware adapter.
+
+27
+02:57.870 --> 03:06.240
+I'm going to leave other settings at their defaults and click OK and click, OK, so what I've now done
+
+28
+03:06.240 --> 03:15.240
+is integrated NPM with GNS3 and I can build a topology consisting of routers and NPM.
+
+29
+03:16.920 --> 03:22.010
+In the next few videos, I'm going to show you how to integrate GNS3 and NPM.
+
+30
+03:23.040 --> 03:29.910
+Now, in this example, I'm using, the GNS3 VM because it's the recommended way of running GNS
+
+31
+03:29.910 --> 03:30.270
+3.
+
+32
+03:31.620 --> 03:40.310
+It also makes sense in this example, because I'm running NPM on a Windows seven VM within VMware workstation,
+
+33
+03:40.890 --> 03:49.980
+So I've got both NPM running in windows and GNS3 running within the GNS3 VM within VMware
+
+34
+03:49.980 --> 03:50.730
+workstation.
+
+35
+03:52.200 --> 03:59.880
+The initial topology that we're going to build consists of three routers connected via serial interfaces
+
+36
+04:00.090 --> 04:08.070
+and we'll advertise routes between these routers using EIGRP will also configure an out-of-band management
+
+37
+04:08.070 --> 04:16.890
+network and connect NPM to the out-of-band Ethernet network to allow NPM to manage the routers.
+
+38
+04:18.980 --> 04:23.780
+So to build our GNS3 topology, I'm going to drag 3 routers
+
+39
+04:25.050 --> 04:26.130
+to the workspace
+
+40
+04:30.360 --> 04:32.520
+as well as drag an Ethernet switch
+
+41
+04:34.300 --> 04:38.980
+to the workspace, and I'm going to run to these in the GNS3 VM.
+
+42
+04:42.270 --> 04:48.540
+I'll cable up the routers using the serial interfaces.
+
+43
+04:56.370 --> 04:57.150
+So
+
+44
+04:58.400 --> 05:01.520
+connect the routers via the serial interfaces.
+
+45
+05:02.510 --> 05:07.220
+I'll zoom in and let's view the interface labels.
+
+46
+05:09.910 --> 05:18.820
+Serial 0 is connected to serial 0 on router 2, serial 0 on router 1 is connected to serial 0
+
+47
+05:19.450 --> 05:26.500
+on router 2, serial 0/1 is connected to serial 0/0 on router 3.
+
+48
+05:28.170 --> 05:34.800
+We'll also connect FastEthernet interfaces on each router to the Ethernet switch.
+
+49
+05:36.610 --> 05:39.940
+This is going to be used for our management network.
+
+50
+05:48.920 --> 05:52.910
+So there are interfaces on the switch
+
+51
+05:53.830 --> 06:02.050
+and interfaces on the routers. I'll now bring NPM into the topology
+
+52
+06:04.110 --> 06:11.790
+and I'm going to connect that via the Ethernet interface to port 4 on the Ethernet switch.
+
+53
+06:14.880 --> 06:22.560
+So this allows NPM to manage the road is using the out-of-band management network, I'll configure the
+
+54
+06:22.560 --> 06:29.430
+routers with IP addresses on the serial interfaces first and enable routing and then I'll configure
+
+55
+06:29.430 --> 06:30.660
+the management interface.

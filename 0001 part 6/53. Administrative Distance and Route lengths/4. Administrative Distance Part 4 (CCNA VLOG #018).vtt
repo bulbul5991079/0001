@@ -1,0 +1,241 @@
+WEBVTT
+
+0
+00:00.700 --> 00:20.170
+In this vlog, we're going to continue our discussion
+
+1
+00:20.170 --> 00:21.870
+about administrative distances.
+
+2
+00:22.480 --> 00:24.090
+So let's start with some questions.
+
+3
+00:24.790 --> 00:28.560
+When router 1 pings the loopback of rourter 4,
+
+4
+00:28.720 --> 00:30.760
+So forward, forward, forward four.
+
+5
+00:31.150 --> 00:34.210
+which way will the traffic go?
+
+6
+00:35.080 --> 00:37.390
+Show IP route shows us the routing table.
+
+7
+00:37.570 --> 00:43.630
+So you answer the question. which way will traffic go when sent from router 1 to router 4?
+
+8
+00:44.080 --> 00:47.800
+Will it go via router 2 or will go via router 3?
+
+9
+00:48.250 --> 00:51.570
+Which way will it go and why?
+
+10
+00:52.240 --> 00:55.260
+So let's do a trace to quadruple 4.
+
+11
+00:56.080 --> 00:59.440
+So the traffic is going via router 2.
+
+12
+00:59.740 --> 01:04.870
+So the next-hop is 10.1.1.2 and then it goes to 10.1.3.
+
+13
+01:04.870 --> 01:05.410
+.2.
+
+14
+01:06.010 --> 01:06.700
+Why?
+
+15
+01:07.940 --> 01:09.170
+So here's the routing table.
+
+16
+01:10.180 --> 01:18.970
+We've got these entries for network 4.4.4.4 both EIGRP and OSPF route are shown
+
+17
+01:18.970 --> 01:19.790
+on the routing table.
+
+18
+01:20.320 --> 01:28.030
+notice the admin distance of EIGRP and OSPF. EIGRP has a lower administrative distance than OSPF
+
+19
+01:28.030 --> 01:28.420
+does.
+
+20
+01:28.810 --> 01:33.900
+So typically EIGRP is more believable than OSPF.
+
+21
+01:34.390 --> 01:41.090
+See my other videos for examples demonstrating that however and this is the important piece.
+
+22
+01:41.650 --> 01:48.520
+Notice the mask used on the EIGRP route compared to the mask used on the OSPF route.
+
+23
+01:49.000 --> 01:52.370
+From a router's point of view, these are two separate networks.
+
+24
+01:52.900 --> 02:00.100
+We've got a 4.4.4.0 network and we've got a 4.4.4.4/32 network.
+
+25
+02:00.820 --> 02:03.670
+So /24 and /32 network.
+
+26
+02:04.210 --> 02:05.980
+They are separate networks.
+
+27
+02:06.430 --> 02:09.450
+The router will choose the route with the best match.
+
+28
+02:09.970 --> 02:15.880
+In other words, longest match 32 bits is a longer match or better match than 24 bits.
+
+29
+02:16.300 --> 02:17.260
+So this route
+
+30
+02:18.180 --> 02:25.800
+takes precedence over this route for traffic sent to the loopback of router 4 the administrative 
+
+31
+02:25.800 --> 02:30.520
+distances are only used when we are talking about the same route.
+
+32
+02:30.690 --> 02:34.800
+In other words, the mask are the same here because they are different mask
+
+33
+02:35.220 --> 02:43.830
+longest match is used. So as an example, if I removed OSPF from the router and then use the command show IP
+
+34
+02:43.830 --> 02:44.250
+route.
+
+35
+02:44.940 --> 02:45.840
+Notice the EIGRP
+
+36
+02:45.960 --> 02:53.310
+route is the route in the routing table and if we traced to quadruple 4, it would go via router 3.
+
+37
+02:54.390 --> 03:06.570
+So let's add back OSPF and I'll just enable OSPF on all interfaces in area 0 show IP route,
+
+38
+03:07.860 --> 03:10.920
+OSPF loading still has to be done.
+
+39
+03:13.060 --> 03:20.110
+But once that's done notice the route is available in the routing table and we are going via router 2
+
+40
+03:20.110 --> 03:28.140
+in this example. So router 1 is learning about this network from router 2 through OSPF, router
+
+41
+03:28.400 --> 03:35.740
+1 is learning about this network through EIGRP from router 3 but because of the longest match
+
+42
+03:36.790 --> 03:39.910
+the traffic is sent via router 2.
+
+43
+03:43.610 --> 03:52.190
+So let's see why the summary route was added. So show run interface gigabit01, I added this summary
+
+44
+03:52.190 --> 03:58.790
+route to router 4 to summarize the network advertised through EIGRP.
+
+45
+03:59.930 --> 04:02.480
+So let's go into that interface and remove it.
+
+46
+04:07.710 --> 04:10.980
+Now, show IP route on router 1.
+
+47
+04:12.450 --> 04:19.560
+What you'll notice is the OSPF route has been removed, this new route has only been available in the
+
+48
+04:19.560 --> 04:22.680
+routing table for 5 seconds previously.
+
+49
+04:23.930 --> 04:31.790
+We had this route in the routing table for about 49 seconds, so a new route has been added through
+
+50
+04:31.790 --> 04:37.040
+EIGRP because it's the same route as the route advertised by OSPF.
+
+51
+04:37.460 --> 04:42.950
+In other words, this is the same as this exact match.
+
+52
+04:43.730 --> 04:49.140
+The EIGRP route takes precedence because it has a lower administrative distance.
+
+53
+04:49.850 --> 04:54.200
+So now when we trace to that loopback, it's going via router 3.
+
+54
+04:55.090 --> 05:02.350
+So be careful with admin distances and administrative distance is only used as a tiebreaker when multiple
+
+55
+05:02.350 --> 05:07.440
+routing protocols are trying to put the same route into the routing table if they are different routes.
+
+56
+05:07.450 --> 05:11.210
+In other words, they're different masks both routes will end up in the routing table.
+
+57
+05:11.830 --> 05:13.180
+That concludes this vlog.
+
+58
+05:13.630 --> 05:19.810
+If you enjoyed the video, please like it and please subscribe to our YouTube channel. I wish you all
+
+59
+05:19.810 --> 05:20.470
+the very best.

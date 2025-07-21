@@ -1,0 +1,784 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.000 align:middle line:84%
+So I want to teach you a trick
+
+00:00:02.000 --> 00:00:06.000 align:middle line:84%
+now this doesn’t always apply, it only works in certain situations
+
+00:00:06.000 --> 00:00:08.000 align:middle line:84%
+but it saves you a lot of a time
+
+00:00:08.000 --> 00:00:12.000 align:middle line:84%
+if you remember back to your Binary, this bit is 128
+
+00:00:12.000 --> 00:00:16.000 align:middle line:84%
+this bit is 64, this is 32, this is 16
+
+00:00:16.000 --> 00:00:22.000 align:middle line:84%
+this is 8, this is 4, this is 2 and that is 1
+
+00:00:22.000 --> 00:00:30.000 align:middle line:84%
+so 255 in decimal and an IP address would be an octet populated with binary 1's
+
+00:00:30.000 --> 00:00:35.000 align:middle line:84%
+please refer back to the ICND 1 course if you can’t remember binary
+
+00:00:35.000 --> 00:00:38.000 align:middle line:84%
+but hopefully, at the point, you're fairly comfortable with it.
+
+00:00:38.000 --> 00:00:41.000 align:middle line:84%
+If you were given subnets where for instance
+
+00:00:41.000 --> 00:00:45.000 align:middle line:84%
+the third octet was in the range 4 to 7
+
+00:00:45.000 --> 00:00:49.000 align:middle line:84%
+in other words, from 4 to 1 less than 8 so 7
+
+00:00:49.000 --> 00:00:52.000 align:middle line:84%
+you could summarize that automatically as 4
+
+00:00:52.000 --> 00:01:02.000 align:middle line:84%
+so for example, let’s say you’re given 172.16.4.0/24 up to 172.16.7.0/24
+
+00:01:02.000 --> 00:01:07.000 align:middle line:84%
+so notice in the third octet the range is from 4 to 7
+
+00:01:07.000 --> 00:01:10.000 align:middle line:84%
+so in other words, from 4 to 1 less than 8
+
+00:01:10.000 --> 00:01:16.000 align:middle line:84%
+you could immediately write the answer as 172.16.4.0
+
+00:01:16.000 --> 00:01:21.000 align:middle line:84%
+now to work out the subnet mask you just remember that the first octet is 8 bits
+
+00:01:21.000 --> 00:01:25.000 align:middle line:84%
+the second octet is 8 bits and that’s 16
+
+00:01:25.000 --> 00:01:28.000 align:middle line:84%
+and then you need to work out where binary value of 4 is
+
+00:01:28.000 --> 00:01:37.000 align:middle line:84%
+so let's count 1 2 3 4 5 6, so it’s in binary bits 6
+
+00:01:37.000 --> 00:01:47.000 align:middle line:84%
+so 8 + 8 = 16 + 6 binary bits  which we’ve not counted to see where 4 is
+
+00:01:47.000 --> 00:01:52.000 align:middle line:84%
+gives you 22, so the mask would be 22 8 + 8 + 6
+
+00:01:52.000 --> 00:01:55.000 align:middle line:84%
+and it’s a simple as that
+
+00:01:55.000 --> 00:01:58.000 align:middle line:84%
+to work out the answers to a question likes this
+
+00:01:58.000 --> 00:02:01.000 align:middle line:84%
+by the same token if you were given an example
+
+00:02:01.000 --> 00:02:04.000 align:middle line:84%
+where the values was from 8 to 15
+
+00:02:04.000 --> 00:02:08.000 align:middle line:84%
+in other words 8 to 1 less than 16
+
+00:02:08.000 --> 00:02:10.000 align:middle line:84%
+you could summarize that immediately as 8.
+
+00:02:10.000 --> 00:02:20.000 align:middle line:84%
+So let’s say for example it was 10.8.0.0/16 up to 10.15.0.0/16
+
+00:02:20.000 --> 00:02:24.000 align:middle line:84%
+in other words, from 8 to 1 less than 16
+
+00:02:24.000 --> 00:02:30.000 align:middle line:84%
+you could summarize it automatically as 10.8.0.0
+
+00:02:30.000 --> 00:02:35.000 align:middle line:84%
+so in other words, were saying if it's from this binary value 8
+
+00:02:35.000 --> 00:02:37.000 align:middle line:84%
+up to 1 less than the next binary value
+
+00:02:37.000 --> 00:02:41.000 align:middle line:84%
+you just summarize it down to this binary value of 8
+
+00:02:41.000 --> 00:02:44.000 align:middle line:84%
+finally, to work out the subnet mask you need to remember
+
+00:02:44.000 --> 00:02:49.000 align:middle line:84%
+that the first octet is 8 bits and then work out where 8 is
+
+00:02:49.000 --> 00:02:53.000 align:middle line:84%
+so 8 is 1 2 3 4 5
+
+00:02:53.000 --> 00:02:56.000 align:middle line:84%
+so 8 + 5 will give you 13
+
+00:02:56.000 --> 00:03:01.000 align:middle line:84%
+8 binary bits + 5 binary bits gives you 13
+
+00:03:01.000 --> 00:03:06.000 align:middle line:84%
+so the mask is 13, by the same token 16 to 31
+
+00:03:06.000 --> 00:03:10.000 align:middle line:84%
+so 1 less than 32 can be summarized to 16
+
+00:03:10.000 --> 00:03:15.000 align:middle line:84%
+32 to 63 in other words, 1 less than 64
+
+00:03:15.000 --> 00:03:18.000 align:middle line:84%
+so 32 to 63 can be summarize to 32
+
+00:03:18.000 --> 00:03:22.000 align:middle line:84%
+64 to 1 less than 128 in other words 127
+
+00:03:22.000 --> 00:03:26.000 align:middle line:84%
+so 64 to 127 can be summarize as 64
+
+00:03:26.000 --> 00:03:31.000 align:middle line:84%
+now I’ve already shown you those examples by working it out in binary
+
+00:03:31.000 --> 00:03:36.000 align:middle line:84%
+just to remind you 64 up to 127
+
+00:03:36.000 --> 00:03:43.000 align:middle line:84%
+we work out in binary and work out the answer as 172.16.64.0
+
+00:03:43.000 --> 00:03:48.000 align:middle line:84%
+so once again, 64 to 127 can be summarized as 64
+
+00:03:48.000 --> 00:03:51.000 align:middle line:84%
+and then you count the number of common bits
+
+00:03:51.000 --> 00:03:58.000 align:middle line:84%
+so 8 + 8 + 2 because 64 is in the second binary bit position
+
+00:03:58.000 --> 00:04:00.000 align:middle line:84%
+giving you a total of 18
+
+00:04:00.000 --> 00:04:02.000 align:middle line:84%
+so, therefore, you can work out this answer
+
+00:04:02.000 --> 00:04:05.000 align:middle line:84%
+in a matter of seconds rather than minutes
+
+00:04:05.000 --> 00:04:12.000 align:middle line:84%
+this example with 172.16.32.0 up to 172.16.63.0
+
+00:04:12.000 --> 00:04:14.000 align:middle line:84%
+can quickly and easily be summarized as 172.16.32.0
+
+00:04:14.000 --> 00:04:19.000 align:middle line:84%
+19 bits are in common and the way we work that out
+
+00:04:19.000 --> 00:04:23.000 align:middle line:84%
+is 8 bits in the first octet + 8 bits in the second octet
+
+00:04:23.000 --> 00:04:29.000 align:middle line:84%
+is 16 + 32 is in the third binary bit position
+
+00:04:29.000 --> 00:04:32.000 align:middle line:84%
+so 3 bits gives you a total of 19
+
+00:04:32.000 --> 00:04:36.000 align:middle line:84%
+so I’m hoping this trick will save you quite a bit of time
+
+00:04:36.000 --> 00:04:39.000 align:middle line:84%
+when working out summarization please be careful though
+
+00:04:39.000 --> 00:04:45.000 align:middle line:84%
+if you are given an example of let say 16 to 35
+
+00:04:45.000 --> 00:04:47.000 align:middle line:84%
+you're going to have to split up your summary
+
+00:04:47.000 --> 00:04:52.000 align:middle line:84%
+the 16 to 31 subnets can easily summarize very quickly
+
+00:04:52.000 --> 00:04:55.000 align:middle line:84%
+but if the question asks you to summarize subnets
+
+00:04:55.000 --> 00:04:58.000 align:middle line:84%
+that go across this bit boundaries
+
+00:04:58.000 --> 00:05:00.000 align:middle line:84%
+then you would have to work it out in binary
+
+00:05:00.000 --> 00:05:02.000 align:middle line:84%
+but this will hopefully save you a bit of time
+
+00:05:02.000 --> 00:05:04.000 align:middle line:84%
+also be careful if you're given an example
+
+00:05:04.000 --> 00:05:08.000 align:middle line:84%
+where you're asked to summarize from 16 to let say 19
+
+00:05:08.000 --> 00:05:11.000 align:middle line:84%
+and you use this example that I’ve explain
+
+00:05:11.000 --> 00:05:15.000 align:middle line:84%
+you’ll be summarizing more than just those subnets
+
+00:05:15.000 --> 00:05:18.000 align:middle line:84%
+so it will be better, in that case, to do it in binary
+
+00:05:18.000 --> 00:05:21.000 align:middle line:84%
+So what are the advantages of VLSM and summarization?
+
+00:05:21.000 --> 00:05:25.000 align:middle line:84%
+We get more efficient use of the IP address space
+
+00:05:25.000 --> 00:05:28.000 align:middle line:84%
+so rather than for instance having to use a /24 mask
+
+00:05:28.000 --> 00:05:32.000 align:middle line:84%
+on a serial link which consumes 254 host addresses
+
+00:05:32.000 --> 00:05:37.000 align:middle line:84%
+we can use a /30 mask which only needs to, there are fewer updates
+
+00:05:37.000 --> 00:05:39.000 align:middle line:84%
+because we can hide network changes
+
+00:05:39.000 --> 00:05:42.000 align:middle line:84%
+or topology changes by sending a summary root
+
+00:05:42.000 --> 00:05:46.000 align:middle line:84%
+rather than individual networks or subnets to other devices
+
+00:05:46.000 --> 00:05:50.000 align:middle line:84%
+it also allows us to implement hierarchical levels
+
+00:05:50.000 --> 00:05:55.000 align:middle line:84%
+for better route summarization, so in the real world VLSM and route summarization
+
+00:05:55.000 --> 00:06:01.000 align:middle line:84%
+are used very heavily to conserve IP addresses and reduce routing table sizes
+
+00:06:01.000 --> 00:06:06.000 align:middle line:84%
+so here’s an example of address hiding and topology change hiding
+
+00:06:06.000 --> 00:06:10.000 align:middle line:84%
+the router on the right-hand side only receives 1 route
+
+00:06:10.000 --> 00:06:14.000 align:middle line:84%
+from the route from the left-hand side 10.1.0.0/16
+
+00:06:14.000 --> 00:06:21.000 align:middle line:84%
+so if a more specific subnet like 10.1.12.0/24 went down
+
+00:06:21.000 --> 00:06:24.000 align:middle line:84%
+the router on the right-hand side is oblivious to that fact
+
+00:06:24.000 --> 00:06:30.000 align:middle line:84%
+because it only has 10.1.0.0/16 in its routing table
+
+00:06:30.000 --> 00:06:35.000 align:middle line:84%
+and that’s all that's been advertised to it that route state has not changed
+
+00:06:35.000 --> 00:06:37.000 align:middle line:84%
+and thus the router on the right-hand side
+
+00:06:37.000 --> 00:06:41.000 align:middle line:84%
+does not have to reprocess or re-compute its routing table
+
+00:06:41.000 --> 00:06:47.000 align:middle line:84%
+it is oblivious to the fact that this subnet 10.1.12.0 has gone down
+
+00:06:47.000 --> 00:06:53.000 align:middle line:84%
+because all it sees is the super net or summary of 10.1.0.0/16
+
+00:06:53.000 --> 00:06:57.000 align:middle line:84%
+thus there are major advantages to implementing summarization
+
+00:06:57.000 --> 00:07:00.000 align:middle line:84%
+including topology change hiding
+
+00:07:00.000 --> 00:07:04.000 align:middle line:84%
+however, it’s important that you realize that there’s a difference
+
+00:07:04.000 --> 00:07:06.000 align:middle line:84%
+between what are called classful routing protocols
+
+00:07:06.000 --> 00:07:08.000 align:middle line:84%
+and classles routing protocols
+
+00:07:08.000 --> 00:07:13.000 align:middle line:84%
+classful routing protocols do not include the subnet mask
+
+00:07:13.000 --> 00:07:18.000 align:middle line:84%
+when advertising the network, that means other devices do not know
+
+00:07:18.000 --> 00:07:20.000 align:middle line:84%
+what subnet mask is being used
+
+00:07:20.000 --> 00:07:24.000 align:middle line:84%
+so router assumes and we all know how bad it is to assume
+
+00:07:24.000 --> 00:07:27.000 align:middle line:84%
+but they assume that within the same network
+
+00:07:27.000 --> 00:07:29.000 align:middle line:84%
+there is consistency of the subnet mask
+
+00:07:29.000 --> 00:07:32.000 align:middle line:84%
+in other words, everyone within the same network
+
+00:07:32.000 --> 00:07:36.000 align:middle line:84%
+is using the same subnet mask as everyone else
+
+00:07:36.000 --> 00:07:39.000 align:middle line:84%
+so in other words, when a router's received on an interface
+
+00:07:39.000 --> 00:07:42.000 align:middle line:84%
+the subnet mask for the received route is implied
+
+00:07:42.000 --> 00:07:45.000 align:middle line:84%
+by the subnet mask on the local interface
+
+00:07:45.000 --> 00:07:50.000 align:middle line:84%
+as the router does not know what subnet mask was used by the other routers
+
+00:07:50.000 --> 00:07:53.000 align:middle line:84%
+so it assumes that they are using the same subnet mask as itself.
+
+00:07:53.000 --> 00:07:58.000 align:middle line:84%
+routes will automatically be summarized when going across a classful boundary
+
+00:07:58.000 --> 00:08:02.000 align:middle line:84%
+so summary routes are exchanged when crossing a classful boundary
+
+00:08:02.000 --> 00:08:06.000 align:middle line:84%
+in other words, as an example when going from a 10 network
+
+00:08:06.000 --> 00:08:12.000 align:middle line:84%
+to a 192.168 network or from 10 to 11 and so forth and so on
+
+00:08:12.000 --> 00:08:14.000 align:middle line:84%
+examples of classful routing protocols
+
+00:08:14.000 --> 00:08:17.000 align:middle line:84%
+includes RIP version 1 and IGRP
+
+00:08:17.000 --> 00:08:21.000 align:middle line:84%
+IGRP is no longer supported on the Cisco IOS
+
+00:08:21.000 --> 00:08:24.000 align:middle line:84%
+and RIP version 1 shouldn’t be used in today’s networks
+
+00:08:24.000 --> 00:08:27.000 align:middle line:84%
+but just for completeness, it's mentioned here.
+
+00:08:27.000 --> 00:08:32.000 align:middle line:84%
+Classless routing protocols do include the subnet mask
+
+00:08:32.000 --> 00:08:34.000 align:middle line:84%
+with the network in routing advertisements
+
+00:08:34.000 --> 00:08:38.000 align:middle line:84%
+in other words, classless routing protocols advertise
+
+00:08:38.000 --> 00:08:45.000 align:middle line:84%
+not just the network like 10.1.1.0 but also the associated mask like /24
+
+00:08:45.000 --> 00:08:49.000 align:middle line:84%
+because the subnet mask is included in the routing updates
+
+00:08:49.000 --> 00:08:54.000 align:middle line:84%
+classless routing protocols support Variable Length Subnet Mask or VLSM
+
+00:08:54.000 --> 00:08:57.000 align:middle line:84%
+summary routes can be manually configured
+
+00:08:57.000 --> 00:09:00.000 align:middle line:84%
+so unlike in classful routing protocols
+
+00:09:00.000 --> 00:09:04.000 align:middle line:84%
+where automatic summarization takes place across classful boundaries
+
+00:09:04.000 --> 00:09:09.000 align:middle line:84%
+in classless routing protocols summarization in some cases, for example
+
+00:09:09.000 --> 00:09:14.000 align:middle line:84%
+with EIGRP can be configured on any interface anywhere in the network
+
+00:09:14.000 --> 00:09:18.000 align:middle line:84%
+examples of classless routing protocols include
+
+00:09:18.000 --> 00:09:22.000 align:middle line:84%
+RIP version 2, EIGRP, OSPF and ISIS
+
+00:09:22.000 --> 00:09:28.000 align:middle line:84%
+in this course, we'll concentrate mainly on RIP v2, EIGRP and OSPF
+
+00:09:28.000 --> 00:09:32.000 align:middle line:84%
+but just be aware that there are other routing  protocols out there
+
+00:09:32.000 --> 00:09:40.000 align:middle line:84%
+be careful EIGRP and RIP v2 act as classful routing protocols by default
+
+00:09:40.000 --> 00:09:44.000 align:middle line:84%
+you need to use the command no auto summary within the  routing process
+
+00:09:44.000 --> 00:09:46.000 align:middle line:84%
+to disable this default behavior
+
+00:09:46.000 --> 00:09:50.000 align:middle line:84%
+so that they act like a classless routing protocol.
+
+00:09:50.000 --> 00:09:54.000 align:middle line:84%
+So let’s look at some of the issues regarding discontiguous networks
+
+00:09:54.000 --> 00:09:58.000 align:middle line:84%
+or discontiguous subnets, the router on the left
+
+00:09:58.000 --> 00:10:02.000 align:middle line:84%
+has a network of 10.1.1.0/24 connected to it
+
+00:10:02.000 --> 00:10:07.000 align:middle line:84%
+this if you remember is a class A subnet, the router on the right
+
+00:10:07.000 --> 00:10:13.000 align:middle line:84%
+has a subnet of  10.1.2.0/24 connected to it also a class A subnet
+
+00:10:13.000 --> 00:10:16.000 align:middle line:84%
+they are both  connected to the router at the top
+
+00:10:16.000 --> 00:10:22.000 align:middle line:84%
+with class C addresses of 192.168.1.0 and 192.168.2.0
+
+00:10:22.000 --> 00:10:28.000 align:middle line:84%
+so please note we are going from a class A, to class C, to class A subnet
+
+00:10:28.000 --> 00:10:30.000 align:middle line:84%
+when traversing these routers
+
+00:10:30.000 --> 00:10:37.000 align:middle line:84%
+the problem here is classful routing protocols like RIP v1 and IGRP
+
+00:10:37.000 --> 00:10:42.000 align:middle line:84%
+will automatically summarize this subnets their classful network
+
+00:10:42.000 --> 00:10:48.000 align:middle line:84%
+so 10.1.2.0 Will automatically be summarize as 10.0.0.0
+
+00:10:48.000 --> 00:10:52.000 align:middle line:84%
+the same will take place here, on this router 10.1.1.0
+
+00:10:52.000 --> 00:10:55.000 align:middle line:84%
+will automatically be summarize to 10.0.0.0
+
+00:10:55.000 --> 00:10:58.000 align:middle line:84%
+this causes an issue for the router in the middle
+
+00:10:58.000 --> 00:11:01.000 align:middle line:84%
+because when it wants to go to 10.1.1.0
+
+00:11:01.000 --> 00:11:06.000 align:middle line:84%
+it believes it can send traffic to the left, as well as to the right
+
+00:11:06.000 --> 00:11:10.000 align:middle line:84%
+because it's receiving the same route from multiple routers
+
+00:11:10.000 --> 00:11:15.000 align:middle line:84%
+If this router was pinging a device over here 10.1.1
+
+00:11:15.000 --> 00:11:20.000 align:middle line:84%
+it would only be a 50% success rate because half of the packets
+
+00:11:20.000 --> 00:11:23.000 align:middle line:84%
+will be sent to this network on the right-hand side
+
+00:11:23.000 --> 00:11:27.000 align:middle line:84%
+be careful of routing protocols like EIGRP and RIP v2
+
+00:11:27.000 --> 00:11:31.000 align:middle line:84%
+even though they are classless they act as classful
+
+00:11:31.000 --> 00:11:35.000 align:middle line:84%
+and thus have the same issue, where they automatically summarize
+
+00:11:35.000 --> 00:11:39.000 align:middle line:84%
+a classful boundaries, don't forget to use the command
+
+00:11:39.000 --> 00:11:45.000 align:middle line:84%
+no auto summary under the routing process to disable this behavior
+
+00:11:45.000 --> 00:11:49.000 align:middle line:84%
+Once you've typed that command, the routers will not summarize the networks
+
+00:11:49.000 --> 00:11:52.000 align:middle line:84%
+and they will be advertised in EIGRP in RIP v2
+
+00:11:52.000 --> 00:11:58.000 align:middle line:84%
+as 10.1.1.0/24 as well as 10.1.2.0/24
+
+00:11:58.000 --> 00:12:01.000 align:middle line:84%
+so the router in the middle will be able to correctly route
+
+00:12:01.000 --> 00:12:06.000 align:middle line:84%
+to the various networks OSPF does not have this issue
+
+00:12:06.000 --> 00:12:09.000 align:middle line:84%
+because OSPF does not automatically summarize
+
+00:12:09.000 --> 00:12:12.000 align:middle line:84%
+you have to manually summarize networks.
+
+00:12:12.000 --> 00:12:16.000 align:middle line:84%
+So when does automatic summarization does takes place?
+
+00:12:16.000 --> 00:12:23.000 align:middle line:84%
+well it only affects this routing protocols RIP v2, EIGRP, RIP v1 and IGRP
+
+00:12:23.000 --> 00:12:26.000 align:middle line:84%
+it occurs when you move across classful boundaries
+
+00:12:26.000 --> 00:12:30.000 align:middle line:84%
+in other words, when a subnet is advertised from a class A to class B
+
+00:12:30.000 --> 00:12:34.000 align:middle line:84%
+or B to C or any one of these combinations
+
+00:12:34.000 --> 00:12:38.000 align:middle line:84%
+in other words, when a router has 1 interface in a class A network for example
+
+00:12:38.000 --> 00:12:40.000 align:middle line:84%
+and another interface in a class B network
+
+00:12:40.000 --> 00:12:45.000 align:middle line:84%
+and that advertisement crosses that classful boundary going from A to B
+
+00:12:45.000 --> 00:12:48.000 align:middle line:84%
+the network will automatically be summarized
+
+00:12:48.000 --> 00:12:51.000 align:middle line:84%
+another one that people forget is when you are moving
+
+00:12:51.000 --> 00:12:56.000 align:middle line:84%
+across major network boundaries, automatic summarization will also take place
+
+00:12:56.000 --> 00:13:00.000 align:middle line:84%
+in other words, if you go from a 10 network to an 11 network
+
+00:13:00.000 --> 00:13:04.000 align:middle line:84%
+or to a 12 network automatic summarization will take place
+
+00:13:04.000 --> 00:13:10.000 align:middle line:84%
+notice the major network 10 has changed to 11 or to 12
+
+00:13:10.000 --> 00:13:12.000 align:middle line:84%
+these are all class A networks
+
+00:13:12.000 --> 00:13:16.000 align:middle line:84%
+but you are moving across a major network boundary
+
+00:13:16.000 --> 00:13:19.000 align:middle line:84%
+so if 1 interface on a router is in the 10 network
+
+00:13:19.000 --> 00:13:23.000 align:middle line:84%
+and another interface on a router is in the 11 network
+
+00:13:23.000 --> 00:13:25.000 align:middle line:84%
+there will be automatic summarization.
+
+00:13:25.000 --> 00:13:31.000 align:middle line:84%
+Remember on EIGRP and RIP v2 to type the command no auto-summary
+
+00:13:31.000 --> 00:13:34.000 align:middle line:84%
+because even though they are classless routing protocols
+
+00:13:34.000 --> 00:13:36.000 align:middle line:84%
+they act as classful routing protocols
+
+00:13:36.000 --> 00:13:39.000 align:middle line:84%
+when it comes to automatic summarization
+
+00:13:39.000 --> 00:13:43.000 align:middle line:84%
+now here’s another situation that causes a lot of confusion
+
+00:13:43.000 --> 00:13:46.000 align:middle line:84%
+in ICND 1 you learned about administrative distance
+
+00:13:46.000 --> 00:13:48.000 align:middle line:84%
+and you learned that the lower the administrative distance
+
+00:13:48.000 --> 00:13:55.000 align:middle line:84%
+the more preferable a route is, the administrative distance of RIP v2 is 120
+
+00:13:55.000 --> 00:13:58.000 align:middle line:84%
+the administrative distance of OSPF is 110
+
+00:13:58.000 --> 00:14:01.000 align:middle line:84%
+the administrative distance of EIGRP is 90.
+
+00:14:01.000 --> 00:14:07.000 align:middle line:84%
+So let's assume router 1, router 2 and router 3 have networks in the 10 range
+
+00:14:07.000 --> 00:14:13.000 align:middle line:84%
+connected to them, they are advertising various routes to router 4.
+
+00:14:13.000 --> 00:14:17.000 align:middle line:84%
+So RIP v2 is advertising 10.1.1.0/27
+
+00:14:17.000 --> 00:14:25.000 align:middle line:84%
+OSPF is advertising 10.1.0.0/16 EIGRP is advertising 10.0.0.0/8
+
+00:14:25.000 --> 00:14:31.000 align:middle line:84%
+so router 4 is receiving multiple advertisements in the 10 range
+
+00:14:31.000 --> 00:14:36.000 align:middle line:84%
+but if on router 4 you type the command ping 10.1.1.1
+
+00:14:36.000 --> 00:14:41.000 align:middle line:84%
+which way will a traffic flow, will it go to router 3
+
+00:14:41.000 --> 00:14:44.000 align:middle line:84%
+or will it go to router 2 or will it go to router 1?
+
+00:14:44.000 --> 00:14:50.000 align:middle line:84%
+Now remember EIGRP has a lower administrative distance than OSPF
+
+00:14:50.000 --> 00:14:52.000 align:middle line:84%
+which has a lower administrative distance than RIP
+
+00:14:52.000 --> 00:14:56.000 align:middle line:84%
+but please note administrative distance only comes into play
+
+00:14:56.000 --> 00:14:59.000 align:middle line:84%
+when the same prefix is advertised
+
+00:14:59.000 --> 00:15:04.000 align:middle line:84%
+a prefix is not just the network it's the network and the mask
+
+00:15:04.000 --> 00:15:08.000 align:middle line:84%
+router 4 will see this prefixes 10.1.1.0/27
+
+00:15:08.000 --> 00:15:16.000 align:middle line:84%
+10.1.0.0/16 and 10.0.0.0/8 as separate prefixes
+
+00:15:16.000 --> 00:15:20.000 align:middle line:84%
+these 3 routes will appear in the routing table with router 4
+
+00:15:20.000 --> 00:15:24.000 align:middle line:84%
+and router 4 will make its decision on the best match.
+
+00:15:24.000 --> 00:15:30.000 align:middle line:84%
+10.1.1.0/27 is the best match out of these 3 routes.
+
+00:15:30.000 --> 00:15:37.000 align:middle line:84%
+27 is the most specific, so the most specific or best match will be used
+
+00:15:37.000 --> 00:15:39.000 align:middle line:84%
+and not the administrative distance
+
+00:15:39.000 --> 00:15:42.000 align:middle line:84%
+the administrative distance would only be used
+
+00:15:42.000 --> 00:15:47.000 align:middle line:84%
+if the same route was advertised by multiple routing protocols
+
+00:15:47.000 --> 00:15:51.000 align:middle line:84%
+so in this case, the ping to 10.1.1.1
+
+00:15:51.000 --> 00:15:55.000 align:middle line:84%
+will go to router 1 and not router 2 or router 3
+
+00:15:55.000 --> 00:16:00.000 align:middle line:84%
+however, in this example, notice the same prefix is advertised
+
+00:16:00.000 --> 00:16:08.000 align:middle line:84%
+by the 3 routers 10.0.0.0/8 is advertised by RIP, OSPF and EIGRP
+
+00:16:08.000 --> 00:16:12.000 align:middle line:84%
+in this case only 1 route can be put into the routing table
+
+00:16:12.000 --> 00:16:16.000 align:middle line:84%
+and the choice is done via administrative distance
+
+00:16:16.000 --> 00:16:19.000 align:middle line:84%
+EIGRP having the lowest administrative distance
+
+00:16:19.000 --> 00:16:21.000 align:middle line:84%
+will have its route inserted into a routing table
+
+00:16:21.000 --> 00:16:26.000 align:middle line:84%
+and the ping from router 4 will now go to router 3
+
+00:16:26.000 --> 00:16:33.000 align:middle line:84%
+to sum this up, in this example, there are 3 separate prefixes
+
+00:16:33.000 --> 00:16:37.000 align:middle line:84%
+the router does not see this as the same network
+
+00:16:37.000 --> 00:16:40.000 align:middle line:84%
+it sees them as 3 separate prefixes or subnets
+
+00:16:40.000 --> 00:16:43.000 align:middle line:84%
+all 3 will be put into the routing table
+
+00:16:43.000 --> 00:16:48.000 align:middle line:84%
+and a decision will be made on the best match or longest prefix
+
+00:16:48.000 --> 00:16:53.000 align:middle line:84%
+in this case, 27 is longer than 16, just longer than 8
+
+00:16:53.000 --> 00:17:00.000 align:middle line:84%
+so the RIP v2 route will be chosen, however, where the route is the same route.
+
+00:17:00.000 --> 00:17:02.000 align:middle line:84%
+So in this example 10.0.0.0/8
+
+00:17:02.000 --> 00:17:08.000 align:middle line:84%
+the choice will be made on administrative distance with EIGRP winning
+
+00:17:08.000 --> 00:17:11.000 align:middle line:84%
+because it has the lowest administrative distance
+
+00:17:11.000 --> 00:17:15.000 align:middle line:84%
+please don’t forget this, a lot of engineers make the mistake
+
+00:17:15.000 --> 00:17:18.000 align:middle line:84%
+of assuming that administrative distance is the way choices are made
+
+00:17:18.000 --> 00:17:20.000 align:middle line:84%
+for choosing the best route
+
+00:17:20.000 --> 00:17:24.000 align:middle line:84%
+administrative distance is only chosen as a tie breaker
+
+00:17:24.000 --> 00:17:27.000 align:middle line:84%
+when the same route or prefix is attempted
+
+00:17:27.000 --> 00:17:31.000 align:middle line:84%
+to be put into the routing table by multiple routing protocols
+
+00:17:31.000 --> 00:17:34.000 align:middle line:84%
+So what have we covered?
+
+00:17:34.000 --> 00:17:37.000 align:middle line:84%
+we look at Variable Length Subnet Mask or VLSM
+
+00:17:37.000 --> 00:17:41.000 align:middle line:84%
+we discuss CIDR or Classless Inter-Domain Routing
+
+00:17:41.000 --> 00:17:44.000 align:middle line:84%
+we talked about summarization and the advantages of summarization
+
+00:17:44.000 --> 00:17:48.000 align:middle line:84%
+I showed you examples of how to work out summarized routes
+
+00:17:48.000 --> 00:17:51.000 align:middle line:84%
+I showed you routing choices and how routers will make a choice
+
+00:17:51.000 --> 00:17:55.000 align:middle line:84%
+firstly on most specific match and then secondly on administrative distance
+
+00:17:55.000 --> 00:17:59.000 align:middle line:84%
+and then I showed you some issues regarding discontiguous networks.
+
+00:17:59.000 --> 00:18:04.000 align:middle line:84%
+Thank you for watching!

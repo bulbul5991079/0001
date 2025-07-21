@@ -1,0 +1,373 @@
+WEBVTT
+
+0
+00:20.810 --> 00:27.440
+This vlog is a continuation of a previous vlog discussing administrative distance or the believability of
+
+1
+00:27.440 --> 00:34.180
+a routing protocol. In this example, we've got four routers, router 1, router 2, router 3 and router 4.
+
+2
+00:34.190 --> 00:39.800
+Router 2 in this topology is only running OSPF.
+
+3
+00:40.070 --> 00:49.460
+If we can see that by using the show IP protocols command, it has a relationship with both router 1 and
+
+4
+00:49.460 --> 00:53.260
+router 4. Router 3 in this topology
+
+5
+00:54.820 --> 01:02.110
+is running rip and EIGRP. Now in the real world, you typically don't enable a whole bunch of routing 
+
+6
+01:02.110 --> 01:03.130
+protocols on your router.
+
+7
+01:03.130 --> 01:10.180
+we're doing it here to explain administrative distances. So show IP protocol on router 1
+
+8
+01:10.930 --> 01:11.170
+router
+
+9
+01:11.200 --> 01:20.440
+1 is running rip, EIGRP as well as OSPF. Router 4 is doing the same, so on router 1 show IP route
+
+10
+01:20.740 --> 01:23.650
+the route of interest in this topologies quadruple four
+
+11
+01:24.190 --> 01:26.080
+that's a loopback on router 4.
+
+12
+01:26.710 --> 01:32.770
+We can see in the routing table of router 1 that the route appears in the routing table and the protocol
+
+13
+01:32.780 --> 01:34.660
+selected was EIGRP.
+
+14
+01:35.230 --> 01:40.210
+That's because EIGRP has an administrative distance of 90 which we can see here.
+
+15
+01:40.730 --> 01:43.660
+OSPF has an administrative distance of 110.
+
+16
+01:44.230 --> 01:53.080
+The loopback of router 2 has been learnt via OSPF because we are not running EIGRP on router 2 the
+
+17
+01:53.080 --> 01:57.270
+lower the administrative distance, the more believable the routing protocol.
+
+18
+01:57.790 --> 02:03.790
+So this route was selected because EIGRP has a lower admin distance. Show
+
+19
+02:03.800 --> 02:12.850
+IP OSPF database shows us that the route is available in the OSPF database, but EIGRP was selected because it
+
+20
+02:12.850 --> 02:15.370
+has the lowest administrative distance.
+
+21
+02:16.360 --> 02:23.710
+So at the moment, show run section EIGRP shows us that EIGRP is enabled on router 1.
+
+22
+02:24.220 --> 02:31.450
+So if we remove EIGRP from router 1 and then look at the routing table what you'll notice is that
+
+23
+02:31.450 --> 02:34.120
+the route has been added from OSPF.
+
+24
+02:34.600 --> 02:40.720
+The next hop is via 10.1.1.2 if we scroll up previously
+
+25
+02:41.880 --> 02:46.650
+the next hop was 10.1.1.2.2 which is router 3.
+
+26
+02:47.890 --> 02:55.120
+But because EIGRP is no longer running on router 1, the route is now available via router 2 and was
+
+27
+02:55.120 --> 02:56.760
+learnt through OSPF.
+
+28
+02:58.120 --> 03:05.800
+So as an example, if we trace to that route now notice that it goes via router 2 we're still running
+
+29
+03:05.950 --> 03:07.780
+rip on this router.
+
+30
+03:08.200 --> 03:16.840
+So rip is running on router 3, router 1, and router 4 but the rip route is not selected for quadruple
+
+31
+03:16.840 --> 03:23.160
+four because of RIP has a higher administrative distance when compared to OSPF.
+
+32
+03:23.770 --> 03:29.890
+So the loopback of router 3 is advertised via rip to router 1
+
+33
+03:30.310 --> 03:36.670
+and because OSPF is not advertising that route, the rip route is put into the routing table, but because
+
+34
+03:36.670 --> 03:41.140
+OSPF is advertising this route and it has a lower administrative distance
+
+35
+03:41.140 --> 03:45.040
+when compared to rip the OSPF route is used, not the rip route.
+
+36
+03:45.670 --> 03:55.140
+So to confirm that and try and prove it to you, I'm going to remove EIGRP from router 3.
+
+37
+03:56.200 --> 03:57.400
+So router 3
+
+38
+04:00.030 --> 04:08.370
+is running rip, it's not running EIGRP rip is the only routing protocol running on router 3.
+
+39
+04:08.910 --> 04:16.170
+So on router 1, we can see the loopback of router 3 learnt via rip but we don't see the loopback
+
+40
+04:16.170 --> 04:19.320
+of router 4 because OSPF takes precedence.
+
+41
+04:19.800 --> 04:26.040
+So let's remove OSPF, show IP route
+
+42
+04:27.070 --> 04:32.260
+We haven't learnt about the route through rip yet, so let's do some investigation to make sure things are
+
+43
+04:32.260 --> 04:35.050
+working show IP route on router 3
+
+44
+04:35.680 --> 04:37.860
+notice the route has been learnt via rip.
+
+45
+04:39.170 --> 04:41.930
+On router 1 it's now available
+
+46
+04:43.860 --> 04:49.740
+I was a bit impatient, rip takes longer to advertise routes. So now ping
+
+47
+04:51.190 --> 04:59.650
+quadruple 4, trace quadruple 4 it's going via router 3 and that's because the only routing
+
+48
+04:59.650 --> 05:03.670
+protocol that's running on router 1 is rip.
+
+49
+05:05.760 --> 05:15.660
+So the routing table is populated with rip routes, the router won't be able to ping the loopback of router 2 because
+
+50
+05:15.660 --> 05:21.900
+rip is not running on router 2, So it need to enable rip on router 2 if we wanted full connectivity
+
+51
+05:21.900 --> 05:22.880
+in this network
+
+52
+05:23.340 --> 05:24.810
+but for now, I'm not going to do that.
+
+53
+05:24.820 --> 05:27.990
+I want to prove to you that OSPF takes precedence.
+
+54
+05:28.230 --> 05:32.370
+So notice the rip route is in the routing table with an administrative distance of 120
+
+55
+05:32.580 --> 05:37.020
+hop count is 2 it's available via 10.1 .2.2.
+
+56
+05:37.500 --> 05:42.390
+It's been in the routing table for 19 seconds and it's available via gigabit 01.
+
+57
+05:44.420 --> 05:58.760
+Let's enable OSPF network and I'll enable OSPF on all interfaces, show IP OSPF neighbor we have a neighbor
+
+58
+05:58.760 --> 06:06.110
+relationship with router 2 show IP route notice the routing table has been updated
+
+59
+06:06.680 --> 06:08.810
+OSPF takes precedence over rip.
+
+60
+06:11.140 --> 06:20.290
+So the path used to get to quadruple 4 is via router 2 if we enable EIGRP on this router
+
+61
+06:24.400 --> 06:32.570
+traffic will still go via router 2 because we need to enable EIGRP on router 3. So let's do that
+
+62
+06:32.570 --> 06:38.140
+router EIGRP, enable EIGRP in all interfaces.
+
+63
+06:38.740 --> 06:44.830
+neighbour relationship has been established. So show IP EIGRP neighbour, neighbour relationship is available
+
+64
+06:45.190 --> 06:46.150
+show IP route.
+
+65
+06:46.630 --> 06:53.410
+The EIGRP route has now been put into the routing table and if we trace to that loopback, it's going
+
+66
+06:53.410 --> 06:54.460
+via router 3.
+
+67
+06:55.060 --> 06:58.030
+So administrative distances work as follows:
+
+68
+06:58.720 --> 07:00.250
+The lowest number wins, 
+
+69
+07:00.520 --> 07:05.260
+different routing protocols have different administrative distances set by default.
+
+70
+07:05.260 --> 07:06.490
+You can change them.
+
+71
+07:07.090 --> 07:12.430
+RIP is 120, OSPF is a 110, EIGRP internal routes is 90
+
+72
+07:14.580 --> 07:22.350
+but I could, as an example, add a route to the routing table statically at a static route to force
+
+73
+07:22.350 --> 07:24.210
+the traffic to go via router 2.
+
+74
+07:25.020 --> 07:31.650
+Now when we look at the routing table, notice the static route has replaced EIGRP because the static
+
+75
+07:31.650 --> 07:35.730
+route to a next-hop IP address has an admin distance of 1.
+
+76
+07:36.380 --> 07:43.710
+There's nothing more believable than you, as in the router believes you more than it believes a algorithm
+
+77
+07:43.710 --> 07:45.740
+such as EIGRP or OSPF
+
+78
+07:46.410 --> 07:52.350
+and that's because you know what you're doing and the router believes you more than it believes are
+
+79
+07:52.350 --> 07:52.890
+the routers.
+
+80
+07:54.220 --> 07:54.940
+So once again
+
+81
+07:56.370 --> 08:04.980
+trace is via router 2, show run pipe include route we've got the static route forcing the traffic 
+
+82
+08:05.040 --> 08:05.580
+via
+
+83
+08:07.420 --> 08:08.200
+router 2.
+
+84
+08:10.430 --> 08:15.560
+I'll remove the static route, show IP route EIGRP is the most believable now.
+
+85
+08:18.440 --> 08:24.200
+Traffic is going via router 3, remove EIGRP
+
+86
+08:27.550 --> 08:32.350
+OSPF route takes precedence now traffic is going via
+
+87
+08:34.510 --> 08:41.140
+router 2. So that is a demonstration of administrative distance or the believability factor of a route.
+
+88
+08:41.710 --> 08:46.620
+for the CCNA exam, you need to know admin distances. in a separate video
+
+89
+08:46.630 --> 08:48.600
+I'll show you an example with BGP.
+
+90
+08:49.140 --> 08:50.280
+I hope you've enjoyed the video.
+
+91
+08:50.800 --> 08:54.490
+Please like it and please subscribe to my YouTube channel.
+
+92
+08:54.700 --> 08:56.140
+I wish you all the very best.

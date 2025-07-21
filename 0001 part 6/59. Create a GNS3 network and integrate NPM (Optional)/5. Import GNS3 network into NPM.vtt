@@ -1,0 +1,301 @@
+WEBVTT
+
+0
+00:00.820 --> 00:09.520
+So our network is working, so we've integrated the NPM VM with our GNS 3 topology, we've
+
+1
+00:09.520 --> 00:11.110
+tested IP connectivity.
+
+2
+00:12.910 --> 00:23.980
+So now we can connect to NPM and login, so URL to use is localhost:8787 or alternatively
+
+3
+00:23.980 --> 00:25.750
+the hostname of your PC.
+
+4
+00:26.940 --> 00:33.510
+The default username is Admin the default password is no password, in other words, blank that's
+
+5
+00:33.510 --> 00:40.650
+shown here, and you can change that by going to settings, manage accounts.
+
+6
+00:41.250 --> 00:47.610
+I'm going to login with those default values and now we can start our network discovery.
+
+7
+00:48.000 --> 00:49.200
+So I'm going to click start.
+
+8
+00:51.610 --> 01:00.370
+We can discover devices by using a small subnet such as /24 or by specifying individual IP addresses.
+
+9
+01:00.910 --> 01:09.070
+I'm going to add a range of addresses so 10.1.100.1 to 10.1.100
+
+10
+01:09.460 --> 01:10.300
+.3.
+
+11
+01:13.250 --> 01:14.180
+I'm gonna click next.
+
+12
+01:15.400 --> 01:18.040
+I'll make this a bit bigger, so it's easier to read.
+
+13
+01:21.730 --> 01:27.820
+Next, we're told that NPM can check all notes currently polling with agents for updates by selecting
+
+14
+01:28.750 --> 01:34.660
+by selecting this option, all notes currently polling via an agent will be pulled for updates.
+
+15
+01:35.350 --> 01:41.560
+The setting is helpful when using scheduled discoveries to keep agent updates current.
+
+16
+01:41.830 --> 01:44.050
+So I'm going to select that option and click next.
+
+17
+01:45.520 --> 01:53.820
+Do we want to log in to ESXI so we can poll VMware and add our vCenter or ESX credentials?
+
+18
+01:53.830 --> 01:54.790
+I'm going to click next.
+
+19
+01:55.940 --> 02:03.320
+Now, by default SNMP or simple network management protocol will use a public and private community
+
+20
+02:03.320 --> 02:05.490
+value for accessing devices.
+
+21
+02:06.140 --> 02:07.580
+Now we configured
+
+22
+02:08.950 --> 02:09.550
+our routers.
+
+23
+02:13.460 --> 02:21.770
+So show run pipe include SNMP with a community value of NPM, so we need to add a new credential
+
+24
+02:21.770 --> 02:22.100
+here.
+
+25
+02:25.670 --> 02:28.220
+The value is going to be NPM, 
+
+26
+02:30.120 --> 02:39.000
+click add so there it is, click next, we can add Windows credentials if we want to allow solar
+
+27
+02:39.000 --> 02:47.150
+winds NPM to collect C.P.U memory and volume data from Windows servers that don't support SNMP.
+
+28
+02:47.550 --> 02:47.970
+For now
+
+29
+02:47.970 --> 02:48.930
+I'm not going to do that.
+
+30
+02:48.960 --> 02:49.950
+I'm going to click next.
+
+31
+02:51.360 --> 02:57.630
+We asked how we would like to set up what to monitor so manually set up monitoring of the devices are
+
+32
+02:57.630 --> 03:02.580
+discovered automatically monitor based on my defined monitoring settings.
+
+33
+03:04.390 --> 03:08.440
+I'm going to leave it at the default of manual, click next.
+
+34
+03:10.610 --> 03:17.000
+Now, at any point, you can go back through the wizard, so at the moment I'm at discovery settings,
+
+35
+03:17.030 --> 03:20.180
+I could click back to go to monitoring settings.
+
+36
+03:21.740 --> 03:27.080
+So as an example, I might want to include devices that respond to pings alone.
+
+37
+03:29.730 --> 03:30.420
+Click next.
+
+38
+03:31.400 --> 03:33.960
+Details of my discovery are shown here.
+
+39
+03:34.340 --> 03:36.590
+I'm going to accept the defaults and click next.
+
+40
+03:37.670 --> 03:44.330
+I'm asked how often I want to do the polling that could be hourly, daily, or other options.
+
+41
+03:44.340 --> 03:46.100
+I'm going to select once only
+
+42
+03:46.730 --> 03:49.570
+and I want to run the discovery right now.
+
+43
+03:49.580 --> 03:51.380
+So click discover,
+
+44
+03:51.980 --> 03:57.950
+the discovery process is then started and you can see here that three notes have been discovered.
+
+45
+03:59.510 --> 04:02.600
+You can see the overall progress indicator.
+
+46
+04:04.330 --> 04:11.160
+So at this point, three routers were discovered and one Windows 7 workstation was discovered, click
+
+47
+04:11.260 --> 04:11.680
+next.
+
+48
+04:13.480 --> 04:18.220
+Now, which interfaces should be monitored by default, up interfaces are monitored.
+
+49
+04:19.300 --> 04:27.040
+The port mode of trunk access or unknown is going to be monitored and physical, virtual, and unknown
+
+50
+04:27.040 --> 04:28.630
+interfaces are going to be monitored.
+
+51
+04:29.880 --> 04:33.270
+We can see a list of interfaces, so as an example, 
+
+52
+04:34.460 --> 04:41.000
+on router 1 FastEthernet 0/0 is up, but FastEthernet 1/0 is down.
+
+53
+04:41.900 --> 04:46.400
+So my various interfaces, including serial interfaces, are shown here.
+
+54
+04:47.810 --> 04:55.160
+Other interfaces are also listed, such as null zero, as well as the loopback interfaces of the devices.
+
+55
+04:56.260 --> 05:02.560
+As an example, show IP interface brief on router 1 shows a list of interfaces.
+
+56
+05:03.550 --> 05:08.590
+So you can see the FastEthernet interfaces and serial interfaces.
+
+57
+05:10.990 --> 05:20.020
+So that interface information has been picked up by the solarwinds NPM application, click next on my
+
+58
+05:20.290 --> 05:29.260
+PC, I can view RAM virtual memory, fixed disk space, and other options. Here's the import preview so we
+
+59
+05:29.260 --> 05:30.820
+can decide what we want to import.
+
+60
+05:30.970 --> 05:36.310
+I'm going to import my routers as well as the Windows machine, and you can see that information is
+
+61
+05:36.310 --> 05:39.940
+now being imported into the database.
+
+62
+05:40.510 --> 05:41.950
+The import has finished.
+
+63
+05:42.070 --> 05:43.360
+So I'm going to click finish.
+
+64
+05:45.260 --> 05:47.690
+So going to my dashboard's summary.
+
+65
+05:49.520 --> 05:58.430
+I can see that I have three Cisco routers, router 1, router 2, and router 3.
+
+66
+06:01.440 --> 06:08.640
+An unknown device has also been picked up, that is the additional IP address on my local Windows PC.
+
+67
+06:10.110 --> 06:15.690
+I can also see that I have issues connecting to Google.com as an example.
+
+68
+06:17.780 --> 06:20.120
+So let's click on one of the routers, router 1.
+
+69
+06:22.300 --> 06:29.350
+You can see the note is up, can see the IP address, machine type description, and other information
+
+70
+06:29.590 --> 06:31.240
+about the router.
+
+71
+06:32.300 --> 06:41.470
+Including, as an example, interface utilization, that's how you get NPM integrated with a GNS 3 network,
+
+72
+06:42.110 --> 06:47.810
+not only is NPM a very powerful application and we'll look at some of the features as we go through the
+
+73
+06:47.810 --> 06:55.160
+course, but it also helps you learn practically simple network management protocol and the management
+
+74
+06:55.160 --> 06:57.890
+of network devices using a management station.

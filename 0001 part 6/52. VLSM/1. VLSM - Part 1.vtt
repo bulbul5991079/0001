@@ -1,0 +1,724 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.000 align:middle line:84%
+welcome back, my name is David Bombal CCIE 1123
+
+00:00:06.000 --> 00:00:10.000 align:middle line:84%
+and in this section, we're going to look at Variable Length Subnet Mask or VLSM
+
+00:00:10.000 --> 00:00:12.000 align:middle line:84%
+and route summarization.
+
+00:00:12.000 --> 00:00:15.000 align:middle line:84%
+VLSM allows us to better use IP addresses
+
+00:00:15.000 --> 00:00:21.000 align:middle line:84%
+by allowing for Variable Length Subnet Mask on a single network.
+
+00:00:21.000 --> 00:00:25.000 align:middle line:84%
+so what we're going to cover in this section is firstly VLSM
+
+00:00:25.000 --> 00:00:28.000 align:middle line:84%
+once again Variable Length Subnet Mask, we're going to look at CIDR
+
+00:00:28.000 --> 00:00:31.000 align:middle line:84%
+or classless Inter-Domain Routing
+
+00:00:31.000 --> 00:00:33.000 align:middle line:84%
+I want to explain summarization and show you
+
+00:00:33.000 --> 00:00:38.000 align:middle line:84%
+how you can summarize multiple routes into fewer or single a route.
+
+00:00:38.000 --> 00:00:40.000 align:middle line:84%
+we're going to look at routing choices
+
+00:00:40.000 --> 00:00:43.000 align:middle line:84%
+and how routers choose one route over another
+
+00:00:43.000 --> 00:00:45.000 align:middle line:84%
+not just based on administrative distance
+
+00:00:45.000 --> 00:00:49.000 align:middle line:84%
+but also based on the legnth of the  prefix match
+
+00:00:49.000 --> 00:00:53.000 align:middle line:84%
+and then lastly we're going to look at issues regarding discontiguous networks.
+
+00:00:53.000 --> 00:00:55.000 align:middle line:84%
+so Variable Length Subnet Mask
+
+00:00:55.000 --> 00:01:00.000 align:middle line:84%
+allow us to have varying or variable mask throughout our network
+
+00:01:00.000 --> 00:01:03.000 align:middle line:84%
+so for example, a classful network of 10
+
+00:01:03.000 --> 00:01:06.000 align:middle line:84%
+will have a mask of /8 with the first octet
+
+00:01:06.000 --> 00:01:08.000 align:middle line:84%
+10 is the network portion of the address
+
+00:01:08.000 --> 00:01:11.000 align:middle line:84%
+and the last 3 octets, in other words, the last 24 bits
+
+00:01:11.000 --> 00:01:13.000 align:middle line:84%
+is the host portion of the address.
+
+00:01:13.000 --> 00:01:16.000 align:middle line:84%
+that classful network was subnetted
+
+00:01:16.000 --> 00:01:21.000 align:middle line:84%
+we could, for instance, have a subnet of 10.1.1.0/24
+
+00:01:21.000 --> 00:01:24.000 align:middle line:84%
+where 10.1.1 is the network portion of the address
+
+00:01:24.000 --> 00:01:27.000 align:middle line:84%
+in other words, the most siginificant 24 bits
+
+00:01:27.000 --> 00:01:32.000 align:middle line:84%
+or most significant 3 octets is the netwok portion and the last octet
+
+00:01:32.000 --> 00:01:36.000 align:middle line:84%
+or least significant portion of the address is the host portion.
+
+00:01:36.000 --> 00:01:43.000 align:middle line:84%
+we could also subnet a 10 network down to 10.1.0.0/16
+
+00:01:43.000 --> 00:01:46.000 align:middle line:84%
+where half of the address is the network portion
+
+00:01:46.000 --> 00:01:49.000 align:middle line:84%
+and half of the address is the host portion.
+
+00:01:49.000 --> 00:01:52.000 align:middle line:84%
+please refer to the ICND 1 part of this course
+
+00:01:52.000 --> 00:01:57.000 align:middle line:84%
+or my subnetting explained e-book, for lots of detail on subnetting.
+
+00:01:57.000 --> 00:02:03.000 align:middle line:84%
+CIDR or Classless Inter-Domain Routing was introduced in 1993
+
+00:02:03.000 --> 00:02:07.000 align:middle line:84%
+to replace the prior addressing architecture of classful networks.
+
+00:02:07.000 --> 00:02:10.000 align:middle line:84%
+classful networks were not scalable
+
+00:02:10.000 --> 00:02:14.000 align:middle line:84%
+classful networking introduce 3 classes of addresses
+
+00:02:14.000 --> 00:02:18.000 align:middle line:84%
+for allocation of IP addresses to hosts and networking devices
+
+00:02:18.000 --> 00:02:22.000 align:middle line:84%
+we had A B and C networks.
+
+00:02:22.000 --> 00:02:29.000 align:middle line:84%
+so for instance 10.0.0.0/8 is an example of a classful A network.
+
+00:02:29.000 --> 00:02:35.000 align:middle line:84%
+172.16.0.0/16 is an example of a class B network
+
+00:02:35.000 --> 00:02:41.000 align:middle line:84%
+and 192.168.1.0/24 is an example of a class C network.
+
+00:02:41.000 --> 00:02:44.000 align:middle line:84%
+the problem with this method is that you were forced to use
+
+00:02:44.000 --> 00:02:50.000 align:middle line:84%
+for instances a /16 mask which gave you approximately 65000 host addresses
+
+00:02:50.000 --> 00:02:53.000 align:middle line:84%
+or you could use a class C address like this
+
+00:02:53.000 --> 00:02:56.000 align:middle line:84%
+which only gave you 254 host addresses.
+
+00:02:56.000 --> 00:02:58.000 align:middle line:84%
+this scheme would have resulted
+
+00:02:58.000 --> 00:03:02.000 align:middle line:84%
+in the quick extortion of IP addresses and inflexibility.
+
+00:03:02.000 --> 00:03:06.000 align:middle line:84%
+so CIDR replaced this which is based on Variable Length Subnet Mask
+
+00:03:06.000 --> 00:03:10.000 align:middle line:84%
+were masks can vary on arbitrary lengths
+
+00:03:10.000 --> 00:03:12.000 align:middle line:84%
+so they allow for different size subnets
+
+00:03:12.000 --> 00:03:17.000 align:middle line:84%
+so rather than being forced to use for instance 10.0.0.0/8
+
+00:03:17.000 --> 00:03:25.000 align:middle line:84%
+you can also use 10.0.0.0/16 or 24 or 30 depending on the requirements
+
+00:03:25.000 --> 00:03:29.000 align:middle line:84%
+for the number of subnets or hosts in your network
+
+00:03:29.000 --> 00:03:37.000 align:middle line:84%
+or you can use for instance 10.1.1.0/27 or 10.1.2.0/26 and so forth and so on.
+
+00:03:37.000 --> 00:03:40.000 align:middle line:84%
+so you could take a single class A address
+
+00:03:40.000 --> 00:03:44.000 align:middle line:84%
+and subdivide it into multiple subnets based on your requirements.
+
+00:03:44.000 --> 00:03:47.000 align:middle line:84%
+it's also important to note that in CIDR
+
+00:03:47.000 --> 00:03:52.000 align:middle line:84%
+we don't just advertise a network, we advertise a routing prefix
+
+00:03:52.000 --> 00:04:00.000 align:middle line:84%
+in other words, we would advertise 192.168.1.0/24 not just 192.168.1.0
+
+00:04:00.000 --> 00:04:03.000 align:middle line:84%
+CIDR also allows for the summarization of addresses
+
+00:04:03.000 --> 00:04:06.000 align:middle line:84%
+which I'm going to explain in more detail in a moment.
+
+00:04:06.000 --> 00:04:09.000 align:middle line:84%
+but this is were we take multiple subnets
+
+00:04:09.000 --> 00:04:12.000 align:middle line:84%
+and put them into a super net or summary network
+
+00:04:12.000 --> 00:04:14.000 align:middle line:84%
+which will reduce routing table sizes.
+
+00:04:14.000 --> 00:04:19.000 align:middle line:84%
+Variable Length Subnet Mask have many advantages
+
+00:04:19.000 --> 00:04:23.000 align:middle line:84%
+including the better utilization of IP addresses and subnets.
+
+00:04:23.000 --> 00:04:28.000 align:middle line:84%
+on a WAN link as an example only 2 IP addresses are required.
+
+00:04:28.000 --> 00:04:30.000 align:middle line:84%
+1 IP address for 1 end of the link
+
+00:04:30.000 --> 00:04:32.000 align:middle line:84%
+and another IP address for the other end of the link
+
+00:04:32.000 --> 00:04:39.000 align:middle line:84%
+thus a /30 mask would be better in say a /16 or /24 mask.
+
+00:04:39.000 --> 00:04:43.000 align:middle line:84%
+a /30 mask only support 2 hosts on that subnet
+
+00:04:43.000 --> 00:04:48.000 align:middle line:84%
+and thats all that's required in the point-to-point scenario like this.
+
+00:04:48.000 --> 00:04:52.000 align:middle line:84%
+a /24 mask for instance would support 254 hosts
+
+00:04:52.000 --> 00:04:55.000 align:middle line:84%
+and that would be over kill on this specific link.
+
+00:04:55.000 --> 00:04:58.000 align:middle line:84%
+so VLSM gives assist the administrator
+
+00:04:58.000 --> 00:05:02.000 align:middle line:84%
+the ability to better utilize IP addresses and subnets.
+
+00:05:02.000 --> 00:05:04.000 align:middle line:84%
+where we subnet down subnets
+
+00:05:04.000 --> 00:05:09.000 align:middle line:84%
+to support the required number of IP addresses on that specific segment.
+
+00:05:09.000 --> 00:05:12.000 align:middle line:84%
+so as an example, here we have subnets
+
+00:05:12.000 --> 00:05:17.000 align:middle line:84%
+that are using a /27 mask, on the WAN links we are using /30 mask
+
+00:05:17.000 --> 00:05:22.000 align:middle line:84%
+and for the instance at the headquarters we are using a /16 mask.
+
+00:05:22.000 --> 00:05:25.000 align:middle line:84%
+it also allows us to implement better summarization
+
+00:05:25.000 --> 00:05:30.000 align:middle line:84%
+and scalability of networks as rather than the entire world
+
+00:05:30.000 --> 00:05:32.000 align:middle line:84%
+being forced to use a specific subnet mask
+
+00:05:32.000 --> 00:05:37.000 align:middle line:84%
+we are able to use varying mask in our own networks
+
+00:05:37.000 --> 00:05:41.000 align:middle line:84%
+and advertise summaries to other companies or to the Internet.
+
+00:05:41.000 --> 00:05:44.000 align:middle line:84%
+so heres a simple network to explain the problem
+
+00:05:44.000 --> 00:05:46.000 align:middle line:84%
+when summarization is not used.
+
+00:05:46.000 --> 00:05:51.000 align:middle line:84%
+on the left hand side we have networks 10.1.1.0/24
+
+00:05:51.000 --> 00:05:54.000 align:middle line:84%
+up to 10.1.2.200.0/24
+
+00:05:54.000 --> 00:05:57.000 align:middle line:84%
+on the right hand side we have networks 10.2.1.0/24
+
+00:05:57.000 --> 00:06:05.000 align:middle line:84%
+up to 10.2.200.0/24 now summarization is now implemented
+
+00:06:05.000 --> 00:06:08.000 align:middle line:84%
+and let's say you're running a routeing protocol like RIP
+
+00:06:08.000 --> 00:06:11.000 align:middle line:84%
+which advertises the entire routing table every 30 seconds
+
+00:06:11.000 --> 00:06:14.000 align:middle line:84%
+you're going to have scenario like this
+
+00:06:14.000 --> 00:06:16.000 align:middle line:84%
+with the router on the left-hand side
+
+00:06:16.000 --> 00:06:21.000 align:middle line:84%
+advertises 200 routes every 30 seconds and the router on the router side
+
+00:06:21.000 --> 00:06:25.000 align:middle line:84%
+also advertises 200 routes every 30 seconds.
+
+00:06:25.000 --> 00:06:29.000 align:middle line:84%
+RIP will continually sends out its entire routing table
+
+00:06:29.000 --> 00:06:32.000 align:middle line:84%
+every 30 seconds even though there are no changes.
+
+00:06:32.000 --> 00:06:36.000 align:middle line:84%
+so 400 routes are advertised across this WAN link
+
+00:06:36.000 --> 00:06:39.000 align:middle line:84%
+which is very inefficient, those routing updates
+
+00:06:39.000 --> 00:06:42.000 align:middle line:84%
+consume a lot of bandwidth and don’t accomplish much
+
+00:06:42.000 --> 00:06:44.000 align:middle line:84%
+because they will continuously be advertise
+
+00:06:44.000 --> 00:06:46.000 align:middle line:84%
+even though there are no changes
+
+00:06:46.000 --> 00:06:49.000 align:middle line:84%
+so it makes more sense to summarize the routes
+
+00:06:49.000 --> 00:06:53.000 align:middle line:84%
+so on the left-hand side, we have 10.1.1.0
+
+00:06:53.000 --> 00:06:56.000 align:middle line:84%
+all the way up to 10.1.200.0
+
+00:06:56.000 --> 00:07:01.000 align:middle line:84%
+So these are subnets of the 10.1.0.0 network
+
+00:07:01.000 --> 00:07:05.000 align:middle line:84%
+so we could summarize those 200 routes into a single route
+
+00:07:05.000 --> 00:07:11.000 align:middle line:84%
+and on the left hand side 10.2.1.0 up to 10.2.200.0
+
+00:07:11.000 --> 00:07:14.000 align:middle line:84%
+could be summarize as 10.2.0.0/16
+
+00:07:14.000 --> 00:07:20.000 align:middle line:84%
+so rather than advertising 400 routes a single route from the left-hand side
+
+00:07:20.000 --> 00:07:22.000 align:middle line:84%
+is advertised to the left-hand side.
+
+00:07:22.000 --> 00:07:26.000 align:middle line:84%
+and a single route from right-hand side is advertised to the left-hand side
+
+00:07:26.000 --> 00:07:29.000 align:middle line:84%
+With summarization what we are have looking for
+
+00:07:29.000 --> 00:07:33.000 align:middle line:84%
+is most significant bits that are equal, in other words
+
+00:07:33.000 --> 00:07:37.000 align:middle line:84%
+starting from the left-and side and working towards the right-hand side
+
+00:07:37.000 --> 00:07:40.000 align:middle line:84%
+we look for bits that are the same
+
+00:07:40.000 --> 00:07:43.000 align:middle line:84%
+so in the first octet all the subnets contain 10
+
+00:07:43.000 --> 00:07:47.000 align:middle line:84%
+so that’s common, in the second octet all the subnets contain 1
+
+00:07:47.000 --> 00:07:52.000 align:middle line:84%
+so that's common but in the 3rd octet the values vary from 1 - 200
+
+00:07:52.000 --> 00:07:56.000 align:middle line:84%
+so it’s not as easy to see what’s in common
+
+00:07:56.000 --> 00:07:59.000 align:middle line:84%
+so we could just summarize it as 10.1.0.00/16
+
+00:07:59.000 --> 00:08:03.000 align:middle line:84%
+knowing that 10.1 is common throughout
+
+00:08:03.000 --> 00:08:06.000 align:middle line:84%
+and the router over here will summarize all of those routes
+
+00:08:06.000 --> 00:08:09.000 align:middle line:84%
+and only send out 1 advertisement
+
+00:08:09.000 --> 00:08:13.000 align:middle line:84%
+the router on the left-hand side can still get to all of this subnets
+
+00:08:13.000 --> 00:08:17.000 align:middle line:84%
+because they are subnets of this network
+
+00:08:17.000 --> 00:08:20.000 align:middle line:84%
+so even though we've summarized routes
+
+00:08:20.000 --> 00:08:23.000 align:middle line:84%
+we still have full connectivity throughout the network
+
+00:08:23.000 --> 00:08:25.000 align:middle line:84%
+here’s some more complicated example
+
+00:08:25.000 --> 00:08:30.000 align:middle line:84%
+assume that we have networks 172.16.32.0/24
+
+00:08:30.000 --> 00:08:36.000 align:middle line:84%
+all the way up to 172.16.63.0/24
+
+00:08:36.000 --> 00:08:40.000 align:middle line:84%
+now rather than this router advertising all of those networks
+
+00:08:40.000 --> 00:08:47.000 align:middle line:84%
+can we summarize this network into 1 or at least a few summaries
+
+00:08:47.000 --> 00:08:51.000 align:middle line:84%
+now to work this out you start from the most significant bits
+
+00:08:51.000 --> 00:08:53.000 align:middle line:84%
+in other words, you start from the left-hand side
+
+00:08:53.000 --> 00:08:58.000 align:middle line:84%
+and you look for what is common throughout all of this networks
+
+00:08:58.000 --> 00:09:04.000 align:middle line:84%
+so in the first octet 172 is common, so we know that’s common
+
+00:09:04.000 --> 00:09:10.000 align:middle line:84%
+16 is also common, so we know does far that the 1st 2 octets are common
+
+00:09:10.000 --> 00:09:15.000 align:middle line:84%
+in the third octet, however, the numbers are changing
+
+00:09:15.000 --> 00:09:20.000 align:middle line:84%
+so we have 32, 33, 34, 35, all the way up to 63
+
+00:09:20.000 --> 00:09:24.000 align:middle line:84%
+so it's not as easy to visualize or see what’s common here
+
+00:09:24.000 --> 00:09:27.000 align:middle line:84%
+so what we're going to do is we can convert the third octet
+
+00:09:27.000 --> 00:09:37.000 align:middle line:84%
+into binary to look for common bits, so for example 32 = 0010 0000
+
+00:09:37.000 --> 00:09:41.000 align:middle line:84%
+now obviously there’s no gap halfway through an octet
+
+00:09:41.000 --> 00:09:45.000 align:middle line:84%
+I’ve just put the space here to try and make it easier to read
+
+00:09:45.000 --> 00:09:50.000 align:middle line:84%
+so an octet consists of 8 binary values, 32 would look at follows
+
+00:09:50.000 --> 00:09:53.000 align:middle line:84%
+now as soon as you convert into binary
+
+00:09:53.000 --> 00:09:56.000 align:middle line:84%
+you should convert the remaining bits into binary as well
+
+00:09:56.000 --> 00:09:59.000 align:middle line:84%
+now in this example, you don’t need to do that
+
+00:09:59.000 --> 00:10:04.000 align:middle line:84%
+because you can see that the last octet contains just a 0
+
+00:10:04.000 --> 00:10:11.000 align:middle line:84%
+but I’ve done it here for completeness, the second network is 172.16.33.0
+
+00:10:11.000 --> 00:10:18.000 align:middle line:84%
+and 33 in binary looks as follows, 34 looks as follows, 35 looks as follows
+
+00:10:18.000 --> 00:10:22.000 align:middle line:84%
+and I wouldn’t recommend that you convert all the addresses into binary
+
+00:10:22.000 --> 00:10:24.000 align:middle line:84%
+I would just do say the first 3 or 4
+
+00:10:24.000 --> 00:10:26.000 align:middle line:84%
+and then the last one to see what’s in common.
+
+00:10:26.000 --> 00:10:31.000 align:middle line:84%
+in the real world, however, you may come across far more complicated examples
+
+00:10:31.000 --> 00:10:34.000 align:middle line:84%
+and you may need to convert all the addresses into binary
+
+00:10:34.000 --> 00:10:38.000 align:middle line:84%
+but at the CCNA level that may not be necessary.
+
+00:10:38.000 --> 00:10:41.000 align:middle line:84%
+So once we’ve done that we can look for bits that are in common
+
+00:10:41.000 --> 00:10:45.000 align:middle line:84%
+so the first binary 0 in the 3rd octet is common throughout
+
+00:10:45.000 --> 00:10:51.000 align:middle line:84%
+the second binary 0 is also common throughout, the 3rd binary bit is a 1
+
+00:10:51.000 --> 00:10:55.000 align:middle line:84%
+and that is common throughout, however, in the 4th binary bit position
+
+00:10:55.000 --> 00:11:02.000 align:middle line:84%
+the values change as you can see here the first few networks have 0's
+
+00:11:02.000 --> 00:11:05.000 align:middle line:84%
+but the last network has a 1 in the fourth binary bit position
+
+00:11:05.000 --> 00:11:11.000 align:middle line:84%
+so we can draw a line to the right of all the bits that are common
+
+00:11:11.000 --> 00:11:15.000 align:middle line:84%
+so as you can see here to the left of the line in the 3rd octet
+
+00:11:15.000 --> 00:11:18.000 align:middle line:84%
+we have 001 in binary
+
+00:11:18.000 --> 00:11:23.000 align:middle line:84%
+the remaining bits in binary are not common in other words bits vary.
+
+00:11:23.000 --> 00:11:27.000 align:middle line:84%
+Now Cisco does not support discontiguous subnet masks
+
+00:11:27.000 --> 00:11:33.000 align:middle line:84%
+so you can see these bits are not in common and these this bits are in common
+
+00:11:33.000 --> 00:11:36.000 align:middle line:84%
+there has to be a contiguous grouping of common bits
+
+00:11:36.000 --> 00:11:40.000 align:middle line:84%
+starting from the left-hand side moving from the right-hand side
+
+00:11:40.000 --> 00:11:43.000 align:middle line:84%
+and as soon as there are bits that are not common
+
+00:11:43.000 --> 00:11:47.000 align:middle line:84%
+you have to draw a line to make a differentiation between common bits
+
+00:11:47.000 --> 00:11:49.000 align:middle line:84%
+and bits that are not common
+
+00:11:49.000 --> 00:11:54.000 align:middle line:84%
+so we know now that the first octet is common, the second octet is common
+
+00:11:54.000 --> 00:12:00.000 align:middle line:84%
+so 172.16 in the third octet, the first 3 binary bits are common
+
+00:12:00.000 --> 00:12:05.000 align:middle line:84%
+so 001 now any bits that are not in common are just set to 0
+
+00:12:05.000 --> 00:12:11.000 align:middle line:84%
+so notice, we’ve populate the remaining portion of the address with binary 0's
+
+00:12:11.000 --> 00:12:14.000 align:middle line:84%
+and then we convert the  binary back to decimal
+
+00:12:14.000 --> 00:12:17.000 align:middle line:84%
+so hopefully remember this from the ICND 1 course.
+
+00:12:17.000 --> 00:12:23.000 align:middle line:84%
+So the first octet is 172, the second octet is 16
+
+00:12:23.000 --> 00:12:28.000 align:middle line:84%
+the third octet if you convert this to decimal is equal to 32
+
+00:12:28.000 --> 00:12:32.000 align:middle line:84%
+and the last octet converted to decimal is 0.
+
+00:12:32.000 --> 00:12:37.000 align:middle line:84%
+So the summary address is 172.16.32.0
+
+00:12:37.000 --> 00:12:41.000 align:middle line:84%
+The last step is to work out the bits that are in common
+
+00:12:41.000 --> 00:12:45.000 align:middle line:84%
+now the first octet is in common and an octet is 8 bits
+
+00:12:45.000 --> 00:12:49.000 align:middle line:84%
+the second octet is in common and that’s an additional 8 bits
+
+00:12:49.000 --> 00:12:54.000 align:middle line:84%
+so thus far we have 8 bits + 8 bits in other words, 16 bits that are in common
+
+00:12:54.000 --> 00:13:02.000 align:middle line:84%
+3 bits in the third octet are in common, so 8+8+3 will give you 19 bits in common
+
+00:13:02.000 --> 00:13:10.000 align:middle line:84%
+thus the summary address for this subnets will be 172.16.32.0/19
+
+00:13:10.000 --> 00:13:14.000 align:middle line:84%
+it’s a simple as that to work out summarization
+
+00:13:14.000 --> 00:13:16.000 align:middle line:84%
+and I’m going to show you trick in a moment
+
+00:13:16.000 --> 00:13:19.000 align:middle line:84%
+that allows you to work this out in the few seconds
+
+00:13:19.000 --> 00:13:29.000 align:middle line:84%
+here’s another example, we have subnets 172.16.64.0/24 up to 172.16.127.0/24
+
+00:13:29.000 --> 00:13:36.000 align:middle line:84%
+can these subnets be summarized into a single subnet or fewer subnets?
+
+00:13:36.000 --> 00:13:40.000 align:middle line:84%
+so using the same process we start from the left-hand side
+
+00:13:40.000 --> 00:13:42.000 align:middle line:84%
+and we look for bits that are in common
+
+00:13:42.000 --> 00:13:47.000 align:middle line:84%
+in the first octet, we have 172 throughout all of those subnets
+
+00:13:47.000 --> 00:13:51.000 align:middle line:84%
+so that’s common, in the second octet we have 16
+
+00:13:51.000 --> 00:13:53.000 align:middle line:84%
+so that’s common throughout
+
+00:13:53.000 --> 00:13:58.000 align:middle line:84%
+So we know that the first 2 octets 172.16 are common throughout
+
+00:13:58.000 --> 00:14:01.000 align:middle line:84%
+but in the third octet the values are changing
+
+00:14:01.000 --> 00:14:06.000 align:middle line:84%
+we’ve got 64, 65, 66, 67 all the way up to 127
+
+00:14:06.000 --> 00:14:10.000 align:middle line:84%
+so that third octet we're going to convert to binary
+
+00:14:10.000 --> 00:14:13.000 align:middle line:84%
+to be able to better see what’s in common
+
+00:14:13.000 --> 00:14:20.000 align:middle line:84%
+so converting 64 into binary will give you 00100 0000
+
+00:14:20.000 --> 00:14:26.000 align:middle line:84%
+65 will look as follows, 66 as this, 67 as that
+
+00:14:26.000 --> 00:14:30.000 align:middle line:84%
+and you could convert a third octet of all of the subnets until you get a 127
+
+00:14:30.000 --> 00:14:32.000 align:middle line:84%
+which looks as follows
+
+00:14:32.000 --> 00:14:38.000 align:middle line:84%
+the last octet is a 0 in decimal which looks as follows in binary
+
+00:14:38.000 --> 00:14:40.000 align:middle line:84%
+so now what we need to do is we need to look for the common bits
+
+00:14:40.000 --> 00:14:44.000 align:middle line:84%
+so the common bits are once again 172.16
+
+00:14:44.000 --> 00:14:50.000 align:middle line:84%
+and then the first binary 0 is in common throughout the subnets
+
+00:14:50.000 --> 00:14:55.000 align:middle line:84%
+the second binary bit which is set to 1 is common throughout
+
+00:14:55.000 --> 00:15:00.000 align:middle line:84%
+but the third binary bit is not common throughout notice there’s 0
+
+00:15:00.000 --> 00:15:02.000 align:middle line:84%
+and then here there’s a binary 1
+
+00:15:02.000 --> 00:15:05.000 align:middle line:84%
+so we can draw a line after the second binary bit
+
+00:15:05.000 --> 00:15:09.000 align:middle line:84%
+to denote that everything to the left of the line is in common
+
+00:15:09.000 --> 00:15:12.000 align:middle line:84%
+and everything to the right of the line is not in common
+
+00:15:12.000 --> 00:15:16.000 align:middle line:84%
+so all of this is in common and all of this is not in common.
+
+00:15:16.000 --> 00:15:23.000 align:middle line:84%
+therefore 172.16 in decimal, the first 2 octets are in common
+
+00:15:23.000 --> 00:15:26.000 align:middle line:84%
+and the first 2 binary bits of the third octet are in common
+
+00:15:26.000 --> 00:15:30.000 align:middle line:84%
+the remaining binary bits need to be set to 0's
+
+00:15:30.000 --> 00:15:34.000 align:middle line:84%
+so filling the remaining binary bits is to 0 will look as follows
+
+00:15:34.000 --> 00:15:36.000 align:middle line:84%
+and then converting the binary back to decimal
+
+00:15:36.000 --> 00:15:41.000 align:middle line:84%
+will get 172 in the first octet, 16 in the second octet
+
+00:15:41.000 --> 00:15:47.000 align:middle line:84%
+this is 64 in decimal, so the third octet is 64
+
+00:15:47.000 --> 00:15:52.000 align:middle line:84%
+and the last octet binary 0's is equal to 0 in decimal
+
+00:15:52.000 --> 00:16:01.000 align:middle line:84%
+so the address is 172.16.64.0 that is the summary network for all of these subnets.
+
+00:16:01.000 --> 00:16:04.000 align:middle line:84%
+the last step is to count the number of bits in common
+
+00:16:04.000 --> 00:16:08.000 align:middle line:84%
+the first octet is 8 bits, the second octet is 8 bits
+
+00:16:08.000 --> 00:16:12.000 align:middle line:84%
+so that’s  16 bits in total followed by another 2 binary bits
+
+00:16:12.000 --> 00:16:15.000 align:middle line:84%
+which gives you 18 bits in common
+
+00:16:15.000 --> 00:16:19.000 align:middle line:84%
+so the first 18 bits are in common throughout all of this subnets
+
+00:16:19.000 --> 00:16:25.000 align:middle line:84%
+so our final answer will be 172.16.64.0/18
+
+00:16:25.000 --> 00:16:30.000 align:middle line:84%
+that is the summary network for all of the listed subnets.

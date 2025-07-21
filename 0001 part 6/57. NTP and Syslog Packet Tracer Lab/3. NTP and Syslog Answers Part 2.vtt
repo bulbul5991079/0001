@@ -1,0 +1,197 @@
+WEBVTT
+
+0
+00:06.260 --> 00:14.930
+The first thing I need to do is configure the NTP server, so on the NTP server, go to NTP
+
+1
+00:15.910 --> 00:18.490
+and I'll enable the NTP servers.
+
+2
+00:19.550 --> 00:22.520
+I'm not going to enable authentication at this point.
+
+3
+00:23.180 --> 00:28.280
+I can then specify the date and time this is OK for this lab.
+
+4
+00:29.520 --> 00:37.880
+The clock on the local PC is the 12th of April, 2018 time is 4:38 AM. 
+
+5
+00:40.080 --> 00:49.260
+We're told to check the time on the router in the switch first, at the moment show clock shows us that
+
+6
+00:49.350 --> 00:51.930
+the router thinks it's 1993.
+
+7
+00:54.360 --> 01:02.520
+The switch thinks it's also 1993, so the time is wrong on both of these devices.
+
+8
+01:03.770 --> 01:10.760
+Before we configure NTP let's send time-stamped messages to the syslog server.
+
+9
+01:14.370 --> 01:22.620
+So at the moment, the Syslog server is not showing timestamps on Syslog messages. So on
+
+10
+01:22.680 --> 01:30.690
+the router, I'm going to type service timestamps, log messages, date and time,
+
+11
+01:31.900 --> 01:41.170
+and milliseconds, notice the difference now when I type end we can see the date and time on the syslog message,
+
+12
+01:41.620 --> 01:46.360
+but it's the wrong date and time, so that doesn't really help us with troubleshooting.
+
+13
+01:47.060 --> 01:49.860
+We want to know when something took place.
+
+14
+01:51.040 --> 01:54.940
+So we want  date and time as well as milliseconds
+
+15
+01:55.690 --> 02:00.550
+but again, the switch is showing the wrong date and time, so we need to fix that.
+
+16
+02:02.780 --> 02:03.740
+So on the router
+
+17
+02:06.000 --> 02:13.020
+NTP server we need to specify the IP address of the NTP server.
+
+18
+02:15.620 --> 02:24.770
+NTP server has this IP address, 10.1.1.201, so specify IP address of NTP server.
+
+19
+02:26.060 --> 02:35.660
+When I type end now and press enter notice of the correct date and time is displayed on the syslog message.
+
+20
+02:36.630 --> 02:46.200
+It's the 12th of April, 2018, the time is 4:42 AM. So that's good, configure the switch.
+
+21
+02:47.580 --> 02:58.350
+So NTP server 10.1.1.201, type end notice of the corrected date and time is
+
+22
+02:58.350 --> 02:59.000
+displayed.
+
+23
+02:59.520 --> 03:03.330
+We're getting messages from both the router and the switch.
+
+24
+03:04.230 --> 03:10.650
+We're told to verify the date and time on the road and switch. So on
+
+25
+03:10.650 --> 03:19.050
+the router, show clock shows the correct date and time on the switch show clock shows the correct date
+
+26
+03:19.050 --> 03:19.620
+and time.
+
+27
+03:20.730 --> 03:28.260
+We're then told to shut and enable the loopback interface and shut and enable the ethernet interface on
+
+28
+03:28.260 --> 03:33.000
+the switch to verify that the syslog messages are correct.
+
+29
+03:34.690 --> 03:35.820
+I've done that already
+
+30
+03:37.330 --> 03:44.710
+but to demonstrate it again, when I go into the loopback  interface and I shut the interface
+
+31
+03:44.710 --> 03:50.650
+down, we can see that the interface went down at the correct date and time.
+
+32
+03:52.780 --> 03:57.910
+No shut interface has come up at the correct date and time.
+
+33
+03:58.660 --> 04:05.470
+So we see the corrected date and time on the router as well as on the syslog server.
+
+34
+04:06.520 --> 04:12.400
+Same thing should happen on the switch, shut interface F104
+
+35
+04:15.310 --> 04:16.900
+show IP interface brief.
+
+36
+04:18.370 --> 04:23.800
+This is the interface I want to shut down to gigabit interface, not fast Ethernet so interface gigabit
+
+37
+04:24.280 --> 04:30.990
+104, shut that down rather than no shut interface has gone down.
+
+38
+04:31.540 --> 04:35.830
+We can see the interface has gone down at the state in time.
+
+39
+04:36.370 --> 04:37.090
+No, shut it
+
+40
+04:38.040 --> 04:39.060
+interfaces come up
+
+41
+04:40.020 --> 04:48.860
+at the state and time, so again, the switch is displaying the correct time and so is the syslog server.
+
+42
+04:49.680 --> 04:52.280
+So I've successfully completed this lab.
+
+43
+04:52.890 --> 05:00.360
+I've been able to configure the router and the switch to use an NTP server to get the correct
+
+44
+05:00.450 --> 05:04.870
+date and time and to log messages to syslog server.
+
+45
+05:05.490 --> 05:07.630
+Were you able to complete this lab?
+
+46
+05:08.250 --> 05:17.130
+Again, it's important for you to know both syslog and NTP for the CCNA exam as well as for the real
+
+47
+05:17.130 --> 05:17.670
+world.
+
+48
+05:18.150 --> 05:24.660
+Make sure that you understand how to configure both syslog and NTP.
