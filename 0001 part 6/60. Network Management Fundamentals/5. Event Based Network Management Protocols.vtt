@@ -1,0 +1,165 @@
+WEBVTT
+
+0
+00:00.330 --> 00:07.020
+In event-based system, the network management protocols, work very differently to query-based systems.
+
+1
+00:07.920 --> 00:14.760
+In any event-based system, the network management system simply listens for possible announcements
+
+2
+00:14.760 --> 00:17.100
+or events to be sent over the wire.
+
+3
+00:17.970 --> 00:24.420
+Typically, network management protocols that leverage these types of events are either syslog based or
+
+4
+00:24.420 --> 00:25.860
+SNMP Trap based.
+
+5
+00:26.710 --> 00:33.660
+Now, they are controllable in terms of the amount of detail that you receive from devices on your network.
+
+6
+00:34.510 --> 00:41.170
+So as an example, on a Cisco router, you could enable debugging, which produces a very large amount
+
+7
+00:41.170 --> 00:41.660
+of data.
+
+8
+00:42.580 --> 00:46.600
+There's a lot of low-level detail that's generated with the debugging.
+
+9
+00:47.410 --> 00:52.510
+You may not necessarily want that amount of data pushed to your network management system.
+
+10
+00:53.320 --> 00:59.560
+One of the issues here is if you receive a large amount of data, who's going to sift through the data
+
+11
+00:59.890 --> 01:03.670
+to make meaningful decisions on the data that was received?
+
+12
+01:04.450 --> 01:09.940
+So you don't want to just enable lots of event-based information that's sent to you a Syslog server.
+
+13
+01:10.930 --> 01:16.530
+One of the advantages of event-based systems is that they can react very quickly.
+
+14
+01:17.080 --> 01:22.870
+In other words, if any event takes place on the network, the network management system can act on that
+
+15
+01:22.870 --> 01:27.510
+event immediately rather than waiting for a polling interval to expire.
+
+16
+01:28.480 --> 01:35.350
+As an example, if you were polling a router interface for its status every five minutes, then you would
+
+17
+01:35.350 --> 01:42.330
+know that that interface is up whenever the poll is done or query is done in a query-based system.
+
+18
+01:43.180 --> 01:49.420
+But if the interface goes down just after you pulled it, it may take another five minutes for you to
+
+19
+01:49.420 --> 01:51.760
+realize that the interface went down.
+
+20
+01:52.600 --> 01:58.900
+When your network management system polls the router every five minutes, it will receive back a positive
+
+21
+01:58.900 --> 02:05.680
+response from the router, confirming that the interface is up as an example that's typically done using
+
+22
+02:05.680 --> 02:07.930
+a network management protocol such as SNMP.
+
+23
+02:08.770 --> 02:12.520
+So you know the interface is operational because you've queried the router.
+
+24
+02:13.300 --> 02:16.570
+If you don't get a response from the router, then you know there's a problem.
+
+25
+02:17.440 --> 02:22.750
+But the downside of a query-based system is that you're only polling it every five minutes.
+
+26
+02:23.260 --> 02:30.070
+If the interface went down immediately after you had pulled the router, it could take up to five minutes
+
+27
+02:30.520 --> 02:37.240
+for you to realize that there's a problem on the interface of that router. Whereas in an event-based
+
+28
+02:37.240 --> 02:43.480
+system and SNMP Trap or Syslog message is sent immediately when the interface goes down.
+
+29
+02:43.960 --> 02:49.720
+So in this case, the router is informing the network management system that there's a problem rather than
+
+30
+02:49.720 --> 02:56.050
+the network management system having to wait a five minute interval to query the router for the status
+
+31
+02:56.050 --> 02:56.860
+of an interface.
+
+32
+02:57.820 --> 03:04.150
+Now, there is a downside to event-based systems, the network management protocols are not reliable
+
+33
+03:04.480 --> 03:11.260
+because the network management system is simply passively waiting and listening for events to be sent
+
+34
+03:11.260 --> 03:11.820
+to it.
+
+35
+03:12.700 --> 03:18.700
+It wouldn't know if there was a problem on the network if that event didn't reach the network management
+
+36
+03:18.700 --> 03:19.100
+system.
+
+37
+03:19.930 --> 03:26.470
+So there's a network issue or an interface went down that prevents the Syslog message or SNMP Trap
+
+38
+03:26.830 --> 03:29.110
+from getting to the network management system.
+
+39
+03:29.830 --> 03:36.550
+The network management system would be unaware of the problem without explicitly polling the network
+
+40
+03:36.550 --> 03:37.210
+device.

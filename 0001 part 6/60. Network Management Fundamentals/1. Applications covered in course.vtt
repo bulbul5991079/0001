@@ -1,0 +1,49 @@
+WEBVTT
+
+0
+00:00.240 --> 00:06.090
+In this course, I'm going to demonstrate multiple solar winds, applications, including network performance
+
+1
+00:06.090 --> 00:14.460
+monitor or NPM, Kiwi Syslog server, Kiwi CatTools, and others that may be of interest to you.
+
+2
+00:15.180 --> 00:19.310
+Please give feedback if there's any tool that you'd like to add to the course.
+
+3
+00:19.980 --> 00:26.340
+But before we get into the demonstrations, it's important that you understand the protocols that these
+
+4
+00:26.340 --> 00:29.700
+applications rely on to manage the network.
+
+5
+00:30.620 --> 00:39.380
+So you need a knowledge of protocol such as ICMP, SNMP or Simple Network Management Protocol, SNMP
+
+6
+00:39.380 --> 00:50.600
+Traps, Syslog and WMI, these protocols enable applications such as NPM to access devices in GNS3 
+
+7
+00:50.840 --> 00:55.940
+or in a production topology and to extract information from those devices.
+
+8
+00:57.010 --> 01:02.950
+So it's important that you, as a network engineer or network manager, have an understanding of these
+
+9
+01:02.950 --> 01:03.790
+protocols.
+
+10
+01:04.740 --> 01:10.680
+If you already know what SNMP is or what Syslog is feel free to skip ahead, but in this video, I'm
+
+11
+01:10.680 --> 01:12.660
+going to discuss some of these protocols.

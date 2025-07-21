@@ -1,0 +1,129 @@
+WEBVTT
+
+0
+00:00.240 --> 00:05.120
+So what are the best practices, what should you be doing in a live environment? Now
+
+1
+00:05.390 --> 00:07.800
+best practices state that you should use both.
+
+2
+00:08.720 --> 00:15.410
+You should use polling-based or query-based as well as event-based network management protocols as part
+
+3
+00:15.410 --> 00:17.060
+of your network management solution.
+
+4
+00:18.260 --> 00:23.720
+Now, it doesn't help just to receive a large amount of data, you need to make meaningful decisions
+
+5
+00:23.720 --> 00:24.620
+on that data.
+
+6
+00:25.550 --> 00:31.790
+So you'll also want to build and leverage alerts and reports so that you're both notified when an issue occurs,
+
+7
+00:32.270 --> 00:37.640
+whether it was based on a polling-based detection mechanism or an event-based detection.
+
+8
+00:38.520 --> 00:44.160
+And in addition, you're going to want some kind of reporting capability that provides you with detail
+
+9
+00:44.160 --> 00:50.490
+of performance, not only in real-time at this point in time, but over a period of time.
+
+10
+00:50.880 --> 00:55.290
+So you want historical data available so that you can make meaningful decisions.
+
+11
+00:56.220 --> 01:04.260
+As an example, if an interface on a router has a utilization of 70% is that good or is that bad?
+
+12
+01:05.160 --> 01:10.770
+That's difficult to know if you don't have historical data that allows you to build a baseline of what
+
+13
+01:10.770 --> 01:12.600
+your network typically runs at.
+
+14
+01:13.540 --> 01:19.060
+If that interface in the last three months has been running at 2% utilization and now suddenly
+
+15
+01:19.060 --> 01:24.940
+it's running at 90% utilization, you'll know that something has happened on your network that
+
+16
+01:24.940 --> 01:28.030
+has changed the interface utilization dramatically.
+
+17
+01:29.010 --> 01:34.740
+So you're going to want reports to give you performance detail over time, as well as notify you of
+
+18
+01:34.740 --> 01:38.340
+issues and the availability of devices in your network.
+
+19
+01:39.340 --> 01:44.890
+You're going to want to, at a glance, be able to see if there's a problem with a network device such
+
+20
+01:44.890 --> 01:50.620
+as a router or if there's a problem with an individual interface on one of your routers.
+
+21
+01:51.730 --> 01:58.480
+Don't forget to set the polling frequency and how granular your event notifications are.
+
+22
+01:59.500 --> 02:05.290
+This will vary from one environment to another and often depends on the type of topology that you have,
+
+23
+02:05.770 --> 02:12.580
+the bandwidth available and the resources you have to detect and then act on the information that you're
+
+24
+02:12.580 --> 02:13.180
+receiving.
+
+25
+02:14.050 --> 02:19.810
+In addition, you might need to make decisions on how quickly you need to react to an issue on your
+
+26
+02:19.810 --> 02:20.350
+network.
+
+27
+02:21.350 --> 02:28.160
+If something happens on your network and it effects an entire building or the entire organization,
+
+28
+02:28.340 --> 02:30.260
+you're going to want to act on that quickly.
+
+29
+02:30.920 --> 02:35.930
+But if something happens and it only affects a single device, that's not important, it's probably
+
+30
+02:35.930 --> 02:41.810
+not as important that you get woken up at three o'clock in the morning to tell you that the port on the
+
+31
+02:41.810 --> 02:42.800
+switch has gone down.

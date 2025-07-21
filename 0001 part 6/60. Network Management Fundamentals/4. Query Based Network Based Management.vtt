@@ -1,0 +1,73 @@
+WEBVTT
+
+0
+00:00.240 --> 00:06.480
+There are several advantages and disadvantages to why you'd want to use a query-based network management
+
+1
+00:06.480 --> 00:07.110
+protocol.
+
+2
+00:08.090 --> 00:15.710
+Firstly, query-based protocols are reliable because it's query-based, the network management station
+
+3
+00:15.710 --> 00:24.470
+is queering or asking for information from a network device. If the NMS doesn't receive a response
+
+4
+00:24.560 --> 00:27.280
+from the device, that indicates a problem.
+
+5
+00:28.160 --> 00:34.220
+The fact that the NMS made a query and didn't get back a response indicates that there's a problem
+
+6
+00:34.220 --> 00:34.970
+on the network.
+
+7
+00:35.900 --> 00:43.730
+So no response equates to a problem query-based, also called polling-based network management protocols
+
+8
+00:44.000 --> 00:47.650
+can be scheduled and you can set how frequently that's done.
+
+9
+00:48.530 --> 00:55.460
+So you could pull the network on a very frequent basis or pull the network less frequently to reduce
+
+10
+00:55.460 --> 00:57.500
+the impact of the queries on the network.
+
+11
+00:58.250 --> 01:05.300
+As an example, you may not necessarily want to query a network device every five seconds because of
+
+12
+01:05.300 --> 01:07.200
+the overhead that you're putting on the network.
+
+13
+01:08.030 --> 01:16.040
+Now, in Orion Network Performance Monitor or Orion NPM also referred in this course to as solarwinds
+
+14
+01:16.040 --> 01:16.640
+NPM.
+
+15
+01:17.650 --> 01:24.460
+The default setting is two minutes for query-based polls for status information and nine minutes for
+
+16
+01:24.460 --> 01:26.680
+query based polling firm statistics.
+
+17
+01:27.770 --> 01:32.450
+Orion NPM uses both query and event based protocols.

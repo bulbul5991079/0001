@@ -1,0 +1,53 @@
+WEBVTT
+
+0
+00:00.210 --> 00:06.450
+Now, there are two main types of network management protocols that you should be aware of when studying
+
+1
+00:06.780 --> 00:10.410
+network management protocols and how to manage your network.
+
+2
+00:10.890 --> 00:18.030
+Always think about how the protocols work and the advantages and disadvantages of the two main types
+
+3
+00:18.030 --> 00:25.890
+of network management protocols, the two types of query based, which means that the network management
+
+4
+00:25.890 --> 00:31.470
+station or NMS asks a question from a device and then waits for a response.
+
+5
+00:32.340 --> 00:40.230
+And then you have event-based protocols where the network management station simply listens for announcements
+
+6
+00:40.230 --> 00:42.450
+or events from the network.
+
+7
+00:43.360 --> 00:49.720
+So with query-based, the network management station is sending a query to a router to extract information
+
+8
+00:49.720 --> 00:57.010
+from that router, whereas with event-based protocols, a router or switch would inform the network management
+
+9
+00:57.010 --> 01:03.540
+station of an issue or of something taking place as an example, an interface goes down
+
+10
+01:03.670 --> 01:04.570
+that's an event
+
+11
+01:05.080 --> 01:10.390
+and a message is sent to the network management station to inform the network management station of
+
+12
+01:10.390 --> 01:11.920
+that event taking place.
