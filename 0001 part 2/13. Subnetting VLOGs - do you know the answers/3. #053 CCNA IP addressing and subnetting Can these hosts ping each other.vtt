@@ -1,0 +1,269 @@
+WEBVTT
+
+0
+00:09.540 --> 00:13.300
+This is one of multiple videos discussing IP subnetting.
+
+1
+00:13.500 --> 00:20.070
+I've received a number of questions asking me to explain various subnetting scenarios and this is one
+
+2
+00:20.070 --> 00:21.310
+of them.
+
+3
+00:21.340 --> 00:30.720
+So can the PC on the left configure it with this IP address 10 .1.248.1 slash 20 ping the PC
+
+4
+00:30.720 --> 00:37.810
+on the right with IP address 10.1.192.2 slash 20.
+
+5
+00:37.920 --> 00:46.440
+In this example, I'm using Cisco routers as my PCs and I'm doing that because it's important that you
+
+6
+00:46.440 --> 00:50.000
+learn the Cisco CLI. 
+
+7
+00:50.110 --> 00:56.680
+However, the subnetting behavior will be the same on Cisco versus a PC but it gives us a lot of options
+
+8
+00:56.710 --> 01:00.950
+to troubleshoot and test our subnetting scenarios.
+
+9
+01:01.300 --> 01:10.290
+So this is the IP address configured on gigabit 00, show run interface gigabit 00 shows us the IP address
+
+10
+01:10.290 --> 01:19.670
+configuration and show IP interface gigabit 00 shows us the IP address inside the notation.
+
+11
+01:19.670 --> 01:27.270
+So that's the address inside a notation and that's the address configured in dotted decimal notation.
+
+12
+01:27.430 --> 01:34.520
+I'll do the same here show run interface gigabit 00 there's the IP address of PC 2 or router 2 acting
+
+13
+01:34.520 --> 01:41.520
+as PC 2 dotted decimal notation and show IP interface gigabit 00.
+
+14
+01:41.900 --> 01:47.660
+And what I'll do is only include the IP address of 10.
+
+15
+01:47.930 --> 01:52.910
+So there's the IP address inside the notation.
+
+16
+01:53.040 --> 02:03.350
+I could do it this way which shows all the output but it's nice to have that output as well as this
+
+17
+02:03.350 --> 02:04.760
+output on the same screen.
+
+18
+02:07.440 --> 02:16.580
+I'll do the same here show run interface gigabit 00 show IP interface gigabit 00 and I'll include 10.
+
+19
+02:16.950 --> 02:23.130
+So there's the IP address inside the notation and a dotted decimal notation.
+
+20
+02:23.130 --> 02:27.310
+So the question again can these two PCs ping each other.
+
+21
+02:27.720 --> 02:28.780
+So let's test it.
+
+22
+02:28.800 --> 02:31.950
+Ping 10.1.248.1
+
+23
+02:31.980 --> 02:40.660
+notice the pings are failing ping 10.1.192.2, pings are failing.
+
+24
+02:40.680 --> 02:43.620
+Why are they failing?
+
+25
+02:43.620 --> 02:48.000
+The answer is the PCs are in different subnets.
+
+26
+02:48.000 --> 02:53.130
+They connected physically to each other and we can see that by using the command show CDP neighbors
+
+27
+02:53.790 --> 03:01.640
+notice router1 is connected to router 2 on gigabit 00 and router 2 is connected back on gigabit
+
+28
+03:01.730 --> 03:02.870
+00.
+
+29
+03:03.330 --> 03:08.670
+So they're definitely connected to each other physically but they can't ping each other.
+
+30
+03:10.790 --> 03:17.320
+To help explain, I've taken the IP addresses in decimal notation and converted them to binary.
+
+31
+03:17.570 --> 03:22.100
+So this is the binary representation of 10.1.248.1 
+
+32
+03:22.370 --> 03:32.630
+Here's the binary representation of 10.1.192.2 slash 20 means 20 binary ones in the subnet
+
+33
+03:32.630 --> 03:33.450
+mask.
+
+34
+03:33.500 --> 03:37.040
+Here's the subnet mask with 20 binary ones.
+
+35
+03:37.070 --> 03:44.810
+I typically don't have a space between your binary bits but I've just added that to make it easier to
+
+36
+03:44.810 --> 03:45.830
+read.
+
+37
+03:45.830 --> 03:50.380
+So here's the first octet, second octet, third octet
+
+38
+03:50.660 --> 03:57.010
+But notice four binary ones in the third octet and four binary zeros.
+
+39
+03:57.350 --> 03:58.840
+The same is shown here
+
+40
+03:58.860 --> 04:00.240
+slash 20.
+
+41
+04:00.290 --> 04:03.200
+So are these two devices in the same subnet.
+
+42
+04:03.200 --> 04:04.800
+The answer is, No
+
+43
+04:04.890 --> 04:10.710
+Because notice the network portion is different on these two devices.
+
+44
+04:10.820 --> 04:18.180
+I've highlighted the network portion in red, the host portion as shown in blue. For devices to be in
+
+45
+04:18.180 --> 04:25.980
+the same subnet the network portion or subnet portion needs to be the same on both devices, notice here
+
+46
+04:26.100 --> 04:28.070
+the subnet portion is different.
+
+47
+04:28.110 --> 04:34.530
+So they are in different subnets and won't be able to ping each other unless you put a router between
+
+48
+04:34.530 --> 04:37.580
+them or change the subnet mask.
+
+49
+04:38.010 --> 04:41.790
+What would you change the subnet mask to, to allow them to ping each other?
+
+50
+04:46.050 --> 04:58.500
+And the answer is make the subnet portion this which means that the host portion is now changed
+
+51
+05:00.190 --> 05:01.260
+to that.
+
+52
+05:01.480 --> 05:04.090
+So this is the host portion
+
+53
+05:04.260 --> 05:09.000
+this is the network portion, network portion is now the same.
+
+54
+05:09.000 --> 05:20.290
+That equates to 8 plus 8, 16 17 18 binary bits which equates to 255.255.192.
+
+55
+05:20.370 --> 05:30.010
+So previously that was the IP address on this side and that was the IP address on the right-hand side.
+
+56
+05:30.080 --> 05:42.500
+So we would change the IP address to 10.1.192.2, 255.255.192.0 and on this side interface
+
+57
+05:42.500 --> 05:51.500
+gigabit00, IP address 10.1.248.1, 255.255.192.0.
+
+58
+05:51.920 --> 05:57.620
+So same IP address all I've changed is the subnet mask.
+
+59
+05:57.620 --> 06:05.680
+So can the router on the right acting as our PC ping the router on the left acting as a PC.
+
+60
+06:05.780 --> 06:07.970
+And the answer is, Yes it can.
+
+61
+06:07.970 --> 06:14.910
+It dropped the first ping while doing an ARP but notice device on the right can ping the device on the
+
+62
+06:14.910 --> 06:20.170
+left and the device on the left can ping the device on the right.
+
+63
+06:20.400 --> 06:32.560
+And that's just because we changed the subnet mask to slash 18 and put the devices in the same subnet.
+
+64
+06:32.560 --> 06:38.860
+I hope you enjoyed the video if it's been of benefit to you please like it and please subscribe to my YouTube
+
+65
+06:38.890 --> 06:39.870
+channel.
+
+66
+06:39.880 --> 06:41.440
+I wish you all the very best.

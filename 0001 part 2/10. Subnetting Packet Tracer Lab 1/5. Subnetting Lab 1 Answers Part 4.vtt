@@ -1,0 +1,389 @@
+WEBVTT
+
+0
+00:06.490 --> 00:11.230
+So on the subnet 1 9 2 1 6 8 1 128 slash 26.
+
+1
+00:11.260 --> 00:16.030
+We've been told to configure the router with the last IP address in the subnet.
+
+2
+00:16.030 --> 00:19.000
+Now the next subnet is 192
+
+3
+00:19.030 --> 00:27.070
+so the broadcast address for the subnet will be 191 which means that this router can be configured with
+
+4
+00:27.070 --> 00:28.810
+190
+
+5
+00:28.810 --> 00:31.970
+Have a look at the previous videos in this series.
+
+6
+00:32.050 --> 00:40.860
+If you're not sure how I worked that out, so IP address 192 168 1, 192 is the next subnet 1
+
+7
+00:40.860 --> 00:49.720
+91 is the broadcast, 190 is the last IP address in the subnet, subnet mask is that and we know
+
+8
+00:49.720 --> 00:58.310
+that from our previous calculations, the switch needs to use the second IP address in the subnet. The
+
+9
+00:58.310 --> 01:08.720
+router is configured with 190 so the switch, I'll change the name to switch 2 we'll simply use IP address
+
+10
+01:09.010 --> 01:18.660
+192 168 1 189 so 1 less than the router
+
+11
+01:21.290 --> 01:26.680
+no shut the interface so ping 192 168 1 189.
+
+12
+01:26.940 --> 01:28.770
+That's our local IP address.
+
+13
+01:28.770 --> 01:30.680
+Can we ping the router?
+
+14
+01:30.780 --> 01:32.360
+Yes, we can.
+
+15
+01:32.360 --> 01:43.680
+I'll also configure a default gateway on the switch pointing to the router, switch is configured, so the
+
+16
+01:43.680 --> 01:47.160
+switch once again is using 189.
+
+17
+01:47.160 --> 01:49.930
+The DNS server should use 188
+
+18
+01:53.150 --> 02:02.330
+one less than the switch, so static IP address of the DHCP server is 192 168 188 subnet mask is 255
+
+19
+02:02.360 --> 02:16.340
+255 255 192, default gateway is the router 192 168 1 190 again that's the IP address of the router DNS
+
+20
+02:16.360 --> 02:18.680
+server will be Google.
+
+21
+02:19.050 --> 02:26.890
+So on the server, can we ping the router, type that right.
+
+22
+02:27.920 --> 02:29.120
+Yes, we can.
+
+23
+02:29.120 --> 02:31.910
+Can we ping the switch?
+
+24
+02:31.910 --> 02:33.380
+Yes, we can.
+
+25
+02:33.380 --> 02:33.860
+Can we
+
+26
+02:33.860 --> 02:37.630
+ping the DNS server?
+
+27
+02:37.760 --> 02:43.540
+Not at the moment because we need to configure the serial interface of the router.
+
+28
+02:43.670 --> 02:52.970
+But now let's configure the DHCP server, so DHCP I'll enable the DHCP service default gateway is gonna
+
+29
+02:52.970 --> 03:03.110
+be 192 so 1, so 192 168 1 190 DNS server is Google, IP addresses that we'll allocate
+
+30
+03:03.360 --> 03:06.230
+are 192 168 1.
+
+31
+03:06.230 --> 03:07.760
+Now you need to be careful.
+
+32
+03:07.880 --> 03:13.750
+The first host is one more than the subnet, so it's 129.
+
+33
+03:14.210 --> 03:15.460
+Maximum number of hosts
+
+34
+03:15.470 --> 03:19.670
+I'll allocate is 50 and I'll save that configuration.
+
+35
+03:19.880 --> 03:24.490
+You could allocate more IP addresses in your pool or less if you wanted to so.
+
+36
+03:24.530 --> 03:29.990
+So for instance only allocate 10, just depends how many IP addresses in your subnet you want to have
+
+37
+03:30.470 --> 03:32.040
+for static IP addresses.
+
+38
+03:32.120 --> 03:41.930
+How many IP addresses you want for dynamic IP addresses. So on the PC, IP config, IP address has been
+
+39
+03:41.930 --> 03:42.770
+allocated.
+
+40
+03:42.950 --> 03:46.560
+Ping 192 168 1 190.
+
+41
+03:46.640 --> 03:48.320
+That's the router, 
+
+42
+03:48.320 --> 03:51.880
+that's the switch, that's the DNS server.
+
+43
+03:51.950 --> 03:53.480
+What about PC 5
+
+44
+03:53.540 --> 03:55.160
+just do one more here.
+
+45
+03:55.340 --> 03:59.830
+IP config, IP address has been allocated.
+
+46
+03:59.990 --> 04:02.680
+So can we ping the router?
+
+47
+04:03.260 --> 04:04.430
+Yes, we can.
+
+48
+04:04.430 --> 04:06.320
+What about switch?
+
+49
+04:06.350 --> 04:07.670
+Yes, we can.
+
+50
+04:07.670 --> 04:09.710
+What about DNS server?
+
+51
+04:09.710 --> 04:10.960
+Yes, we can.
+
+52
+04:11.000 --> 04:15.490
+We won't be able to ping 192 168 1.1
+
+53
+04:15.680 --> 04:22.910
+PC in the other subnet because we still need to configure this serial link, so let's configure the
+
+54
+04:22.910 --> 04:31.820
+serial link the IP address of this router on the serial interface is gonna be one more than the subnet.
+
+55
+04:34.100 --> 04:36.520
+So show IP interface brief.
+
+56
+04:36.830 --> 04:47.060
+This serial interface needs to be configured with IP address 192 168 1 subnet is 192.
+
+57
+04:47.060 --> 04:53.390
+So, first IP address will be 193 with that subnet mask.
+
+58
+04:53.510 --> 04:57.170
+So can we ping 192 168 1 193.
+
+59
+04:57.170 --> 05:04.730
+It won't work at this point because we need to configure the other side. So on this router show IP interface
+
+60
+05:04.730 --> 05:12.770
+brief we still need to configure the zero interface it's currently down, so no shut that. IP address
+
+61
+05:12.770 --> 05:21.950
+will be 192 168 1 and this is a little bit more difficult to work out the broadcast for the subnet.
+
+62
+05:22.160 --> 05:31.610
+Again you just populate the host portion with binary ones and what you'll notice is it's full of ones.
+
+63
+05:31.820 --> 05:39.320
+So that would equal 255, so one less than the broadcast is 254.
+
+64
+05:39.320 --> 05:49.380
+So 254 subnet mask is that no shut the interface again so show IP interface brief according to this
+
+65
+05:49.380 --> 05:51.570
+it's still down.
+
+66
+05:51.590 --> 05:54.800
+Let's make sure that I've configured it right.
+
+67
+05:54.800 --> 05:56.480
+Show IP interface brief, 
+
+68
+06:00.250 --> 06:07.320
+I may have connected the wrong serial interface in this network and that looks like what I've done, wrong
+
+69
+06:07.320 --> 06:08.970
+serial interface.
+
+70
+06:09.090 --> 06:12.120
+So what I'll do is delete that serial interface.
+
+71
+06:12.120 --> 06:15.060
+I'll fix it in your lab so you don't have that problem.
+
+72
+06:16.470 --> 06:27.120
+That serial should be connected to that serial, so show IP interface brief this interface is up up
+
+73
+06:27.810 --> 06:31.120
+so can we ping 192 168 1 254
+
+74
+06:31.170 --> 06:31.920
+Yes, we can.
+
+75
+06:32.430 --> 06:41.040
+So router 2 can ping the Internet router, so hopefully, these PCs can now ping the Internet which
+
+76
+06:41.040 --> 06:49.650
+they can, notice they can ping cisco.com as an example and they can ping facebook.com.
+
+77
+06:49.650 --> 06:57.540
+So going to the web browser on PC 3, can this PC get to cisco.com?
+
+78
+06:57.540 --> 06:58.950
+Yes, it can.
+
+79
+06:58.980 --> 07:00.930
+Can it get to facebook.com?
+
+80
+07:00.930 --> 07:02.400
+Yes, it can.
+
+81
+07:02.400 --> 07:07.470
+What about PC 5, web browser on PC 5.
+
+82
+07:07.470 --> 07:09.570
+Can we get to cisco.com?
+
+83
+07:09.570 --> 07:10.950
+Yes, we can.
+
+84
+07:10.950 --> 07:13.120
+Can we get to facebook.com?
+
+85
+07:13.140 --> 07:14.290
+Yes, we can.
+
+86
+07:14.340 --> 07:17.820
+We can access these servers on the Internet.
+
+87
+07:17.910 --> 07:21.150
+We've had to do quite a lot here, as a last test.
+
+88
+07:21.150 --> 07:29.640
+Can the PCs in the 1 subnet ping PCs in the other subnet, so can we ping 192 168 1.
+
+89
+07:29.640 --> 07:30.310
+1?
+
+90
+07:30.360 --> 07:31.080
+Yes, we can.
+
+91
+07:31.410 --> 07:32.700
+What about 1.2?
+
+92
+07:32.700 --> 07:33.990
+Yes, we can.
+
+93
+07:33.990 --> 07:43.440
+And if we trace to that, we are essentially sending traffic to router 2 then to the Internet router
+
+94
+07:43.770 --> 07:48.890
+then to router 1 and then to the PC in the other subnet.
+
+95
+07:49.120 --> 07:54.250
+Okay, so this was quite a complex lab we had to do a lot of things here, but I'm hoping it's helped you
+
+96
+07:54.250 --> 08:01.620
+understand subnetting and way you use subnetting and how to use subnetting in a practical lab.

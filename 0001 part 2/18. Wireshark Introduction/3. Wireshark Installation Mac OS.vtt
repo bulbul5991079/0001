@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.240 --> 00:01.350
+-: In this video, I'm gonna show you how to
+
+00:01.350 --> 00:04.860
+download and install Wireshark on a Mac.
+
+00:04.860 --> 00:08.250
+If you haven't got a Mac, then skip this video.
+
+00:08.250 --> 00:11.070
+But if you want to see how to install Wireshark on a Mac,
+
+00:11.070 --> 00:13.080
+I'm gonna show you that here.
+
+00:13.080 --> 00:16.320
+The first thing you need to do is go to Wireshark.org
+
+00:16.320 --> 00:20.190
+This is the official website and click download.
+
+00:20.190 --> 00:22.530
+In my example, I'm gonna download
+
+00:22.530 --> 00:26.730
+Wireshark for Mac Os 10.12 and later.
+
+00:26.730 --> 00:28.380
+So click on that link,
+
+00:28.380 --> 00:32.250
+that then downloads the software to my local computer.
+
+00:32.250 --> 00:33.950
+It's a fairly simple installation.
+
+00:35.220 --> 00:38.370
+Basically go to the website, click download
+
+00:38.370 --> 00:40.230
+and then download the software.
+
+00:40.230 --> 00:42.600
+I'm gonna open it when it's finished.
+
+00:42.600 --> 00:45.300
+And then it's a fairly simple installation.
+
+00:45.300 --> 00:50.130
+Okay so, the package file or DMG file is being opened
+
+00:50.130 --> 00:51.033
+and verified.
+
+00:53.430 --> 00:55.623
+I'm gonna double click on the package file,
+
+00:58.710 --> 01:00.063
+that's being verified.
+
+01:02.400 --> 01:04.530
+And now I can follow the Installation wizard.
+
+01:04.530 --> 01:07.380
+Basically all I'm gonna do is
+
+01:07.380 --> 01:11.130
+click next, next, next and install the software.
+
+01:11.130 --> 01:13.350
+I'm going to put my password in,
+
+01:13.350 --> 01:15.093
+to allow it to be installed.
+
+01:17.130 --> 01:19.530
+The software is now being installed on my computer,
+
+01:19.530 --> 01:23.310
+and as you can see, that has successfully completed.
+
+01:23.310 --> 01:25.680
+I'm gonna keep the DMG file for the moment
+
+01:25.680 --> 01:26.943
+and close this window.
+
+01:29.700 --> 01:33.330
+I'm gonna open up a finder window and go to applications,
+
+01:33.330 --> 01:35.913
+and search for Wireshark.
+
+01:38.490 --> 01:39.690
+So there it is,
+
+01:39.690 --> 01:42.243
+I'm gonna right click and click open.
+
+01:44.490 --> 01:46.590
+And notice, there I'm able
+
+01:46.590 --> 01:50.070
+to start capturing traffic in Wireshark.
+
+01:50.070 --> 01:52.590
+I'm gonna double click on ethernet interface
+
+01:52.590 --> 01:57.183
+and notice I can now capture traffic in Wireshark.
+
+01:58.230 --> 02:00.480
+I'll just search for ARP here,
+
+02:00.480 --> 02:03.720
+notice I can see ARP messages from a
+
+02:03.720 --> 02:07.443
+Cisco router ARPing for a specific IP address.
+
+02:08.580 --> 02:11.940
+So, a lot of broadcast ARP traffic there.
+
+02:11.940 --> 02:15.603
+But basically I'll be able to see traffic on the network.
+
+02:22.050 --> 02:24.660
+Including Dropbox syncing,
+
+02:24.660 --> 02:28.470
+so syncing protocol this on VNC, traffic actually,
+
+02:28.470 --> 02:29.523
+on the network.
+
+02:30.510 --> 02:32.013
+Here's ARP, once again.
+
+02:33.210 --> 02:36.243
+Here's TLS, so encrypted web traffic.
+
+02:38.010 --> 02:40.563
+Bunch of traffic being sent on the network.
+
+02:42.330 --> 02:44.160
+But that's an example of how to
+
+02:44.160 --> 02:47.820
+install Wireshark on a Mac.
+
+02:47.820 --> 02:49.860
+In subsequent videos I'm gonna show you
+
+02:49.860 --> 02:52.320
+how to use Wireshark more effectively
+
+02:52.320 --> 02:54.120
+than just grabbing all traffic.
+
+02:54.120 --> 02:55.710
+I'll stop at this capture,
+
+02:55.710 --> 02:57.540
+and then close Wireshark down,
+
+02:57.540 --> 03:00.183
+but I won't save the captured file.
+
+03:01.290 --> 03:02.280
+Okay, so there you go.
+
+03:02.280 --> 03:05.883
+That's how you download and install Wireshark on a Mac.

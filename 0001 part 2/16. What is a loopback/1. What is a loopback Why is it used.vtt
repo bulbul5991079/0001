@@ -1,0 +1,393 @@
+WEBVTT
+
+0
+00:21.730 --> 00:23.870
+Pedro sent me a question,
+
+1
+00:23.980 --> 00:25.920
+Thanks Pedro for the question.
+
+2
+00:26.440 --> 00:30.700
+Pedro asked, what is the purpose of the loopback interfaces?
+
+3
+00:30.700 --> 00:38.110
+Now if you do a search in google you'll find all kinds of answers including that the loopback interface
+
+4
+00:38.140 --> 00:44.680
+allows you to test connectivity to the 127 001 IP address.
+
+5
+00:44.680 --> 00:51.890
+Now that may be true on a PC but on a Cisco device a loopback interface has an entirely different
+
+6
+00:51.920 --> 00:54.040
+meaning. In this topology
+
+7
+00:54.040 --> 01:01.760
+I've got three routers, router 1, router 2 and router 3 configured with this IP addresses.
+
+8
+01:01.780 --> 01:10.840
+On router 2, show IP interface brief shows us that the router has IP addresses configured on the gigabit
+
+9
+01:10.840 --> 01:18.790
+interfaces. So gigabit 00 01 and 02 have IP addresses.
+
+10
+01:18.790 --> 01:25.300
+Now in this example, these are virtual routers but if they were physical routers and a cable got disconnected
+
+11
+01:25.330 --> 01:30.650
+or got cut or broken in some way the interface would go down.
+
+12
+01:30.910 --> 01:38.920
+The difference between a physical interface and a loopback interface, is a loopback interface is a logical
+
+13
+01:38.920 --> 01:42.620
+interface on a router and you can create many of these.
+
+14
+01:42.670 --> 01:48.190
+So notice as soon as I create that logical interface the interfaces come up.
+
+15
+01:48.190 --> 01:53.430
+I can then give that interface an IP address such as this.
+
+16
+01:53.530 --> 01:57.070
+Notice it's a slash 32 IP address.
+
+17
+01:57.070 --> 02:01.900
+In other words, this is the only IP address on that interface.
+
+18
+02:01.900 --> 02:08.980
+A loopback interface is a logical interface on a router that won't go down unless you manually shut
+
+19
+02:09.070 --> 02:10.680
+the interface down.
+
+20
+02:10.750 --> 02:18.520
+It typically only has one IP address but you could configure multiple IP addresses on that interface
+
+21
+02:18.520 --> 02:20.370
+if you wanted to.
+
+22
+02:20.380 --> 02:26.620
+The first advantage of a loopback interface is the interface doesn't go down unless you explicitly
+
+23
+02:26.620 --> 02:28.140
+shut it down.
+
+24
+02:28.210 --> 02:33.290
+So it's not like there's a cable that can be unplugged and then interface goes down.
+
+25
+02:33.340 --> 02:39.040
+Now, why is that important when you telnet to a router, so let's say I'll telnet from router 1 to router
+
+26
+02:39.070 --> 02:40.210
+2.
+
+27
+02:40.240 --> 02:48.630
+I could telnet to one of the gigabit interfaces on the router so telnet 10.1.1.2, notice
+
+28
+02:48.640 --> 02:49.720
+I can log in.
+
+29
+02:49.870 --> 02:54.120
+So I'm now connected to router 2, I'll go back to router 1
+
+30
+02:54.460 --> 03:01.020
+and then I'll telnet to the second IP address 10 122.
+
+31
+03:01.060 --> 03:01.890
+Now that's fine,
+
+32
+03:02.140 --> 03:06.870
+but firstly you need to remember which IP address is configured on which router 
+
+33
+03:07.180 --> 03:16.510
+and secondly if for some reason an interface went down so let's say the cable was disconnected rather
+
+34
+03:16.510 --> 03:23.380
+than me shutting it down manually here you would have a problem telnetting back to that IP address 10
+
+35
+03:23.380 --> 03:27.210
+112 because the interface has gone down.
+
+36
+03:27.220 --> 03:33.790
+However, if you have the loopback IP address configured on the router and you advertise that loopback
+
+37
+03:33.850 --> 03:41.210
+through a routing protocol such as OSPF, you can telnet to that loopback using this network or
+
+38
+03:41.380 --> 03:42.850
+this network.
+
+39
+03:42.850 --> 03:49.490
+So if one of the interfaces goes down it's not a problem because you can still reach the loopback interface.
+
+40
+03:49.530 --> 03:55.410
+So at the moment on router 1, we can't ping the loopback of router 2 because it's not advertised
+
+41
+03:55.830 --> 03:57.070
+in a routing protocol.
+
+42
+03:57.330 --> 04:00.900
+So what I'll do here is enable EIGRP
+
+43
+04:03.500 --> 04:04.820
+and I'll do something similar here
+
+44
+04:04.890 --> 04:05.860
+so
+
+45
+04:07.850 --> 04:12.640
+enable EIGRP in all interfaces and let's do the same thing
+
+46
+04:12.950 --> 04:19.600
+on router 3.
+
+47
+04:19.750 --> 04:25.130
+Now once the neighbor relationships have been established which I have done in this example, so show
+
+48
+04:25.130 --> 04:31.600
+IP EIGRP neighbors, there's our neighbor relationship, router 1 can ping the loopback of router 2.
+
+49
+04:32.000 --> 04:43.490
+So now I can telnet to the loopback of router 2 even though the WAN interface is down, notice gigabit 00
+
+50
+04:43.670 --> 04:45.230
+is currently down.
+
+51
+04:45.860 --> 04:57.020
+So by the same token, if we brought up that gigabit 00 interface but then shut gigabit 02
+
+52
+05:00.380 --> 05:02.690
+my telnet session still continues.
+
+53
+05:02.690 --> 05:07.010
+So I notice the telnet session stayed up that won't always happen in the real world.
+
+54
+05:07.010 --> 05:13.250
+It depends how long the connection takes to establish but notice show IP interface brief.
+
+55
+05:13.250 --> 05:20.720
+I'm still able to telnet to the loopback of router 2 from router 1 because the telnet traffic is
+
+56
+05:20.720 --> 05:31.540
+using the alternate route. So it doesn't matter if interfaces go down or come up as long as I've got
+
+57
+05:31.550 --> 05:34.080
+one route between router 1 and router 2.
+
+58
+05:34.550 --> 05:40.160
+I can connect to the loopback and manage the router through the loopback interface.
+
+59
+05:40.170 --> 05:46.360
+It's also a lot easier if you use a separate subnet for your management network.
+
+60
+05:46.440 --> 05:52.780
+In this example, I'm just gonna keep it simple and create loopbacks with IP addresses,
+
+61
+05:52.920 --> 05:56.260
+Quadruple 1, Quadruple 2 and Quadruple 3.
+
+62
+05:56.700 --> 06:07.950
+So I'll simply create an IP address on router 1 with the loopback address and I'll do the same on router 3
+
+63
+06:12.590 --> 06:15.530
+on router 1 show IP route.
+
+64
+06:15.800 --> 06:18.390
+We have two routes to get to the loop of router
+
+65
+06:18.410 --> 06:23.020
+2 and two routes to get to the loopback of router 3.
+
+66
+06:23.300 --> 06:30.560
+So ping quadruple 3, telnet quadruple 3, telnet is not working.
+
+67
+06:30.560 --> 06:31.590
+Let's have a look.
+
+68
+06:31.590 --> 06:36.220
+So show run pipe begin VTY.
+
+69
+06:36.480 --> 06:46.860
+Notice I've got transport input none, line VTY 04, transport input and I'll just say all, telnet
+
+70
+06:46.860 --> 06:48.180
+again.
+
+71
+06:48.330 --> 06:50.930
+We can log in to router 3.
+
+72
+06:51.050 --> 06:55.580
+So from a management point of view, it's a lot easier to use loopbacks.
+
+73
+06:55.910 --> 06:58.800
+Now you might not wanna do it the way I've done it here in the real world.
+
+74
+06:58.970 --> 07:04.220
+You might have a separate network that you use for management.
+
+75
+07:04.220 --> 07:09.670
+So in this example I'll just use 192 network
+
+76
+07:09.920 --> 07:13.970
+and actually what I'll do is I'll create a separate loopback.
+
+77
+07:14.060 --> 07:24.900
+So I'll put this back to quadruple 2 and create a additional loopback for 192 168 1.2.
+
+78
+07:25.370 --> 07:28.440
+So I could do something like this to make it consistent.
+
+79
+07:28.550 --> 07:34.850
+So use interface loopback 192 it's always good practice to keep it simple.
+
+80
+07:36.230 --> 07:38.970
+So use the same loopback number.
+
+81
+07:39.030 --> 07:40.740
+Don't do what I've done here.
+
+82
+07:40.740 --> 07:42.340
+Try and keep them consistent.
+
+83
+07:43.340 --> 07:44.510
+So let's change that
+
+84
+07:44.510 --> 07:46.000
+no interface.
+
+85
+07:46.350 --> 07:53.120
+Loopback 1, interface loopback 192. Notice however it's very easy to create loopback interfaces
+
+86
+07:54.110 --> 07:55.370
+just create as many as you like
+
+87
+08:00.930 --> 08:03.680
+there are normally some kind of limitation on the router.
+
+88
+08:03.890 --> 08:05.920
+But notice the numbers that we could use here
+
+89
+08:05.960 --> 08:14.740
+you could use really long numbers if you wanted to but in this example I'll just keep it simple and
+
+90
+08:14.740 --> 08:15.510
+use 192.
+
+91
+08:15.520 --> 08:17.540
+So show IP route, 
+
+92
+08:18.160 --> 08:25.060
+we've now learnt the routes of the loopbacks and now all I need to remember is that when I telnet to
+
+93
+08:25.060 --> 08:32.830
+router 2 it's 192 168 1 dot and the router which is dot 2. When I wanna telnet to router 3
+
+94
+08:32.830 --> 08:40.450
+it's 192 168 1 dot router 3, so telnet 192 168 1.3
+
+95
+08:40.920 --> 08:42.050
+and I can log in.
+
+96
+08:42.490 --> 08:50.660
+So that's the first reason Pedro for using loopback interfaces. I'll cover another reason in a separate
+
+97
+08:50.670 --> 08:50.990
+blog.

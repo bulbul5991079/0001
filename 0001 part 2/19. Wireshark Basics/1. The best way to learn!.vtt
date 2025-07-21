@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00.000 --> 00:02.583
+(upbeat music)
+
+00:05.370 --> 00:07.200
+-: Now there's no better way for you to learn
+
+00:07.200 --> 00:09.570
+than to follow along practically.
+
+00:09.570 --> 00:12.030
+So make sure that you've got Wireshark downloaded
+
+00:12.030 --> 00:15.600
+and installed, and that you open the PCAP files
+
+00:15.600 --> 00:18.150
+that I've attached to this course.
+
+00:18.150 --> 00:20.280
+Now I'm going to demonstrate stuff practically
+
+00:20.280 --> 00:21.930
+using GNS3.
+
+00:21.930 --> 00:24.150
+But rather than you trying to build this topology
+
+00:24.150 --> 00:26.220
+and replicate what I've done,
+
+00:26.220 --> 00:28.770
+you can simply download the PCAP files
+
+00:28.770 --> 00:30.330
+and then follow along.
+
+00:30.330 --> 00:34.050
+The PCAP files that I'm sharing are the actual captures
+
+00:34.050 --> 00:35.580
+that I'm gonna do now.
+
+00:35.580 --> 00:39.060
+So you'll be able to follow along and also use Wireshark
+
+00:39.060 --> 00:41.760
+to see the results that I get.
+
+00:41.760 --> 00:46.300
+In this topology I've got two Windows PCs, PC1 and PC2.
+
+00:47.850 --> 00:50.463
+So here's PC1, here's PC2.
+
+00:52.890 --> 00:56.340
+PC1 has IP address, 10.1.1.1,
+
+00:56.340 --> 00:59.400
+default gateway's 10.1.1.254,
+
+00:59.400 --> 01:01.950
+which is the router in the topology.
+
+01:01.950 --> 01:06.950
+PC2 has IP address, 10.1.2.1,
+
+01:08.010 --> 01:11.580
+default gateway is 10.1.2.254,
+
+01:11.580 --> 01:14.160
+which is the router in the topology.
+
+01:14.160 --> 01:18.660
+So I'm simulating an entire network here in GNS3,
+
+01:18.660 --> 01:21.270
+and I'm gonna show you how to capture packets,
+
+01:21.270 --> 01:22.200
+or capture frames,
+
+01:22.200 --> 01:24.810
+and we'll talk about those terms in a moment,
+
+01:24.810 --> 01:27.630
+and then you'll be able to see what's going on.
+
+01:27.630 --> 01:30.330
+I've also got a server in this topology.
+
+01:30.330 --> 01:34.350
+The server is a web server, FTP server, TFTP server,
+
+01:34.350 --> 01:36.270
+and runs other services.
+
+01:36.270 --> 01:38.820
+So what I'll do is send traffic
+
+01:38.820 --> 01:43.230
+from the hosts to each other, so PC1 to PC2 back again.
+
+01:43.230 --> 01:45.990
+And also from the PCs to the server.
+
+01:45.990 --> 01:48.510
+And then have a look at the captured packets
+
+01:48.510 --> 01:51.600
+and hopefully you'll be able to see what's going on
+
+01:51.600 --> 01:54.630
+and get an understanding of the frames, packets,
+
+01:54.630 --> 01:55.830
+segments, and so forth.
+
+01:55.830 --> 01:59.493
+And also get an understanding of how to use Wireshark.
+
+01:59.493 --> 02:02.076
+(upbeat music)

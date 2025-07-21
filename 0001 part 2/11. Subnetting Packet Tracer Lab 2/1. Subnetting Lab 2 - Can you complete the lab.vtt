@@ -1,0 +1,121 @@
+WEBVTT
+
+0
+00:06.210 --> 00:12.600
+This packet tracer lab is a continuation of a previous Packet Tracer lab. In the previous lab, you were
+
+1
+00:12.600 --> 00:22.900
+asked to subnet 192 168 1.0 slash 24 and break it up into subnets for site 1 and site 2
+
+2
+00:23.250 --> 00:30.880
+and you were asked to configure subnets on those sites as well as on the serial links. In this lab you
+
+3
+00:30.880 --> 00:38.370
+need to subnet the network again to extend and conserve IP addresses an additional site has been added
+
+4
+00:38.460 --> 00:39.730
+to the lab site 3.
+
+5
+00:39.730 --> 00:51.390
+What you need to do is take the subnet 192 168 1 64 slash 26 and subnet that to support this third
+
+6
+00:51.390 --> 00:58.810
+site as well as to reuse the subnet for the three serial connections.
+
+7
+00:59.160 --> 01:06.970
+Serial links only need a slash 30 mask so you need to subnet the last new subnet that you get from
+
+8
+01:06.970 --> 01:17.050
+192 168 1 64 slash 26 and you slash 30 masks so that you can allocate that subnet to the 3 serial
+
+9
+01:17.050 --> 01:18.700
+links.
+
+10
+01:18.850 --> 01:26.920
+So what you need to do once again is break up 192 168 1 64 slash 26 to support as many subnets as
+
+11
+01:26.920 --> 01:35.380
+possible with 8 hosts per subnet to allocate the first new subnet to site 3.
+
+12
+01:35.500 --> 01:45.100
+So in the words on the local area network over here and then take the last new subnet that you get
+
+13
+01:45.100 --> 01:54.370
+from 192 168 1 64 and subnet that with slash 30 masks and then allocate those subnets to the serial
+
+14
+01:54.370 --> 02:01.450
+links you need to configure the routers appropriately so this router needs to use the first IP address
+
+15
+02:01.960 --> 02:03.040
+in the new subnet.
+
+16
+02:03.040 --> 02:12.790
+This router the last one and the same is true for the other sites, on the local area network at site 3,
+
+17
+02:13.030 --> 02:19.270
+router 4 should use the last IP address in the new subnet the switch the second last IP address in the
+
+18
+02:19.270 --> 02:26.740
+subnet and the hosts should be allocated IP addresses from the first available IP address to the last
+
+19
+02:26.860 --> 02:28.430
+available IP address.
+
+20
+02:28.510 --> 02:32.530
+You're gonna configure the IP addresses in the subnet manually.
+
+21
+02:32.530 --> 02:39.850
+Previously we used DHCP to allocate IP addresses to PCs but in this subnet, you're gonna use static
+
+22
+02:39.850 --> 02:41.680
+IP addresses.
+
+23
+02:41.680 --> 02:48.910
+Now once you've configured the network verify that PCs can access cisco.com and facebook.com
+
+24
+02:48.910 --> 02:56.350
+using their browsers, cisco.com and facebook.com are websites on the Internet.
+
+25
+02:56.350 --> 03:05.860
+You need to verify that your PCs, PC 6 7 and 8 can access the Internet as well as choose a PC
+
+26
+03:05.860 --> 03:12.920
+in site 1 and site 2 and make sure that they can also access cisco.com and facebook.com
+
+27
+03:13.930 --> 03:20.410
+So can you complete this lab, download the packet tracer file and see if you can complete the lab
+
+28
+03:20.410 --> 03:21.400
+yourself.
+
+29
+03:21.400 --> 03:24.940
+Otherwise watch the next video where I complete the lab.

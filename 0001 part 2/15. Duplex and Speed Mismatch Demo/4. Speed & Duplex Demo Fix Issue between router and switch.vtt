@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00.870 --> 00:03.450
+Instructor: So let's fix this problem
+
+00:03.450 --> 00:07.950
+between router one and 2950-1.
+
+00:07.950 --> 00:10.920
+So on the router, it's currently configured
+
+00:10.920 --> 00:12.543
+to use a speed of 100.
+
+00:13.770 --> 00:17.733
+So I'm going to set the speed to auto.
+
+00:18.780 --> 00:21.753
+This router doesn't give me the option to set duplex.
+
+00:23.040 --> 00:26.850
+So show run interface f0.
+
+00:26.850 --> 00:28.350
+Speed is auto.
+
+00:28.350 --> 00:30.543
+Show interface f0.
+
+00:32.160 --> 00:34.890
+Speed is still half-duplex.
+
+00:34.890 --> 00:38.430
+The router can't negotiate with the switch.
+
+00:38.430 --> 00:40.620
+So once again, it moves
+
+00:40.620 --> 00:44.220
+to a full back position of 10 meg half-duplex.
+
+00:44.220 --> 00:47.760
+And this is what has caused a lot of problems in the past.
+
+00:47.760 --> 00:50.190
+Because the one side such as the router
+
+00:50.190 --> 00:52.680
+can't negotiate with the other side,
+
+00:52.680 --> 00:56.280
+it simply moves to the lowest possible speed
+
+00:56.280 --> 00:58.980
+which is half-duplex, 10 megabits per second
+
+00:58.980 --> 01:01.593
+whereas the switch is using full duplex.
+
+01:02.850 --> 01:06.990
+So on the switch show run interface f0/3.
+
+01:06.990 --> 01:07.920
+Speed is 10.
+
+01:07.920 --> 01:09.690
+Duplex is full.
+
+01:09.690 --> 01:13.833
+Let's change that to speed,
+
+01:15.480 --> 01:18.227
+or rather speed auto duplex.
+
+01:24.450 --> 01:25.283
+Auto.
+
+01:29.820 --> 01:33.180
+Show run interface f0/3.
+
+01:33.180 --> 01:36.843
+No configuration, show interface f0/3.
+
+01:38.070 --> 01:42.660
+Notice it is now using 100 meg, full-duplex.
+
+01:42.660 --> 01:47.660
+And on the router we are getting 100 meg, full-duplex.
+
+01:50.940 --> 01:52.203
+So that's a lot better.
+
+01:53.040 --> 01:56.160
+The router and the switch have negotiated correctly
+
+01:56.160 --> 02:00.093
+to use 100 megabits per second, full-duplex.
+
+02:01.200 --> 02:04.023
+So can we ping router two?
+
+02:04.950 --> 02:05.943
+Yes, we can.
+
+02:06.840 --> 02:09.423
+Let's do a large ping.
+
+02:13.740 --> 02:15.213
+Large datagram size.
+
+02:17.880 --> 02:20.883
+Pings are being sent without any problems.
+
+02:23.130 --> 02:26.460
+We are not seeing any late collisions at the moment
+
+02:26.460 --> 02:30.660
+because the speed and duplex have negotiated properly.
+
+02:30.660 --> 02:34.203
+This may indicate a problem somewhere else in the network,
+
+02:36.780 --> 02:39.270
+but at the moment everything looks good.
+
+02:39.270 --> 02:41.643
+Show interface f0.
+
+02:43.230 --> 02:46.680
+Now we still see late collisions,
+
+02:46.680 --> 02:49.620
+but that's because of the previous counters.
+
+02:49.620 --> 02:51.850
+So I'm gonna clear the counters
+
+02:52.860 --> 02:57.000
+and then do the command show interface f0 again.
+
+02:57.000 --> 02:59.943
+And notice we see zero late collisions.
+
+03:00.930 --> 03:04.170
+So when looking at your output,
+
+03:04.170 --> 03:07.140
+be careful of the information.
+
+03:07.140 --> 03:08.193
+Clear counters.
+
+03:10.380 --> 03:13.563
+And we could specify a specific interface.
+
+03:15.360 --> 03:16.830
+Allows us to clear the counters
+
+03:16.830 --> 03:21.330
+on that interface so that we see fresh information.
+
+03:21.330 --> 03:23.943
+So once again, if we ping 10.1.1.2.
+
+03:29.615 --> 03:31.170
+1,000 pings.
+
+03:31.170 --> 03:32.613
+Large packet size.
+
+03:35.130 --> 03:38.550
+We're sending some traffic on this side.
+
+03:38.550 --> 03:41.163
+Show interface f0/3.
+
+03:43.731 --> 03:46.713
+We've got the input errors and CRC, so clear counters.
+
+03:47.880 --> 03:50.347
+F0/3.
+
+03:51.750 --> 03:54.813
+we don't see any input errors and CRCs.
+
+03:56.040 --> 03:59.160
+Now obviously you need to monitor that
+
+03:59.160 --> 04:00.840
+over a period of time.
+
+04:00.840 --> 04:02.040
+So we are seeing a certain number
+
+04:02.040 --> 04:05.130
+of packets in and a certain number of packets out.
+
+04:05.130 --> 04:06.960
+So traffic is definitely being sent
+
+04:06.960 --> 04:10.680
+and received under this interface.
+
+04:10.680 --> 04:12.300
+We are not seeing any input errors
+
+04:12.300 --> 04:15.000
+which is better than what we saw last time,
+
+04:15.000 --> 04:18.240
+but you just need to monitor that for a period of time.
+
+04:18.240 --> 04:19.893
+On the router, show interface f0,
+
+04:22.110 --> 04:24.150
+we see the number of packets input,
+
+04:24.150 --> 04:26.010
+number of packets output.
+
+04:26.010 --> 04:29.130
+We have no late collisions at the moment.
+
+04:29.130 --> 04:32.850
+So that's a lot better than what we saw previously.
+
+04:32.850 --> 04:37.560
+Now on this switch, we still seeing another problem
+
+04:37.560 --> 04:41.823
+with a duplex mismatch to switch two.
+
+04:45.420 --> 04:48.063
+So this connection here has a duplex problem.

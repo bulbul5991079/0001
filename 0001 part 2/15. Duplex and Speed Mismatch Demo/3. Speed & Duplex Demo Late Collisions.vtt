@@ -1,0 +1,289 @@
+WEBVTT
+
+00:00.990 --> 00:03.690
+Instructor: Here's router 1, which is this device
+
+00:03.690 --> 00:07.140
+and I'll ping router 2 from router 1
+
+00:07.140 --> 00:09.153
+to see if pings succeed.
+
+00:10.410 --> 00:14.223
+So pinging 10, 1, 1, 2, pings succeed.
+
+00:15.630 --> 00:17.340
+But notice we are getting a message
+
+00:17.340 --> 00:19.020
+that there's a duplex mismatch
+
+00:19.020 --> 00:22.923
+between the router and the 2950-1 switch.
+
+00:23.880 --> 00:26.890
+So we've been told that there's a duplex problem here
+
+00:29.430 --> 00:30.810
+and on the switch we are seeing
+
+00:30.810 --> 00:32.490
+that there's a duplex mismatch
+
+00:32.490 --> 00:36.390
+on fast ethernet 0 3 to the router.
+
+00:36.390 --> 00:39.520
+So we've been told that there's a duplex problem here
+
+00:40.470 --> 00:43.770
+but we're also told that there's a duplex issue
+
+00:43.770 --> 00:45.730
+on fast ethernet 0 4
+
+00:46.890 --> 00:51.060
+to the 2950-2 switch on fast ethernet 0 4.
+
+00:51.060 --> 00:52.953
+So there's a problem here as well.
+
+00:55.230 --> 00:58.980
+Now you may not be physically connected to the console
+
+00:58.980 --> 01:01.680
+and hence you may not see these issues.
+
+01:01.680 --> 01:04.470
+That's a good reason to use a Syslog server
+
+01:04.470 --> 01:06.330
+or a management application
+
+01:06.330 --> 01:09.270
+from a company such as SolarWinds.
+
+01:09.270 --> 01:13.203
+So let's ping router 2 again, ping succeeds.
+
+01:14.700 --> 01:17.340
+So pings aren't necessarily a good way
+
+01:17.340 --> 01:20.100
+to test for duplex mismatches.
+
+01:20.100 --> 01:22.330
+However, I'll do an extended ping
+
+01:24.420 --> 01:28.200
+to that router,
+
+01:28.200 --> 01:29.523
+so let's try that again.
+
+01:30.750 --> 01:35.640
+10, 1, 1, 2, I'll send a thousand pings
+
+01:35.640 --> 01:39.363
+and I'm gonna make the datagram size a large size.
+
+01:42.780 --> 01:46.200
+So we want to send a lot of traffic onto the network
+
+01:46.200 --> 01:49.140
+and hopefully we'll encounter a problem.
+
+01:49.140 --> 01:50.220
+And there you go.
+
+01:50.220 --> 01:53.973
+We've got a message saying a late collision has occurred.
+
+01:55.140 --> 01:57.183
+So this is a problem you may encounter.
+
+01:58.890 --> 02:03.690
+One side may tell you that there are late collisions.
+
+02:03.690 --> 02:05.250
+As you can see over there,
+
+02:05.250 --> 02:08.070
+we're getting a number of late collisions.
+
+02:08.070 --> 02:10.143
+On the other side, we're not seeing that.
+
+02:13.680 --> 02:16.840
+So on the switch show interface f 0 slash 3
+
+02:20.220 --> 02:23.163
+we're not seeing a lot of late collisions.
+
+02:24.330 --> 02:26.760
+The configuration of that interface
+
+02:26.760 --> 02:31.760
+is set to a speed of 10 meg and duplex of full.
+
+02:32.100 --> 02:37.020
+But notice on this side, show run interface f 0,
+
+02:38.910 --> 02:42.483
+this side has its speed set to 100.
+
+02:43.410 --> 02:46.860
+Let's confirm that, show interface f 0.
+
+02:46.860 --> 02:49.620
+Notice the duplex is half,
+
+02:49.620 --> 02:54.120
+speed is set in this example to 10 megabits per second.
+
+02:54.120 --> 02:56.940
+So the router, because it can't negotiate properly
+
+02:56.940 --> 03:01.940
+with the other device, in this case the 2950 switch,
+
+03:02.490 --> 03:07.490
+has set its speed to a value of 10 meg half duplex.
+
+03:10.770 --> 03:15.570
+So the point to remember is when there is a mismatch,
+
+03:15.570 --> 03:18.010
+the side that is set for half duplex
+
+03:19.080 --> 03:22.530
+will see late collisions on the connection.
+
+03:22.530 --> 03:26.433
+But this only occurs when you're sending enough traffic.
+
+03:27.750 --> 03:31.140
+So a standard ping doesn't show that problem
+
+03:31.140 --> 03:33.000
+but when a large amount of traffic is sent
+
+03:33.000 --> 03:35.910
+on this half duplex connection,
+
+03:35.910 --> 03:37.863
+we're getting a late collisions.
+
+03:42.270 --> 03:43.923
+On the switch side,
+
+03:46.290 --> 03:48.753
+show interface f 0 slash 3.
+
+03:50.610 --> 03:54.180
+Notice the speed is full duplex, 10 megabits per second,
+
+03:54.180 --> 03:55.830
+whereas on the router it's half duplex,
+
+03:55.830 --> 03:57.153
+10 megabits per second.
+
+03:59.700 --> 04:03.420
+Even though I configured it to use 100 megabits per second,
+
+04:03.420 --> 04:07.620
+it's using a failback position of the worst case scenario,
+
+04:07.620 --> 04:10.590
+which is 10 meg, half duplex.
+
+04:10.590 --> 04:13.320
+And in this case, we are having that problem.
+
+04:13.320 --> 04:16.470
+Notice this is 100BaseTX/FX
+
+04:16.470 --> 04:19.590
+whereas this side is 100BaseTX.
+
+04:19.590 --> 04:21.450
+So in this example,
+
+04:21.450 --> 04:25.380
+the router has gone for half duplex, 10 megabits per second
+
+04:25.380 --> 04:29.160
+whereas the switch is using 10 meg, full duplex.
+
+04:29.160 --> 04:31.293
+And hence we've got a duplex mismatch.
+
+04:32.370 --> 04:35.370
+So in summary, we get told by CDP
+
+04:35.370 --> 04:37.980
+that there is a duplex mismatch.
+
+04:37.980 --> 04:41.010
+The local interface is not using full duplex
+
+04:41.010 --> 04:44.070
+whereas the other side is using full duplex.
+
+04:44.070 --> 04:48.480
+Pinging a device doesn't tell us that there's a problem
+
+04:48.480 --> 04:50.643
+but when large packets are sent,
+
+04:53.760 --> 04:56.823
+user's may encounter drops,
+
+04:59.640 --> 05:03.033
+poor throughput, and you may see late collisions.
+
+05:04.110 --> 05:05.943
+So let me saturate that link again.
+
+05:09.150 --> 05:10.653
+Send a thousand pings,
+
+05:12.060 --> 05:13.653
+large datagram size,
+
+05:17.700 --> 05:20.103
+show interface f 0 slash 3.
+
+05:23.730 --> 05:27.720
+Notice, we are now seeing the late collisions taking place
+
+05:27.720 --> 05:28.863
+on the interface.
+
+05:29.940 --> 05:31.533
+So on the half duplex side,
+
+05:32.850 --> 05:35.553
+we see this output of late collisions.
+
+05:36.510 --> 05:39.150
+On the interface show interface f 0,
+
+05:39.150 --> 05:41.700
+notice the number of late collisions has increased.
+
+05:42.600 --> 05:45.840
+On the full duplex side, we may get input errors
+
+05:45.840 --> 05:50.250
+such as CRC errors or runt frames.
+
+05:50.250 --> 05:54.540
+So in this example, we've got 28 input errors, 15 CRCs.
+
+05:54.540 --> 05:56.580
+We aren't seeing any runts
+
+05:56.580 --> 05:59.883
+but we are receiving duplex mismatch messages.

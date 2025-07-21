@@ -1,0 +1,353 @@
+WEBVTT
+
+0
+00:19.940 --> 00:25.280
+In question 5 we're told to assume that switch 1s MAC address is empty.
+
+1
+00:25.870 --> 00:37.090
+We can verify that by looking at the output of the show MAC address table command on the switch, as we
+
+2
+00:37.090 --> 00:39.500
+can see here the MAC address table is empty.
+
+3
+00:40.400 --> 00:48.310
+We're asked when PC 5 pings PC 8 what type of packet is sent to the switch initially
+
+4
+00:48.580 --> 00:50.100
+and can we prove it?
+
+5
+00:50.380 --> 00:50.950
+So
+
+6
+00:53.620 --> 01:01.000
+IP config on PC 5 shows us the IP address of PC 5, 10 115
+
+7
+01:01.270 --> 01:02.150
+PC 8
+
+8
+01:04.720 --> 01:08.630
+has IP address 10 118.
+
+9
+01:08.690 --> 01:15.430
+So what kind of frame or what kind of packet is sent to the switch when using terms such as frames and
+
+10
+01:15.430 --> 01:25.070
+packets once again, are we referring to layer 2 or layer 3 or layer 4 of the OSI model.
+
+11
+01:25.090 --> 01:32.720
+So what I'll do on PC 5 is ping 10 118 before I do that,
+
+12
+01:32.750 --> 01:35.960
+notice the ARP cache is empty.
+
+13
+01:35.960 --> 01:41.880
+On PC 5 if it had just a rebooted the ARP cache would be empty.
+
+14
+01:41.920 --> 01:49.580
+So I'm gonna send two pings into the network we can see that the first packet that was generated is
+
+15
+01:49.580 --> 01:59.780
+an ARP packet looking at the actual packet or frame we can see that at layer 2 the frame has a destination
+
+16
+01:59.780 --> 02:01.100
+address of a broadcast.
+
+17
+02:02.130 --> 02:10.530
+The type of packet at layer 3 is ARP, so in the layer 3 headers we can see that this is an ARP packet
+
+18
+02:11.460 --> 02:23.840
+requesting the MAC address of host with IP address 10 118 so the Ethernet type is 06 08 06.
+
+19
+02:23.860 --> 02:28.280
+In other words it's an ARP packet, capture forward
+
+20
+02:31.200 --> 02:43.360
+and before I continue the answer to Question 5, is this is an ARP packet it's a broadcast packet we can
+
+21
+02:43.360 --> 02:51.100
+see that again by looking at the inbound PDU on the switch notice destination address is a broadcast
+
+22
+02:52.190 --> 03:00.170
+who receives the packet because it's a broadcast it's gonna be flooded to the other devices in the
+
+23
+03:00.170 --> 03:09.970
+network and then PC 6 and PC 7 are gonna drop it because the packet is not destined to them.
+
+24
+03:09.970 --> 03:12.650
+So the answer for question 6 is
+
+25
+03:12.700 --> 03:20.860
+PC 6, PC 7 and PC 8 will receive the packet.
+
+26
+03:20.970 --> 03:22.400
+Now here's where things change,
+
+27
+03:22.410 --> 03:26.140
+who receives the return packet?
+
+28
+03:26.160 --> 03:33.450
+So here we've got our ARP reply on the inbound PDU to the switch.
+
+29
+03:33.450 --> 03:37.290
+We can see that the target mac address is this,
+
+30
+03:37.440 --> 03:43.330
+that's the MAC address of PC 5.
+
+31
+03:43.420 --> 03:48.290
+So the MAC address is actually written into the frame.
+
+32
+03:48.310 --> 03:54.120
+This is a uni cost packet sent from PC 8 to PC 5.
+
+33
+03:54.220 --> 03:59.790
+It's not a broadcast unlike the ARP request so notice what happens now.
+
+34
+04:01.930 --> 04:05.790
+The packet is only sent to PC 5
+
+35
+04:05.860 --> 04:16.960
+it's not flooded out of all ports so the only PC that receives it is PC 5 that is different to
+
+36
+04:16.960 --> 04:27.460
+our previous example where PC 1, PC 2 and PC 3 received the return traffic and notice the difference
+
+37
+04:27.520 --> 04:34.320
+in question 8 when ping traffic is sent from PC 5 to PC 8 who receives it.
+
+38
+04:34.450 --> 04:35.160
+So here's our
+
+39
+04:37.720 --> 04:51.790
+ICMP request or echo request message we can see that its ICMP destination MAC address is PC 8, 
+
+40
+04:51.870 --> 04:56.040
+source MAC address is PC 5 source IP address is
+
+41
+04:56.040 --> 05:00.150
+PC 5 destination IP address is PC 8.
+
+42
+05:00.250 --> 05:10.670
+So notice now that the packet is only sent to PC 8, so that's very different to what we saw when we
+
+43
+05:10.670 --> 05:19.130
+were using a hub, a switch is different to a hub in that it has a separate collision domain on every
+
+44
+05:19.130 --> 05:30.190
+port so when packets are sent from PC 5 to PC 8 they are sent directly between the devices they don't
+
+45
+05:30.730 --> 05:34.270
+get flooded to the other PCs in the network.
+
+46
+05:34.270 --> 05:44.080
+That is very different to a hub so to prove that what I'll do is populate the ARP cache of PC 6.
+
+47
+05:44.660 --> 05:45.890
+So I'll get it to ping
+
+48
+05:46.000 --> 05:56.730
+PC 8 and I'll run this in real-time so if we look at to the ARP cache of PC 6 ARP cache is populated
+
+49
+06:01.860 --> 06:05.160
+the same is true on PC 5.
+
+50
+06:05.410 --> 06:06.000
+So both
+
+51
+06:06.000 --> 06:15.180
+PC 5 and PC 6 know the MAC address of PC 8. I'll change this to simulation mode
+
+52
+06:16.410 --> 06:21.980
+and I'll get both of these PCs to ping PC 8
+
+53
+06:27.060 --> 06:30.090
+both of them are sending ICMP packets
+
+54
+06:30.090 --> 06:32.130
+they both get sent to the switch.
+
+55
+06:33.980 --> 06:41.170
+And notice the first one is sent to PC 8 and then the second one is sent to PC 8.
+
+56
+06:41.170 --> 06:52.490
+We don't end up with a collision so the switch caches the packet and allows the communication and
+
+57
+06:52.490 --> 06:54.300
+to show you this in a different way.
+
+58
+06:54.320 --> 07:00.380
+What I'll do is get PC 5 to ping PC 8
+
+59
+07:02.900 --> 07:14.140
+but get PC 6 to ping PC 7. So PC 5 is pinging PC8, PC 6 is pinging PC 
+
+60
+07:14.190 --> 07:21.920
+7, in this case, PC 6 needs to ARP for the MAC address of PC 7.
+
+61
+07:22.030 --> 07:29.960
+Notice however that there is no collision taking place.
+
+62
+07:30.090 --> 07:41.520
+So now notice the ARP cache of PC 6 is populated with the MAC address of both PC 7 and PC 8. So I'll
+
+63
+07:41.520 --> 07:42.750
+run that again
+
+64
+07:46.310 --> 07:49.370
+and I need to be in simulation mode to do that.
+
+65
+07:51.830 --> 07:54.770
+So they're both are sending ICMP packets
+
+66
+07:57.520 --> 07:59.300
+these are unicast
+
+67
+07:59.340 --> 08:09.780
+they are not broadcasts, notice the destination of this frame is PC 7 destination of this frame
+
+68
+08:10.650 --> 08:22.860
+is PC 8 both packets can be sent and received by the switch without interference from the other conversation
+
+69
+08:25.000 --> 08:34.590
+so the PCs can communicate now without collisions and they are essentially separated from the other
+
+70
+08:34.590 --> 08:42.900
+conversation. The conversation between PC 5 and PC 8 happens independently of the conversation between
+
+71
+08:42.900 --> 08:45.900
+PC 7 and PC 6.
+
+72
+08:45.930 --> 08:49.610
+We have 4 collision domains here
+
+73
+08:53.840 --> 09:04.350
+a hub is a single collision domain, a switch has a collision domain per interface, but again if PC 5
+
+74
+09:04.440 --> 09:05.730
+sent a broadcast
+
+75
+09:09.950 --> 09:11.120
+the broadcast
+
+76
+09:14.540 --> 09:20.240
+would be forwarded to all devices in the network.
+
+77
+09:20.240 --> 09:21.770
+This is a layer 2 switch
+
+78
+09:21.770 --> 09:29.810
+it's gonna flood that broadcast out of all ports so everyone is gonna receive the broadcast and
+
+79
+09:29.870 --> 09:35.090
+everyone is gonna have to reply back to that broadcast.
+
+80
+09:39.460 --> 09:46.220
+Packet tracer is not perfect software but it allows you to visually see how traffic flows in the network
+
+81
+09:46.700 --> 09:53.480
+and to learn how to answer questions such as these.
+
+82
+09:53.570 --> 10:01.550
+So when studying for the CCNA exam you can use packet tracer to learn how traffic flows to learn what
+
+83
+10:01.550 --> 10:08.090
+frames look like, what packets look like, what segments look like and it helps you essentially become
+
+84
+10:08.150 --> 10:10.430
+a better network engineer.
+
+85
+10:10.490 --> 10:12.890
+So were you able to answer these questions?
+
+86
+10:13.130 --> 10:20.360
+Do you understand how data flows in a network when you have a switch or when you have a hub?
+
+87
+10:20.600 --> 10:24.920
+Make sure that you understand how data flows through networks.

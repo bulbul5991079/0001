@@ -1,0 +1,201 @@
+WEBVTT
+
+0
+00:19.600 --> 00:23.720
+Okay, so let's see if we can practically answer these questions.
+
+1
+00:23.950 --> 00:31.420
+To do that I'm gonna use simulation mode in packet tracer and I'm gonna change the filters to
+
+2
+00:31.480 --> 00:36.160
+only show ARP and ICMP messages.
+
+3
+00:36.160 --> 00:44.170
+I don't wanna see all the other traffic types in the network. So let's see what happens when PC 1 pings 
+
+4
+00:44.170 --> 01:02.420
+PC 4. PC 1 has an IP address of 10 111, PC 4 has an IP address of 10 114 so we're going
+
+5
+01:02.420 --> 01:04.700
+to send ICMP traffic
+
+6
+01:04.700 --> 01:05.960
+in other words ping traffic
+
+7
+01:08.670 --> 01:16.150
+from PC 1 to PC 4 and then we're going to observe what happens. Now in this example
+
+8
+01:16.150 --> 01:18.890
+I'll only send two packets.
+
+9
+01:19.030 --> 01:28.410
+In other words two pings, notice what happens in the network there's ICMP traffic but there is also an
+
+10
+01:28.440 --> 01:31.520
+ARP frame that's generated.
+
+11
+01:31.650 --> 01:37.110
+PC 1 needs to learn the MAC address of PC 4
+
+12
+01:37.320 --> 01:47.820
+so it sends out an ARP which is a broadcast requesting the target MAC address of PC 4. So in answer
+
+13
+01:47.820 --> 01:51.320
+to our first question, what type of packet is sent
+
+14
+01:51.330 --> 01:58.250
+initially? The answer is a ARP packet which is a broadcast packet.
+
+15
+02:02.170 --> 02:08.280
+We've proven that by running simulation mode in Packet Tracer.
+
+16
+02:08.290 --> 02:16.510
+Now this is a broadcast and in this network, the devices are connected to a hub so the traffic should
+
+17
+02:16.510 --> 02:25.670
+be flooded to all devices in the network except the device that sent the packet.
+
+18
+02:25.670 --> 02:27.500
+So who receives the packet?
+
+19
+02:27.530 --> 02:28.510
+PC 2 does, 
+
+20
+02:28.520 --> 02:41.380
+PC 3 does and so does PC 4, PC 2 and PC 3 will drop the packets because the ARP packet is not for
+
+21
+02:41.530 --> 02:52.830
+their IP address, PC 2 as an example is configured with IP address 10 112 so PC 2 is gonna drop the
+
+22
+02:52.830 --> 02:53.660
+packet.
+
+23
+02:53.910 --> 03:04.010
+The ARP request is for IP address 10 114 so both PC 2 and PC 3
+
+24
+03:04.020 --> 03:14.360
+drop the packet but PC 4 will accept the packet and what it should do now is send back an ARP reply.
+
+25
+03:14.750 --> 03:27.400
+So if we look at this packet notice the inbound packet to the hub is an ARP reply packet with the MAC
+
+26
+03:27.400 --> 03:32.020
+address of PC 4 this is PC 4s IP address
+
+27
+03:32.050 --> 03:34.090
+this is its MAC address.
+
+28
+03:34.090 --> 03:46.170
+We can verify that by using the IP config command and I should say IP config slash all notice the MAC
+
+29
+03:46.170 --> 03:55.650
+address which is the source MAC address of the frame and that's the source MAC address we see over here.
+
+30
+03:55.650 --> 04:00.120
+So the next question is, who receives the return traffic?
+
+31
+04:00.120 --> 04:11.180
+So if I click capture forward notice PC 1, PC 3 and PC 2 receive the return traffic so it PC
+
+32
+04:11.180 --> 04:13.300
+1, PC 2 and PC 3.
+
+33
+04:13.490 --> 04:23.740
+PC 2 and PC 3 will drop the ARP reply because it's not destined to them when we look at that packet
+
+34
+04:24.580 --> 04:33.320
+we can see that the destination MAC address is PC1 and we can confirm that by looking at the config
+
+35
+04:33.320 --> 04:44.420
+of PC1 notice the MAC address is this, so PC2 and PC 3 will drop the ARP
+
+36
+04:44.410 --> 04:53.840
+reply. We're then asked when ping traffic is sent from PC 1 to PC 4 who receives the traffic.
+
+37
+04:53.840 --> 04:58.280
+Now it's a hub so the traffic will be flooded.
+
+38
+04:58.440 --> 05:10.320
+So here's the ICMP message we can see that it's an Ethernet 2 frame using IP 4 at layer 3 and
+
+39
+05:10.320 --> 05:16.440
+we can see it's an ICMP packet and when we click capture forward notice
+
+40
+05:16.550 --> 05:29.850
+PC 2, PC 3 and PC 4 receive the traffic but again PC 2 and PC 3 will drop the packet because
+
+41
+05:29.850 --> 05:40.670
+it's not destined to them when we look at the inbound PDU or protocol data unit on PC 4 we can
+
+42
+05:40.670 --> 05:47.880
+see that the destination IP address is PC 4 and the destination MAC address is
+
+43
+05:47.880 --> 05:58.270
+PC 4 we can verify that once again by using the IP config slash all command and we can see the MAC
+
+44
+05:58.270 --> 05:59.170
+address of
+
+45
+05:59.170 --> 06:02.950
+PC 4. So that's going to continue now
+
+46
+06:03.410 --> 06:03.980
+When the
+
+47
+06:03.980 --> 06:08.320
+PC 4 replies to PC 1
+
+48
+06:08.400 --> 06:15.660
+the traffic is flooded and this is the problem with the hub even though the conversation is between
+
+49
+06:16.110 --> 06:23.480
+PC 1 and PC 4 everyone in the network receives the traffic.

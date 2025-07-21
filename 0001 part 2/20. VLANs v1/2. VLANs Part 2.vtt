@@ -1,0 +1,1381 @@
+WEBVTT
+
+00:00.416 --> 00:03.583
+(light ambient music)
+
+00:08.419 --> 00:10.380
+Instructor: So in this example,
+
+00:10.380 --> 00:14.340
+let's assume A is sending a frame to D.
+
+00:14.340 --> 00:17.280
+So the source address at layer two will be A
+
+00:17.280 --> 00:19.500
+and the destination address will be D.
+
+00:19.500 --> 00:22.290
+A will send the frame to switch one,
+
+00:22.290 --> 00:26.100
+switch one will then copy that frame to all ports
+
+00:26.100 --> 00:28.410
+based once again, on the switch architecture
+
+00:28.410 --> 00:30.960
+the central ASIC will check the destination
+
+00:30.960 --> 00:32.340
+in the cam table.
+
+00:32.340 --> 00:35.160
+And let's assume for the moment that D is not
+
+00:35.160 --> 00:38.130
+in switch one's cam table or MAC address table.
+
+00:38.130 --> 00:41.281
+So the frame will attempt to go out of this port zero two
+
+00:41.281 --> 00:44.820
+but because the internal tag color is red for that frame
+
+00:44.820 --> 00:46.620
+and this is a green port
+
+00:46.620 --> 00:49.500
+the frame is not permitted out of zero two.
+
+00:49.500 --> 00:52.110
+However, on this port, because it's a trunk link
+
+00:52.110 --> 00:54.570
+and let's assume for the moment that all VLANs are allowed
+
+00:54.570 --> 00:57.588
+across this trunk, that frame will be sent
+
+00:57.588 --> 01:01.530
+out of port zero three to switch two.
+
+01:01.530 --> 01:04.140
+However, just before the frame is sent out
+
+01:04.140 --> 01:06.990
+it needs to be tagged with the VLAN number.
+
+01:06.990 --> 01:10.020
+So in this case, the VLAN identifier would be red.
+
+01:10.020 --> 01:11.820
+Now, as mentioned in switches
+
+01:11.820 --> 01:13.950
+VLANs are identified by numbers.
+
+01:13.950 --> 01:17.220
+But to keep these examples simple, we're gonna use colors.
+
+01:17.220 --> 01:22.220
+So this would in actual fact be a number from zero to 4,096.
+
+01:22.260 --> 01:23.520
+That frame is then sent
+
+01:23.520 --> 01:28.500
+across the trunk to switch two, who then receives the frame.
+
+01:28.500 --> 01:32.010
+Once again, the frame is processed internally.
+
+01:32.010 --> 01:35.181
+Now this switch reads the VLAN identifier in the
+
+01:35.181 --> 01:38.550
+802.1Q header and sees that it belongs to the red VLAN,
+
+01:38.550 --> 01:41.100
+that is tagged internally within the switch.
+
+01:41.100 --> 01:42.780
+The frame is sent to all ports,
+
+01:42.780 --> 01:45.210
+zero two as well as zero one.
+
+01:45.210 --> 01:47.460
+And let's assume once again that the MAC address table
+
+01:47.460 --> 01:51.540
+of switch two does not contain the Mac address of D.
+
+01:51.540 --> 01:54.510
+So when the frame is attempting to go out of port zero one
+
+01:54.510 --> 01:56.640
+it is denied because the color
+
+01:56.640 --> 01:59.250
+of the frame is red and this interface is
+
+01:59.250 --> 02:02.670
+in the green VLAN, so the frame is dropped.
+
+02:02.670 --> 02:06.330
+However, out of this interface, the frame is permitted
+
+02:06.330 --> 02:08.490
+because the port is in the red VLAN
+
+02:08.490 --> 02:11.790
+and the frame is tagged with the red VLAN.
+
+02:11.790 --> 02:14.850
+All tagging is stripped out of this port
+
+02:14.850 --> 02:19.230
+so it's sent as a normal ethernet frame to PC D.
+
+02:19.230 --> 02:21.120
+Once again, the PCs are oblivious
+
+02:21.120 --> 02:24.000
+to the fact that they have been put into VLANs.
+
+02:24.000 --> 02:26.550
+They just see standard ethernet.
+
+02:26.550 --> 02:28.590
+So a standard frame with a source address
+
+02:28.590 --> 02:31.830
+of A, destination address D is transmitted
+
+02:31.830 --> 02:35.806
+out of port zero two and processed by the PC.
+
+02:35.806 --> 02:39.150
+802.1Q trunks have a special VLAN known
+
+02:39.150 --> 02:40.950
+as the native VLAN.
+
+02:40.950 --> 02:43.860
+Native VLANs are untagged, when not port
+
+02:43.860 --> 02:46.530
+on the switch is set up as a trunk.
+
+02:46.530 --> 02:50.880
+For instance, this interface on switch one and switch two
+
+02:50.880 --> 02:54.690
+that interface can receive and transmit tagged frames.
+
+02:54.690 --> 02:57.630
+Frames belonging to the native VLAN do not
+
+02:57.630 --> 03:01.230
+carry VLAN tags when sent over this trunk.
+
+03:01.230 --> 03:02.400
+By the same token
+
+03:02.400 --> 03:06.060
+if an untagged frame were received on this trunk port
+
+03:06.060 --> 03:08.070
+that frame would automatically be associated
+
+03:08.070 --> 03:10.950
+with a native VLAN for this port.
+
+03:10.950 --> 03:13.410
+Now specific management traffic will go
+
+03:13.410 --> 03:15.120
+across the native VLAN.
+
+03:15.120 --> 03:16.350
+So for instance
+
+03:16.350 --> 03:19.829
+spanning tree BPDUs will use the native VLAN
+
+03:19.829 --> 03:22.830
+and so will dynamic trunking protocol.
+
+03:22.830 --> 03:25.290
+Dynamic trunking protocol is a way that switches
+
+03:25.290 --> 03:28.800
+negotiate to set up a trunk between themselves automatically
+
+03:28.800 --> 03:32.010
+and I'll show you an example of that in a moment.
+
+03:32.010 --> 03:35.430
+Certain management traffic always uses VLAN 1.
+
+03:35.430 --> 03:38.670
+If you have left VLAN 1 as the native VLAN,
+
+03:38.670 --> 03:43.670
+traffic like CDP, VTP, PAGP and UDLD will be transmitted
+
+03:44.040 --> 03:45.640
+across the native VLAN untagged.
+
+03:46.770 --> 03:49.980
+If however, the native VLAN is changed to something other
+
+03:49.980 --> 03:53.610
+than VLAN 1, these protocols will then be tagged
+
+03:53.610 --> 03:56.610
+in that specific VLAN, CDP was explained
+
+03:56.610 --> 03:59.220
+in the ICND 1 portion of this course.
+
+03:59.220 --> 04:02.283
+It allows us to view directly connected devices
+
+04:02.283 --> 04:03.840
+VLAN trunking protocol.
+
+04:03.840 --> 04:06.480
+We're gonna discuss in the next few slides.
+
+04:06.480 --> 04:09.420
+It is a way to dynamically update other switches
+
+04:09.420 --> 04:13.770
+with changes made on a single switch in a VTP domain.
+
+04:13.770 --> 04:18.030
+PAGP or port aggregation protocol is a protocol used
+
+04:18.030 --> 04:22.500
+for the automatic creation of Ether channels and UDLD
+
+04:22.500 --> 04:25.290
+or unidirectional link detection is used to
+
+04:25.290 --> 04:28.320
+monitor the physical configuration of cables
+
+04:28.320 --> 04:32.010
+between devices and detect unidirectional links.
+
+04:32.010 --> 04:35.220
+This allows us to detect incorrectly cabled links.
+
+04:35.220 --> 04:36.570
+The important thing to take note
+
+04:36.570 --> 04:40.050
+of here is that on trunk links, there's a special VLAN known
+
+04:40.050 --> 04:43.440
+as the native VLAN where traffic is sent untagged.
+
+04:43.440 --> 04:46.020
+If left at the default of VLAN 1, a lot
+
+04:46.020 --> 04:49.770
+of management traffic will be sent across that native VLAN.
+
+04:49.770 --> 04:52.200
+It's important that the native VLAN
+
+04:52.200 --> 04:54.660
+on both sides of the trunk be the same.
+
+04:54.660 --> 04:57.960
+If they're not set the same, the switches will notify you
+
+04:57.960 --> 05:00.680
+by telling you that there's a native VLAN mismatch.
+
+05:00.680 --> 05:02.143
+The issue that arises
+
+05:02.143 --> 05:04.500
+if the native VLANs are not the same is
+
+05:04.500 --> 05:06.150
+that traffic from one VLAN
+
+05:06.150 --> 05:08.850
+on this switch will automatically be associated
+
+05:08.850 --> 05:11.640
+and end up in a different VLAN on another switch.
+
+05:11.640 --> 05:12.840
+And obviously the whole concept
+
+05:12.840 --> 05:17.310
+of VLANs is to separate traffic into a specific VLAN.
+
+05:17.310 --> 05:19.380
+In other words, a separate broadcast domain
+
+05:19.380 --> 05:22.140
+or separate subnet, traffic from one VLAN
+
+05:22.140 --> 05:24.360
+should not end up in another VLAN
+
+05:24.360 --> 05:27.430
+because of a native VLAN misconfiguration.
+
+05:28.500 --> 05:29.940
+Now this is something you probably not see
+
+05:29.940 --> 05:31.440
+in networks today.
+
+05:31.440 --> 05:33.960
+In theory, with a native VLAN, a switch
+
+05:33.960 --> 05:38.190
+like switch one could send tagged frames to switch two
+
+05:38.190 --> 05:40.710
+and untagged frames to this MacBook.
+
+05:40.710 --> 05:43.470
+So by using the native VLAN, this MacBook
+
+05:43.470 --> 05:47.220
+or a PC would still be able to communicate with a network
+
+05:47.220 --> 05:50.220
+even though it doesn't understand tagged frames.
+
+05:50.220 --> 05:51.720
+802.1Q frames
+
+05:51.720 --> 05:55.530
+or tagged frames are useful communicating VLAN information
+
+05:55.530 --> 05:57.930
+between networking devices like switches.
+
+05:57.930 --> 06:00.720
+This end device wouldn't necessarily understand
+
+06:00.720 --> 06:03.210
+802.1Q frames, but could still communicate
+
+06:03.210 --> 06:06.030
+with a network by using the native VLAN.
+
+06:06.030 --> 06:07.890
+However, that's not common today.
+
+06:07.890 --> 06:10.740
+What is more typical today is a scenario
+
+06:10.740 --> 06:13.740
+like this where you have a PC connected
+
+06:13.740 --> 06:17.670
+to an IP phone connected to a Cisco switch.
+
+06:17.670 --> 06:21.480
+Now Cisco IP phone has a built-in three way switch.
+
+06:21.480 --> 06:25.050
+One port is connected back to the network infrastructure.
+
+06:25.050 --> 06:29.490
+So our Cisco switch, a second port allows the PC to connect
+
+06:29.490 --> 06:31.800
+to the infrastructure through the phone
+
+06:31.800 --> 06:34.500
+and a third port allows for voice traffic
+
+06:34.500 --> 06:36.690
+from the handset to be prioritized
+
+06:36.690 --> 06:40.230
+over data when sent to the network infrastructure.
+
+06:40.230 --> 06:43.110
+So the phone has a built-in three-way switch
+
+06:43.110 --> 06:46.581
+always prioritizing voice over data.
+
+06:46.581 --> 06:49.140
+The thing to take note of here though is
+
+06:49.140 --> 06:51.030
+that the phone can be configured
+
+06:51.030 --> 06:53.250
+in a separate VLAN to the PC.
+
+06:53.250 --> 06:55.530
+So the phone could be in the red VLAN
+
+06:55.530 --> 06:57.930
+and the PC could be in the green VLAN.
+
+06:57.930 --> 07:00.750
+There are a lot of advantages to doing it this way.
+
+07:00.750 --> 07:03.000
+Firstly, from a security point of view
+
+07:03.000 --> 07:06.280
+this PC will not be able to sniff voice traffic
+
+07:06.280 --> 07:09.630
+and therefore listening on the voice conversation.
+
+07:09.630 --> 07:11.370
+Now, there are a lot of caveats relating
+
+07:11.370 --> 07:13.650
+to Cisco phones and different models are set up
+
+07:13.650 --> 07:16.290
+different ways, but in theory, the concept is
+
+07:16.290 --> 07:20.040
+that the phone is in a separate VLAN to the PC
+
+07:20.040 --> 07:24.000
+and therefore the PC is not able to see the voice traffic.
+
+07:24.000 --> 07:26.760
+There are applications like Cane Enable, which is
+
+07:26.760 --> 07:29.340
+a very powerful hacking tool that allow you to
+
+07:29.340 --> 07:31.890
+sniff the network, capture the voice traffic
+
+07:31.890 --> 07:34.680
+and then replay that traffic as a web file
+
+07:34.680 --> 07:39.210
+on your local PC, so you can replay the voice conversation.
+
+07:39.210 --> 07:42.720
+But if the phone is in a separate VLAN, security is enhanced
+
+07:42.720 --> 07:45.843
+because the PC is not able to see the voice traffic
+
+07:45.843 --> 07:48.712
+from a quality of service point of view.
+
+07:48.712 --> 07:49.545
+This is also a lot better
+
+07:49.545 --> 07:51.900
+because it's easier to prioritize the voice traffic
+
+07:51.900 --> 07:55.380
+over the data traffic if it's in a separate VLAN.
+
+07:55.380 --> 07:57.895
+Setting up your network this way also has the advantages
+
+07:57.895 --> 08:00.420
+of easier IP address management
+
+08:00.420 --> 08:03.600
+because you can assign a separate subnet to your phones
+
+08:03.600 --> 08:07.304
+versus your PCs and thus scale your IP addressing.
+
+08:07.304 --> 08:10.050
+So what happens is the switch is configured
+
+08:10.050 --> 08:13.320
+with what's called a voice VLAN and a native VLAN.
+
+08:13.320 --> 08:16.650
+The voice VLAN is tagged, so tagged frames get sent
+
+08:16.650 --> 08:18.540
+to the phone and the phone
+
+08:18.540 --> 08:20.970
+with its built-in three-way switch is able to
+
+08:20.970 --> 08:23.670
+read the 802.1Q frames.
+
+08:23.670 --> 08:25.500
+Untagged frames are sent
+
+08:25.500 --> 08:28.980
+on what's called the native VLAN or data VLAN.
+
+08:28.980 --> 08:30.900
+That information is sent to the phone
+
+08:30.900 --> 08:34.740
+and the phone just switches that to the PC.
+
+08:34.740 --> 08:38.610
+So the PC receives the untagged or native VLAN frames
+
+08:38.610 --> 08:42.630
+and the phone receives the tagged or voice VLAN frames.
+
+08:42.630 --> 08:46.050
+No configuration on the phone is necessary to enable this.
+
+08:46.050 --> 08:48.060
+You literally type a few commands
+
+08:48.060 --> 08:50.910
+on the switch telling the switch what the voice VLAN is
+
+08:50.910 --> 08:54.480
+and what the data VLAN is, and this happens automatically
+
+08:54.480 --> 08:57.690
+because when the phones boot up, they query the switch
+
+08:57.690 --> 09:01.170
+through CDP to find out which VLAN they belong to.
+
+09:01.170 --> 09:04.710
+So the switch updates, the phone's configuration
+
+09:04.710 --> 09:06.335
+through the use of CDP.
+
+09:06.335 --> 09:08.940
+So this is a very common implementation
+
+09:08.940 --> 09:12.129
+of native VLANs in the real world today.
+
+09:12.129 --> 09:16.110
+So just to sum up, our ports are assigned to VLANs.
+
+09:16.110 --> 09:19.590
+Firstly, they can be statically assigned by an administrator
+
+09:19.590 --> 09:22.350
+so use an administrator, go onto an interface
+
+09:22.350 --> 09:25.350
+and statically put that port into a VLAN.
+
+09:25.350 --> 09:27.000
+The second option is to create what are
+
+09:27.000 --> 09:28.710
+called dynamic VLANs.
+
+09:28.710 --> 09:31.590
+Using a VLAN membership policy server,
+
+09:31.590 --> 09:33.270
+dynamic VLANs allow
+
+09:33.270 --> 09:37.230
+for a ports VLAN to be dynamically updated based
+
+09:37.230 --> 09:40.800
+on the MAC address of the device attached to that port.
+
+09:40.800 --> 09:43.860
+So in a boardroom, for example, when a director plugs
+
+09:43.860 --> 09:46.380
+in a laptop based on the Mac address of that laptop
+
+09:46.380 --> 09:50.040
+that port is dynamically assigned to the director's VLAN.
+
+09:50.040 --> 09:52.140
+When a manager plugs his laptop
+
+09:52.140 --> 09:55.200
+into that same port the next day, for example
+
+09:55.200 --> 09:58.950
+that VLAN is automatically updated to the manager's VLAN.
+
+09:58.950 --> 10:00.690
+So based on the source Mac address
+
+10:00.690 --> 10:02.580
+of frames received on the port
+
+10:02.580 --> 10:06.270
+the port is automatically assigned to different VLANs.
+
+10:06.270 --> 10:08.130
+And lastly, we have voice VLANs
+
+10:08.130 --> 10:10.964
+which are used specifically for IP phones.
+
+10:10.964 --> 10:14.940
+VTP or VLAN trunking protocol is a Cisco
+
+10:14.940 --> 10:18.630
+proprietary layer two protocol, which allows
+
+10:18.630 --> 10:21.660
+for the propagation of VLAN information from one switch
+
+10:21.660 --> 10:25.980
+to another rather than tail netting to multiple switches.
+
+10:25.980 --> 10:30.090
+You can create, delete or rename VLANs on one switch
+
+10:30.090 --> 10:33.030
+and have that information automatically propagated
+
+10:33.030 --> 10:35.520
+to other switches across trunk links.
+
+10:35.520 --> 10:38.670
+Notice the name, VLAN trunking protocol.
+
+10:38.670 --> 10:42.720
+This information can only be propagated across trunk links.
+
+10:42.720 --> 10:45.540
+Now, VTP can save you a lot of time
+
+10:45.540 --> 10:47.610
+but as a lot of Cisco engineers will tell you
+
+10:47.610 --> 10:50.100
+VTP can cause you a lot of headaches.
+
+10:50.100 --> 10:53.340
+Switches can have the entire VLAN configuration wiped
+
+10:53.340 --> 10:55.110
+out if a new switch is added
+
+10:55.110 --> 10:58.470
+to the network without following a proper procedure.
+
+10:58.470 --> 11:01.470
+So a lot of Cisco engineers will not enable VTP
+
+11:01.470 --> 11:02.910
+in modern environments because
+
+11:02.910 --> 11:06.213
+of the inherent risks associated with this protocol.
+
+11:07.380 --> 11:10.530
+VTP messages are sent to the following MAC address
+
+11:10.530 --> 11:13.680
+which is a well-known multicast address for flooding
+
+11:13.680 --> 11:16.860
+of the CDP and VTP protocols.
+
+11:16.860 --> 11:19.290
+There are three types of messages in VTP.
+
+11:19.290 --> 11:22.751
+You have summary advertisements, subset advertisements
+
+11:22.751 --> 11:24.960
+and advertisement requests.
+
+11:24.960 --> 11:26.250
+And I'll explain each of these
+
+11:26.250 --> 11:29.520
+in more detail in the upcoming slides, but please be aware
+
+11:29.520 --> 11:32.130
+that there are three message types.
+
+11:32.130 --> 11:35.280
+When setting up VTP, devices will by default belong
+
+11:35.280 --> 11:36.687
+to the null domain.
+
+11:36.687 --> 11:39.570
+For VTP to work, you need to configure
+
+11:39.570 --> 11:43.170
+and put the devices into a specific VTP domain.
+
+11:43.170 --> 11:47.430
+Only devices within the same VTP domain will be updated
+
+11:47.430 --> 11:49.410
+with VLAN information.
+
+11:49.410 --> 11:50.850
+A switch can only be configured
+
+11:50.850 --> 11:54.510
+in a single VTP domain at any given time.
+
+11:54.510 --> 11:58.440
+By default, Cisco switches are in the null domain
+
+11:58.440 --> 12:02.460
+or no management domain until they receive an advertisement
+
+12:02.460 --> 12:05.010
+for a domain over a trunk link
+
+12:05.010 --> 12:08.460
+or until you manually configure a management domain.
+
+12:08.460 --> 12:10.320
+So in this example, let's assume
+
+12:10.320 --> 12:12.270
+that these devices have been put
+
+12:12.270 --> 12:15.900
+into the VTP domain with the name of Cisco.
+
+12:15.900 --> 12:18.990
+Remember that VTP is a layer two protocol
+
+12:18.990 --> 12:22.440
+and requires trunk links for communication.
+
+12:22.440 --> 12:24.942
+So VTP will not traverse a rider.
+
+12:24.942 --> 12:27.120
+An important concept to understand
+
+12:27.120 --> 12:30.423
+in VTP is the concept of a revision number.
+
+12:31.260 --> 12:34.860
+Every time a change is made to the VLAN database
+
+12:34.860 --> 12:38.340
+the revision number in VTP will increment by one.
+
+12:38.340 --> 12:40.560
+So let's assume that all devices
+
+12:40.560 --> 12:43.083
+in this topology have a revision number of one.
+
+12:44.370 --> 12:46.050
+You as an administrator add a VLAN
+
+12:46.050 --> 12:48.960
+let's say VLAN 3 to this switch.
+
+12:48.960 --> 12:50.820
+Its revision number will then increment
+
+12:50.820 --> 12:54.059
+from revision number one to revision number two.
+
+12:54.059 --> 12:56.970
+That information will then be advertised
+
+12:56.970 --> 12:59.550
+to all other switches in the VTP domain
+
+12:59.550 --> 13:02.430
+so that they can synchronize their databases
+
+13:02.430 --> 13:06.450
+to the latest revision number, which is revision number two.
+
+13:06.450 --> 13:08.130
+So the switch at the top will send what is
+
+13:08.130 --> 13:11.610
+called A VTP summary advertisement to all other switches
+
+13:11.610 --> 13:14.730
+informing them that a change has been made.
+
+13:14.730 --> 13:17.640
+Remember, this is sent using a multicast address
+
+13:17.640 --> 13:20.970
+so all of these devices will see that message.
+
+13:20.970 --> 13:22.980
+They will then request the latest information
+
+13:22.980 --> 13:25.800
+using an advertisement request, and the switch
+
+13:25.800 --> 13:28.740
+at the top will send them detailed information
+
+13:28.740 --> 13:31.710
+about the change using a subset advertisement.
+
+13:31.710 --> 13:34.440
+The net result is that the revision numbers and all
+
+13:34.440 --> 13:37.980
+of these switches will increment to the same revision number
+
+13:37.980 --> 13:40.680
+as the switch where the change was made.
+
+13:40.680 --> 13:42.330
+So VLAN 3 will appear
+
+13:42.330 --> 13:44.910
+in all the databases of these switches
+
+13:44.910 --> 13:48.120
+and the revision number will be set to revision number two.
+
+13:48.120 --> 13:50.250
+The whole concept with VTP is
+
+13:50.250 --> 13:53.400
+that you can make changes on an individual device.
+
+13:53.400 --> 13:56.670
+As those changes are made, all other switches are informed
+
+13:56.670 --> 13:59.970
+of the change and they will synchronize their databases
+
+13:59.970 --> 14:02.760
+to the latest revision number so that they end up
+
+14:02.760 --> 14:06.030
+having the same VLANs in their VLAN databases.
+
+14:06.030 --> 14:07.829
+That means that you as the administrator
+
+14:07.829 --> 14:09.360
+only need to make changes
+
+14:09.360 --> 14:13.110
+on one switch rather than five switches in this topology.
+
+14:13.110 --> 14:14.280
+Please note ports are put
+
+14:14.280 --> 14:18.540
+into individual VLANs by, for example, an administrator.
+
+14:18.540 --> 14:21.660
+VTP does not put ports into individual VLANs.
+
+14:21.660 --> 14:24.300
+It just updates the VLAN database
+
+14:24.300 --> 14:27.390
+so that the switches know which VLANs exist.
+
+14:27.390 --> 14:29.940
+You as an administrators still need to put those ports
+
+14:29.940 --> 14:31.890
+into the relevant VLANs.
+
+14:31.890 --> 14:35.310
+So this is just a VLAN database update mechanism
+
+14:35.310 --> 14:39.093
+so that switches know the VLANs that exist in the topology.
+
+14:40.710 --> 14:43.410
+So let's look at the VTP messages in more detail.
+
+14:43.410 --> 14:46.650
+The first type of VTP message is a summary advertisement.
+
+14:46.650 --> 14:48.537
+This is sent every five minutes
+
+14:48.537 --> 14:51.510
+or whenever there's a change.
+
+14:51.510 --> 14:53.970
+So whenever an administrator makes a change
+
+14:53.970 --> 14:57.180
+on a switch by, for instance, adding a VLAN
+
+14:57.180 --> 14:58.830
+a summary advertisement will be sent
+
+14:58.830 --> 15:01.320
+out on the well-known multicast address
+
+15:01.320 --> 15:03.480
+to all other switches in the domain.
+
+15:03.480 --> 15:05.690
+So this is used to inform other switches
+
+15:05.690 --> 15:07.980
+of the current VTP domain
+
+15:07.980 --> 15:11.100
+and the current configuration revision number.
+
+15:11.100 --> 15:13.104
+So as an example, on switch one
+
+15:13.104 --> 15:15.300
+the administrator adds another VLAN.
+
+15:15.300 --> 15:16.920
+Let's say VLAN 4
+
+15:16.920 --> 15:19.396
+the revision number will be incremented.
+
+15:19.396 --> 15:21.000
+So if the revision number was three
+
+15:21.000 --> 15:23.550
+it would now be incremented to four.
+
+15:23.550 --> 15:26.010
+This switch will send a summary advertisement
+
+15:26.010 --> 15:28.499
+to all neighboring switches informing them
+
+15:28.499 --> 15:30.810
+of the current VTP domain
+
+15:30.810 --> 15:34.200
+and the new configuration revision number
+
+15:34.200 --> 15:37.380
+switches that receive that summary advertisement will then
+
+15:37.380 --> 15:40.350
+send back a summary request asking
+
+15:40.350 --> 15:44.070
+for detailed information of the changes that have been made.
+
+15:44.070 --> 15:47.250
+There are three situations when summary requests are used.
+
+15:47.250 --> 15:49.800
+Firstly, when a switch has been reset
+
+15:49.800 --> 15:52.770
+or when the VTP domain name has been changed,
+
+15:52.770 --> 15:57.000
+or when the switch has received a VTP summary advertisement
+
+15:57.000 --> 16:00.390
+with a higher configuration revision number than its own.
+
+16:00.390 --> 16:03.360
+So because switch two received a summary advertisement
+
+16:03.360 --> 16:06.914
+from switch one indicating a high revision number
+
+16:06.914 --> 16:08.820
+in other words, the revision number
+
+16:08.820 --> 16:10.830
+on switch one is revision number four
+
+16:10.830 --> 16:11.670
+and the revision number
+
+16:11.670 --> 16:14.100
+on switch two is revision number three.
+
+16:14.100 --> 16:17.113
+Switch two will now request information
+
+16:17.113 --> 16:20.610
+from switch one so that it can update its database
+
+16:20.610 --> 16:23.370
+with the latest VLAN information.
+
+16:23.370 --> 16:26.250
+That detailed information is sent from switch one
+
+16:26.250 --> 16:29.640
+to switch two using what's called a subset advertisement.
+
+16:29.640 --> 16:33.120
+This contains a list of VLAN information
+
+16:33.120 --> 16:35.040
+and if there are several VLANs,
+
+16:35.040 --> 16:39.090
+more than one subset advertisement may be required to update
+
+16:39.090 --> 16:42.180
+and synchronize the databases of other switches.
+
+16:42.180 --> 16:45.360
+So essentially what this is is detailed information
+
+16:45.360 --> 16:47.430
+of the changes that have been made.
+
+16:47.430 --> 16:50.190
+The summary advertisement just informs the switch
+
+16:50.190 --> 16:52.590
+in summary format of the latest revision number
+
+16:52.590 --> 16:54.390
+and VTP domain.
+
+16:54.390 --> 16:57.120
+If the local switch sees that it's out of date
+
+16:57.120 --> 16:59.880
+it'll request detailed information so
+
+16:59.880 --> 17:02.340
+that it can synchronize its database and that
+
+17:02.340 --> 17:06.390
+information will be provided using a subset advertisement.
+
+17:06.390 --> 17:08.400
+The switches now are able to synchronize their
+
+17:08.400 --> 17:10.710
+local databases to the database
+
+17:10.710 --> 17:13.053
+of the switch with the latest information.
+
+17:14.190 --> 17:16.980
+Now there are three modes in VTP.
+
+17:16.980 --> 17:19.110
+The default mode is server.
+
+17:19.110 --> 17:23.550
+A VTP switch in server mode can create VLANs
+
+17:23.550 --> 17:26.310
+modify VLANs and delete VLANs.
+
+17:26.310 --> 17:29.700
+It also sends and forwards advertisements.
+
+17:29.700 --> 17:32.340
+So if it received an advertisement from another switch
+
+17:32.340 --> 17:34.170
+it would forward that on.
+
+17:34.170 --> 17:36.330
+If you made changes on the local switch
+
+17:36.330 --> 17:38.970
+it would send summary advertisements.
+
+17:38.970 --> 17:41.369
+It would also synchronize its local database
+
+17:41.369 --> 17:44.190
+to the latest revision number, and it also
+
+17:44.190 --> 17:47.340
+saves the VLAN configuration information locally.
+
+17:47.340 --> 17:50.460
+So this is the device where you're gonna make your changes.
+
+17:50.460 --> 17:53.561
+Multiple switches can be configured as VTP servers
+
+17:53.561 --> 17:56.460
+but you need to be really careful with this.
+
+17:56.460 --> 17:58.873
+The second mode is VTP client.
+
+17:58.873 --> 18:03.489
+A VTP client cannot create, change or delete VLANs.
+
+18:03.489 --> 18:07.170
+It is also able to send and forward advertisements
+
+18:07.170 --> 18:09.630
+so it can send any VLANs currently listed
+
+18:09.630 --> 18:12.840
+in its database to other VTP switches.
+
+18:12.840 --> 18:15.630
+It can also forward advertisements received
+
+18:15.630 --> 18:17.220
+from other switches.
+
+18:17.220 --> 18:19.710
+Thirdly, it would also synchronize its database
+
+18:19.710 --> 18:22.113
+to the latest configuration revision number.
+
+18:23.280 --> 18:25.020
+This is a major potential issue
+
+18:25.020 --> 18:29.880
+with VTP and has burnt many Cisco engineers in the past.
+
+18:29.880 --> 18:32.340
+A lot of Cisco engineers will not use VTP
+
+18:32.340 --> 18:33.840
+because of this issue.
+
+18:33.840 --> 18:36.150
+So here's a sample topology.
+
+18:36.150 --> 18:38.130
+Notice we have a VTP server
+
+18:38.130 --> 18:39.870
+and let's assume that all of these switches
+
+18:39.870 --> 18:43.020
+at the top are configured as VTP clients.
+
+18:43.020 --> 18:46.650
+The host machines are in the red VLAN or green VLAN
+
+18:46.650 --> 18:48.093
+and currently the revision number
+
+18:48.093 --> 18:51.278
+for the domain is revision number two.
+
+18:51.278 --> 18:55.560
+So the latest configuration revision number is two.
+
+18:55.560 --> 18:58.410
+The VTP domain is Cisco
+
+18:58.410 --> 19:00.899
+and the VLANs that have been configured
+
+19:00.899 --> 19:03.480
+on the switches of VLANs red and green.
+
+19:03.480 --> 19:04.470
+Please note once again
+
+19:04.470 --> 19:06.750
+that the switches have a VLAN database.
+
+19:06.750 --> 19:09.090
+That is what VTP updates.
+
+19:09.090 --> 19:12.270
+The individual ports on the switches need to manually be put
+
+19:12.270 --> 19:14.020
+in the correct VLANs.
+
+19:14.020 --> 19:17.070
+Now, someone plugs another switch
+
+19:17.070 --> 19:20.846
+into the topology, from, for instance, a lab environment.
+
+19:20.846 --> 19:23.310
+The reason why this is dangerous is that
+
+19:23.310 --> 19:27.510
+in a lab environment, VLANs may have been added and removed
+
+19:27.510 --> 19:30.120
+and thus the revision number may be a lot higher
+
+19:30.120 --> 19:32.100
+than the production network.
+
+19:32.100 --> 19:33.420
+So let's assume for the moment
+
+19:33.420 --> 19:35.580
+that the revision number is 50
+
+19:35.580 --> 19:39.330
+this switch only has the blue VLAN configured on it.
+
+19:39.330 --> 19:42.000
+So the green and red VLANs do not exist
+
+19:42.000 --> 19:44.040
+in the VLAN database.
+
+19:44.040 --> 19:46.489
+A lot of people make the mistake of assuming
+
+19:46.489 --> 19:50.160
+that as long as the switch is configured as a VTP client
+
+19:50.160 --> 19:53.190
+it'll not cause any problems on the network.
+
+19:53.190 --> 19:54.670
+So an administrator plugs in the switch
+
+19:54.670 --> 19:58.410
+and configures this port as a trunk.
+
+19:58.410 --> 19:59.400
+Please note once again
+
+19:59.400 --> 20:02.610
+that VTP advertisements are only sent across trunk ports.
+
+20:02.610 --> 20:04.650
+So let's assume that throughout the network
+
+20:04.650 --> 20:07.839
+all of these links are configured as trunks.
+
+20:07.839 --> 20:11.400
+As soon as this client is added to the VTP domain.
+
+20:11.400 --> 20:13.020
+And what's really scary is
+
+20:13.020 --> 20:15.335
+that this client can be automatically updated
+
+20:15.335 --> 20:17.910
+with the VTP information.
+
+20:17.910 --> 20:20.550
+In other words, if it's configured with a null domain
+
+20:20.550 --> 20:24.090
+it can automatically join the current VTP domain of Cisco.
+
+20:24.090 --> 20:25.560
+And as soon as that happens
+
+20:25.560 --> 20:28.020
+the devices will synchronize their databases
+
+20:28.020 --> 20:30.660
+to the latest configuration revision number
+
+20:30.660 --> 20:32.283
+which in this case is 50.
+
+20:33.120 --> 20:35.070
+So in all switches in the live domain
+
+20:35.070 --> 20:37.680
+the revision numbers change to 50
+
+20:37.680 --> 20:40.830
+because all of the switches, including the VTP server
+
+20:40.830 --> 20:44.250
+will synchronize automatically to the VTP client.
+
+20:44.250 --> 20:47.010
+The current VLANs red and green
+
+20:47.010 --> 20:50.400
+are automatically removed from the VLAN database
+
+20:50.400 --> 20:53.116
+and the only VLAN that will now be available
+
+20:53.116 --> 20:58.116
+in the VLAN databases of all of these switches is VLAN blue.
+
+20:58.710 --> 21:00.226
+Now all of the ports
+
+21:00.226 --> 21:03.300
+on all the switches that have manually been put
+
+21:03.300 --> 21:07.560
+into the green or red VLAN are error disabled.
+
+21:07.560 --> 21:11.400
+The issue here is that a port belongs to the red VLAN
+
+21:11.400 --> 21:14.820
+but the red VLAN does not exist in the database.
+
+21:14.820 --> 21:17.670
+So the port is automatically error disabled.
+
+21:17.670 --> 21:18.503
+That means
+
+21:18.503 --> 21:21.420
+that no traffic can be central received on this port
+
+21:21.420 --> 21:24.630
+and the same thing happens on all other switches.
+
+21:24.630 --> 21:25.800
+Essentially what happens is
+
+21:25.800 --> 21:28.380
+that the entire network is brought down
+
+21:28.380 --> 21:31.080
+by the introduction of the single switch.
+
+21:31.080 --> 21:33.720
+That's extremely worrying to say the least
+
+21:33.720 --> 21:36.750
+that the introduction of a single switch can bring
+
+21:36.750 --> 21:39.720
+down an entire enterprise network.
+
+21:39.720 --> 21:42.240
+The only way to fix this is to physically connect
+
+21:42.240 --> 21:43.830
+to the VTP server
+
+21:43.830 --> 21:48.123
+and then manually add the VLANs that have been deleted.
+
+21:49.820 --> 21:53.070
+(light ambient music)

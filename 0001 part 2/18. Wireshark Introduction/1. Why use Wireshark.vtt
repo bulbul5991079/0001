@@ -1,0 +1,277 @@
+WEBVTT
+
+00:00.000 --> 00:02.833
+(energetic music)
+
+00:04.740 --> 00:05.573
+-: Now in this course,
+
+00:05.573 --> 00:07.710
+we are mainly using Cisco Packet Tracer
+
+00:07.710 --> 00:09.330
+to simulate networks.
+
+00:09.330 --> 00:12.450
+Cisco Packet Tracer is fantastic software.
+
+00:12.450 --> 00:15.390
+It allows us to simulate all kinds of networks.
+
+00:15.390 --> 00:18.090
+We can simulate routers, we can simulate switches,
+
+00:18.090 --> 00:21.030
+we can simulate wireless access points,
+
+00:21.030 --> 00:22.920
+wireless LAN controllers,
+
+00:22.920 --> 00:25.050
+all kinds of devices can be simulated
+
+00:25.050 --> 00:26.970
+using Cisco Packet Tracer,
+
+00:26.970 --> 00:28.680
+but it's a simulator.
+
+00:28.680 --> 00:31.200
+It doesn't actually show us what's happening
+
+00:31.200 --> 00:32.970
+in a real network.
+
+00:32.970 --> 00:35.130
+It gets us a long way there.
+
+00:35.130 --> 00:36.152
+Fantastic software
+
+00:36.152 --> 00:39.060
+for building virtual networks on your laptop,
+
+00:39.060 --> 00:40.740
+but if you really wanna see
+
+00:40.740 --> 00:42.960
+what's actually happening on a network,
+
+00:42.960 --> 00:45.660
+you need to use something like Wireshark.
+
+00:45.660 --> 00:49.230
+So in this course I'm gonna show you Wireshark captures
+
+00:49.230 --> 00:52.470
+and we are gonna dig deep into the packets.
+
+00:52.470 --> 00:55.050
+We are going to look at applications such
+
+00:55.050 --> 00:57.780
+as HTTP, FTP and others.
+
+00:57.780 --> 01:00.660
+I'm gonna show you how you can capture passwords
+
+01:00.660 --> 01:03.000
+off the wire or off the air
+
+01:03.000 --> 01:05.010
+if you are using a wireless network.
+
+01:05.010 --> 01:07.710
+So basically, Wireshark is what's called
+
+01:07.710 --> 01:09.360
+a protocol analyzer.
+
+01:09.360 --> 01:11.910
+It captures traffic off the wire
+
+01:11.910 --> 01:15.420
+and allows you to view packets that have been sent
+
+01:15.420 --> 01:18.090
+by either your device or other devices.
+
+01:18.090 --> 01:21.540
+If you use a mode called Promiscuous Mode.
+
+01:21.540 --> 01:25.050
+Basically, Wireshark is a fantastic tool
+
+01:25.050 --> 01:28.020
+that network engineers use to analyze networks
+
+01:28.020 --> 01:30.584
+and find out if there are problems on a network.
+
+01:30.584 --> 01:33.540
+(energetic music)
+
+01:33.540 --> 01:36.870
+In this example, it's gonna be voiceover IP traffic.
+
+01:36.870 --> 01:39.450
+In other words, we are gonna capture traffic
+
+01:39.450 --> 01:42.990
+between virtual phones as shown here
+
+01:42.990 --> 01:46.050
+as well as virtual phones and physical phones.
+
+01:46.050 --> 01:48.570
+I'm gonna make calls between these two phones
+
+01:48.570 --> 01:50.580
+and then we are gonna capture the traffic
+
+01:50.580 --> 01:53.340
+and then replay the voice call.
+
+01:53.340 --> 01:55.830
+And we are gonna use Wireshark for that.
+
+01:55.830 --> 02:00.830
+This is my second call, David Bombal speaking to himself.
+
+02:01.980 --> 02:05.553
+Click "Play streams" and there's our voice call.
+
+02:06.637 --> 02:11.637
+"This is my second call, David Bombal speaking to himself."
+
+02:13.590 --> 02:15.180
+Now to make it easier for you,
+
+02:15.180 --> 02:16.950
+rather than you trying to build
+
+02:16.950 --> 02:19.890
+some of the networks that I've created in this course,
+
+02:19.890 --> 02:22.830
+I've captured the packets in Wireshark
+
+02:22.830 --> 02:24.840
+and I've attached them to the course.
+
+02:24.840 --> 02:28.200
+So all you need to do is download the Wireshark captures
+
+02:28.200 --> 02:31.860
+and then you can follow along and follow what I'm doing.
+
+02:31.860 --> 02:34.020
+So you can actually try this yourself.
+
+02:34.020 --> 02:36.510
+Rather than trying to build a whole network,
+
+02:36.510 --> 02:39.450
+capture the packets and then try and follow along,
+
+02:39.450 --> 02:42.030
+you can simply download the Wireshark captures.
+
+02:42.030 --> 02:44.040
+So I've made this a lot easier for you.
+
+02:44.040 --> 02:45.780
+Just download the Wireshark captures
+
+02:45.780 --> 02:48.150
+and then you can try this yourself.
+
+02:48.150 --> 02:51.450
+Now obviously if you want to try this in your networks,
+
+02:51.450 --> 02:54.090
+either at home or in the office and so forth,
+
+02:54.090 --> 02:55.830
+but be careful.
+
+02:55.830 --> 02:58.950
+You need to have permission to capture traffic,
+
+02:58.950 --> 03:01.590
+especially if you're gonna be capturing passwords.
+
+03:01.590 --> 03:03.960
+So don't just go and capture any traffic anywhere.
+
+03:03.960 --> 03:05.760
+You could land in trouble.
+
+03:05.760 --> 03:07.230
+So make sure that you have permission
+
+03:07.230 --> 03:08.940
+to capture the packets of a network
+
+03:08.940 --> 03:11.100
+if it's not your own private network.
+
+03:11.100 --> 03:12.690
+Okay, so in the next video
+
+03:12.690 --> 03:15.840
+I'm gonna show you how to download Wireshark,
+
+03:15.840 --> 03:17.760
+how to install it on a Windows computer
+
+03:17.760 --> 03:20.190
+and I'll also show you how to install it on a Mac.
+
+03:20.190 --> 03:21.180
+And then I'm gonna show you
+
+03:21.180 --> 03:23.130
+how to interpret Wireshark captures,
+
+03:23.130 --> 03:25.020
+a really important skill to have.
+
+03:25.020 --> 03:29.070
+It's important that you know how to read Wireshark captures.
+
+03:29.070 --> 03:30.720
+So I'm introducing this now.
+
+03:30.720 --> 03:32.310
+It's quite a complex topic.
+
+03:32.310 --> 03:33.450
+You may struggle.
+
+03:33.450 --> 03:36.180
+Now, please don't worry if you struggle initially.
+
+03:36.180 --> 03:39.660
+All of us initially struggle with new technologies.
+
+03:39.660 --> 03:43.230
+Keep on studying, keep on learning, do the labs.
+
+03:43.230 --> 03:45.593
+That's probably the best advice I can give you.
+
+03:45.593 --> 03:49.740
+Keep on trying, keep on learning and you'll get it.
+
+03:49.740 --> 03:51.930
+Okay, so that's enough said about Wireshark.
+
+03:51.930 --> 03:52.763
+In the next video
+
+03:52.763 --> 03:55.191
+I'm gonna show you how to download and install Wireshark.
+
+03:55.191 --> 03:58.024
+(energetic music)

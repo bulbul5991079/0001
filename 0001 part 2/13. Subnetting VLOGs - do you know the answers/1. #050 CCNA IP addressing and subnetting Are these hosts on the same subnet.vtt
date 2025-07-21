@@ -1,0 +1,353 @@
+WEBVTT
+
+0
+00:09.260 --> 00:16.950
+I've been asked a number of times to explain whether devices on the same subnet or separate subnets.
+
+1
+00:17.040 --> 00:19.340
+In this example I've got two PCs.
+
+2
+00:19.530 --> 00:24.420
+The one on the left will be configured with an IP address of 10.1.1.1 and the
+
+3
+00:24.420 --> 00:28.940
+one on the right will be configured with an IP address of 10.1.2.2
+
+4
+00:29.220 --> 00:33.430
+So here's the question, Can these two hosts ping each other?
+
+5
+00:33.540 --> 00:37.350
+Are they in the same subnet?
+
+6
+00:37.360 --> 00:44.260
+It's a tricky question because you can't actually answer this question without knowing what the subnet
+
+7
+00:44.260 --> 00:45.700
+mask is.
+
+8
+00:45.700 --> 00:49.820
+You can't determine whether these two hosts on the same subnet
+
+9
+00:49.840 --> 01:00.020
+If you don't know what the subnet mask is. Now in this example rather than using a Windows PC, I'm using Cisco
+
+10
+01:00.020 --> 01:06.220
+routers as my PCs in my GNS3 topology.
+
+11
+01:06.270 --> 01:13.560
+Don't worry if you're not familiar with the Cisco CLI, I cover that in more detail in my CCNA course
+
+12
+01:13.830 --> 01:24.370
+but in this example what I'll firstly do is name the router on the left router 1 and the router on
+
+13
+01:24.370 --> 01:35.610
+the right I'll name as router 2 at the moment no IP addresses have been configured on the gigabit 0
+
+14
+01:35.640 --> 01:40.880
+interfaces of these routers so show IP interface brief.
+
+15
+01:41.190 --> 01:52.690
+Notice no IP address is configured on gigabit 00 on either router show IP interface gigabit 00 shows
+
+16
+01:52.690 --> 01:58.530
+us that to the interface is down Internet Protocol processing is disabled.
+
+17
+01:58.540 --> 02:00.920
+In other words IP doesn't work.
+
+18
+02:00.940 --> 02:09.100
+So what we need to do is go on to the gigabit 00 interface and no shut it that essentially enables the
+
+19
+02:09.100 --> 02:10.100
+interface
+
+20
+02:10.390 --> 02:15.740
+and then I need to configure an IP address on the interface.
+
+21
+02:15.760 --> 02:24.520
+So notice if I type IP address 10 1 1 1 and press enter, I'm told that that's an incomplete command.
+
+22
+02:25.240 --> 02:26.970
+The same is true on this side
+
+23
+02:27.340 --> 02:29.280
+I'll enable the interface.
+
+24
+02:29.320 --> 02:37.660
+And if I try and enable an IP address of 10 1 2 2, I'm told that that's an incomplete command.
+
+25
+02:37.750 --> 02:40.120
+You need to specify the subnet mask
+
+26
+02:43.600 --> 02:46.700
+so I'll do that on this side as well.
+
+27
+02:47.230 --> 02:54.730
+And notice now when I type show IP interface gigabit 0 0 we're told that the IP address configured
+
+28
+02:54.760 --> 03:03.770
+on this interface is 10.1.2.2 slash 24 on the side show IP interface gigabit 0 0.
+
+29
+03:03.860 --> 03:07.910
+We're told that the IP address is 10.1.1.1
+
+30
+03:08.040 --> 03:18.810
+This is using CIDR notation 24 equates to 24 binary ones which is the equivalent of doing it this way
+
+31
+03:19.580 --> 03:22.320
+in dotted decimal notation.
+
+32
+03:22.320 --> 03:28.570
+So do you say tomato or do you say tomato, do you say router or do you say router.
+
+33
+03:28.860 --> 03:36.750
+It's the same thing just a different way of phrasing it so 24 means 24 binary ones.
+
+34
+03:38.240 --> 03:42.390
+255 in decimal equates to 8 binary ones.
+
+35
+03:42.430 --> 03:48.580
+So this is 8 binary ones plus 8 binary ones plus 8 binary ones which equates to
+
+36
+03:48.580 --> 03:50.590
+24 binary ones.
+
+37
+03:50.590 --> 04:00.580
+So this is the same as this, what this is telling us is that the first 24 bits of the IP address is the
+
+38
+04:00.580 --> 04:02.500
+network portion.
+
+39
+04:02.500 --> 04:14.480
+In other words 255 first octet is network, 255 second octet is network, 255 third octet is network.
+
+40
+04:14.580 --> 04:17.560
+This is the network portion of the address.
+
+41
+04:17.700 --> 04:23.450
+This is the host portion based on the binary zeroes in the subnet mask, on this site
+
+42
+04:23.610 --> 04:27.160
+show run interface gigabit 00.
+
+43
+04:27.310 --> 04:29.940
+This is the network portion,
+
+44
+04:29.940 --> 04:32.130
+this is the host portion.
+
+45
+04:32.130 --> 04:38.370
+So when a device wants to ping another device it needs to determine whether the other device is in the
+
+46
+04:38.370 --> 04:46.010
+same subnet as itself the way it does that is it looks at the subnet mask and determines if the network
+
+47
+04:46.030 --> 04:53.340
+portion of the address is the same or if it's different if it's the same then the device will send out
+
+48
+04:53.340 --> 04:54.570
+an ARP.
+
+49
+04:54.570 --> 05:00.930
+Now if Ethernet is used the device will send out an ARP to work out which Mac address is associated with
+
+50
+05:00.930 --> 05:02.180
+the IP address.
+
+51
+05:02.340 --> 05:08.360
+If it's on a different subnet the device will typically forward the traffic to its default gateway.
+
+52
+05:08.360 --> 05:14.190
+Now in this example notice when we try and ping from  router 1 to router 2 the ping doesn't work
+
+53
+05:14.460 --> 05:23.910
+because these two devices are in different subnets, can router 2 acting as PC 2 ping router 1 acting
+
+54
+05:23.910 --> 05:25.100
+as PC 1?
+
+55
+05:25.410 --> 05:32.490
+No, it can't, and that's because they're in different subnets we'll use the command de-bug IP packets on this
+
+56
+05:32.530 --> 05:35.090
+side and do the ping again.
+
+57
+05:37.030 --> 05:40.100
+We're told that the packets are unrouteable
+
+58
+05:40.320 --> 05:42.920
+the router doesn't know what to do with the packets.
+
+59
+05:42.930 --> 05:45.970
+In other words it doesn't know where to forward the packets.
+
+60
+05:45.980 --> 05:57.220
+However, if we change the subnet mask it's all configured the same IP address but use a slash 16 mask.
+
+61
+05:57.540 --> 06:00.740
+So show IP interface gigabit 00.
+
+62
+06:01.080 --> 06:04.510
+Notice that slash 16 and I'll just do that again.
+
+63
+06:04.560 --> 06:13.050
+So show IP interface gigabit 00 slash 16 mask show run interface gigabit 00.
+
+64
+06:13.210 --> 06:25.210
+Notice it's 255 255 0.0 and I'll do the same on this side IP address 10 1 1 1,  255 255 0.0 so show
+
+65
+06:25.240 --> 06:30.640
+IP interface gigabit 00 notice it say slash 16 mask
+
+66
+06:30.640 --> 06:39.880
+So again show IP interface gigabit 00 IP address on the site is 10 1 1 1 slash 16 show run interface gigabit
+
+67
+06:40.940 --> 06:45.150
+00 IP address looks like this.
+
+68
+06:45.150 --> 06:47.770
+So can these two devices now ping each other
+
+69
+06:52.390 --> 06:57.740
+you've got a lot of debugs there so let's turn off the debugging and try again.
+
+70
+06:57.800 --> 07:05.860
+Notice the ping succeeds on this side ping 10 1 2 2 ping succeeds.
+
+71
+07:06.020 --> 07:10.550
+Now debugging on a router just allows you to see what's going on in the background.
+
+72
+07:10.700 --> 07:14.500
+So it allows you to troubleshoot what's happening on your network.
+
+73
+07:14.600 --> 07:25.880
+So notice by just changing the subnet mask I was able to get these devices to ping each other because
+
+74
+07:25.880 --> 07:28.910
+I've now told them that they are in the same subnet
+
+75
+07:31.540 --> 07:36.000
+When traffic is sent and we're using the debug will be able to see what's going on.
+
+76
+07:37.190 --> 07:44.810
+So notice here we had one failure, one ping failed indicated by the dot and then four exclamation marks
+
+77
+07:45.080 --> 07:48.420
+told us that the pings succeeded.
+
+78
+07:48.500 --> 07:56.090
+We had an encapsulation failure firstly because the device had to send out an ARP to determine the remote
+
+79
+07:56.420 --> 07:58.820
+PCs Mac address.
+
+80
+07:58.820 --> 08:06.580
+And then once that was done a full packet was sent so after ARP resolution the packets were sent out
+
+81
+08:07.030 --> 08:12.280
+onto the gigabit 00 interface to the destination 10 1 2 2
+
+82
+08:15.170 --> 08:19.040
+because these two devices are now in the same subnet.
+
+83
+08:19.210 --> 08:20.780
+They can ping each other.
+
+84
+08:20.980 --> 08:29.300
+They know that they're in the same subnet because 10.1 the network portion is the same on both sides.
+
+85
+08:29.310 --> 08:32.640
+Hope you found this video useful if it was a benefit to you.
+
+86
+08:32.830 --> 08:36.840
+Please like it and please subscribe to my YouTube channel.
+
+87
+08:36.860 --> 08:38.800
+I wish you all the very best.

@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00.360 --> 00:02.010
+Instructor: Duplex and speed negotiation
+
+00:02.010 --> 00:05.700
+is also important for connections between a PC and a switch.
+
+00:05.700 --> 00:09.240
+In this example, the PC is connected to the switch
+
+00:09.240 --> 00:11.970
+using this interface ethernet two.
+
+00:11.970 --> 00:12.803
+At the moment,
+
+00:12.803 --> 00:16.650
+the speed negotiated is 100 megabits per second.
+
+00:16.650 --> 00:20.793
+So here's the switch, show interface F 1 0 5.
+
+00:22.620 --> 00:27.620
+This interface is currently running at full duplex 100 meg
+
+00:27.840 --> 00:32.400
+on the switch, and that's what's been negotiated on the pc.
+
+00:32.400 --> 00:35.400
+So we can see 100 megabits per second.
+
+00:35.400 --> 00:40.400
+Now we could change some of the settings on the pc,
+
+00:41.576 --> 00:43.980
+so if we wanted to we could change
+
+00:43.980 --> 00:46.890
+the speed and duplex negotiation.
+
+00:46.890 --> 00:49.470
+At the moment, it's using auto negotiation
+
+00:49.470 --> 00:50.850
+but we could make a mistake
+
+00:50.850 --> 00:53.553
+and set it to one gigabits per second full duplex.
+
+00:56.400 --> 01:00.750
+On the switch, we see that the interface has gone down.
+
+01:00.750 --> 01:05.750
+It's supposedly come up again, so I'll just look
+
+01:06.660 --> 01:09.540
+at the duplex in the output.
+
+01:09.540 --> 01:12.813
+The switch is using 100 meg full duplex,
+
+01:14.190 --> 01:18.000
+and on the network card it's actually moved down
+
+01:18.000 --> 01:22.740
+to 100 meg rather than using the gigabit speed
+
+01:22.740 --> 01:24.003
+that we configured.
+
+01:24.840 --> 01:28.710
+But if the PC had accepted that speed
+
+01:28.710 --> 01:30.780
+of one gigabits per second full duplex,
+
+01:30.780 --> 01:33.450
+we would've had a duplex and speed mismatch
+
+01:33.450 --> 01:35.580
+between the switch and the pc
+
+01:35.580 --> 01:37.173
+which would of course problems.
+
+01:38.190 --> 01:41.280
+Let's set the PC to 10 meg
+
+01:41.280 --> 01:45.510
+and see if they can still negotiate properly.
+
+01:45.510 --> 01:47.103
+So interface has gone down.
+
+01:48.360 --> 01:52.173
+It's come up, and in this case it has negotiated properly.
+
+01:53.400 --> 01:58.143
+In gigabit ethernet, even when set manually,
+
+01:59.490 --> 02:02.880
+the device will still tell the other side
+
+02:02.880 --> 02:04.713
+what speed and duplex it's using.
+
+02:07.530 --> 02:11.670
+So things are a lot better than they were in the past.
+
+02:11.670 --> 02:14.920
+Let's set the side for auto negotiation
+
+02:15.960 --> 02:17.940
+but what I'll do now is on the switch
+
+02:17.940 --> 02:19.353
+configure it manually.
+
+02:21.570 --> 02:26.570
+So interface F 1 0 5 do show run interface F 1 0 5.
+
+02:29.610 --> 02:33.420
+Duplex and speed are not set, but let's set the speed
+
+02:33.420 --> 02:36.843
+to 100 meg, duplex to full.
+
+02:38.280 --> 02:41.610
+So the configuration looks as follows.
+
+02:41.610 --> 02:42.963
+Interface has come up.
+
+02:44.190 --> 02:46.140
+What is this site using?
+
+02:46.140 --> 02:48.423
+It's using 100 megabits per second.
+
+02:50.280 --> 02:55.280
+So do show interface F 1 0 5 pipe include duplex.
+
+02:56.580 --> 02:57.780
+That looks good.
+
+02:57.780 --> 03:00.100
+Let's set the duplex to half
+
+03:02.490 --> 03:07.023
+and the speed to 10.
+
+03:09.870 --> 03:14.130
+On this side, negotiation has taken place successfully
+
+03:14.130 --> 03:15.660
+so things are a lot better
+
+03:15.660 --> 03:19.290
+than they were years ago with duplex and speed,
+
+03:19.290 --> 03:23.520
+but generally the recommendation is to use auto negotiation
+
+03:23.520 --> 03:27.780
+of speed and duplex, allow both sides to negotiate
+
+03:27.780 --> 03:32.613
+to the highest speed and duplex that they both support.
+
+03:34.050 --> 03:37.743
+So I'll try and break this by going to 100 full duplex.
+
+03:40.320 --> 03:42.690
+Interface has gone down and come up
+
+03:42.690 --> 03:44.890
+but it's still successfully negotiated
+
+03:46.140 --> 03:49.713
+so it's still showing the speed of 10 meg.
+
+03:50.590 --> 03:53.190
+Let's however, configure it to go
+
+03:53.190 --> 03:56.850
+to the best possible speed and duplex.
+
+03:56.850 --> 03:58.953
+I'll set it to use auto negotiation.
+
+04:00.660 --> 04:05.640
+And on the switch we'll set the speed
+
+04:06.720 --> 04:09.843
+to auto duplex to auto,
+
+04:13.860 --> 04:15.660
+and as we can see
+
+04:15.660 --> 04:20.580
+show interface F 1 0 5 include duplex
+
+04:20.580 --> 04:23.520
+the output shows full duplex 100 meg
+
+04:23.520 --> 04:26.730
+so it has successfully negotiated
+
+04:26.730 --> 04:30.093
+with the PC to use 100 meg full duplex.
+
+04:30.960 --> 04:35.010
+So in summary, again auto negotiation is the way to go today
+
+04:35.010 --> 04:36.660
+if you are gonna hard code
+
+04:36.660 --> 04:39.573
+make sure that you hard code correctly on both sides.

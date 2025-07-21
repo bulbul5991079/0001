@@ -1,0 +1,353 @@
+WEBVTT
+
+0
+00:11.050 --> 00:19.300
+This is one of multiple IP addressing and subnetting scenarios rather than just working out the subnets
+
+1
+00:19.360 --> 00:20.880
+for a scenario.
+
+2
+00:21.220 --> 00:28.330
+We gonna work them out and then configure the devices so that we can practically design and configure
+
+3
+00:28.750 --> 00:30.480
+a Cisco IP network.
+
+4
+00:31.400 --> 00:37.400
+OK so now that we've worked out the subnets we need to configure the devices in our network.
+
+5
+00:37.430 --> 00:45.760
+Let's assume that these switches are Layer 2 switches the local area networks need to support up to
+
+6
+00:45.760 --> 00:52.580
+60 hosts including an IP address allocated to the switches and the routers.
+
+7
+00:52.900 --> 00:59.590
+So let's start with router 1 on the fastEthernet interface.
+
+8
+01:00.010 --> 01:02.910
+I'm gonna no shut the interface.
+
+9
+01:03.400 --> 01:11.170
+We need to configure an IP address so 192 168 1 and this is why subnetting is so important.
+
+10
+01:11.520 --> 01:14.530
+What address are we gonna allocate to the router?
+
+11
+01:14.530 --> 01:20.920
+So the network we're using is 192 186 1.0 slash 26.
+
+12
+01:21.000 --> 01:24.910
+So let's assume we want to use the last IP address for the router.
+
+13
+01:26.080 --> 01:32.500
+What is the first IP address and last IP address in the subnet?
+
+14
+01:32.720 --> 01:37.440
+So there are four addresses that we need to think about, we need to think about the subnet address that's
+
+15
+01:37.450 --> 01:41.690
+192 168 1.0 slash 26.
+
+16
+01:41.720 --> 01:45.380
+Then we need to work out the first IP address
+
+17
+01:45.550 --> 01:52.610
+or first host that can be allocated then we need to work out the last IP address and we need to work
+
+18
+01:52.610 --> 01:55.530
+out what the broadcast address is.
+
+19
+01:55.540 --> 02:04.780
+So we already have the subnet address, to work out the first IP address what you do is you set all binary
+
+20
+02:05.230 --> 02:10.760
+bits to 0 in the host portion except for the last bit.
+
+21
+02:10.800 --> 02:16.640
+So if you look at this that equates to 1 in decimal.
+
+22
+02:16.700 --> 02:22.220
+So the first host will be 192 168 1.1 slash 26.
+
+23
+02:25.040 --> 02:26.660
+There's our subnet.
+
+24
+02:26.720 --> 02:36.700
+There's our first host, to work out to the last address in the subnet you fill the host portion only the host
+
+25
+02:36.700 --> 02:39.440
+portion with binary ones.
+
+26
+02:39.640 --> 02:46.740
+Except for the last bit which is set to binary 0.
+
+27
+02:47.190 --> 02:54.010
+So notice the host portion is filled with binary ones except for the last bit.
+
+28
+02:54.200 --> 02:55.400
+So what does this equal.
+
+29
+02:55.430 --> 03:08.140
+It's 32 plus 16 which is 48 plus 8 which is 56 plus 4 which is 60 plus 2 which is 62.
+
+30
+03:08.950 --> 03:14.900
+So that equals 62 slash 26.
+
+31
+03:15.060 --> 03:17.600
+And what is the broadcast address equal to.
+
+32
+03:18.150 --> 03:23.910
+Now talk about easier ways to work this out but let's work it out as follows.
+
+33
+03:23.910 --> 03:30.600
+So to work out the broadcast what you do is you fill the host portion with binary ones and that will
+
+34
+03:30.600 --> 03:39.090
+give you 63 slash 26 so you can either count up all these bits or you do it in reverse.
+
+35
+03:39.090 --> 03:43.580
+You say it's 255 minus 128 minus 64.
+
+36
+03:43.580 --> 03:47.010
+This is why it's good to have this in the exam.
+
+37
+03:47.010 --> 03:53.420
+So when you go to the exam write this down so that you can work out the values.
+
+38
+03:53.460 --> 03:58.330
+So this address is a broadcast address so we can't allocate that to the router.
+
+39
+03:58.470 --> 04:02.780
+But what we can do is allocate the last IP address to the router.
+
+40
+04:02.930 --> 04:13.290
+So the routing needs to be configured as 192 168 1 62 and the mask is 255 255 255 192.
+
+41
+04:13.430 --> 04:29.150
+Remember the mask is 255 255 255 192, IP address again is 192 168 162 which is what we've configured
+
+42
+04:29.150 --> 04:29.870
+on the router.
+
+43
+04:29.960 --> 04:31.620
+So I can press enter.
+
+44
+04:32.240 --> 04:41.430
+So we've now configured the router and as an example, we should be able to ping ourselves which we
+
+45
+04:41.430 --> 04:46.940
+can and if we ping 63 that is actually a broadcast
+
+46
+04:49.550 --> 04:53.130
+so show IP interface fast
+
+47
+04:53.140 --> 05:03.730
+ethernet 0 slash 0 notice the router is configured as follows IP address is 192 168 162 slash 26.
+
+48
+05:03.730 --> 05:11.840
+This is all hosts, all network broadcast but this is a local subnet broadcast.
+
+49
+05:11.860 --> 05:18.430
+So again show run interface f0 slash, f0 slash zero, there is our configuration.
+
+50
+05:18.460 --> 05:20.320
+Now we need to configure the hosts
+
+51
+05:25.460 --> 05:34.620
+and let's assume that we're gonna configure the first host using the first IP address in the subnet.
+
+52
+05:34.620 --> 05:36.930
+So it's 192 168 1
+
+53
+05:40.610 --> 05:46.280
+so it needs to be configured as 192 168 1.1 slash 26.
+
+54
+05:46.380 --> 05:59.640
+So 1.1 subnet mask is 255 255 255 192, default gateway is 62 and I'll set the DNS to the
+
+55
+05:59.640 --> 06:10.220
+default gateway, click save let's start-up that host and open up a console to the host.
+
+56
+06:10.250 --> 06:11.290
+So here it is.
+
+57
+06:11.290 --> 06:18.170
+I have config eth zero, IP address of the host is configured as follows.
+
+58
+06:19.980 --> 06:21.790
+Mask is set to the following.
+
+59
+06:21.790 --> 06:27.390
+So ping 192 168 1.1 and ping itself can we ping the router.
+
+60
+06:27.510 --> 06:29.100
+Yes, we can.
+
+61
+06:29.100 --> 06:35.380
+Now, to prove that we could de-bug IP ICMP and ping from the host to the router.
+
+62
+06:35.670 --> 06:40.860
+You can see the pings are succeeding and we're getting it debug on the router.
+
+63
+06:40.890 --> 06:41.990
+Turn off the Debug.
+
+64
+06:42.180 --> 06:52.160
+Ping 192 168 1 21 router and ping the first PC show IP interface brief again.
+
+65
+06:52.370 --> 06:54.140
+This is the IP address of the router.
+
+66
+06:54.260 --> 06:57.440
+Let's configure the second PC 61
+
+67
+07:00.350 --> 07:03.880
+so I'll configure that statically
+
+68
+07:10.100 --> 07:22.410
+61 subnet mask is 255 255 255 192, router is 62 we'll set the DNS to the router
+
+69
+07:26.340 --> 07:30.850
+and start the PC up and open up a console.
+
+70
+07:30.910 --> 07:42.940
+So here's ubuntu 2, PC 2 I-F config ethe zero, IP address is 61 subnet mask is this, Can we ping
+
+71
+07:43.710 --> 07:45.100
+the router?
+
+72
+07:45.730 --> 07:46.510
+Yes, we can.
+
+73
+07:46.510 --> 07:47.790
+Can we ping the other host?
+
+74
+07:47.790 --> 07:49.580
+Yes, we can.
+
+75
+07:49.610 --> 07:53.900
+So we've configured the IP addresses on this subnet.
+
+76
+07:53.930 --> 07:54.870
+Now one last test.
+
+77
+07:54.890 --> 07:57.810
+Let's ping the broadcast address.
+
+78
+07:57.830 --> 08:05.500
+Notice the option we are told that we have to explicitly specify broadcast and when I broadcast the
+
+79
+08:05.500 --> 08:10.220
+router actually replies to that broadcast the other host doesn't.
+
+80
+08:10.480 --> 08:20.320
+But we are pinging the broadcast address when we use 63 so the broadcast isn't 192 168  1 255 the
+
+81
+08:20.330 --> 08:24.990
+broadcast address for the subnet is 192 168 1 63.
+
+82
+08:25.010 --> 08:29.450
+So we have successfully configured this subnet.
+
+83
+08:29.450 --> 08:35.330
+Now we need to configure this subnet and this gets a little bit more interesting because it's 192 1
+
+84
+08:35.330 --> 08:39.110
+68 1 64 slash 26
+
+85
+08:39.110 --> 08:40.990
+I hope you found this video useful.
+
+86
+08:41.090 --> 08:46.550
+If it was of benefit to you please like it and please subscribe to my YouTube channel.
+
+87
+08:46.880 --> 08:48.500
+I wish you all the very best.

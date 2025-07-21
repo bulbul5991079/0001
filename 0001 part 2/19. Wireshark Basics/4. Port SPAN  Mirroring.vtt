@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.960 --> 00:02.220
+-: So in this genus three topology
+
+00:02.220 --> 00:04.633
+I'm gonna add a device that will allow me to
+
+00:04.633 --> 00:07.260
+capture traffic basically as
+
+00:07.260 --> 00:10.230
+if I had a monitoring station in my network.
+
+00:10.230 --> 00:15.230
+So let's pretend the Ubuntu PC is a monitoring device.
+
+00:17.070 --> 00:19.290
+I'm not actually gonna use that for monitoring.
+
+00:19.290 --> 00:23.400
+I'm gonna use genus three to do it directly.
+
+00:23.400 --> 00:28.350
+But let's pretend you were running Wire shark
+
+00:28.350 --> 00:30.480
+on the Ubuntu PC.
+
+00:30.480 --> 00:32.310
+I could as an example
+
+00:32.310 --> 00:35.700
+use a Windows PC here rather than a Ubuntu
+
+00:35.700 --> 00:38.850
+but I'm going to simply capture the traffic this way.
+
+00:38.850 --> 00:41.950
+So again, if I start capturing on this link
+
+00:43.230 --> 00:48.060
+will I see the HGDP traffic from the PC to the server?
+
+00:48.060 --> 00:49.920
+I'll filter for HGDP here
+
+00:49.920 --> 00:53.163
+nothing at the moment, on the client.
+
+00:54.300 --> 00:56.160
+I'll refresh this page.
+
+00:56.160 --> 01:00.183
+Don't see anything, manually type it in, don't see anything.
+
+01:01.140 --> 01:03.423
+Shut that down, open it up again.
+
+01:04.320 --> 01:06.153
+Try and connect to the server.
+
+01:07.020 --> 01:11.610
+We don't see any HGDP traffic on this link
+
+01:11.610 --> 01:14.100
+but what I'm gonna do now is SPAN
+
+01:14.100 --> 01:16.473
+or mirror the port on the switch.
+
+01:17.520 --> 01:19.440
+So on switch one
+
+01:19.440 --> 01:22.230
+I'm gonna go into global configuration mode.
+
+01:22.230 --> 01:23.970
+I'm gonna type monitor.
+
+01:23.970 --> 01:26.010
+This goes by different terms.
+
+01:26.010 --> 01:30.840
+It's known as SPAN or monitor or mirroring.
+
+01:30.840 --> 01:34.170
+SPAN is known as switched port analyzer.
+
+01:34.170 --> 01:36.150
+We're gonna use the term monitor here.
+
+01:36.150 --> 01:38.970
+So I'm gonna monitor a session.
+
+01:38.970 --> 01:40.680
+I'm gonna give it a number one.
+
+01:40.680 --> 01:43.740
+I'm gonna specify the source interface
+
+01:43.740 --> 01:47.790
+as gigabit 0/0.
+
+01:47.790 --> 01:50.790
+So this interface is gonna be the source.
+
+01:50.790 --> 01:54.510
+And then I'm gonna say monitor session one
+
+01:54.510 --> 01:59.510
+destination interface, gigabit 0/3
+
+02:00.780 --> 02:03.810
+So source interface, destination interface.
+
+02:03.810 --> 02:05.850
+The switch is gonna copy all traffic
+
+02:05.850 --> 02:08.553
+from this interface to this interface.
+
+02:09.480 --> 02:12.150
+So let's prove that, this is the Wireshark capture
+
+02:12.150 --> 02:15.120
+from gigabit 0/3 to the Ubuntu host.
+
+02:15.120 --> 02:20.120
+In other words, over here, on the client, refresh the page.
+
+02:21.540 --> 02:24.900
+Notice I suddenly see HGDP traffic.
+
+02:24.900 --> 02:26.253
+Refresh the page again.
+
+02:27.405 --> 02:29.493
+I see more HGDP traffic.
+
+02:30.390 --> 02:32.400
+So because I'm spanning the port
+
+02:32.400 --> 02:35.910
+I can see the HGDP traffic.
+
+02:35.910 --> 02:38.220
+So if I had a monitoring station here
+
+02:38.220 --> 02:41.610
+so I was running a Windows computer or some other computer
+
+02:41.610 --> 02:45.420
+with Y shock directly on it, I would need to SPAN the port
+
+02:45.420 --> 02:47.920
+like I've done here to be able to see the traffic.
+
+02:50.640 --> 02:53.220
+Again, network vendors use different terms
+
+02:53.220 --> 02:58.220
+mirroring, monitoring, SPAN, but notice show monitor session
+
+03:00.090 --> 03:01.390
+and let's say session one
+
+03:02.460 --> 03:05.970
+you can see that we are capturing traffic
+
+03:05.970 --> 03:09.210
+in both directions on this port.
+
+03:09.210 --> 03:12.243
+And the destination port is gigabit 0/3.
+
+03:13.080 --> 03:14.430
+Capsulation is native.
+
+03:14.430 --> 03:17.733
+We're not adding any additional frames to the captures.
+
+03:18.570 --> 03:21.600
+So you'll actually see the original frames here.
+
+03:21.600 --> 03:22.980
+Notice source MAC address,
+
+03:22.980 --> 03:26.190
+PC going to the server, source IP address of PC
+
+03:26.190 --> 03:27.023
+to the server.
+
+03:27.023 --> 03:30.720
+So frame, packet, segment, random port number
+
+03:30.720 --> 03:31.980
+going to port 80.
+
+03:31.980 --> 03:36.000
+And you can see the actual request made there.
+
+03:36.000 --> 03:38.760
+So if we look at the server response
+
+03:38.760 --> 03:43.760
+we can see, for instance, the PNG file.
+
+03:43.860 --> 03:45.720
+Notice nothing was modified.
+
+03:45.720 --> 03:50.720
+So with a browser, it often caches the data locally.
+
+03:51.210 --> 03:56.210
+So it doesn't re-request all the data to save on bandwidth.
+
+03:56.340 --> 03:59.280
+But if I shut that browser down
+
+03:59.280 --> 04:04.280
+open it up again and go to the server
+
+04:04.587 --> 04:09.333
+and I'll go right down again, we see not modified.
+
+04:10.170 --> 04:12.030
+So let's actually do this.
+
+04:12.030 --> 04:15.510
+I'm gonna open up a private window and go
+
+04:15.510 --> 04:18.783
+to the server that way to force it to do everything again.
+
+04:21.750 --> 04:23.910
+So here we go, client request.
+
+04:23.910 --> 04:26.610
+Here's the reply from the server.
+
+04:26.610 --> 04:29.850
+And notice you can see all the data from the server.
+
+04:29.850 --> 04:32.910
+So you can see title of the webpage
+
+04:32.910 --> 04:35.940
+you can see the actual text in the webpage.
+
+04:35.940 --> 04:40.940
+So in summary, be careful of where you capture traffic.
+
+04:42.330 --> 04:45.330
+In this example, we wouldn't see the traffic
+
+04:45.330 --> 04:47.250
+on this link or on this link
+
+04:47.250 --> 04:51.960
+unless we enabled port monitoring or SPAN the port.
+
+04:51.960 --> 04:55.350
+In other words, you need to get the switch to copy frames
+
+04:55.350 --> 04:58.110
+from this interface out of this interface.
+
+04:58.110 --> 04:59.610
+It wouldn't normally do that
+
+04:59.610 --> 05:02.730
+if traffic was going from the client to the server.
+
+05:02.730 --> 05:04.830
+You have to enable the mirroring
+
+05:04.830 --> 05:07.290
+of traffic to be able to see it on a switch.
+
+05:07.290 --> 05:08.850
+With a hub, you wouldn't have to do that.
+
+05:08.850 --> 05:12.600
+A hub floods traffic out of all ports, but a switch doesn't.
+
+05:12.600 --> 05:14.340
+So once again, don't forget
+
+05:14.340 --> 05:17.100
+you need to be careful where you're monitoring traffic.
+
+05:17.100 --> 05:20.040
+If you want to see what's going on, as an example
+
+05:20.040 --> 05:21.090
+if you wanna see what's going on
+
+05:21.090 --> 05:22.350
+on this side of the network
+
+05:22.350 --> 05:26.070
+you want to put a probe or some device on that part
+
+05:26.070 --> 05:28.350
+of the network so that you can see what's going on.
+
+05:28.350 --> 05:31.470
+You could implement remote SPAN where you copy traffic
+
+05:31.470 --> 05:34.950
+through a tunnel from one side of the network to another.
+
+05:34.950 --> 05:36.240
+But you need to be careful with that
+
+05:36.240 --> 05:39.270
+because of overhead and because of the amount
+
+05:39.270 --> 05:41.340
+of traffic that you're gonna be receiving.
+
+05:41.340 --> 05:44.403
+So it would be better to capture traffic locally if you can.

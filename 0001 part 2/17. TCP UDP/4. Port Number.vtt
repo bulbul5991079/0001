@@ -1,0 +1,535 @@
+WEBVTT
+
+00:00.300 --> 00:02.370
+Lecturer: When a PC, for example, is connecting
+
+00:02.370 --> 00:04.860
+to a web server on the internet,
+
+00:04.860 --> 00:08.490
+traffic will be sent from a source IP address
+
+00:08.490 --> 00:10.830
+to a destination IP address.
+
+00:10.830 --> 00:12.840
+So, the source IP address in this transmission
+
+00:12.840 --> 00:14.920
+will be from the host 10111
+
+00:16.410 --> 00:19.620
+to the server 10121.
+
+00:19.620 --> 00:20.700
+Traffic will be routed
+
+00:20.700 --> 00:23.370
+from the PC to the server.
+
+00:23.370 --> 00:25.890
+And when the traffic arrives at the server,
+
+00:25.890 --> 00:28.470
+the server needs a way to differentiate
+
+00:28.470 --> 00:32.700
+which application to send this traffic to.
+
+00:32.700 --> 00:35.430
+Well-known port numbers are used
+
+00:35.430 --> 00:40.140
+for various common day applications like HTTP.
+
+00:40.140 --> 00:41.340
+So, this server will be running
+
+00:41.340 --> 00:46.260
+a web server application like IIS or Apache
+
+00:46.260 --> 00:50.280
+which serves up the webpages for the web browser.
+
+00:50.280 --> 00:52.320
+Using Apache as an example,
+
+00:52.320 --> 00:55.410
+the Apache server will be listening to traffic
+
+00:55.410 --> 00:57.660
+on Port 80, which is the well-known
+
+00:57.660 --> 00:59.313
+port number for HTTP.
+
+01:00.240 --> 01:01.920
+Your browser will automatically
+
+01:01.920 --> 01:04.710
+open up a connection to the service
+
+01:04.710 --> 01:07.140
+IP address on that port number,
+
+01:07.140 --> 01:08.763
+if the defaults are used.
+
+01:10.320 --> 01:11.490
+When that traffic arrives
+
+01:11.490 --> 01:13.200
+at the transport layer,
+
+01:13.200 --> 01:15.960
+TCP will send that traffic
+
+01:15.960 --> 01:18.600
+to port 80, the port number,
+
+01:18.600 --> 01:20.613
+the Apache server is listening on,
+
+01:21.990 --> 01:24.210
+and the Apache server, at the application layer,
+
+01:24.210 --> 01:26.733
+will process the data received.
+
+01:28.560 --> 01:30.870
+The PC will use a random source
+
+01:30.870 --> 01:34.050
+port number in a specific range.
+
+01:34.050 --> 01:37.230
+That range is dependent on the operating system
+
+01:37.230 --> 01:39.573
+and whether the IANA standards are followed.
+
+01:40.500 --> 01:41.940
+But essentially, a random port number
+
+01:41.940 --> 01:43.530
+is used as the source
+
+01:43.530 --> 01:45.180
+and a well-known port number is used
+
+01:45.180 --> 01:47.913
+as the destination in this conversation.
+
+01:49.050 --> 01:50.550
+When the reply from the server
+
+01:50.550 --> 01:52.860
+is sent back to the PC,
+
+01:52.860 --> 01:54.330
+note that the source address
+
+01:54.330 --> 01:56.370
+will be the server's IP address
+
+01:56.370 --> 01:58.683
+and the port number will be port 80.
+
+01:59.550 --> 02:01.230
+The destination IP address
+
+02:01.230 --> 02:03.870
+will be the PC's IP address
+
+02:03.870 --> 02:06.030
+and the port number the PC selected
+
+02:06.030 --> 02:08.160
+as the source port number.
+
+02:08.160 --> 02:11.460
+So note, return traffic has the IP addresses reversed
+
+02:11.460 --> 02:13.160
+and the port numbers are reversed.
+
+02:14.850 --> 02:17.280
+The PC's web browser,
+
+02:17.280 --> 02:19.800
+let's say for instance internet Explorer,
+
+02:19.800 --> 02:22.473
+will be listening on this port 60000.
+
+02:23.490 --> 02:25.050
+And when the traffic arrives
+
+02:25.050 --> 02:27.660
+at the PC's transport layer,
+
+02:27.660 --> 02:29.640
+in this case, TCP,
+
+02:29.640 --> 02:33.243
+TCP will push that traffic to Port 60000,
+
+02:34.110 --> 02:35.850
+the port number that Internet Explorer
+
+02:35.850 --> 02:37.983
+is expecting to receive the traffic on,
+
+02:39.510 --> 02:44.400
+thus port numbers bind layer 4 to layer 7,
+
+02:44.400 --> 02:46.713
+allowing applications to communicate.
+
+02:49.290 --> 02:50.970
+Now, there are some well-known port numbers
+
+02:50.970 --> 02:52.800
+that you need to remember.
+
+02:52.800 --> 02:54.810
+Well-known port numbers
+
+02:54.810 --> 02:58.833
+are in the range less than or equal to 1023.
+
+02:59.880 --> 03:04.120
+So, for example, HTTP uses port 80
+
+03:05.370 --> 03:08.043
+and TCP, as its transport layer protocol.
+
+03:09.960 --> 03:12.150
+FTP control,
+
+03:12.150 --> 03:13.800
+which is used for FTP server
+
+03:13.800 --> 03:15.540
+and client negotiation,
+
+03:15.540 --> 03:18.513
+uses Port 21, using TCP.
+
+03:19.530 --> 03:22.800
+FTP Data, which is used for the actual transmission
+
+03:22.800 --> 03:24.480
+of data in FTP,
+
+03:24.480 --> 03:28.323
+uses Port 20 and TCP.
+
+03:29.520 --> 03:33.000
+Telnet, used for management, uses Port 23
+
+03:33.000 --> 03:34.383
+and uses TCP.
+
+03:35.520 --> 03:38.280
+DNS is an interesting case
+
+03:38.280 --> 03:42.167
+because it uses both TCP and UDP
+
+03:43.470 --> 03:45.213
+and uses Port 53.
+
+03:46.050 --> 03:51.050
+DNS, primarily, uses UDP on port 53 to serve requests.
+
+03:52.080 --> 03:54.030
+In other words, when a host needs a resolution,
+
+03:54.030 --> 03:55.770
+for say, cisco.com,
+
+03:55.770 --> 03:57.723
+that will use UDP Port 53.
+
+03:58.680 --> 04:01.140
+TCP is used when the response data
+
+04:01.140 --> 04:03.690
+exceeds 512 bytes
+
+04:03.690 --> 04:06.183
+or for tasks such as zone transfers.
+
+04:07.230 --> 04:08.670
+Zone transfers are used
+
+04:08.670 --> 04:10.650
+for replication of databases
+
+04:10.650 --> 04:12.660
+containing DNS data
+
+04:12.660 --> 04:14.523
+across a set of DNS servers.
+
+04:17.130 --> 04:21.570
+TFTP uses UDP Port 69.
+
+04:21.570 --> 04:24.903
+And SNMP uses UDP Port 161.
+
+04:26.040 --> 04:28.713
+Once again, to see a list of port numbers,
+
+04:30.150 --> 04:33.003
+go to Google and type iana port numbers.
+
+04:35.430 --> 04:36.600
+And as you can see here,
+
+04:36.600 --> 04:39.433
+the internet assigned numbers authority for IANA.
+
+04:39.433 --> 04:42.513
+A port number list is available for viewing.
+
+04:44.820 --> 04:45.900
+As you can see here,
+
+04:45.900 --> 04:47.820
+the well-known port numbers on the range,
+
+04:47.820 --> 04:49.773
+zero to 1023.
+
+04:50.880 --> 04:52.650
+However, because of the number of applications
+
+04:52.650 --> 04:53.703
+that are in use,
+
+04:54.630 --> 04:55.950
+there's a second range known
+
+04:55.950 --> 04:57.390
+as the registered ports
+
+04:57.390 --> 05:02.390
+in the range 1024 through to 49151,
+
+05:03.180 --> 05:04.110
+which are generally used
+
+05:04.110 --> 05:05.973
+for proprietary applications.
+
+05:08.940 --> 05:11.490
+Dynamic or private port numbers
+
+05:11.490 --> 05:15.293
+on the range 49152 through to 65535.
+
+05:17.700 --> 05:18.540
+As you can see,
+
+05:18.540 --> 05:23.433
+the full port range is from zero to 65535.
+
+05:25.666 --> 05:26.940
+To search for a well-known application,
+
+05:26.940 --> 05:28.590
+I'm just going to use
+
+05:28.590 --> 05:30.540
+the key sequence control + F
+
+05:30.540 --> 05:33.420
+and then type in, for example, Telnet.
+
+05:33.420 --> 05:34.500
+And as you can see here,
+
+05:34.500 --> 05:36.513
+Telnet uses port 23.
+
+05:37.530 --> 05:41.160
+Now, both TCP and UDP could be used for Telnet
+
+05:41.160 --> 05:44.163
+but in most implementations, TCP is used.
+
+05:45.450 --> 05:46.590
+I could search for another protocol,
+
+05:46.590 --> 05:48.183
+like, let's say TFTP.
+
+05:49.290 --> 05:50.880
+And as you can see here,
+
+05:50.880 --> 05:53.670
+TFTP uses port 69.
+
+05:53.670 --> 05:57.030
+Once again, TCP or UDP could be used,
+
+05:57.030 --> 06:00.930
+but in real world applications, UDP is used.
+
+06:00.930 --> 06:03.780
+I could search, for example, for HTTP
+
+06:03.780 --> 06:05.043
+and as you can see here,
+
+06:06.600 --> 06:08.043
+notice port 80.
+
+06:09.180 --> 06:11.013
+There are many applications here,
+
+06:12.540 --> 06:16.293
+some of which, you may never have used or seen.
+
+06:17.580 --> 06:19.020
+Here's another example,
+
+06:19.020 --> 06:21.450
+bootp and its derivative,
+
+06:21.450 --> 06:24.843
+DHEP, used port 67 and 68.
+
+06:25.680 --> 06:27.420
+I could scroll down the list
+
+06:27.420 --> 06:29.493
+and show you many, many port numbers.
+
+06:31.380 --> 06:34.200
+Here's an example of VMware,
+
+06:34.200 --> 06:36.990
+and here's an example
+
+06:36.990 --> 06:39.690
+of some of the port numbers used by Bloomberg.
+
+06:39.690 --> 06:41.580
+Now, according to the IANA,
+
+06:41.580 --> 06:43.620
+there are three ranges of port numbers.
+
+06:43.620 --> 06:47.670
+Well-known port numbers are less than or equal to 1023,
+
+06:47.670 --> 06:49.620
+registered port numbers on this range
+
+06:49.620 --> 06:53.700
+1024 to 49151,
+
+06:53.700 --> 06:56.040
+and dynamically assigned port numbers
+
+06:56.040 --> 06:57.810
+which should be used by hosts
+
+06:57.810 --> 06:59.640
+when initiating sessions to,
+
+06:59.640 --> 07:01.200
+for instance, well-known port numbers
+
+07:01.200 --> 07:06.200
+on the range 49152 to 65535.
+
+07:06.210 --> 07:10.050
+However, vendor implementations do not necessarily
+
+07:10.050 --> 07:12.330
+follow that recommendation.
+
+07:12.330 --> 07:15.630
+Ephemeral port numbers are short-lived ports
+
+07:15.630 --> 07:18.840
+used for the client's side of a connection.
+
+07:18.840 --> 07:21.660
+So, when your PC initiates a session
+
+07:21.660 --> 07:23.040
+to a web server,
+
+07:23.040 --> 07:25.290
+an ephemeral port will be used.
+
+07:25.290 --> 07:26.310
+They are temporary
+
+07:26.310 --> 07:29.790
+and only last for the duration of the session.
+
+07:29.790 --> 07:30.657
+As I've shown you,
+
+07:30.657 --> 07:32.310
+the IANA suggests the range
+
+07:32.310 --> 07:36.930
+49152 to 65535.
+
+07:36.930 --> 07:41.930
+However, BSD uses this range 1024 through 4999.
+
+07:45.600 --> 07:50.493
+Linux or Linux uses ports 32768 to 61000.
+
+07:52.380 --> 07:54.420
+Windows through to server 2003,
+
+07:54.420 --> 07:58.260
+use the range 1025 to 5000.
+
+07:58.260 --> 07:59.940
+Windows Vista, and 7,
+
+07:59.940 --> 08:02.190
+use the actual IANA range
+
+08:02.190 --> 08:06.170
+and free BSD uses the IANA range since version 4.6.
+
+08:08.100 --> 08:09.060
+So, just be aware,
+
+08:09.060 --> 08:11.730
+the source port numbers used by hosts
+
+08:11.730 --> 08:16.080
+will vary based on the vendor implementation
+
+08:16.080 --> 08:18.120
+and which ephemeral port numbers
+
+08:18.120 --> 08:20.223
+that vendor has decided to use.
+
+08:21.180 --> 08:22.290
+So, in this example,
+
+08:22.290 --> 08:25.530
+this host, which may be running Windows Vista,
+
+08:25.530 --> 08:28.650
+is using a source port of 60000
+
+08:28.650 --> 08:31.080
+when connecting to this Apache server
+
+08:31.080 --> 08:32.853
+on well-known Port 80.

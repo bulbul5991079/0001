@@ -1,0 +1,121 @@
+WEBVTT
+
+0
+00:00.480 --> 00:07.530
+Some points to remember with regards to speed and duplex negotiation and mismatches. Duplex and speed
+
+1
+00:07.530 --> 00:15.900
+mismatches occur when auto-negotiation fails or when manual configurations are mismatched.
+
+2
+00:15.900 --> 00:21.600
+So, for example, one side is configured to use full-duplex and the other side is configured to use half
+
+3
+00:21.600 --> 00:29.220
+duplex auto-negotiation may fail because of physical problems in the network such as cabling problems
+
+4
+00:29.640 --> 00:36.400
+or a hub somewhere in the network duplex mismatches do cause performance problems.
+
+5
+00:36.660 --> 00:46.230
+Your pings may succeed but the movement of large files may be negatively affected and UDP may especially
+
+6
+00:46.500 --> 00:53.470
+have problems with recovering from duplex mismatch issues so a quick bit of history.
+
+7
+00:53.590 --> 00:58.880
+Originally ethernet was half duplex because devices were connected to hubs.
+
+8
+00:59.050 --> 01:06.370
+So a decision was made that when you can't negotiate with the other side you would revert back to 10
+
+9
+01:06.370 --> 01:11.990
+meg half-duplex older devices weren't designed to auto- negotiate.
+
+10
+01:12.070 --> 01:19.660
+So the auto-negotiating device would revert back to half-duplex mode if it wasn't able to negotiate
+
+11
+01:19.660 --> 01:27.340
+with the other side because it assumed that that device must only support half-duplex. Auto-negotiation
+
+12
+01:27.340 --> 01:33.130
+of speed and duplex didn't work well in the old days and often caused problems with the speed and duplex
+
+13
+01:33.130 --> 01:34.240
+mismatch.
+
+14
+01:34.690 --> 01:41.170
+If one side is using half-duplex and the other side is using full-duplex, the full-duplex side thinks
+
+15
+01:41.260 --> 01:45.540
+that it can transmit it any time even when it's receiving traffic.
+
+16
+01:45.580 --> 01:52.320
+The half-duplex side however because it uses carrier sense multiple access collision detection or CSMA
+
+17
+01:52.360 --> 01:56.990
+slash CD will want the line to be clear before transmitting.
+
+18
+01:57.220 --> 02:02.860
+And when it does transmit and the packet is transmitted by the other side running at full-duplex a collision
+
+19
+02:02.860 --> 02:03.790
+occurs.
+
+20
+02:04.090 --> 02:09.940
+So the half duplex side will back off because of the collision and then try and transmit again when
+
+21
+02:09.940 --> 02:16.780
+the line is clear and we'll have the constant issue of late collisions with the full-duplex side is
+
+22
+02:16.780 --> 02:20.680
+transmitting data and can starve the half duplex side.
+
+23
+02:20.680 --> 02:25.930
+In other words, it can use up all the bandwidth causing a lot of collisions and retransmissions on the
+
+24
+02:25.930 --> 02:31.900
+half-duplex side this would cause the frames on the half-duplex side to que up and eventually be dropped.
+
+25
+02:32.590 --> 02:33.790
+When looking for problems
+
+26
+02:33.790 --> 02:39.180
+have a look at the areas which I'll demonstrate in a moment on the full-duplex side you will see errors
+
+27
+02:39.190 --> 02:46.620
+such as CRC errors or runts, on the half-duplex side you typically see late collisions and perhaps
+
+28
+02:46.620 --> 02:52.750
+buffer overloading, management systems from companies such as solar winds and others allow you to see
+
+29
+02:52.750 --> 02:58.480
+where you've got Duplex problems on your network and help you resolve these issues more easily.

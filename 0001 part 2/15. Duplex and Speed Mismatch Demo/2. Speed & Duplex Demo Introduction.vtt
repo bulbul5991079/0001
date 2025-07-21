@@ -1,0 +1,149 @@
+WEBVTT
+
+0
+00:01.070 --> 00:08.780
+A number of years ago I had a customer who had a connection from the head office to a data center in
+
+1
+00:08.780 --> 00:15.090
+London and they raised a ticket stating that the connection to the data center was very slow.
+
+2
+00:15.320 --> 00:21.430
+They were connecting to a router with a VPN to the data center and throughput was very poor.
+
+3
+00:21.470 --> 00:26.320
+In other words they could ping the data center without any problems
+
+4
+00:26.480 --> 00:31.570
+but when they sent large files the connections were very very slow.
+
+5
+00:31.580 --> 00:38.210
+I went to site and on investigation I found that there was a duplex mismatch between a Cisco router
+
+6
+00:38.360 --> 00:44.720
+and a Cisco switch. Duplex mismatches used to cause a lot of problems in the past.
+
+7
+00:44.720 --> 00:49.060
+The negotiation of Duplex often failed on 10 100 links
+
+8
+00:49.340 --> 00:56.330
+and in those days it was recommended that you hard code speed and duplex on links between devices such
+
+9
+00:56.330 --> 01:02.990
+as Cisco routers and switches. Today, fortunately, things are a lot better today it's generally recommended
+
+10
+01:03.110 --> 01:09.650
+that you allow switches and routers to use auto-negotiation of duplex as well as speed.
+
+11
+01:09.650 --> 01:15.260
+Now in some cases, you may wannna hard code the speed and duplex between your switches and your routers
+
+12
+01:15.800 --> 01:23.110
+but be aware that if you configure it incorrectly you may end up with an issue such as the following.
+
+13
+01:23.120 --> 01:26.990
+Notice the switch is stating that there is a duplex mismatch on Fast
+
+14
+01:26.990 --> 01:32.560
+Ethernet 04 to another switch on FastEthernet 04 on the router.
+
+15
+01:32.570 --> 01:38.480
+We have a duplex mismatch on FastEthernet0 to the switch on Fast
+
+16
+01:38.480 --> 01:41.330
+Ethernet 0/3. In this video
+
+17
+01:41.330 --> 01:47.390
+I'm not using GNS3 I'm using physical switches and I'm simply using GNS3 to show you what the
+
+18
+01:47.390 --> 01:49.360
+topology looks like.
+
+19
+01:49.370 --> 01:57.020
+I have two routers each in turn connected to 2950 switches which are connected to 3750 switches and
+
+20
+01:57.020 --> 02:04.150
+I have a laptop connected on port F 0/5 to the first 3750 switch.
+
+21
+02:04.190 --> 02:08.220
+So let's have a look at some of the issues you may encounter with Duplex mismatches.
+
+22
+02:08.270 --> 02:12.820
+Remember that with full-duplex a device can transmit and receive at the same time.
+
+23
+02:13.040 --> 02:19.910
+Whereas with half-duplex only one side can send in other words a device cannot send and receive simultaneously
+
+24
+02:20.360 --> 02:25.040
+with half-duplex one party transmits and one party receives with full-duplex
+
+25
+02:25.040 --> 02:30.710
+both parties can transmit and receive at the same time half duplex was required for connections to hubs.
+
+26
+02:31.220 --> 02:34.080
+These days because of the use of Ethernet switches
+
+27
+02:34.130 --> 02:40.670
+we generally wanna use full-duplex which means as an example on this 100 megabits per second link
+
+28
+02:41.090 --> 02:46.040
+this switch can send traffic to the core switch at 100 megabits per second and at the same time the
+
+29
+02:46.040 --> 02:51.820
+core switch can send traffic to the 2950 switch at 100 megabits per second.
+
+30
+02:51.830 --> 02:59.000
+So we actually have a throughput in theory of 200 megabits per second 100 in each direction when using
+
+31
+02:59.000 --> 03:07.470
+full-duplex. Now I've cabled the link here to show you a problem with Duplex between two 2950s
+
+32
+03:07.640 --> 03:13.950
+and I'll also demonstrate auto-negotiation of speed and duplex between 3750s and 2950s
+
+33
+03:14.510 --> 03:17.330
+as well as a PC and a switch.
+
+34
+03:17.330 --> 03:22.760
+But before we do that let's have a look at some of the problems you may encounter when you have a duplex
+
+35
+03:22.760 --> 03:23.560
+mismatch.
+
+36
+03:23.750 --> 03:26.800
+As mentioned your throughput may be a problem.

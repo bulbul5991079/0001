@@ -1,0 +1,382 @@
+WEBVTT
+
+00:00.210 --> 00:02.220
+-: In this video, I'm gonna show you how to download
+
+00:02.220 --> 00:05.850
+and install Wireshark on a Windows computer.
+
+00:05.850 --> 00:08.100
+The process is fairly intuitive.
+
+00:08.100 --> 00:11.160
+First thing you need to do is open up a web browser
+
+00:11.160 --> 00:14.733
+and go to wireshark.org.
+
+00:17.400 --> 00:19.740
+This is the official Wireshark website
+
+00:19.740 --> 00:22.710
+so simply browse to wireshark.org
+
+00:22.710 --> 00:24.540
+and then click download.
+
+00:24.540 --> 00:26.820
+You then need to select the installer.
+
+00:26.820 --> 00:27.653
+In my example,
+
+00:27.653 --> 00:30.273
+it's gonna be a Windows installer 64 bit.
+
+00:31.110 --> 00:33.690
+I'm gonna save that to my local computer.
+
+00:33.690 --> 00:36.510
+If you're still running a 32 bit Windows operating system,
+
+00:36.510 --> 00:37.920
+you could select that,
+
+00:37.920 --> 00:40.200
+but I'm running Windows 10 here,
+
+00:40.200 --> 00:42.840
+64 bit operating system.
+
+00:42.840 --> 00:45.010
+I'm gonna open up the folder
+
+00:46.260 --> 00:49.053
+and then double click on the installation file.
+
+00:50.640 --> 00:53.853
+Click yes to start the installation process.
+
+00:55.080 --> 00:57.750
+And now I'm simply gonna just choose all the defaults.
+
+00:57.750 --> 00:59.730
+So click next.
+
+00:59.730 --> 01:03.060
+Now Wireshark is open source software.
+
+01:03.060 --> 01:07.170
+It's licensed under the GNU General Public License
+
+01:07.170 --> 01:08.880
+so you don't have to pay for Wireshark,
+
+01:08.880 --> 01:11.730
+but you need to agree to this license.
+
+01:11.730 --> 01:14.160
+Click agree to continue.
+
+01:14.160 --> 01:17.070
+I'm gonna install all the default components
+
+01:17.070 --> 01:18.330
+and click next.
+
+01:18.330 --> 01:22.140
+I'm also going to add a Wireshark desktop icon
+
+01:22.140 --> 01:23.580
+to my desktop.
+
+01:23.580 --> 01:24.690
+Click next.
+
+01:24.690 --> 01:27.360
+I'm gonna stay with the default installation directory.
+
+01:27.360 --> 01:28.560
+Click next.
+
+01:28.560 --> 01:31.650
+Click next again and click install.
+
+01:31.650 --> 01:33.390
+So basically all I did there
+
+01:33.390 --> 01:36.543
+was go through the default installation process.
+
+01:38.850 --> 01:42.960
+Now what Wireshark will do is add information
+
+01:42.960 --> 01:45.030
+to your network adapters.
+
+01:45.030 --> 01:47.673
+So at the moment, I've only got network adapter two.
+
+01:51.060 --> 01:55.053
+So you can see here, I've got Ethernet0 network two,
+
+01:58.380 --> 02:00.150
+but that will be updated.
+
+02:00.150 --> 02:03.930
+I'm going to agree to the Nmap installation.
+
+02:03.930 --> 02:05.910
+And again, just select the defaults
+
+02:05.910 --> 02:06.993
+and click install.
+
+02:10.500 --> 02:11.760
+You can look at the details if you like.
+
+02:11.760 --> 02:15.090
+Otherwise just wait for the installation to complete.
+
+02:15.090 --> 02:16.690
+It's a very simple installation.
+
+02:19.920 --> 02:21.270
+Going back through the installation,
+
+02:21.270 --> 02:25.470
+notice this installing Npcap Loopback adapter.
+
+02:25.470 --> 02:30.470
+So now, I've got this Npcap Loopback adapter
+
+02:31.890 --> 02:34.200
+that gets installed automatically.
+
+02:34.200 --> 02:36.003
+Click next, click finish.
+
+02:38.580 --> 02:40.770
+The Wireshark installation now completes.
+
+02:40.770 --> 02:43.260
+So notice it's extracting a bunch of files
+
+02:43.260 --> 02:45.840
+and installing Wireshark.
+
+02:45.840 --> 02:47.730
+The Wireshark software is now installed
+
+02:47.730 --> 02:49.620
+and you can see that's completed.
+
+02:49.620 --> 02:52.560
+Click next and click finish.
+
+02:52.560 --> 02:55.020
+So I've got Wireshark installed
+
+02:55.020 --> 02:56.220
+and I could run it,
+
+02:56.220 --> 02:58.090
+so I'll simply type Wireshark here
+
+02:58.950 --> 03:01.143
+and run the desktop application.
+
+03:04.140 --> 03:05.250
+So there you go.
+
+03:05.250 --> 03:07.680
+You can see various network adapters.
+
+03:07.680 --> 03:10.620
+So my Npcap Loopback adapter
+
+03:10.620 --> 03:12.720
+and my Ethernet0 adapter.
+
+03:12.720 --> 03:15.090
+That's the one that I want to capture traffic on
+
+03:15.090 --> 03:16.980
+so I'm simply gonna double click it.
+
+03:16.980 --> 03:19.110
+And as you can see now,
+
+03:19.110 --> 03:21.450
+it's starting to capture traffic.
+
+03:21.450 --> 03:24.630
+Now it's capturing a lot of traffic on my local network,
+
+03:24.630 --> 03:26.730
+including Dropbox traffic.
+
+03:26.730 --> 03:29.910
+What I'll do however, is go to a website
+
+03:29.910 --> 03:31.540
+such as cisco.com
+
+03:33.870 --> 03:38.310
+and then in Wireshark, I'll stop this capture
+
+03:38.310 --> 03:40.890
+and do a filter for HTTP.
+
+03:40.890 --> 03:42.450
+And what you can see here
+
+03:42.450 --> 03:45.393
+is I've been able to capture HTTP traffic.
+
+03:46.350 --> 03:47.490
+I can move these around
+
+03:47.490 --> 03:49.653
+so that's easier to read what's going on.
+
+03:51.480 --> 03:55.053
+But notice HTTP or hyper text transfer protocol,
+
+03:55.960 --> 03:57.840
+we can see this is actually traffic coming
+
+03:57.840 --> 03:59.553
+from a Microsoft website.
+
+04:00.840 --> 04:04.743
+So stuff is being sent to Microsoft.
+
+04:07.140 --> 04:09.150
+But notice here, HTTP.
+
+04:09.150 --> 04:10.810
+So there's my HTTP get
+
+04:11.790 --> 04:13.290
+and then I'm getting a message saying
+
+04:13.290 --> 04:15.720
+that the website has been moved.
+
+04:15.720 --> 04:18.300
+Basically, I'm being redirected
+
+04:18.300 --> 04:21.930
+to an HTTPS website
+
+04:21.930 --> 04:24.660
+rather than going to pure HTTP
+
+04:24.660 --> 04:27.990
+which is insecure, shouldn't be using it,
+
+04:27.990 --> 04:31.470
+I'm being redirected to a encrypted website.
+
+04:31.470 --> 04:32.850
+So hence being told
+
+04:32.850 --> 04:34.860
+that the website has been moved
+
+04:34.860 --> 04:36.090
+because I'm gonna be pushed
+
+04:36.090 --> 04:37.920
+to a encrypted website
+
+04:37.920 --> 04:41.913
+rather than using an insecure website.
+
+04:43.110 --> 04:46.530
+But the point is is that I can connect to the internet.
+
+04:46.530 --> 04:49.860
+Here's some traffic to amazontrust.com.
+
+04:49.860 --> 04:52.710
+So a whole bunch of stuff happening in the background
+
+04:52.710 --> 04:54.450
+on my network,
+
+04:54.450 --> 04:57.900
+but were you able to capture some traffic in your example?
+
+04:57.900 --> 05:01.650
+As always, be careful capturing traffic on a network.
+
+05:01.650 --> 05:02.910
+You need to have permission
+
+05:02.910 --> 05:04.233
+to capture the traffic.
+
+05:05.100 --> 05:06.390
+In my example, that's fine.
+
+05:06.390 --> 05:09.540
+This is my own local home network,
+
+05:09.540 --> 05:13.350
+but be careful capturing traffic
+
+05:13.350 --> 05:15.780
+on any network, especially a public network.
+
+05:15.780 --> 05:17.220
+You could get into trouble.
+
+05:17.220 --> 05:20.340
+So adhere to the laws of where you are.
+
+05:20.340 --> 05:23.520
+Ethical hacking means that you need to be careful.
+
+05:23.520 --> 05:25.200
+Don't just hack any network.
+
+05:25.200 --> 05:27.450
+Don't just access any network
+
+05:27.450 --> 05:29.700
+unless you really want to go to jail
+
+05:29.700 --> 05:32.340
+or you know, want to get a fine.
+
+05:32.340 --> 05:35.520
+Be careful, do things ethically.
+
+05:35.520 --> 05:36.353
+But there you go.
+
+05:36.353 --> 05:37.186
+Simple as that
+
+05:37.186 --> 05:39.240
+to download and install Wireshark
+
+05:39.240 --> 05:40.560
+on a Windows computer
+
+05:40.560 --> 05:42.003
+and then capture traffic.
+
+05:43.050 --> 05:43.890
+In subsequent videos,
+
+05:43.890 --> 05:46.110
+I'll show you more options in Wireshark,
+
+05:46.110 --> 05:48.360
+but I simply wanted to get you started
+
+05:48.360 --> 05:50.433
+downloading and installing Wireshark.

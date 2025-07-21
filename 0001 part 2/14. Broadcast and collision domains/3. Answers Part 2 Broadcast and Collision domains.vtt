@@ -1,0 +1,205 @@
+WEBVTT
+
+0
+00:19.720 --> 00:27.450
+We can also answer this question, How many broadcast domains are there in network 1?
+
+1
+00:27.570 --> 00:35.700
+So if I go back all the way to the original ARP message and then click capture forward the ARP message
+
+2
+00:35.690 --> 00:39.060
+is sent to the Hub.
+
+3
+00:39.090 --> 00:42.580
+Notice it's a broadcast at layer 2.
+
+4
+00:42.600 --> 00:53.730
+So what happens to broadcast traffic it gets flooded so we have one broadcast domain because a broadcast
+
+5
+00:53.790 --> 00:58.120
+sent to a hub is flooded.
+
+6
+00:58.910 --> 01:03.390
+So single broadcast domain in network 1
+
+7
+01:06.380 --> 01:15.140
+we can also prove that by rerunning a simulation so let's rerun the simulation.
+
+8
+01:15.260 --> 01:24.620
+I'm only going to look at ARP and ICMP traffic but on PC 1 what I'm gonna do now is send a broadcast
+
+9
+01:24.680 --> 01:35.900
+to 10 11 255 so this is a broadcast, I'll only send two packets notice the broadcast traffic is sent
+
+10
+01:35.930 --> 01:48.800
+to the hub when we look at the packet, source address is PC 1 we can see that again by looking at the
+
+11
+01:48.860 --> 01:50.480
+MAC address.
+
+12
+01:50.480 --> 01:56.610
+So notice the MAC address is PC 1, destination is a broadcast.
+
+13
+01:56.960 --> 02:05.780
+So the destination MAC address is set to that destination IP address is set to a broadcast 255 255 255
+
+14
+02:06.370 --> 02:07.500
+in Packet Tracer.
+
+15
+02:07.700 --> 02:14.850
+Source IP address is PC 1. Notice the broadcast goes to everyone.
+
+16
+02:14.850 --> 02:23.320
+So it's a single broadcast domain these devices will reply back but the traffic is flooded out of all
+
+17
+02:23.320 --> 02:24.370
+ports.
+
+18
+02:24.370 --> 02:33.920
+Notice we're getting a collision here so I'll reset the  simulation and let's look at another problem
+
+19
+02:35.170 --> 02:51.380
+if PC1 sends a ping to PC 4 and PC 2 sends a ping to PC 4 what's going to happen? So they're
+
+20
+02:51.380 --> 02:54.530
+both sending packets into the network.
+
+21
+02:57.990 --> 02:58.760
+In this example
+
+22
+02:58.760 --> 03:12.790
+PC 2 send an ARP, because it doesn't know the MAC address of PC 4 so here's the actual frame.
+
+23
+03:13.030 --> 03:22.270
+A quick recap of terminology to be precise and to be correct for the CCNA exam at layer 1 on the
+
+24
+03:22.270 --> 03:23.460
+OSI model.
+
+25
+03:23.560 --> 03:31.630
+We talk about bits at layer 2 in the OSI model we talk about frames at layer 3 we talk
+
+26
+03:31.630 --> 03:39.400
+about packets and at layer 4 we talk about segments and then we typically talk about data at
+
+27
+03:39.400 --> 03:41.050
+higher layers.
+
+28
+03:41.050 --> 03:48.520
+I'm often using terms interchangeably here but if you wanna be very precise about terminology at 
+
+29
+03:48.520 --> 03:56.110
+layer 1 it's bits, layer 2 its frames, layer 3 it's packets at layer 4 it's segments.
+
+30
+03:56.110 --> 04:00.990
+So notice at layer 2 the frame has a destination address of a broadcast.
+
+31
+04:03.350 --> 04:09.980
+That's causing problems with the frame that was sent by PC 1.
+
+32
+04:10.040 --> 04:17.660
+We've got a collision taking place here so there's a problem with the frames because of the collisions,
+
+33
+04:18.770 --> 04:24.530
+only one device can access the network at any time. So here
+
+34
+04:24.540 --> 04:31.260
+PC 1 is sending the ICMP message and a reply is sent back to PC 1
+
+35
+04:34.180 --> 04:39.100
+so run the simulation again, before I do that
+
+36
+04:39.100 --> 04:49.720
+I'm gonna make sure that PC 2 can ping PC 4 make sure that it's ARP cache is populated so
+
+37
+04:49.720 --> 04:50.670
+both
+
+38
+04:50.800 --> 05:02.770
+PC 2 and PC1 have PC 4s MAC address in the ARP cache and then what I'll do in simulation mode
+
+39
+05:03.550 --> 05:15.130
+is get PC 1 to ping PC 4 and get PC 2 to ping PC 4 so they both can send an ICMP packet.
+
+40
+05:16.750 --> 05:20.470
+When that hits the hub we have a collision.
+
+41
+05:20.860 --> 05:24.490
+You have a single collision domain when you have a hub.
+
+42
+05:24.910 --> 05:31.830
+So a hub is a single broadcast domain as well as a single collision domain.
+
+43
+05:31.870 --> 05:38.620
+We're gonna have problems with lots of collisions taking place as you add more and more devices to
+
+44
+05:38.620 --> 05:39.790
+a hub.
+
+45
+05:39.790 --> 05:42.120
+So be careful with hubs.
+
+46
+05:42.250 --> 05:50.320
+They are single collision domains and single broadcast domains so we can save for question 11, network
+
+47
+05:50.320 --> 05:56.770
+1 equals a single collision domain.
+
+48
+05:56.770 --> 06:06.160
+Be careful using hubs today we don't use hubs in wide infrastructures we use switches which we'll see
+
+49
+06:06.160 --> 06:07.030
+in a moment.
+
+50
+06:07.090 --> 06:09.430
+Have multiple collision domains.

@@ -1,0 +1,547 @@
+WEBVTT
+
+00:00.480 --> 00:02.790
+-: You need to be careful when using Wireshark
+
+00:02.790 --> 00:05.850
+to capture packets or frames from a network.
+
+00:05.850 --> 00:09.630
+You need to think about how traffic flows through a network
+
+00:09.630 --> 00:11.610
+and make sure that you're capturing
+
+00:11.610 --> 00:13.920
+in the right part of the network.
+
+00:13.920 --> 00:18.090
+So as an example, if PC1 opens up a browser
+
+00:18.090 --> 00:20.190
+and connects to the server,
+
+00:20.190 --> 00:22.440
+where do you need to capture the traffic?
+
+00:22.440 --> 00:24.900
+Now, it's obvious that you may capture here
+
+00:24.900 --> 00:26.490
+or may capture here,
+
+00:26.490 --> 00:28.530
+but what happens if you capture over here?
+
+00:28.530 --> 00:33.530
+Will you see the traffic sent from the client to the server?
+
+00:33.750 --> 00:35.880
+Notice we're seeing a whole bunch of traffic here.
+
+00:35.880 --> 00:39.930
+We're seeing EIGRP, we're seeing Spanning Tree.
+
+00:39.930 --> 00:44.773
+We see other protocols, but let's filter for HTTP.
+
+00:44.773 --> 00:47.193
+At the moment, we see no HTTP traffic.
+
+00:48.360 --> 00:52.143
+What happens when PC1 opens up a browser to the server?
+
+00:53.910 --> 00:58.910
+So I'll close this down and let's open up a browser
+
+00:59.462 --> 01:04.462
+and go to 10.1.1.100, so the server.
+
+01:06.720 --> 01:10.710
+Do we see any HTTP traffic?
+
+01:10.710 --> 01:11.913
+And the answer is no.
+
+01:12.900 --> 01:15.720
+If I clear the filters, I'll see a whole bunch of traffic.
+
+01:15.720 --> 01:18.030
+So as an example, I can see DNS.
+
+01:18.030 --> 01:19.290
+So there's DNS queries.
+
+01:19.290 --> 01:20.913
+So let's filter for DNS.
+
+01:22.530 --> 01:26.460
+Notice the client 10.1.1.1 sent a DNS query,
+
+01:26.460 --> 01:29.880
+you can see query here, to the DNS server.
+
+01:29.880 --> 01:32.610
+The source IP address is 10.1.1.1.
+
+01:32.610 --> 01:35.670
+Destination is 10.1.1.254.
+
+01:35.670 --> 01:40.670
+Now in this topology, the router is acting as a DNS server.
+
+01:41.160 --> 01:42.873
+This is a Cisco router.
+
+01:44.010 --> 01:46.920
+So show version here shows me
+
+01:46.920 --> 01:51.600
+that I'm running Cisco IOS software on this router.
+
+01:51.600 --> 01:54.480
+Now if you're not familiar with Cisco,
+
+01:54.480 --> 01:57.060
+again, you get free access to my CCNA course.
+
+01:57.060 --> 01:59.790
+So that'll teach a whole bunch about Cisco routers
+
+01:59.790 --> 02:02.610
+but you don't need to know that to use Wireshark.
+
+02:02.610 --> 02:04.890
+But if you want to be a serious network engineer,
+
+02:04.890 --> 02:08.250
+I strongly suggest that you learn about Cisco
+
+02:08.250 --> 02:11.070
+because Cisco the biggest vendor out there.
+
+02:11.070 --> 02:12.240
+But what I've done here, if I type
+
+02:12.240 --> 02:14.910
+show run | include dns,
+
+02:14.910 --> 02:18.720
+I have set up this router as a DNS server
+
+02:18.720 --> 02:21.570
+through this command: ip dns server.
+
+02:21.570 --> 02:24.180
+Now, these commands may be confusing,
+
+02:24.180 --> 02:25.350
+so let me show you that.
+
+02:25.350 --> 02:29.010
+The router is also acting as a DHCP server,
+
+02:29.010 --> 02:31.740
+or dynamic host configuration protocol server.
+
+02:31.740 --> 02:33.540
+In other words, it's allocating IP addresses
+
+02:33.540 --> 02:35.280
+to clients dynamically.
+
+02:35.280 --> 02:38.430
+The PCs are not configured with static IP addresses.
+
+02:38.430 --> 02:41.910
+They dynamically get IP addresses from the DHCP server.
+
+02:41.910 --> 02:45.840
+So this allows me to configure the router as a DHCP server
+
+02:45.840 --> 02:48.390
+and this command allows me to create entries
+
+02:48.390 --> 02:51.720
+in the DNS server running on this router
+
+02:51.720 --> 02:56.190
+that says gns3.com has this IP address.
+
+02:56.190 --> 02:59.220
+So as an example, if I ping gns3.com
+
+02:59.220 --> 03:03.900
+that resolves to this IP address, domain name server
+
+03:03.900 --> 03:05.310
+or domain name system.
+
+03:05.310 --> 03:10.310
+DNS allows us to resolve easy to read names to IP addresses.
+
+03:11.520 --> 03:14.190
+This GNS3 topology's not connected to the internet.
+
+03:14.190 --> 03:17.460
+It's running locally on my computer.
+
+03:17.460 --> 03:22.170
+So gns3.com, if you surf from an internet connected device,
+
+03:22.170 --> 03:24.600
+will take you to the actual GNS3 server.
+
+03:24.600 --> 03:26.580
+But in this example, it's simply taking us
+
+03:26.580 --> 03:29.610
+to this server in the topology.
+
+03:29.610 --> 03:31.960
+Now what I'll do is stop this Wireshark capture
+
+03:33.270 --> 03:34.533
+and I'll save this,
+
+03:38.220 --> 03:40.590
+Basic-Wireshark-Capture2.
+
+03:40.590 --> 03:41.910
+So you can also, once again,
+
+03:41.910 --> 03:44.430
+have a look at this capture if you want to.
+
+03:44.430 --> 03:46.200
+But notice here, that the client
+
+03:46.200 --> 03:48.660
+is sending a DNS request to the server.
+
+03:48.660 --> 03:49.830
+The reason this was captured
+
+03:49.830 --> 03:52.080
+is we were capturing traffic on this link,
+
+03:52.080 --> 03:54.960
+and the PC is sending a DNS request to the router,
+
+03:54.960 --> 03:56.373
+which is the DNS server.
+
+03:59.490 --> 04:01.830
+Source MAC address of the PC destination address
+
+04:01.830 --> 04:02.793
+is the router.
+
+04:06.750 --> 04:11.070
+We can prove that once again by going to the router,
+
+04:11.070 --> 04:12.660
+and I can use the command
+
+04:12.660 --> 04:17.660
+show interface gigabit 0/0.
+
+04:17.850 --> 04:20.820
+Notice the MAC address of this router is this
+
+04:20.820 --> 04:23.850
+and that's the destination MAC address of the frame.
+
+04:23.850 --> 04:27.300
+So the PC sent a DNS request to the router.
+
+04:27.300 --> 04:28.740
+Source IP address is a PC.
+
+04:28.740 --> 04:31.110
+Destination IP address is the router.
+
+04:31.110 --> 04:34.380
+I can prove that once again by going back to the router.
+
+04:34.380 --> 04:36.330
+Remember I typed this command.
+
+04:36.330 --> 04:37.860
+There's the MAC address,
+
+04:37.860 --> 04:39.887
+there's the IP address of the router,
+
+04:39.887 --> 04:42.960
+10.1.1.254.
+
+04:42.960 --> 04:44.850
+Source port number is an ephemeral,
+
+04:44.850 --> 04:47.220
+or random, or dynamic port number.
+
+04:47.220 --> 04:50.580
+Destination port number is a well known port number.
+
+04:50.580 --> 04:54.663
+53 is the well-known port number for DNS.
+
+04:55.740 --> 04:58.080
+So again, Layer 2 frames,
+
+04:58.080 --> 05:01.410
+Layer 3 packets, Layer 4 segments.
+
+05:01.410 --> 05:05.760
+In this case, however, it's UDP or user datagram protocol.
+
+05:05.760 --> 05:07.800
+It's not TCP.
+
+05:07.800 --> 05:10.920
+DNS, in this example, is using UDP.
+
+05:10.920 --> 05:13.277
+Source port again, destination port,
+
+05:13.277 --> 05:16.080
+to get to Layer 5 to 7.
+
+05:16.080 --> 05:18.690
+So top layers of the OSI model.
+
+05:18.690 --> 05:20.390
+You can see it's a standard query.
+
+05:21.900 --> 05:24.363
+Let's go through that standard query.
+
+05:26.760 --> 05:30.000
+So the queries are, in this example for MSN,
+
+05:30.000 --> 05:32.130
+so something was happening in the background,
+
+05:32.130 --> 05:35.610
+but let's have a look for gns3.com.
+
+05:35.610 --> 05:39.120
+But notice Windows just right out the gate
+
+05:39.120 --> 05:41.400
+is querying for a whole bunch of stuff,
+
+05:41.400 --> 05:43.800
+including bing.com.
+
+05:43.800 --> 05:45.810
+So a whole bunch of queries there.
+
+05:45.810 --> 05:50.220
+Let's see if we carry on a bunch of Microsoft MSN.
+
+05:50.220 --> 05:54.900
+Keep going, a lot of queries, but this is the one I'm after.
+
+05:54.900 --> 05:57.240
+Notice gns3.com.
+
+05:57.240 --> 06:00.120
+So the Windows PC, in this example,
+
+06:00.120 --> 06:02.550
+queried for gns3.com
+
+06:02.550 --> 06:06.030
+and the server, hopefully at some point, replies.
+
+06:06.030 --> 06:09.750
+Here we go, server reply back to the client.
+
+06:09.750 --> 06:11.310
+Notice source port is 53.
+
+06:11.310 --> 06:15.300
+Destination port is the ephemeral port used by the client.
+
+06:15.300 --> 06:17.280
+Now notice different port numbers
+
+06:17.280 --> 06:19.950
+were used for different queries.
+
+06:19.950 --> 06:23.940
+So the bing query over here used this source port number
+
+06:23.940 --> 06:24.933
+from the client.
+
+06:25.830 --> 06:28.530
+I'd have to go back and find the GNS3 query.
+
+06:28.530 --> 06:29.430
+There it is.
+
+06:29.430 --> 06:34.430
+Notice 55037 is the source port when the query was made.
+
+06:35.430 --> 06:37.020
+When the server replies,
+
+06:37.020 --> 06:39.718
+it's replying back to that port number
+
+06:39.718 --> 06:44.718
+and it tells the client the IP address of the server.
+
+06:45.300 --> 06:48.840
+So the router, acting as a DNS server, is telling the client
+
+06:48.840 --> 06:52.980
+gns3.com has this IP address: 10.1.1.100.
+
+06:52.980 --> 06:57.980
+And then the client can initiate a session to the server.
+
+06:58.350 --> 07:01.920
+But we don't see that if we capture traffic on this link.
+
+07:01.920 --> 07:06.920
+So again, if I filter for HTTP, I see nothing in the output
+
+07:10.680 --> 07:14.460
+because the HTTP traffic is sent directly
+
+07:14.460 --> 07:16.620
+from the client to the server.
+
+07:16.620 --> 07:18.783
+Why? Because this is a switch.
+
+07:19.950 --> 07:21.360
+It's important to remember
+
+07:21.360 --> 07:24.600
+that switches do not flood traffic
+
+07:24.600 --> 07:28.983
+once they know the MAC addresses involved in a conversation.
+
+07:31.980 --> 07:35.320
+So, as an example, if I type show mac address-table
+
+07:37.170 --> 07:41.700
+notice we can see the MAC addresses that have been learnt.
+
+07:41.700 --> 07:44.280
+The switch has learnt about this MAC address
+
+07:44.280 --> 07:46.080
+on gigabit 0/0.
+
+07:46.080 --> 07:48.360
+It's also learn about this MAC address,
+
+07:48.360 --> 07:52.500
+and it's learnt about this MAC address on gigabit 0/1.
+
+07:52.500 --> 07:56.580
+Now when I send traffic from the client,
+
+07:56.580 --> 07:58.650
+so that could have timed out,
+
+07:58.650 --> 08:00.723
+if I refresh that page,
+
+08:02.370 --> 08:06.600
+notice it's learnt about this MAC address on gigabit 0/2.
+
+08:06.600 --> 08:08.460
+Once the switch learns
+
+08:08.460 --> 08:11.670
+about the MAC addresses in the conversation,
+
+08:11.670 --> 08:13.473
+this once again is the server.
+
+08:15.060 --> 08:16.710
+And just in case you don't believe me,
+
+08:16.710 --> 08:21.710
+notice that this is the MAC address of the server.
+
+08:21.810 --> 08:24.033
+This is the HTTP server over here.
+
+08:25.470 --> 08:28.950
+Notice this MAC address was learnt on gigabit 0/2.
+
+08:28.950 --> 08:31.230
+Once this switch has learnt about the devices
+
+08:31.230 --> 08:33.510
+and the conversation, it's not going to flood the frames
+
+08:33.510 --> 08:34.560
+out of other ports.
+
+08:34.560 --> 08:37.380
+It's going to be switched directly between these two hosts.
+
+08:37.380 --> 08:42.380
+So the PC with this MAC address 00-0C, ending in DC-D7,
+
+08:48.240 --> 08:50.490
+in other words, this Mac address,
+
+08:50.490 --> 08:52.200
+is going to have its traffic forwarded
+
+08:52.200 --> 08:54.570
+directly to the server,
+
+08:54.570 --> 08:55.830
+and the server traffic is going to go
+
+08:55.830 --> 08:58.530
+directly back to the PC.
+
+08:58.530 --> 09:00.690
+So if you capture traffic on this link,
+
+09:00.690 --> 09:02.520
+you won't see the conversation
+
+09:02.520 --> 09:04.710
+between the server and the client.
+
+09:04.710 --> 09:09.360
+That's why you need to either span a port or mirror a port
+
+09:09.360 --> 09:12.030
+on the switch to be able to see what's going on.
+
+09:12.030 --> 09:14.040
+Or you need to have a network tap
+
+09:14.040 --> 09:17.430
+or something in the network where you can see the traffic.
+
+09:17.430 --> 09:21.180
+You've got to get the traffic to your capturing device,
+
+09:21.180 --> 09:23.070
+otherwise you won't see it.
+
+09:23.070 --> 09:25.110
+So in the next video, I'll show you how to do that.
+
+09:25.110 --> 09:27.180
+Let's add a mirror to the topology
+
+09:27.180 --> 09:29.380
+so that we can actually see what's going on.

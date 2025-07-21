@@ -1,0 +1,489 @@
+WEBVTT
+
+0
+00:11.060 --> 00:19.280
+This is one of multiple IP addressing and subnetting scenarios rather than just working out the subnets
+
+1
+00:19.370 --> 00:21.130
+for a scenario.
+
+2
+00:21.230 --> 00:28.340
+We're gonna work them out and then configure the devices so that we can practically design and configure
+
+3
+00:28.760 --> 00:30.520
+a Cisco IP network.
+
+4
+00:30.710 --> 00:35.150
+So we've successfully configured this subnet.
+
+5
+00:35.150 --> 00:40.830
+Now we need to configure this subnet and this gets a little bit more interesting because it's 192
+
+6
+00:40.850 --> 00:44.620
+168 1 64 slice 26.
+
+7
+00:45.200 --> 00:48.160
+So we already know what the subnet address is.
+
+8
+00:48.200 --> 00:51.660
+Now we need to work out what the first host address is. 
+
+9
+00:51.740 --> 00:55.040
+So what is the first host for this network?
+
+10
+00:58.110 --> 00:59.940
+Now to work out to the first host.
+
+11
+00:59.970 --> 01:06.680
+You make the host portion zeros except for the last bit which is set to 1.
+
+12
+01:07.170 --> 01:14.960
+But to work out the decimal value over here you need to look at the entire octet.
+
+13
+01:15.000 --> 01:21.770
+So this is 64 because that's the network plus one is 65.
+
+14
+01:22.220 --> 01:24.600
+So the first host is 65.
+
+15
+01:25.100 --> 01:27.230
+What is the last host.
+
+16
+01:27.290 --> 01:34.890
+The easiest way to work that out actually is to do broadcast first and then work out the last host.
+
+17
+01:34.920 --> 01:44.790
+So for the broadcast what we do is we fill the host portion with binary ones.
+
+18
+01:44.900 --> 01:46.290
+So what is that?
+
+19
+01:48.280 --> 01:55.460
+It's 255 less 128 which is 127.
+
+20
+01:56.190 --> 02:01.360
+So the broadcast address is 192 168 1 127.
+
+21
+02:01.410 --> 02:08.850
+Now the last host is one less than the broadcast address.
+
+22
+02:08.970 --> 02:16.960
+So for the last host, we set the host portion to binary ones except for the last bit.
+
+23
+02:17.210 --> 02:22.880
+So what does that equal to, that's equal to 126.
+
+24
+02:22.890 --> 02:28.920
+So let's assume that we configure the router with the last IP address in the subnet and then we're going
+
+25
+02:28.920 --> 02:35.360
+to enable DCHP on the router to allocate IP addresses to the hosts.
+
+26
+02:35.450 --> 02:42.900
+So here's router 2, on the fast ethernet interface I'm gonna no shut the interface and then I'm
+
+27
+02:42.900 --> 02:50.430
+gonna configure an IP address as we worked out 192 168 1 126
+
+28
+02:50.610 --> 02:57.210
+And then we need to specify the subnet mask 255 255 255 192, so can we ping 
+
+29
+03:00.660 --> 03:01.530
+our local address?
+
+30
+03:01.530 --> 03:03.780
+Yes, we can.
+
+31
+03:03.780 --> 03:07.740
+Now for host allocation let's use DHCP.
+
+32
+03:08.220 --> 03:17.440
+So we'll create a DHCP pool with a name, New York and here we need to specify the network.
+
+33
+03:17.460 --> 03:22.360
+So what is the network? It's 192 168 1 64
+
+34
+03:22.890 --> 03:29.260
+And here we have an option we can either use slash 26 or the dotted decimal notation.
+
+35
+03:29.760 --> 03:40.420
+So let's use CIDR or slash 26, do show run will allow us to see our configuration.
+
+36
+03:40.420 --> 03:44.350
+So that's what we've done in the DHCP pool.
+
+37
+03:44.370 --> 03:47.080
+Now we need to configure a default gateway.
+
+38
+03:47.360 --> 03:52.740
+So our default gateway is gonna be 192 168 1 126.
+
+39
+03:52.920 --> 03:59.190
+There are other options that we can specify in DHCP such as DNS server.
+
+40
+03:59.820 --> 04:05.530
+And in this case, let's set the DNS server to the local router in the real world you probably have a
+
+41
+04:05.530 --> 04:07.280
+separate DNS server.
+
+42
+04:07.870 --> 04:08.590
+So show run
+
+43
+04:11.890 --> 04:19.280
+there's the DHCP pool that we've configured we've configured the default gateway or default router and
+
+44
+04:19.280 --> 04:24.800
+DNS server, now in the hosts
+
+45
+04:24.900 --> 04:26.700
+let's see if they get IP addresses.
+
+46
+04:29.520 --> 04:36.260
+So on the hosts we're gonna configure them to use DHCP rather than static IP addresses.
+
+47
+04:36.750 --> 04:44.830
+So let's do that on both hosts or both PCs.
+
+48
+04:45.050 --> 04:47.200
+Change them to use DHCP.
+
+49
+04:47.660 --> 04:54.130
+And then let's start them up and let's see if they get an IP address from the DHCP server.
+
+50
+04:55.160 --> 04:57.590
+Open up a console to both of them.
+
+51
+04:57.680 --> 05:05.680
+So here you can see the first host got an IP address 192 168 1 65.
+
+52
+05:05.860 --> 05:11.200
+And the second host got an IP address of 192 168 1 66.
+
+53
+05:11.200 --> 05:13.750
+So can the second host ping the first host?
+
+54
+05:13.810 --> 05:15.950
+Yes, it can.
+
+55
+05:16.310 --> 05:20.520
+Will it be able to ping the default gateway.
+
+56
+05:20.560 --> 05:22.060
+Let's try that.
+
+57
+05:22.720 --> 05:24.040
+Yes, it can.
+
+58
+05:24.700 --> 05:32.410
+So we've successfully configured the New York site with an IP address on the default gateway and we've
+
+59
+05:32.410 --> 05:34.530
+set up a DHCP.
+
+60
+05:34.540 --> 05:41.390
+Now one thing you wanna do when you set up a DHCP pool like this is specify the excluded address.
+
+61
+05:41.560 --> 05:49.130
+We don't want the DHCP server to allocate its own address so we can use the command IP DHCP server
+
+62
+05:52.310 --> 05:55.990
+or rather IP DHCP excluded address.
+
+63
+05:56.510 --> 06:04.910
+And we can specify a range of addresses to exclude and this example will only exclude the local routers
+
+64
+06:04.970 --> 06:12.810
+IP address so we excluded the local routers IP address which means that it won't be allocated through
+
+65
+06:12.810 --> 06:14.580
+DHCP.
+
+66
+06:14.940 --> 06:20.520
+I'll save the routers configuration and while we're here let's save router 1s configuration.
+
+67
+06:23.080 --> 06:27.300
+OK, so at this point we've configured both San Francisco and New York.
+
+68
+06:27.430 --> 06:31.050
+The next step is to configure the WAN connection.
+
+69
+06:31.060 --> 06:38.950
+Now it's inefficient to use a subnet that supports 62 hosts for a network that only requires two.
+
+70
+06:39.640 --> 06:44.910
+But for now, let's start off by using the subnet that we allocated.
+
+71
+06:45.460 --> 06:51.500
+And then in a subsequent video, I'll show you how to optimize this, so on router 1
+
+72
+06:51.750 --> 06:57.120
+let's allocate the first IP address in the subnet to the router.
+
+73
+06:57.400 --> 07:02.670
+So that's essentially one more than the subnet address.
+
+74
+07:02.830 --> 07:07.990
+So 129 and one more than that
+
+75
+07:10.430 --> 07:11.410
+would be 130
+
+76
+07:14.870 --> 07:25.250
+with our subnet mask so what you'll notice is the first IP address is one more than the subnet address and
+
+77
+07:25.250 --> 07:33.750
+the last IP address is one less than the broadcast address so we need to no shut these two interfaces
+
+78
+07:34.560 --> 07:42.340
+and what should happen now is router 1 should be able to ping router 2 which it can.
+
+79
+07:42.820 --> 07:50.330
+So we've successfully configured the IP addresses on the WAN and on both LAN interfaces but to enable
+
+80
+07:50.330 --> 07:54.480
+full connectivity in this network we need to run a routing protocol.
+
+81
+07:54.980 --> 08:04.850
+And in this example, I'll run EIGRP and enable the EIGRP on network 192 168 1.0
+
+82
+08:04.910 --> 08:08.780
+Now that is a class full network.
+
+83
+08:08.780 --> 08:17.720
+In other words, it's looking at class C 192 168 1.0 and not to the subnet addresses on the side
+
+84
+08:17.720 --> 08:19.560
+we'll do something similar.
+
+85
+08:19.650 --> 08:22.530
+Network 192 168 1.0, I'll
+
+86
+08:22.610 --> 08:30.740
+disable automatic summarization so that they don't automatically summarize any network's show IP EI
+
+87
+08:30.760 --> 08:36.630
+GRP neighbor, notice a neighbor relationship is established to router 2
+
+88
+08:37.070 --> 08:38.780
+and we should see something similar here.
+
+89
+08:38.780 --> 08:45.980
+Show IP EIGRP neighbor, neighbor relationship is established to router 1 show IP route.
+
+90
+08:46.460 --> 08:54.130
+Notice router 1 has 192 168 1.0 directly connected on fast
+
+91
+08:54.140 --> 09:02.950
+ethernet 00 and 192 168 1 128 directly connected to serial to slash 0.
+
+92
+09:02.960 --> 09:04.700
+Those are the two subnets.
+
+93
+09:04.700 --> 09:14.700
+It's also learnt about network 192 168 1 64 from 192 168 1 130.
+
+94
+09:14.700 --> 09:22.100
+In other words router 2, in the same way router 2 has 192 168 1 64 directly connected to fast
+
+95
+09:22.110 --> 09:30.720
+Ethernet 0 slash 0 and 192 168 1 128 is directly connected to serial 2 slash 0.
+
+96
+09:30.920 --> 09:37.280
+This router has learnt about a network through EIGRP from 192 168 1 129.
+
+97
+09:37.280 --> 09:44.570
+In other words router 1 and it's learnt about network 192 168 1.0 so router 1 at this point should be able
+
+98
+09:44.570 --> 09:51.580
+to ping PC 3 and PC 4, and the ping succeed.
+
+99
+09:52.650 --> 09:59.380
+Now, if you remember PC 3 was allocated this IP address and we can confirm that by using the command
+
+100
+09:59.510 --> 10:06.470
+IF config Ethernet0 is the IP address of PC 3, PC 4 IF config
+
+101
+10:06.510 --> 10:07.880
+Eth 0
+
+102
+10:07.950 --> 10:20.360
+There's the IP address of PC 4, so router 1 is able to ping both the PCs, now can PC one ping those
+
+103
+10:20.410 --> 10:25.450
+PCs. So can we ping 192 168 1 65?
+
+104
+10:25.660 --> 10:26.900
+Yes, we can.
+
+105
+10:27.130 --> 10:29.180
+And 66? Yes, we can.
+
+106
+10:29.500 --> 10:35.010
+Let's trace to 192 168 1 65.
+
+107
+10:35.070 --> 10:38.600
+Notice the trace goes to 192 168 1
+
+108
+10:38.680 --> 10:42.660
+62, router 1.
+
+109
+10:42.750 --> 10:51.090
+Then it goes to 192 168 1 130 which is router 2 on the serial subnet and then it goes to 192 16
+
+110
+10:51.090 --> 10:55.570
+8 165, which is PC 3.
+
+111
+10:55.590 --> 10:56.110
+Be careful.
+
+112
+10:56.130 --> 10:59.220
+These are separate subnets.
+
+113
+10:59.220 --> 11:04.660
+These hosts are in different subnets, so that was an example of subnetting.
+
+114
+11:04.890 --> 11:11.680
+We took a network, we created subnets, we worked out the subnet address, first host address, last host
+
+115
+11:11.680 --> 11:17.910
+address and broadcast the address and we configured the network accordingly and then we tested that
+
+116
+11:17.910 --> 11:19.290
+it worked.
+
+117
+11:19.290 --> 11:24.240
+That was a simple example of a practical implementation of subnetting but it's really important that
+
+118
+11:24.240 --> 11:26.200
+you know how to subnet.
+
+119
+11:26.210 --> 11:27.520
+I hope you enjoyed this video.
+
+120
+11:27.660 --> 11:32.300
+If you did please like it and please subscribe to my YouTube channel.
+
+121
+11:32.310 --> 11:33.930
+I wish you all the very best.

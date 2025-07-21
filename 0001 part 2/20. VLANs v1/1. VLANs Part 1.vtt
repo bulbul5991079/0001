@@ -1,0 +1,1153 @@
+WEBVTT
+
+00:00.139 --> 00:02.972
+(inspiring music)
+
+00:09.060 --> 00:10.140
+Instructor: Welcome back.
+
+00:10.140 --> 00:12.060
+In this section we're gonna look at VLANs
+
+00:12.060 --> 00:15.210
+or virtual local area networks.
+
+00:15.210 --> 00:18.420
+We are gonna virtualize our infrastructure.
+
+00:18.420 --> 00:20.730
+Virtualization is a big topic today
+
+00:20.730 --> 00:24.000
+with companies such as VMware virtualizing servers,
+
+00:24.000 --> 00:26.190
+but VLANs have been around for many years.
+
+00:26.190 --> 00:27.030
+And in a similar way,
+
+00:27.030 --> 00:29.040
+we're gonna be virtualizing our switches,
+
+00:29.040 --> 00:32.490
+where one physical switch is virtually multiple switches.
+
+00:32.490 --> 00:34.260
+This is not full virtualization,
+
+00:34.260 --> 00:37.020
+we're just virtualizing the local area networks
+
+00:37.020 --> 00:38.700
+on that specific switch.
+
+00:38.700 --> 00:40.560
+So, I wanna give you an overview of VLANs
+
+00:40.560 --> 00:42.090
+and how they operate.
+
+00:42.090 --> 00:44.040
+We need to talk about trunking protocols
+
+00:44.040 --> 00:48.030
+like 802.1Q and ISL, or inter switch link.
+
+00:48.030 --> 00:51.240
+I wanna explain virtual trunking protocol or VTP,
+
+00:51.240 --> 00:54.240
+which allows us to create VLANs on a single switch
+
+00:54.240 --> 00:56.310
+and have that VLAN information propagated
+
+00:56.310 --> 00:58.530
+to other switches in the topology.
+
+00:58.530 --> 01:01.080
+VTP can be a very useful protocol,
+
+01:01.080 --> 01:02.970
+but can be extremely dangerous
+
+01:02.970 --> 01:04.650
+and has caused a lot of problems
+
+01:04.650 --> 01:07.080
+for Cisco engineers over the years,
+
+01:07.080 --> 01:09.300
+and these days a lot of us will just turn it off
+
+01:09.300 --> 01:12.663
+and never use it because of its inherent dangers.
+
+01:13.620 --> 01:15.420
+Now, an incorrectly designed network
+
+01:15.420 --> 01:18.300
+or poorly-designed network has multiple issues.
+
+01:18.300 --> 01:20.640
+In this simple topology as a example,
+
+01:20.640 --> 01:23.040
+we have a switch with a hub.
+
+01:23.040 --> 01:25.620
+This is a single broadcast domain.
+
+01:25.620 --> 01:28.890
+So, if this host A started broadcasting
+
+01:28.890 --> 01:31.890
+that broadcast would be received by everyone.
+
+01:31.890 --> 01:33.900
+Now, that may not be a problem,
+
+01:33.900 --> 01:36.570
+but if the NIC starts jabbering, in other words,
+
+01:36.570 --> 01:39.810
+sending out broadcast after broadcast after broadcast,
+
+01:39.810 --> 01:42.000
+it can flood through your entire network
+
+01:42.000 --> 01:45.000
+and cause a lot of issues, as every device in the network
+
+01:45.000 --> 01:47.430
+needs to process that broadcast.
+
+01:47.430 --> 01:49.980
+This issue exponentially increases
+
+01:49.980 --> 01:53.310
+as the number of hosts on the network increases.
+
+01:53.310 --> 01:55.590
+More and more hosts are sending broadcasts,
+
+01:55.590 --> 01:58.500
+more and more hosts are affected by those broadcasts,
+
+01:58.500 --> 02:01.530
+and thus broadcasts should be contained or limited
+
+02:01.530 --> 02:02.793
+as far as possible.
+
+02:03.960 --> 02:07.080
+This is an example of a poorly-designed network.
+
+02:07.080 --> 02:08.700
+If this central switch went down
+
+02:08.700 --> 02:11.460
+it would affect all devices in the topology.
+
+02:11.460 --> 02:14.520
+No hosts would be able to communicate with each other
+
+02:14.520 --> 02:18.270
+because all communication needs to go via this single device
+
+02:18.270 --> 02:20.970
+which is now a single point of failure.
+
+02:20.970 --> 02:24.420
+Broadcasts, once again, will flood throughout the network.
+
+02:24.420 --> 02:27.030
+The broadcast is received on all links
+
+02:27.030 --> 02:28.410
+and will consume the bandwidth
+
+02:28.410 --> 02:31.260
+on every single link in this topology.
+
+02:31.260 --> 02:33.750
+Once again, every single device
+
+02:33.750 --> 02:36.510
+has to process that broadcast
+
+02:36.510 --> 02:39.660
+and its CPU will be interrupted by the broadcast.
+
+02:39.660 --> 02:43.113
+Continuous broadcasts will slow down the entire network.
+
+02:44.160 --> 02:46.920
+Because of the way MAC address tables work,
+
+02:46.920 --> 02:49.200
+traffic going to a unicast address,
+
+02:49.200 --> 02:51.240
+where the MAC address is not learned by the switches,
+
+02:51.240 --> 02:53.823
+will also be flooded throughout the topology.
+
+02:54.840 --> 02:57.930
+Multicasts are treated in the same way as broadcasts
+
+02:57.930 --> 03:01.740
+by most Layer 2 switches, so multicast will be flooded
+
+03:01.740 --> 03:04.983
+throughout the network and affect all devices.
+
+03:06.270 --> 03:08.490
+A poorly-designed network may be disorganized
+
+03:08.490 --> 03:10.200
+and poorly documented
+
+03:10.200 --> 03:12.780
+and lack easily identified traffic flows,
+
+03:12.780 --> 03:15.450
+which make support, maintenance, and problem resolution
+
+03:15.450 --> 03:18.540
+very time consuming and very difficult.
+
+03:18.540 --> 03:20.820
+You also have the issue of security.
+
+03:20.820 --> 03:24.330
+If this host on the left hand side is in marketing
+
+03:24.330 --> 03:25.650
+and the host on the right hand side
+
+03:25.650 --> 03:29.040
+is in the accounts department, the person in marketing
+
+03:29.040 --> 03:32.130
+has access to that machine across the network
+
+03:32.130 --> 03:34.920
+because security might not be implemented properly.
+
+03:34.920 --> 03:36.690
+It becomes very difficult
+
+03:36.690 --> 03:38.853
+to manage a poorly-designed network.
+
+03:39.780 --> 03:42.223
+So, what is a virtual LAN or VLAN?
+
+03:42.223 --> 03:46.980
+A VLAN is essentially a single broadcast domain
+
+03:46.980 --> 03:50.460
+or logical subnet or logical network.
+
+03:50.460 --> 03:52.470
+You could say it's a group of hosts
+
+03:52.470 --> 03:54.330
+with a common set of requirements
+
+03:54.330 --> 03:56.760
+attached to the same broadcast domain
+
+03:56.760 --> 03:59.790
+regardless of where they are physically located.
+
+03:59.790 --> 04:02.850
+You are able to group multiple devices together
+
+04:02.850 --> 04:05.670
+logically rather than physically,
+
+04:05.670 --> 04:09.480
+so, it is possible to span a subnet or VLAN
+
+04:09.480 --> 04:11.490
+across multiple switches,
+
+04:11.490 --> 04:14.070
+even though that's not recommended today.
+
+04:14.070 --> 04:16.050
+You can design a VLAN structure
+
+04:16.050 --> 04:18.480
+that allows you to group together stations
+
+04:18.480 --> 04:22.320
+or hosts that are segmented logically by functions,
+
+04:22.320 --> 04:25.410
+project teams, and other types of applications,
+
+04:25.410 --> 04:28.440
+once again, without regard to physical location.
+
+04:28.440 --> 04:31.470
+So, some of the advantages of VLANs include segmentation,
+
+04:31.470 --> 04:35.670
+where you segment or separate users based on function.
+
+04:35.670 --> 04:37.140
+For instance, the sales department
+
+04:37.140 --> 04:38.880
+will go into a specific VLAN
+
+04:38.880 --> 04:40.290
+and the accountancy department
+
+04:40.290 --> 04:42.000
+will go into a different VLAN.
+
+04:42.000 --> 04:43.050
+It's very flexible.
+
+04:43.050 --> 04:45.030
+Without changing physical cabling,
+
+04:45.030 --> 04:48.150
+you can move a user from one VLAN to another.
+
+04:48.150 --> 04:49.710
+It also provides security
+
+04:49.710 --> 04:52.350
+because users are in separate VLANs,
+
+04:52.350 --> 04:54.930
+and therefore have to traverse a Layer 3 device,
+
+04:54.930 --> 04:58.260
+like a router, to get from one VLAN to another.
+
+04:58.260 --> 05:00.990
+On the router, you can implement access lists
+
+05:00.990 --> 05:04.860
+to control which users have access to various VLANs.
+
+05:04.860 --> 05:06.780
+We'll be talking a lot about access lists
+
+05:06.780 --> 05:09.210
+later in the course, but for now understand
+
+05:09.210 --> 05:11.850
+that it gives you the ability to enhance security
+
+05:11.850 --> 05:13.530
+by separating users.
+
+05:13.530 --> 05:16.440
+These days, VLANs also have other advantages,
+
+05:16.440 --> 05:19.050
+specifically when implementing voiceover IP.
+
+05:19.050 --> 05:20.250
+You can put your IP phones
+
+05:20.250 --> 05:23.400
+into a separate VLAN to your workstations
+
+05:23.400 --> 05:25.770
+and therefore provide a better quality of service
+
+05:25.770 --> 05:27.510
+to the IP phones.
+
+05:27.510 --> 05:30.330
+So, implementing VLANs has many advantages
+
+05:30.330 --> 05:31.833
+in modern networks today.
+
+05:32.670 --> 05:35.190
+Something that I find that always confuses people
+
+05:35.190 --> 05:37.710
+is the difference between a physical topology
+
+05:37.710 --> 05:39.660
+and a logical topology.
+
+05:39.660 --> 05:42.630
+You need to change your paradigm and no longer think
+
+05:42.630 --> 05:45.300
+about the physical topology of the network,
+
+05:45.300 --> 05:48.810
+but rather envision what the logical topology looks like.
+
+05:48.810 --> 05:51.060
+The logical topology will be very different
+
+05:51.060 --> 05:54.900
+to the physical topology as soon as VLANs are implemented.
+
+05:54.900 --> 05:57.000
+So, here's an example of what a physical topology
+
+05:57.000 --> 05:58.260
+may look like.
+
+05:58.260 --> 06:00.660
+You have four physical machines
+
+06:00.660 --> 06:03.270
+connected to a single physical switch
+
+06:03.270 --> 06:07.710
+on ports 0/1, 0/2, 0/3, and 0/4.
+
+06:07.710 --> 06:10.440
+So, that's the physical topology.
+
+06:10.440 --> 06:13.320
+However, logically we can put interfaces
+
+06:13.320 --> 06:15.810
+into different VLANs.
+
+06:15.810 --> 06:18.360
+So, all you need to do is go onto the interface,
+
+06:18.360 --> 06:20.400
+and I'll show you the commands in a moment,
+
+06:20.400 --> 06:23.880
+and you put that interface into a specific VLAN.
+
+06:23.880 --> 06:26.460
+Let's say for argument's sake, the red VLAN.
+
+06:26.460 --> 06:29.220
+Now, VLANs on switches are configured with numbers,
+
+06:29.220 --> 06:32.310
+but often when we discuss VLANs we talk about colors
+
+06:32.310 --> 06:34.530
+to try and differentiate between the VLANs
+
+06:34.530 --> 06:36.630
+and make it easier to understand.
+
+06:36.630 --> 06:39.090
+So, assume for the moment that PC A
+
+06:39.090 --> 06:42.840
+and PC D have been put into the red VLAN
+
+06:42.840 --> 06:45.690
+by typing commands on the switch ports.
+
+06:45.690 --> 06:50.610
+PC B and PC C have been put into the green VLAN.
+
+06:50.610 --> 06:54.000
+Please note that the hosts are oblivious to what's happened.
+
+06:54.000 --> 06:57.090
+You as the administrator have just gone onto the switch
+
+06:57.090 --> 07:00.900
+and changed the VLAN that the port belongs to.
+
+07:00.900 --> 07:04.950
+By default, all ports belong to VLAN 1 on Cisco switches,
+
+07:04.950 --> 07:06.870
+but by using a single command,
+
+07:06.870 --> 07:09.780
+you can move that port to a separate VLAN.
+
+07:09.780 --> 07:13.320
+So, once again, the physical topology looks as follows,
+
+07:13.320 --> 07:15.030
+but you've just gotta imagine
+
+07:15.030 --> 07:18.660
+that these PCs are in separate VLANs.
+
+07:18.660 --> 07:20.970
+However, when looking at the logical topology,
+
+07:20.970 --> 07:23.010
+things are dramatically different.
+
+07:23.010 --> 07:28.010
+PC A and PC D are in the red VLAN on our switch.
+
+07:29.040 --> 07:33.720
+PC C and PC B are on the green VLAN.
+
+07:33.720 --> 07:36.840
+Logically, there are two separate switches
+
+07:36.840 --> 07:39.090
+or two separate LANs here.
+
+07:39.090 --> 07:41.610
+We have virtualized our LAN infrastructure
+
+07:41.610 --> 07:45.330
+and created two separate local area networks.
+
+07:45.330 --> 07:48.360
+These networks cannot communicate with each other
+
+07:48.360 --> 07:50.460
+from a Layer 2 point of view.
+
+07:50.460 --> 07:52.560
+VLANs are implemented at Layer 2
+
+07:52.560 --> 07:56.130
+and the only way to move from one VLAN to another
+
+07:56.130 --> 07:59.340
+is to go via a Layer 3 device such as a router.
+
+07:59.340 --> 08:03.330
+Remember please, a VLAN is a separate logical subnet
+
+08:03.330 --> 08:05.520
+or separate broadcast domain.
+
+08:05.520 --> 08:07.230
+If A sent a broadcast
+
+08:07.230 --> 08:10.410
+that broadcast would only be received by D.
+
+08:10.410 --> 08:11.940
+If C sent a broadcast
+
+08:11.940 --> 08:14.520
+that broadcast would only be received by B.
+
+08:14.520 --> 08:17.190
+Which is very different were all the devices
+
+08:17.190 --> 08:20.730
+on the same VLAN or same physical switch.
+
+08:20.730 --> 08:23.490
+Once again, ports can be put into a VLAN
+
+08:23.490 --> 08:25.350
+using different mechanisms.
+
+08:25.350 --> 08:28.260
+For the moment, just assume that you as the administrator
+
+08:28.260 --> 08:31.890
+statically put the port into the relevant VLAN.
+
+08:31.890 --> 08:34.950
+So, going back to our physical view of the topology,
+
+08:34.950 --> 08:38.070
+in this topology we're not gonna use 48-bit MAC addresses
+
+08:38.070 --> 08:40.470
+because I want to simplify what's going on.
+
+08:40.470 --> 08:45.240
+So, just assume that these numbers A, B, C, and D
+
+08:45.240 --> 08:47.523
+are the MAC addresses of these devices.
+
+08:48.420 --> 08:51.240
+When A sends a broadcast
+
+08:51.240 --> 08:53.760
+that broadcast will be forwarded to the switch
+
+08:53.760 --> 08:55.800
+with a source address of A
+
+08:55.800 --> 08:58.290
+and the destination will contain Fs,
+
+08:58.290 --> 09:00.240
+in other words, broadcast.
+
+09:00.240 --> 09:03.570
+When that frame hits the switch, the switch will make a note
+
+09:03.570 --> 09:06.060
+of which VLAN that port belongs to.
+
+09:06.060 --> 09:09.840
+So, that frame is internally tagged with the red VLAN.
+
+09:09.840 --> 09:13.020
+Please note the PC is oblivious to what's going on.
+
+09:13.020 --> 09:16.470
+The PC just sees this link as standard ethernet
+
+09:16.470 --> 09:19.530
+and doesn't understand the concept of VLANs.
+
+09:19.530 --> 09:21.660
+I'm gonna digress just for a second.
+
+09:21.660 --> 09:24.000
+The architecture of switches vary.
+
+09:24.000 --> 09:25.860
+Cisco have documents like this one
+
+09:25.860 --> 09:29.073
+explaining the architecture of a 6500 switch.
+
+09:30.570 --> 09:33.750
+So, for example, looking at the different chassis
+
+09:33.750 --> 09:36.960
+and different line cards and different supervisors,
+
+09:36.960 --> 09:40.950
+this document will explain how the architecture is set up.
+
+09:40.950 --> 09:44.100
+The detail of this is totally outta the scope of the course,
+
+09:44.100 --> 09:45.690
+but it's just to try and explain
+
+09:45.690 --> 09:48.660
+a little bit about what happens behind the scenes.
+
+09:48.660 --> 09:51.390
+One of the things that they explain in this document
+
+09:51.390 --> 09:56.390
+is the day in the life of a packet going through a 6500.
+
+09:56.490 --> 10:00.030
+And in this example they've got centralized forwarding.
+
+10:00.030 --> 10:04.590
+So, they'll explain how a packet will arrive on an interface
+
+10:04.590 --> 10:06.060
+and based on different
+
+10:06.060 --> 10:09.450
+application-specific integrated circuits or ASICs,
+
+10:09.450 --> 10:12.600
+how that packet will flow from the ingress port
+
+10:12.600 --> 10:16.260
+to an egress port, going via the data bus
+
+10:16.260 --> 10:18.090
+on the back plane of the switch.
+
+10:18.090 --> 10:21.270
+You can learn more about the actual flow of the packet
+
+10:21.270 --> 10:23.490
+through the switch, by going and looking at
+
+10:23.490 --> 10:24.783
+documents like this.
+
+10:25.830 --> 10:27.420
+All I want you to realize
+
+10:27.420 --> 10:29.280
+is that the architecture of different switches
+
+10:29.280 --> 10:31.140
+work differently, and if you wanna look at
+
+10:31.140 --> 10:33.840
+the internals of a switch there are really good documents
+
+10:33.840 --> 10:37.260
+on Cisco's website explaining how packets flow
+
+10:37.260 --> 10:39.000
+through a switch.
+
+10:39.000 --> 10:41.610
+For this course, we're gonna explain it as follows.
+
+10:41.610 --> 10:43.500
+When the frame arrives on this port
+
+10:43.500 --> 10:46.350
+it's internally tagged with a red VLAN.
+
+10:46.350 --> 10:50.250
+That frame is then copied to all other ports on the switch.
+
+10:50.250 --> 10:52.530
+However, that broadcast will not be forwarded
+
+10:52.530 --> 10:55.950
+out of this port because the port is in a different VLAN
+
+10:55.950 --> 10:57.243
+to the original frame.
+
+10:58.260 --> 11:01.710
+The frame will also not be forwarded out of this port 0/3,
+
+11:01.710 --> 11:06.000
+because the frame is in a different VLAN to the port.
+
+11:06.000 --> 11:09.210
+However, on this port, the frame will be forwarded out
+
+11:09.210 --> 11:12.360
+because the VLAN number or color is the same.
+
+11:12.360 --> 11:14.790
+Please note, only the original frame
+
+11:14.790 --> 11:16.290
+is sent out of the port.
+
+11:16.290 --> 11:18.630
+No internal tagging leaves the switch.
+
+11:18.630 --> 11:22.080
+The PCs, once again, are oblivious to any tagging
+
+11:22.080 --> 11:23.880
+or changing of frames.
+
+11:23.880 --> 11:25.590
+So, the frame leaves the switch
+
+11:25.590 --> 11:28.890
+and arrives at PC D in its original form.
+
+11:28.890 --> 11:32.550
+Source address is A, destination address is a broadcast.
+
+11:32.550 --> 11:35.250
+So, physically we have one switch here,
+
+11:35.250 --> 11:39.630
+but logically PC A can only send traffic to PC D,
+
+11:39.630 --> 11:44.630
+not to PC B or PC C, they are on a separate VLAN
+
+11:45.060 --> 11:47.283
+or separate logical switch.
+
+11:48.210 --> 11:51.210
+If A tried to send a unicast to C,
+
+11:51.210 --> 11:54.720
+so, the source address is A in the frame,
+
+11:54.720 --> 11:56.970
+and the destination address is C,
+
+11:56.970 --> 12:00.120
+which is this PC on the green VLAN.
+
+12:00.120 --> 12:02.610
+That frame would be sent to the switch
+
+12:02.610 --> 12:04.980
+as a standard ethernet frame.
+
+12:04.980 --> 12:08.340
+Now, we're assuming here that A has somehow learned
+
+12:08.340 --> 12:10.020
+the Mac address of C.
+
+12:10.020 --> 12:12.480
+So, he is sending a frame directly to C.
+
+12:12.480 --> 12:13.770
+Normally, you wouldn't even be able
+
+12:13.770 --> 12:15.660
+to learn that MAC address.
+
+12:15.660 --> 12:19.800
+So, in this example, the person on A could be up to no good.
+
+12:19.800 --> 12:21.570
+The frame arrives at the switch
+
+12:21.570 --> 12:24.570
+and the switch tags the frame internally with the red VLAN.
+
+12:24.570 --> 12:28.170
+That frame is copied to all ports on the switch.
+
+12:28.170 --> 12:30.360
+Now, once again, that depends on the switch architecture.
+
+12:30.360 --> 12:31.950
+So, let's just assume for the moment
+
+12:31.950 --> 12:34.950
+that that's what's gonna happen on this specific switch.
+
+12:34.950 --> 12:37.680
+Now, the central ASIC checks the MAC address table
+
+12:37.680 --> 12:40.890
+and sees that C can be found on port 0/3.
+
+12:40.890 --> 12:43.200
+So, the central ASIC sends a flush message
+
+12:43.200 --> 12:46.380
+to the other ports to remove the copies of the frame.
+
+12:46.380 --> 12:49.950
+So, the frame is only available on port 0/3.
+
+12:49.950 --> 12:52.140
+However, just before sending out the frame
+
+12:52.140 --> 12:54.720
+the port VLAN color is checked against the frame.
+
+12:54.720 --> 12:56.700
+The frame is a red VLAN frame
+
+12:56.700 --> 12:58.530
+because it arrived on a red port,
+
+12:58.530 --> 13:00.990
+but this is a green VLAN interface,
+
+13:00.990 --> 13:04.050
+so, the frame is not transmitted and is dropped.
+
+13:04.050 --> 13:06.390
+So, the frame never gets to PC C.
+
+13:06.390 --> 13:09.480
+Therefore, A is not able to access the green VLAN.
+
+13:09.480 --> 13:12.540
+Logically A is separated from C,
+
+13:12.540 --> 13:14.190
+and from a Layer 2 point of view,
+
+13:14.190 --> 13:16.740
+there is no connection between the red VLAN
+
+13:16.740 --> 13:18.180
+and the green VLAN.
+
+13:18.180 --> 13:20.100
+As mentioned previously, the only way to get
+
+13:20.100 --> 13:22.380
+from one VLAN to another is to traverse
+
+13:22.380 --> 13:24.480
+a Layer 3 device such as a router.
+
+13:24.480 --> 13:26.580
+And as there's no router in this example,
+
+13:26.580 --> 13:28.323
+the traffic is totally separated.
+
+13:29.280 --> 13:31.620
+Now, here's a slightly more complicated example.
+
+13:31.620 --> 13:33.750
+A is still in the red VLAN,
+
+13:33.750 --> 13:35.760
+but is connected to switch one.
+
+13:35.760 --> 13:37.110
+D is in the red VLAN,
+
+13:37.110 --> 13:40.140
+but is in this case connected to switch two.
+
+13:40.140 --> 13:43.230
+C is in the green VLAN, connected to switch two.
+
+13:43.230 --> 13:46.860
+And B is in the green VLAN connected to switch one.
+
+13:46.860 --> 13:49.710
+A special type of link is required between the two switches,
+
+13:49.710 --> 13:52.950
+so that they can communicate VLAN information between them
+
+13:52.950 --> 13:55.380
+and that is known as a trunk port.
+
+13:55.380 --> 13:58.590
+This interface will run a trunking protocol,
+
+13:58.590 --> 14:01.140
+so that VLAN information can be transmitted
+
+14:01.140 --> 14:02.910
+from one switch to another.
+
+14:02.910 --> 14:05.010
+The two trunking protocols that are used
+
+14:05.010 --> 14:09.150
+are ISL or inter switch link, and 802.1Q.
+
+14:09.150 --> 14:12.690
+Now, ISL was a Cisco proprietary protocol
+
+14:12.690 --> 14:14.400
+and tends not to be used today.
+
+14:14.400 --> 14:19.050
+802.1Q, the industry standard, is the protocol of choice
+
+14:19.050 --> 14:22.200
+for communicating VLAN information between switches
+
+14:22.200 --> 14:24.210
+across trunking ports.
+
+14:24.210 --> 14:25.680
+Now, once again, it's important to remember
+
+14:25.680 --> 14:29.490
+what the physical topology looks like, which is as follows.
+
+14:29.490 --> 14:33.450
+And then the logical topology, which looks this.
+
+14:33.450 --> 14:35.703
+PC A is connected to switch one,
+
+14:36.660 --> 14:39.120
+PC C is connected to switch two,
+
+14:39.120 --> 14:40.803
+but they are in the red VLAN.
+
+14:42.000 --> 14:44.250
+PC B is connected to switch one,
+
+14:44.250 --> 14:46.200
+and PC D is connected to switch two,
+
+14:46.200 --> 14:48.330
+but they're on the green VLAN.
+
+14:48.330 --> 14:51.360
+So, there's logical separation between the devices
+
+14:51.360 --> 14:53.100
+across the two switches.
+
+14:53.100 --> 14:55.230
+Physically, please remember, there are only two switches
+
+14:55.230 --> 14:57.660
+in this topology, but logically we are creating
+
+14:57.660 --> 15:00.270
+four switches with the red VLAN separated
+
+15:00.270 --> 15:02.520
+from the green VLAN, and the switches are linked
+
+15:02.520 --> 15:04.590
+using a trunking interface.
+
+15:04.590 --> 15:06.990
+So, trunking once again, allows multiple VLANs
+
+15:06.990 --> 15:09.600
+to traverse a single physical link.
+
+15:09.600 --> 15:12.960
+The two protocols are 802.1Q, the industry standard,
+
+15:12.960 --> 15:14.790
+which tends to be used today,
+
+15:14.790 --> 15:18.060
+and ISL, which was Cisco's proprietary method,
+
+15:18.060 --> 15:20.820
+which tends not to be used in today's environments.
+
+15:20.820 --> 15:24.030
+Cisco IP phones, for example, do not support ISL,
+
+15:24.030 --> 15:27.750
+and a lot of new switches do not provide support for ISL.
+
+15:27.750 --> 15:31.427
+So, in this course we are gonna concentrate on 802.1Q.
+
+15:31.427 --> 15:36.060
+An 802.1Q frame is different to a standard ethernet frame.
+
+15:36.060 --> 15:38.130
+A standard ethernet frame would look something like this.
+
+15:38.130 --> 15:41.610
+You have a destination field, a source field,
+
+15:41.610 --> 15:44.970
+a length or ether type field, you have the data,
+
+15:44.970 --> 15:47.220
+and then you have the frame check sequence.
+
+15:47.220 --> 15:51.270
+An 802.1Q frame has a four-byte tag
+
+15:51.270 --> 15:54.630
+inserted into the header between the source address field
+
+15:54.630 --> 15:56.790
+and the ether type or length field.
+
+15:56.790 --> 15:58.770
+Because the frame has been altered,
+
+15:58.770 --> 16:01.380
+the frame check sequence is recomputed
+
+16:01.380 --> 16:03.633
+and replaced in the modified frame.
+
+16:04.740 --> 16:06.990
+The tag consists of two main parts,
+
+16:06.990 --> 16:10.523
+the tag protocol identifier, which is set to 0x8100
+
+16:12.930 --> 16:17.460
+to identify this as an IEEE 802.1 tag frame,
+
+16:17.460 --> 16:20.490
+and thus allow switches and devices to distinguish
+
+16:20.490 --> 16:24.030
+an 802.1Q frame from untagged frames.
+
+16:24.030 --> 16:27.420
+This is 16 bits in length or two bytes.
+
+16:27.420 --> 16:31.950
+The remaining two bytes or 16 bits is split as follows.
+
+16:31.950 --> 16:35.643
+Three bits represent the priority or priority code point,
+
+16:36.600 --> 16:39.750
+which is a three-bit field used to prioritize
+
+16:39.750 --> 16:42.180
+certain traffic types over others.
+
+16:42.180 --> 16:44.640
+This is used very heavily in quality of service
+
+16:44.640 --> 16:47.340
+where for instance, a decimal value of five
+
+16:47.340 --> 16:49.830
+is used to represent voice.
+
+16:49.830 --> 16:52.830
+The canonical format identifier or CFI
+
+16:52.830 --> 16:55.350
+was used in the old days for compatibility
+
+16:55.350 --> 16:57.720
+between ethernet and token-ring networks.
+
+16:57.720 --> 17:00.660
+It's very unlikely that you're gonna use that today.
+
+17:00.660 --> 17:03.270
+And the important piece is the VLAN identifier,
+
+17:03.270 --> 17:07.230
+which is a 12-bit field specifying the VLAN
+
+17:07.230 --> 17:09.000
+to which this frame belongs.
+
+17:09.000 --> 17:10.800
+A value of zero would mean that this frame
+
+17:10.800 --> 17:13.170
+does not belong to any VLAN.
+
+17:13.170 --> 17:14.700
+It's because of this field
+
+17:14.700 --> 17:16.560
+that switches are able to communicate
+
+17:16.560 --> 17:19.320
+the VLAN number to each other.
+
+17:19.320 --> 17:23.730
+It is 12 bits in size, which allows for 4,096 VLANs
+
+17:23.730 --> 17:27.300
+to be created in an 802.1Q environment.
+
+17:27.300 --> 17:29.250
+You can work that out as follows,
+
+17:29.250 --> 17:34.250
+two to the power of 12 equals 4,096.
+
+17:35.850 --> 17:39.420
+So, in theory, 4,096 VLANs could be configured
+
+17:39.420 --> 17:41.760
+on an 802.1Q switch.
+
+17:41.760 --> 17:44.370
+Switches, however, do not necessarily support
+
+17:44.370 --> 17:46.008
+that number of VLANs.
+
+17:46.008 --> 17:48.925
+(inspiring music)

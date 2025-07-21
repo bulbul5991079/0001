@@ -1,0 +1,377 @@
+WEBVTT
+
+0
+00:06.440 --> 00:15.650
+In this network, we've been told to subnet 1 9 2 1 6 8 1. 0 slash 24 into 4 subnets.
+
+1
+00:15.670 --> 00:24.190
+In other words, we need a subnet for site 1, site 2, this serial link and this serial link.
+
+2
+00:24.190 --> 00:29.760
+Now we haven't been told to use a slash 30 mask on the serial links.
+
+3
+00:29.770 --> 00:37.090
+We'll do that in a separate video so all we need to do at this point is take 1 9 2 1 6 8 1.  
+
+4
+00:37.150 --> 00:42.460
+0 slash 24 and subnet that into 4 subnets.
+
+5
+00:42.460 --> 00:49.750
+Now when we look at a network address such as 1 9 2 1 6 8 1. 0 we need to determine which part is the
+
+6
+00:49.750 --> 00:54.670
+network and which part is the host portion.
+
+7
+00:54.670 --> 00:58.530
+Currently, this portion is the network portion.
+
+8
+00:59.560 --> 01:09.860
+We can't change the network portion but we can manipulate and change the host portion of the address.
+
+9
+01:09.910 --> 01:15.500
+So in other words what we can do is change this last octet.
+
+10
+01:15.610 --> 01:23.320
+The reason why we can't manipulate the first three octets is because that's part of the network, 24
+
+11
+01:23.320 --> 01:28.870
+essentially means that we have 24 binary ones.
+
+12
+01:28.870 --> 01:31.800
+Now you don't have spaces in an octet like this.
+
+13
+01:31.810 --> 01:41.990
+I'm just doing it to make it easier to read, but essentially 24 means that we have 24 ones in the subnet
+
+14
+01:41.990 --> 01:55.300
+mask, so that's 24 binary ones which essentially equates to 255 255 255 0.
+
+15
+01:55.300 --> 02:02.590
+It's important that you know how to convert decimal to binary, this binary value equates to decimal
+
+16
+02:02.740 --> 02:09.000
+255 so the host portion of the address is once again that portion.
+
+17
+02:09.190 --> 02:16.030
+This portion is the network portion we can't manipulate the network portion but to the host portion
+
+18
+02:16.450 --> 02:20.890
+consisting of eight binary zeros can be manipulated.
+
+19
+02:20.890 --> 02:28.990
+Now when we subnet, think of subnetting kind of like stealing bits we're going to steal bits from the
+
+20
+02:28.990 --> 02:30.310
+host portion.
+
+21
+02:30.310 --> 02:37.560
+We need to work out how many bits are required for the number of subnets that we need, in this example
+
+22
+02:37.570 --> 02:39.840
+we need four subnets.
+
+23
+02:39.840 --> 02:43.990
+Now, when it comes to subnetting there are two formulas that you need to know.
+
+24
+02:44.070 --> 02:48.680
+2 to the power of N and 2 to the power of N minus 2.
+
+25
+02:48.780 --> 02:57.590
+This formula is used when we ask for subnets which is what we've been asked in this question.
+
+26
+02:57.690 --> 03:02.140
+This formula we need to use when we're asked for a certain number of hosts.
+
+27
+03:02.220 --> 03:10.980
+So if we were asked to subnet this subnet 1 9 2 1 6 8 1. 0 slash 24 and create as many subnets as possible
+
+28
+03:11.400 --> 03:18.210
+each having 4 hosts we would use 2 to the power of N where N is the number of bits that are required
+
+29
+03:18.600 --> 03:20.020
+minus 2.
+
+30
+03:20.040 --> 03:26.490
+So if we needed to get 4 hosts we would actually need 2 to the power of 3 minus 2 which would
+
+31
+03:26.490 --> 03:31.500
+be 2 to the power of 3, which is 8 minus 2 which means that we would be able to have 6 hosts
+
+32
+03:31.500 --> 03:33.440
+per subnet.
+
+33
+03:33.510 --> 03:39.920
+We need to subtract 2 because of broadcast and network address but we don't need that.
+
+34
+03:40.080 --> 03:46.590
+When asked for networks, 2 to the power of 2 equals 4 which is what we need for the number of
+
+35
+03:46.590 --> 03:49.060
+subnets that we've been asked to create.
+
+36
+03:49.080 --> 03:54.020
+This is the number of bits that we're stealing or using for the subnet portion.
+
+37
+03:54.060 --> 03:59.780
+This is the number of bits that we would keep for the host portion.
+
+38
+03:59.810 --> 04:06.470
+Now, we're not using that formula so I can basically scratch that from our example.
+
+39
+04:06.560 --> 04:10.930
+So basically remove that, we are not using that formula.
+
+40
+04:11.060 --> 04:14.780
+In this example, this is the formula that we need.
+
+41
+04:14.780 --> 04:21.590
+And once again that's because we've been asked 4 subnets we haven't been asked for hosts.
+
+42
+04:21.860 --> 04:28.310
+Now, 2 to the power of 1 equals 2, that doesn't give us enough subnets, 2 to the power of 2 gives
+
+43
+04:28.310 --> 04:35.540
+us 4 subnets, 2 to the power of 3 gives us 8 subnets, 2 to the power of 4 would give
+
+44
+04:35.540 --> 04:41.960
+us 16 subnets, we don't need that many we only need 4 subnets.
+
+45
+04:42.230 --> 04:50.300
+So all we need to do is use 2 bits which means we can steal 2 bits from the host portion for our
+
+46
+04:50.300 --> 04:51.470
+subnet portion.
+
+47
+04:52.220 --> 05:03.560
+So the host portion is now only 6 bits in length, the subnet portion is now 2 bits in length.
+
+48
+05:03.560 --> 05:04.790
+So I'll write it like that.
+
+49
+05:04.850 --> 05:11.570
+Once again there's obviously no spaces here in binary but that hopefully just makes it easier to read.
+
+50
+05:11.690 --> 05:20.740
+So we're going to steal 2 bits from the host portion and allocate that to the subnet portion.
+
+51
+05:20.770 --> 05:23.880
+So how many bits are part of the network and subnet.
+
+52
+05:24.100 --> 05:28.240
+We've got our 8 bits from our original example.
+
+53
+05:28.240 --> 05:33.470
+An additional 8 bits from our original example plus 8 bits.
+
+54
+05:33.580 --> 05:38.040
+So that's 16 plus 1 plus 1.
+
+55
+05:38.080 --> 05:48.010
+So, in other words, this is now a slash 26 subnet it's no longer slash 24 because we've stolen
+
+56
+05:48.040 --> 05:52.950
+bits from the host portion for the network portion.
+
+57
+05:53.170 --> 05:58.570
+So the first network that we have is 1 9 2 1 6 8 1. 0.
+
+58
+05:58.750 --> 06:03.530
+Look at these 8 binary bits to make it easier to read.
+
+59
+06:03.640 --> 06:11.230
+Notice we've got 8 binary bits, I've just split them up with spaces here to make it easier to demonstrate
+
+60
+06:11.710 --> 06:14.150
+which part is subnet, which part is host.
+
+61
+06:14.170 --> 06:21.670
+But notice there are 8 binary bits there, 8 binary bits equates to 0 in decimal.
+
+62
+06:21.670 --> 06:26.450
+So the network is 1 9 2 1 6 8 1. 0 slash 26.
+
+63
+06:26.500 --> 06:28.680
+That's our first network.
+
+64
+06:28.810 --> 06:31.270
+Now what's the second network.
+
+65
+06:31.270 --> 06:34.830
+The second network is 1 9 2 1 6 8 1
+
+66
+06:34.990 --> 06:41.350
+dot and what we do now is we just go through the different binary options.
+
+67
+06:41.350 --> 06:44.440
+This is 0 0 this is 0 1.
+
+68
+06:44.500 --> 06:49.030
+This one would be 1 0 and this would be 1 1.
+
+69
+06:49.030 --> 06:52.930
+So those are the different binary options that we have.
+
+70
+06:52.930 --> 07:01.200
+So if we'll look at this network that second binary bit is set to a 1, what does this equal to, this
+
+71
+07:01.210 --> 07:04.920
+equals to 64 in a decimal.
+
+72
+07:04.960 --> 07:08.350
+So the next network is 64.
+
+73
+07:08.350 --> 07:10.180
+What is this equal.
+
+74
+07:10.300 --> 07:12.710
+It looks like this.
+
+75
+07:12.940 --> 07:15.650
+Which equals 128.
+
+76
+07:15.650 --> 07:24.340
+Now, as soon as you've worked out this second subnet you can simply do addition by that number.
+
+77
+07:24.340 --> 07:32.620
+So 0 plus 64, 64 plus 64 is 128 plus 64 is 192.
+
+78
+07:32.830 --> 07:39.760
+But if you look at the binary it's 128 plus 64, which equals 192.
+
+79
+07:39.760 --> 07:46.460
+So there are our 4 subnets that we've been asked to work out in this example.
+
+80
+07:46.540 --> 07:51.370
+So we've got 4 subnets the first one is for site 1, the second one is for the link between router
+
+81
+07:51.370 --> 07:58.060
+1, an Internet router, third one is for site 2, fourth one is for the link between router 2 and
+
+82
+07:58.090 --> 08:05.480
+the Internet router, so the first subnet would be 1 9 2 1 6 8 1. 0 slash 26.
+
+83
+08:05.800 --> 08:08.540
+And I'll zoom in here to make it clearer.
+
+84
+08:08.920 --> 08:11.190
+So that's our first subnet
+
+85
+08:11.350 --> 08:21.810
+per our calculations, second subnet is 1 9 2 1 6 8 1 64 slash 26.
+
+86
+08:21.840 --> 08:27.870
+Third one is 1 9 2 1 6 8 1 128 slash 26.
+
+87
+08:27.870 --> 08:38.320
+And the last one is 1 9 2 1 6 8 1 192 slash 26 so those subnets are the subnets that we worked out
+
+88
+08:39.540 --> 08:46.700
+so we need to now configure the network with this information in the first step we need to work out
+
+89
+08:46.700 --> 08:53.760
+the subnets but now we need to configure the routers per the instructions so as an example the last
+
+90
+08:53.790 --> 08:58.950
+IP in the subnet should be configured on router 1, second last IP address should be configured on the
+
+91
+08:58.950 --> 09:07.390
+switch, third last IP address should be configured on the DHCP server per these instructions we also need
+
+92
+09:07.390 --> 09:15.150
+to configure a DHCP pool on the DHCP server so I'm going to start with the subnet first and get that
+
+93
+09:15.160 --> 09:18.040
+working and then I'll move to the other subnets.

@@ -1,0 +1,185 @@
+WEBVTT
+
+0
+00:06.370 --> 00:10.320
+This is a practical IP version 4 subnetting lab.
+
+1
+00:10.420 --> 00:17.050
+Now, this is a practical lab helping you test and verify your knowledge of IP version 4 subnetting.
+
+2
+00:17.050 --> 00:23.860
+We're not simply gonna talk about the theory of IP version 4 subnetting you need to subnet, but in
+
+3
+00:23.860 --> 00:28.080
+addition configure the network and get it working.
+
+4
+00:28.360 --> 00:35.020
+You need to configure IP addresses on routers, on switches, and on DHCP servers and then you need to configure
+
+5
+00:35.050 --> 00:41.300
+the DHCP servers to allocate IP addresses to the clients in the correct subnet.
+
+6
+00:41.320 --> 00:48.880
+So once again this is a practical demonstration and lab of IP version 4 subnetting, in this packet
+
+7
+00:48.880 --> 00:49.770
+tracer lab.
+
+8
+00:49.780 --> 00:57.370
+We have multiple sites, site 1 and site 2 connected via serial links to an Internet router.
+
+9
+00:57.490 --> 01:05.650
+You need to configure the network as follows, you've been allocated subnet 1 9 2 1 6 8 1. 0 slash 24 and
+
+10
+01:05.650 --> 01:12.430
+you need to subnet this network into 4 subnets as follows subnet 1 needs to be allocated to site 1
+
+11
+01:12.430 --> 01:22.360
+subnet 2 to the serial link between router 1 and the Internet router, subnet 3 to site 2 and subnet
+
+12
+01:22.360 --> 01:27.470
+4 to the link between router 2 and the Internet router.
+
+13
+01:27.640 --> 01:34.930
+Now, we are not going to initially optimize the subnetting you're only gonna create 4 subnets and
+
+14
+01:34.930 --> 01:42.460
+then split them across these four networks in a subsequent video we'll optimize the serial links to
+
+15
+01:42.460 --> 01:48.350
+use a slash 30 mask and then make more subnets available for additional sites.
+
+16
+01:48.430 --> 01:52.690
+But in this initial topology, you simply need to create 4 subnets.
+
+17
+01:52.900 --> 01:56.410
+You should configure the router as per the instructions in the diagram.
+
+18
+01:56.410 --> 02:02.660
+In other words this interface on router 1 should use the last IP address in the relevant subnet.
+
+19
+02:02.680 --> 02:08.260
+This interface should use the first IP address in the subnet on the serial link.
+
+20
+02:08.260 --> 02:14.770
+The Internet router is gonna use the last IP address in both subnets on the serial links and router
+
+21
+02:14.770 --> 02:22.300
+2 will once again use the last IP address in the subnet on the Ethernet interface and to the first
+
+22
+02:22.330 --> 02:25.210
+IP address on the serial interface.
+
+23
+02:25.210 --> 02:31.570
+You need to configure the switches with the second to last IP address and the subnet and the DHCP servers
+
+24
+02:31.570 --> 02:40.990
+with the third last IP address in the subnet, as an example at Site 1 the switch such 1 should be
+
+25
+02:40.990 --> 02:47.650
+configured with the second last IP address and the subnet and the DHCP server with the third last IP
+
+26
+02:47.650 --> 02:48.590
+address.
+
+27
+02:48.730 --> 02:55.630
+The same should be done for switch 2, in site 2 and the third last IP address should be configured on
+
+28
+02:55.630 --> 02:59.280
+the DHCP server at site 2.
+
+29
+02:59.320 --> 03:06.550
+You also need to configure the DHCP servers to allocate IP addresses to the clients in the relevant subnets.
+
+30
+03:06.550 --> 03:11.850
+So as an example DHCP server 1 should allocate IP addresses to PC 0,
+
+31
+03:12.010 --> 03:20.620
+PC 1 and PC 2 in the subnet allocated to this network, DHCP server 2 should allocate IP addresses
+
+32
+03:20.950 --> 03:24.680
+in the correct subnet to PC 3 4 and 5.
+
+33
+03:24.700 --> 03:31.270
+Once you've done your configuration verify that PCs can access cisco.com and facebook.com
+
+34
+03:31.330 --> 03:33.100
+using their browsers.
+
+35
+03:33.100 --> 03:38.380
+The server 8.8.8.8 is configured as a DNS server.
+
+36
+03:39.130 --> 03:46.330
+So think of this as the Google DNS server that is configured with A records for cisco.com and facebook
+
+37
+03:46.330 --> 03:47.430
+.com
+
+38
+03:47.440 --> 03:54.040
+So once you've got your network configured with the correct IP addresses your DHCP servers are allocating
+
+39
+03:54.280 --> 04:01.070
+IP addresses to the clients, the clients should be able to access cisco.com and facebook.com,
+
+40
+04:01.120 --> 04:05.320
+again this is the DNS server in the network.
+
+41
+04:05.530 --> 04:08.050
+Okay, so can you complete this lab?
+
+42
+04:08.090 --> 04:14.550
+Can you work out the relevant subnets, the relevant IP addresses, and configure the routers switches and
+
+43
+04:14.550 --> 04:18.410
+DHCP servers to get this network working.
+
+44
+04:18.410 --> 04:23.230
+Download the packet tracer file and see if you can complete the lab yourself.
+
+45
+04:23.270 --> 04:27.050
+Otherwise watch the next video where I complete the lab.

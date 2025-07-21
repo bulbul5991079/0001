@@ -1,0 +1,489 @@
+WEBVTT
+
+0
+00:10.950 --> 00:19.170
+This is one of multiple IP addressing and subnetting scenarios rather than just working out the subnets
+
+1
+00:19.290 --> 00:20.960
+for a scenario.
+
+2
+00:21.100 --> 00:28.230
+We're gonna work them out and then configure the devices so that we can practically design and configure
+
+3
+00:28.650 --> 00:32.120
+a Cisco IP network. In this scenario
+
+4
+00:32.120 --> 00:36.870
+let's assume that we've got two sites one in San Francisco one in New York.
+
+5
+00:36.870 --> 00:40.770
+The sites are connected via a serial link.
+
+6
+00:40.860 --> 00:46.670
+In this scenario, we've been allocated a subnet of 192 168 1.0 slash 24.
+
+7
+00:46.980 --> 00:52.210
+And we need to subnet this network to support this topology.
+
+8
+00:52.240 --> 00:54.880
+Let's assume that this is a small medium business.
+
+9
+00:54.910 --> 00:59.530
+So, all PCs at each site will be in the same subnet.
+
+10
+00:59.530 --> 01:05.980
+We're going to keep it simple by configuring the hosts in a single subnet at each site but there are
+
+11
+01:05.980 --> 01:10.870
+60 hosts in San Francisco and 60 hosts in New York.
+
+12
+01:10.880 --> 01:22.730
+OK, so this is our subnet 192 168 1.0 slash24, now slash 24 means that there are 24 binary ones
+
+13
+01:22.730 --> 01:25.910
+in the subnet mask. In the first octet
+
+14
+01:25.920 --> 01:28.020
+we have eight binary ones.
+
+15
+01:28.350 --> 01:33.290
+Second octet to 8 binary ones a third octet a binary ones.
+
+16
+01:33.330 --> 01:37.100
+Now in an octet there is no space between the binary ones.
+
+17
+01:37.110 --> 01:45.570
+I'm just going to represent them that way to make it easier to read 24 is a side notation or classless
+
+18
+01:45.570 --> 01:47.600
+into domain writing notation.
+
+19
+01:47.820 --> 01:54.010
+Twenty four means that the subnet mask again consists of 24 binary ones.
+
+20
+01:54.090 --> 01:57.640
+Again there is no space between the binary ones.
+
+21
+01:57.990 --> 01:59.660
+But to make it easier to read.
+
+22
+01:59.850 --> 02:01.550
+I'm going to show it with spaces.
+
+23
+02:01.560 --> 02:10.650
+So he has octet 1 8 binary ones equates to 255 and decimal 8 binary ones equates to 255 8 binary ones
+
+24
+02:10.650 --> 02:17.160
+equates to 255 8 to binary zeros equates to 0 using decimal.
+
+25
+02:17.160 --> 02:22.110
+So this is the dotted decimal notation of the subnet mask.
+
+26
+02:22.140 --> 02:27.540
+This is the Sajda notational binary notation.
+
+27
+02:27.580 --> 02:31.520
+Now when working with binary Don't forget the following.
+
+28
+02:31.750 --> 02:39.670
+If you have a 1 in the least significant but in the octet that represents 1 in decimal 1 in the second
+
+29
+02:39.730 --> 02:48.070
+least significant position in binary equates to 2 in decimal that equates to 4 and so forth and so 1
+
+30
+02:48.220 --> 02:54.870
+1 in the most significant position in the octet equates to 128.
+
+31
+02:54.900 --> 03:00.700
+So if we look at 1 9 2 1 6 8 1 2 0 in binary 1 9 2 is that.
+
+32
+03:00.870 --> 03:06.270
+In other words it's 128 plus 64 168 in decimal.
+
+33
+03:06.270 --> 03:08.330
+Looks like this in binary.
+
+34
+03:08.340 --> 03:15.820
+In other words it's 128 plus 32 plus 8 1 in decimal.
+
+35
+03:15.830 --> 03:17.690
+Looks like this in binary.
+
+36
+03:17.690 --> 03:23.220
+In other words only the last bit is set on 0 in decimal
+
+37
+03:23.220 --> 03:24.870
+looks as follows.
+
+38
+03:24.870 --> 03:27.250
+This is what our subnet mask looks like
+
+39
+03:28.420 --> 03:34.280
+255 255 255 is zero.
+
+40
+03:34.900 --> 03:39.240
+So in other words this portion is the network portion.
+
+41
+03:39.490 --> 03:46.180
+This portion is the host portion a subnet mask indicates which portion is network and which portion
+
+42
+03:46.180 --> 03:47.430
+is host.
+
+43
+03:47.440 --> 03:53.760
+So this means that the first octet is network, second octet is network, third octet is network, fourth
+
+44
+03:53.770 --> 03:55.280
+octet is host.
+
+45
+03:55.740 --> 04:03.330
+So 192.168.1.0 slash 24 means that this is network, this is host.
+
+46
+04:03.340 --> 04:06.140
+OK so we've been allocated this network.
+
+47
+04:06.220 --> 04:09.030
+How do we subnet this.
+
+48
+04:09.090 --> 04:14.190
+You need to decide whether you're gonna use host or network to do your subnetting.
+
+49
+04:14.190 --> 04:16.310
+In this example we're gonna look at hosts.
+
+50
+04:16.560 --> 04:23.700
+We've got a requirement for 60 hosts on two subnets, when you want to work out the number of bits required
+
+51
+04:23.700 --> 04:26.580
+to support a certain number of hosts.
+
+52
+04:26.580 --> 04:33.970
+Use the formula 2 to the power of x where x is the number of bits that is required for hosts minus 2.
+
+53
+04:34.680 --> 04:41.640
+If you want to work out the number of networks you use the formula 2 to the power of x where x is the
+
+54
+04:41.640 --> 04:45.240
+number of bits that you're gonna be using for networks.
+
+55
+04:46.790 --> 04:53.680
+The reason why we have to subtract two here is we need to we, need to allocate two addresses for special
+
+56
+04:53.680 --> 04:54.860
+use cases.
+
+57
+04:54.970 --> 05:01.750
+One is network or subnet and one is the broadcast address so hence we need to subtract two.
+
+58
+05:02.500 --> 05:07.960
+So if we're gonna support 60 hosts. That's what we've got in our topology here.
+
+59
+05:08.020 --> 05:13.240
+We've got two subnets consisting of 60 hosts how many bits do we need.
+
+60
+05:13.490 --> 05:14.860
+So to work this out.
+
+61
+05:15.730 --> 05:18.200
+Work out how many binary bits you need.
+
+62
+05:18.490 --> 05:24.920
+So two to the power of two as an example minus two gives you two.
+
+63
+05:24.960 --> 05:34.610
+So if you use two binary bits per our formula that'll only support two hosts, OK so how many bits are required
+
+64
+05:34.610 --> 05:36.680
+to support 60 hosts.
+
+65
+05:36.680 --> 05:38.260
+The answer is 6 bits.
+
+66
+05:38.450 --> 05:45.930
+And that's because two to the power of six equals 64 minus two it gives you 62.
+
+67
+05:46.100 --> 05:53.690
+So we will have enough hosts to support 60 hosts if we use six bits. 
+
+68
+05:53.800 --> 06:00.960
+So 60 hosts will require six bits for the host portion of the address.
+
+69
+06:00.980 --> 06:09.740
+Now currently 192 168 1.0 slash 24 means we have 8 bits in the host portion.
+
+70
+06:09.830 --> 06:21.200
+So if we need six bits in the host portion that means that two bits can be stolen if you like for subnets.
+
+71
+06:21.230 --> 06:31.220
+So think of subnets as stolen bits, we're gonna steal two bits from the host portion to create additional
+
+72
+06:31.220 --> 06:32.800
+subnets.
+
+73
+06:32.920 --> 06:39.540
+That means that our subnet mask changes to slash 26.
+
+74
+06:39.550 --> 06:45.700
+The reason why it's slash 26 is we have eight bits in the first octet for network, plus 8 bits in the second
+
+75
+06:45.700 --> 06:50.320
+octet, Plus 8 bits in a third octet that gives us 24.
+
+76
+06:50.500 --> 06:57.760
+But we also have an additional 2 bits in the fourth octet which gives us 26.
+
+77
+06:57.760 --> 07:11.630
+So a subnet mask in dotted-decimal notation will be 255 255 255 192 it's 192 because 128 plus
+
+78
+07:11.630 --> 07:18.930
+64 gives you 192 so this is our new subnet mask.
+
+79
+07:19.430 --> 07:23.460
+So how do we work out the different subnets.
+
+80
+07:23.500 --> 07:35.070
+The first subnet will be exactly this 192.168.1.0 slash 26 now to work out the next subnet look at
+
+81
+07:35.070 --> 07:36.720
+your subnet portion.
+
+82
+07:36.720 --> 07:39.580
+So what I'll do is I'll change this to another color
+
+83
+07:42.660 --> 07:44.030
+lets say orange.
+
+84
+07:44.220 --> 07:48.300
+So the orange portion or subnet portion needs to change.
+
+85
+07:48.300 --> 07:52.070
+This is network, this is subnet.
+
+86
+07:52.200 --> 08:01.480
+This is host portion, so to work out the next subnet you cycle through all the variations of binary
+
+87
+08:01.570 --> 08:04.350
+for the number of bits that you've got.
+
+88
+08:04.360 --> 08:13.450
+So think about this as two cables, you've got two cables and you can put electricity on one cable or two
+
+89
+08:13.450 --> 08:15.400
+cables or no cables.
+
+90
+08:15.820 --> 08:19.780
+So this means there's no electricity on either cable.
+
+91
+08:19.780 --> 08:25.710
+This means that you're putting electricity on the second cable but not the first cable.
+
+92
+08:25.720 --> 08:30.220
+This means that you're putting electricity on the first cable but not the second cable.
+
+93
+08:30.220 --> 08:34.340
+And this means that you're putting electricity on both cables.
+
+94
+08:34.390 --> 08:38.310
+So this is no electricity on both cables.
+
+95
+08:38.310 --> 08:39.330
+This is electricity
+
+96
+08:39.340 --> 08:46.760
+on the second cable this is electricity on the first cable.
+
+97
+08:46.990 --> 08:50.640
+and this is electricity on both cables.
+
+98
+08:50.680 --> 08:56.500
+So what does that equate to this means zero in decimal.
+
+99
+08:56.520 --> 09:08.710
+This however looking at the entire octet isn't 0, 0.1 in binary means that the second bit is set on.
+
+100
+09:08.720 --> 09:11.930
+So what that means is that this is 64.
+
+101
+09:12.260 --> 09:15.020
+What does this whole octet equate to?
+
+102
+09:15.200 --> 09:18.240
+That's 128 first binary
+
+103
+09:18.250 --> 09:20.770
+bit in octet is on. 
+
+104
+09:20.870 --> 09:22.370
+What does this equate to?
+
+105
+09:22.400 --> 09:24.540
+This is 192.
+
+106
+09:25.070 --> 09:29.210
+So what we've got now are four subnets.
+
+107
+09:29.210 --> 09:40.350
+192.168.1.0 slash 26, 192 168 1 64 slash 26, 128 and 192.
+
+108
+09:40.360 --> 09:48.710
+So what we can do now is allocate the first subnet to the hosts on the left and then as an example we
+
+109
+09:48.710 --> 09:56.110
+could allocate the second subnet to the hosts on the right.
+
+110
+09:56.290 --> 10:06.520
+And then what we could do is allocate the third subnet for the serial link and that means we've got
+
+111
+10:06.520 --> 10:09.980
+one additional subnet for future use.
+
+112
+10:10.000 --> 10:15.490
+Now we can optimize the subnet and I'll show you how to do that later but for now we'll allocate a slash
+
+113
+10:15.490 --> 10:19.270
+26 subnet to the serial link.
+
+114
+10:19.270 --> 10:20.770
+Generally you don't want to do that.
+
+115
+10:20.770 --> 10:27.580
+You wanna allocate a slash 30 which means that you only have two IP addresses in a subnet and you
+
+116
+10:27.580 --> 10:30.220
+do that to conserve IP addresses.
+
+117
+10:30.220 --> 10:36.760
+But for now let's configure the network using slash 26 and then I'll show you later how to subnet this
+
+118
+10:36.850 --> 10:38.070
+further.
+
+119
+10:38.070 --> 10:41.500
+I hope you found this video useful if it was of benefit to you.
+
+120
+10:41.500 --> 10:45.580
+Please LIKE IT AND PLEASE SUBSCRIBE TO MY YOUTUBE CHANNEL.
+
+121
+10:45.820 --> 10:47.410
+I wish you all the very best.

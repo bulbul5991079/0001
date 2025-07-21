@@ -1,0 +1,898 @@
+WEBVTT
+
+00:00.750 --> 00:02.490
+-: Okay, so I'm gonna open up a web browser
+
+00:02.490 --> 00:04.743
+from PC one to the server.
+
+00:05.790 --> 00:07.110
+The server's IP address
+
+00:07.110 --> 00:11.320
+and this is a Linux server, is 10.1.1.100.
+
+00:13.200 --> 00:15.150
+I used the command ifconfig
+
+00:15.150 --> 00:17.790
+to see the server's IP address.
+
+00:17.790 --> 00:21.510
+So what I'll do is start capturing traffic
+
+00:21.510 --> 00:24.150
+between the PC and the switch.
+
+00:24.150 --> 00:26.130
+GNS3 makes this very easy.
+
+00:26.130 --> 00:28.410
+It allows us to capture traffic directly
+
+00:28.410 --> 00:32.970
+within the topology, rather than having to install a hub
+
+00:32.970 --> 00:36.753
+or a wiretap or something to see the traffic.
+
+00:37.590 --> 00:40.140
+So I'm gonna capture the traffic between the PC
+
+00:40.140 --> 00:42.750
+and the switch and we'll be able to see
+
+00:42.750 --> 00:47.250
+exactly what's going on within this Wireshark capture.
+
+00:47.250 --> 00:49.920
+So you can see that we've got spanning tree traffic.
+
+00:49.920 --> 00:52.440
+We've got EIJRP traffic,
+
+00:52.440 --> 00:55.690
+dynamic trunk protocol traffic already displayed
+
+00:56.970 --> 01:00.180
+and being captured by a Wireshark.
+
+01:00.180 --> 01:04.380
+What I'm gonna do, however, is filter for HTTP.
+
+01:04.380 --> 01:07.020
+There's no HTTP traffic at the moment,
+
+01:07.020 --> 01:12.020
+but what we'll do is open up a web browser on the PC
+
+01:12.390 --> 01:15.540
+and connect to the server.
+
+01:15.540 --> 01:17.763
+So let's use PC one.
+
+01:19.320 --> 01:20.613
+Open up a web browser.
+
+01:22.860 --> 01:27.390
+I'm gonna browse to 10.1.1.100, which is the server.
+
+01:31.050 --> 01:34.140
+And as you can see there, a webpage is displayed.
+
+01:34.140 --> 01:35.400
+Now, it's nothing fancy,
+
+01:35.400 --> 01:39.900
+it's just a basic webpage hosted on the server,
+
+01:39.900 --> 01:43.920
+but it's enough for us to see what's going on.
+
+01:43.920 --> 01:47.880
+So in Wireshark you can see that traffic was sent
+
+01:47.880 --> 01:52.200
+from a source IP address, 10.1.1.1
+
+01:52.200 --> 01:55.500
+to a destination IP address of 10.1.1.100.
+
+01:55.500 --> 01:57.000
+This is HTTP traffic.
+
+01:57.000 --> 02:00.270
+You can see the protocol layer is HTTP.
+
+02:00.270 --> 02:05.070
+You can see the length, you can see that it's an HTTP get.
+
+02:05.070 --> 02:05.910
+In other words,
+
+02:05.910 --> 02:09.003
+the PC is trying to get a webpage from the server.
+
+02:09.870 --> 02:13.080
+Now, before I go through the Wireshark capture
+
+02:13.080 --> 02:13.920
+in more detail,
+
+02:13.920 --> 02:17.880
+let's explain some of the basics that you see in Wireshark.
+
+02:17.880 --> 02:19.713
+The first thing you see is a frame.
+
+02:20.610 --> 02:23.040
+Now, in networking, this is known as
+
+02:23.040 --> 02:25.680
+layer two of the OSI model.
+
+02:25.680 --> 02:28.470
+Information captured here are known as frames.
+
+02:28.470 --> 02:30.810
+So this is known as a frame.
+
+02:30.810 --> 02:33.300
+We've captured an ethernet two frame.
+
+02:33.300 --> 02:36.480
+In other words, we've captured a traffic on ethernet.
+
+02:36.480 --> 02:38.160
+There are different types of ethernet frames,
+
+02:38.160 --> 02:40.290
+but ethernet two is the most common.
+
+02:40.290 --> 02:43.590
+The source Mac address is a VMware host.
+
+02:43.590 --> 02:45.750
+Destination Mac address is this.
+
+02:45.750 --> 02:50.040
+So the source Mac address is the PC.
+
+02:50.040 --> 02:54.000
+This PC is actually running inside a VMware.
+
+02:54.000 --> 02:56.490
+If I type IP config /all,
+
+02:56.490 --> 02:58.710
+you'll be able to see the Mac address
+
+02:58.710 --> 03:03.710
+of the host 00-0C-29 ending in DC-D7.
+
+03:05.340 --> 03:09.240
+And hopefully that's what we see over here.
+
+03:09.240 --> 03:13.320
+So notice Mac address is DC-D7.
+
+03:13.320 --> 03:15.180
+So notice this Mac address
+
+03:15.180 --> 03:17.130
+is the Mac address of the PC.
+
+03:17.130 --> 03:19.770
+Destination address is this.
+
+03:19.770 --> 03:22.200
+That's the Mac address of the server.
+
+03:22.200 --> 03:23.973
+Notice the Mac address over here.
+
+03:25.672 --> 03:29.070
+36:e4:5c:40:91:a2.
+
+03:29.070 --> 03:30.390
+There you go.
+
+03:30.390 --> 03:32.670
+That's the IP address of the server.
+
+03:32.670 --> 03:34.800
+Mac address of the server.
+
+03:34.800 --> 03:37.320
+Here's the IP address of the PC
+
+03:37.320 --> 03:39.810
+and the Mac address of the PC.
+
+03:39.810 --> 03:44.810
+So in networking we use the term frame at layer two.
+
+03:45.480 --> 03:46.860
+You get different types of frames.
+
+03:46.860 --> 03:48.900
+On ethernet, typically ethernet two,
+
+03:48.900 --> 03:52.320
+but on a WAN connection or wide area network connection,
+
+03:52.320 --> 03:55.110
+you could be using something like point-to-point protocol
+
+03:55.110 --> 03:58.140
+or PPP or HDLC.
+
+03:58.140 --> 04:00.690
+Or in the old days you had encapsulations
+
+04:00.690 --> 04:03.540
+like frame relay or ATM.
+
+04:03.540 --> 04:08.100
+In other words, the layer two frame changes
+
+04:08.100 --> 04:11.310
+depending on the physical technology that you're using.
+
+04:11.310 --> 04:13.770
+Most common technology today is ethernet.
+
+04:13.770 --> 04:17.490
+Most common ethernet frame type is ethernet two.
+
+04:17.490 --> 04:19.980
+So this is known as a frame.
+
+04:19.980 --> 04:22.170
+Now, just to make it more confusing,
+
+04:22.170 --> 04:26.340
+in Wireshark they talk about frames here as well,
+
+04:26.340 --> 04:28.620
+but this is actually just metadata
+
+04:28.620 --> 04:32.070
+used within Wireshark that tells us about the frame.
+
+04:32.070 --> 04:34.350
+So again, this is just metadata.
+
+04:34.350 --> 04:36.990
+We don't typically talk about that as a frame.
+
+04:36.990 --> 04:39.810
+In networking, this is known as a frame.
+
+04:39.810 --> 04:43.350
+This is known as layer two in the OSI model.
+
+04:43.350 --> 04:45.377
+So this is a frame.
+
+04:45.377 --> 04:48.750
+At layer three we have what's called a packet.
+
+04:48.750 --> 04:51.780
+So when we refer to the layers in the OSI model,
+
+04:51.780 --> 04:54.630
+we use terms such as frame layer two,
+
+04:54.630 --> 04:59.100
+packet at layer three and segment at layer four.
+
+04:59.100 --> 05:02.700
+At layer three we've captured the IP version four addresses.
+
+05:02.700 --> 05:05.160
+So this is IP version four information.
+
+05:05.160 --> 05:08.493
+The protocol used here at layer four is IP version four.
+
+05:09.330 --> 05:10.500
+What I'll do actually at this point
+
+05:10.500 --> 05:12.040
+is stop my Wireshark capture
+
+05:12.960 --> 05:15.710
+so that the capture that I share with you isn't too big
+
+05:16.740 --> 05:21.740
+and I'll save this as basic Wireshark capture one.
+
+05:25.830 --> 05:28.620
+Notice it's a PCAPNG file
+
+05:28.620 --> 05:31.620
+or PCAP next generation Wireshark file.
+
+05:31.620 --> 05:33.900
+So that's the file that you'll download
+
+05:33.900 --> 05:35.070
+and you'll be able to do something similar
+
+05:35.070 --> 05:36.720
+to what I've done here.
+
+05:36.720 --> 05:40.710
+So again, protocol at layer three is IP version four.
+
+05:40.710 --> 05:42.030
+Source IP address is this.
+
+05:42.030 --> 05:44.070
+Destination IP address is this.
+
+05:44.070 --> 05:46.710
+IP version four contains a lot of information.
+
+05:46.710 --> 05:48.660
+Differentiated services code points
+
+05:48.660 --> 05:51.720
+or differentiated services field, DSEP.
+
+05:51.720 --> 05:53.880
+Differentiated services code points
+
+05:53.880 --> 05:57.420
+is to do with quality of service.
+
+05:57.420 --> 06:00.120
+Quality of service or QOS or QOS
+
+06:00.120 --> 06:03.570
+allows us to differentiate some traffic types from others.
+
+06:03.570 --> 06:05.190
+So in other words, we could say
+
+06:05.190 --> 06:08.940
+that voice traffic is more important than FTP traffic.
+
+06:08.940 --> 06:12.000
+So when you make a voice call, it should be prioritized
+
+06:12.000 --> 06:15.510
+over file transfer protocol or FTP traffic.
+
+06:15.510 --> 06:18.090
+This is a way to indicate to the network
+
+06:18.090 --> 06:20.400
+how important the traffic is.
+
+06:20.400 --> 06:22.740
+A lot of other information is shown in this header,
+
+06:22.740 --> 06:25.740
+including as an example that the protocol used
+
+06:25.740 --> 06:28.050
+at layer four is TCP.
+
+06:28.050 --> 06:31.140
+So at layer four, once again this is layer two.
+
+06:31.140 --> 06:33.780
+Frame layer three is packet.
+
+06:33.780 --> 06:35.520
+Layer four is segment.
+
+06:35.520 --> 06:40.230
+At layer four in the OSI model, we are using TCP here.
+
+06:40.230 --> 06:42.870
+And you can see source and destination port numbers.
+
+06:42.870 --> 06:46.170
+HTTP, or hypertext transfer protocol,
+
+06:46.170 --> 06:49.380
+uses the well-known port number of 80.
+
+06:49.380 --> 06:52.230
+The server was listening on port 80.
+
+06:52.230 --> 06:56.703
+That's why when the client made a connection to the server,
+
+06:57.570 --> 07:00.090
+the webpage displayed.
+
+07:00.090 --> 07:02.880
+The client initiated a session to port 80.
+
+07:02.880 --> 07:05.640
+The server was listening on port 80.
+
+07:05.640 --> 07:08.220
+It served, because it's a server,
+
+07:08.220 --> 07:11.283
+it's served a webpage to the client,
+
+07:12.510 --> 07:15.690
+in this case using the protocol HTTP.
+
+07:15.690 --> 07:18.840
+So it basically has this page, this webpage
+
+07:18.840 --> 07:21.510
+hosted on its hard drive
+
+07:21.510 --> 07:24.930
+and it served that page to the client.
+
+07:24.930 --> 07:27.360
+when the client connected on port 80.
+
+07:27.360 --> 07:29.583
+The client uses this random port number,
+
+07:30.780 --> 07:33.540
+or ephemeral port number to use the correct term.
+
+07:33.540 --> 07:34.980
+So it connects to the server
+
+07:34.980 --> 07:37.800
+using an ephemeral or random port number,
+
+07:37.800 --> 07:40.680
+going to a well-known port number of 80.
+
+07:40.680 --> 07:44.520
+And then you can see here the application used
+
+07:44.520 --> 07:46.650
+is hypertext transfer protocol.
+
+07:46.650 --> 07:50.520
+Now, in networking we talk about the OSI model,
+
+07:50.520 --> 07:52.410
+but typically it's a hybrid model
+
+07:52.410 --> 07:56.760
+between the TCP model and the OSI model.
+
+07:56.760 --> 07:58.170
+At the top of the OSI model
+
+07:58.170 --> 08:01.260
+we have application, presentation and session.
+
+08:01.260 --> 08:02.850
+Those layers are often grouped
+
+08:02.850 --> 08:05.520
+into a single layer called application.
+
+08:05.520 --> 08:07.020
+So notice we have layer two here.
+
+08:07.020 --> 08:08.940
+Layer one is the physical medium.
+
+08:08.940 --> 08:10.950
+So that's not shown in the Wireshark capture.
+
+08:10.950 --> 08:12.960
+The physical medium here is ethernet,
+
+08:12.960 --> 08:15.720
+could be copper or could be fiber.
+
+08:15.720 --> 08:17.910
+In our example, this is just a virtual network,
+
+08:17.910 --> 08:21.240
+but in the real world this would be physical ethernet.
+
+08:21.240 --> 08:22.920
+In this case perhaps copper.
+
+08:22.920 --> 08:25.290
+So the physical media is copper,
+
+08:25.290 --> 08:27.903
+so that's the physical connection.
+
+08:28.770 --> 08:31.860
+Here it's just a virtual logical connection.
+
+08:31.860 --> 08:33.780
+So layer one, physical.
+
+08:33.780 --> 08:36.810
+Layer two, data link or in this case it's ethernet.
+
+08:36.810 --> 08:39.120
+Layer three is network.
+
+08:39.120 --> 08:41.490
+In this case we've got IP.
+
+08:41.490 --> 08:44.670
+Layer four is transport, in this case it's TCP.
+
+08:44.670 --> 08:46.710
+And then the top three layers are kind of combined
+
+08:46.710 --> 08:49.440
+into one layer, application layer.
+
+08:49.440 --> 08:52.140
+So notice hypertext transfer protocol.
+
+08:52.140 --> 08:56.520
+And inside here we can see details such as the client used.
+
+08:56.520 --> 09:01.143
+It shows up still as Windows NT 10, 164 bit,
+
+09:02.550 --> 09:05.343
+using a browser, Mozilla 5.0.
+
+09:07.560 --> 09:10.590
+So in this example I'm actually using Microsoft Edge.
+
+09:10.590 --> 09:14.790
+That's the browser used within Windows 10.
+
+09:14.790 --> 09:17.460
+So this is a Windows 10, a virtual computer.
+
+09:17.460 --> 09:18.930
+In other words, it's virtualized.
+
+09:18.930 --> 09:22.380
+I'm actually running on a Mac here, recording on a Mac,
+
+09:22.380 --> 09:25.470
+but I'm running a VMware which allows me to virtualize
+
+09:25.470 --> 09:29.460
+multiple devices within my GN3 topology.
+
+09:29.460 --> 09:32.730
+So the Wireshark capture sees the client
+
+09:32.730 --> 09:35.940
+as a Windows 10 computer, which is correct.
+
+09:35.940 --> 09:38.310
+It's using 64 bit windows.
+
+09:38.310 --> 09:42.270
+Mozilla is the browser, it's actually Microsoft Edge.
+
+09:42.270 --> 09:44.880
+And then the server replies back.
+
+09:44.880 --> 09:46.620
+Notice in the server example
+
+09:46.620 --> 09:49.620
+the Mac addresses are swapped round.
+
+09:49.620 --> 09:52.230
+In this example I've got a layer two switch.
+
+09:52.230 --> 09:53.580
+A layer two switch means that
+
+09:53.580 --> 09:56.040
+it's just simply switching frames.
+
+09:56.040 --> 09:59.790
+In other words, layer two data from one port to another.
+
+09:59.790 --> 10:01.320
+It's not trying to route the data
+
+10:01.320 --> 10:03.240
+from one network to another.
+
+10:03.240 --> 10:06.840
+These two hosts are in the same subnet or the same network.
+
+10:06.840 --> 10:09.840
+So the switch is simply switching the traffic
+
+10:09.840 --> 10:11.490
+from one port to another.
+
+10:11.490 --> 10:14.430
+So in this example, the IP addresses are swapped around
+
+10:14.430 --> 10:16.080
+and so are the Mac addresses.
+
+10:16.080 --> 10:18.270
+Going back to the first example,
+
+10:18.270 --> 10:20.100
+notice source Mac address is this,
+
+10:20.100 --> 10:22.230
+destination Mac address is this.
+
+10:22.230 --> 10:25.290
+When the server replies, those are simply swapped around.
+
+10:25.290 --> 10:27.960
+So the server is replying with
+
+10:27.960 --> 10:29.640
+its Mac address is the source,
+
+10:29.640 --> 10:33.000
+destination Mac address is the Windows computer.
+
+10:33.000 --> 10:36.240
+IP addresses are swapped around and so are port numbers.
+
+10:36.240 --> 10:39.540
+And if we look at the hypertext protocol,
+
+10:39.540 --> 10:42.600
+notice we can see server says 200 OK.
+
+10:42.600 --> 10:44.850
+200 means that the server
+
+10:44.850 --> 10:47.970
+was able to provide the data to the client.
+
+10:47.970 --> 10:52.380
+We didn't have a 404 HTML error, as an example.
+
+10:52.380 --> 10:55.500
+Some data was provided to the client.
+
+10:55.500 --> 10:58.230
+Notice you can see here the actual webpage
+
+10:58.230 --> 11:00.150
+that was served to the client.
+
+11:00.150 --> 11:02.850
+So you can see it says Networkers' Toolkit.
+
+11:02.850 --> 11:06.330
+You can see the PNG file.
+
+11:06.330 --> 11:08.460
+Notice Networkers' Toolkit.
+
+11:08.460 --> 11:12.030
+And if I look at that webpage on the client,
+
+11:12.030 --> 11:14.730
+notice you can see the output here.
+
+11:14.730 --> 11:19.730
+It says, "WWW: Files located at /var/www.html".
+
+11:20.310 --> 11:24.150
+And if we look here, that's actually what you see.
+
+11:24.150 --> 11:29.150
+Files located at /var/www.html.
+
+11:29.190 --> 11:33.270
+So if I scroll to the right, notice you see the full output.
+
+11:33.270 --> 11:35.973
+You get to root after logging in.
+
+11:37.950 --> 11:41.640
+Notice we're told you can place files in /tftpboot
+
+11:41.640 --> 11:45.420
+and that's exactly what you see over here.
+
+11:45.420 --> 11:48.780
+So Wireshark has read the HTTP traffic.
+
+11:48.780 --> 11:51.930
+Be careful with HTTP, it's clear text.
+
+11:51.930 --> 11:55.650
+So through Wireshark you can see exactly what's going on.
+
+11:55.650 --> 11:58.980
+Here the client is trying to get the PNG image.
+
+11:58.980 --> 12:01.920
+So it's trying to get the actual PNG image.
+
+12:01.920 --> 12:04.770
+And here the server, which is an Ubuntu server,
+
+12:04.770 --> 12:08.430
+is providing the PNG file.
+
+12:08.430 --> 12:13.233
+So that's the actual file and you can actually export that.
+
+12:14.910 --> 12:16.410
+And I do this again in other ,
+
+12:16.410 --> 12:18.531
+but let's do it right now.
+
+12:18.531 --> 12:20.193
+GNS3 image.
+
+12:21.210 --> 12:23.160
+So I'm gonna export that to my desktop.
+
+12:24.720 --> 12:29.400
+And on my desktop I'm gonna change that to a PNG file.
+
+12:32.880 --> 12:37.880
+And then when I open it up, notice there's the actual image.
+
+12:37.950 --> 12:40.380
+So Wireshark captured all the data
+
+12:40.380 --> 12:42.990
+from the server as well as the image.
+
+12:42.990 --> 12:45.510
+And that's the image that we have on the server.
+
+12:45.510 --> 12:49.380
+So once again, to do that, click portable network graphics,
+
+12:49.380 --> 12:50.970
+'cause there's a PNG file.
+
+12:50.970 --> 12:55.680
+And then go export packet bytes, save it to your hard drive.
+
+12:55.680 --> 12:58.480
+So I'm gonna save it once again as GNS3 image two
+
+13:00.000 --> 13:01.653
+and then I'm gonna rename it.
+
+13:02.700 --> 13:05.040
+So it's saved it as a bin file.
+
+13:05.040 --> 13:08.823
+I'm gonna rename that as PNG, because it's a PNG file.
+
+13:10.320 --> 13:11.733
+And then when I open it up,
+
+13:12.570 --> 13:15.090
+you can see that it's a PNG file
+
+13:15.090 --> 13:17.100
+and there's the actual image.
+
+13:17.100 --> 13:21.720
+So, you can see here it's getting the fave icon
+
+13:21.720 --> 13:25.860
+and then we are getting something HTTP 404 error.
+
+13:25.860 --> 13:27.210
+Something not found.
+
+13:27.210 --> 13:29.043
+So something went wrong here.
+
+13:30.210 --> 13:31.043
+But the point is,
+
+13:31.043 --> 13:35.040
+is that you can read the actual HTTP traffic.
+
+13:35.040 --> 13:40.040
+And remember, because these devices are on the same subnet,
+
+13:41.820 --> 13:44.190
+all that happens is the Mac addresses are swapped around,
+
+13:44.190 --> 13:45.600
+IP addresses are swapped around,
+
+13:45.600 --> 13:49.620
+port numbers are swapped around during that communication.
+
+13:49.620 --> 13:51.960
+So source IP is host.
+
+13:51.960 --> 13:54.630
+Here source IP is the server.
+
+13:54.630 --> 13:56.130
+So when the server replies back,
+
+13:56.130 --> 13:59.910
+it's replying back from port 80 to the client.
+
+13:59.910 --> 14:03.450
+So that was a very basic example of using Wireshark
+
+14:03.450 --> 14:05.790
+to see what's going on in the network.
+
+14:05.790 --> 14:09.630
+Were you able to download the PCAP file?
+
+14:09.630 --> 14:11.610
+Were you able to open it up in Wireshark
+
+14:11.610 --> 14:14.100
+and actually do something similar to what I've done here?
+
+14:14.100 --> 14:16.200
+There's no better way to learn
+
+14:16.200 --> 14:19.560
+than to practically use Wireshark capture frames
+
+14:19.560 --> 14:22.020
+and see for yourself what's going on.
+
+14:22.020 --> 14:23.400
+I've made it a little bit more simple
+
+14:23.400 --> 14:25.920
+by giving you some PCAP files,
+
+14:25.920 --> 14:27.660
+but hopefully they mean something,
+
+14:27.660 --> 14:29.970
+because you using the actual files
+
+14:29.970 --> 14:32.460
+that I'm recording right now,
+
+14:32.460 --> 14:33.960
+rather than just some random file
+
+14:33.960 --> 14:35.700
+that you got off the internet.
+
+14:35.700 --> 14:37.440
+Now, please note it means a lot to me
+
+14:37.440 --> 14:39.390
+if you provide feedback on the course.
+
+14:39.390 --> 14:43.530
+So if you're enjoying the video, then please say so.
+
+14:43.530 --> 14:45.420
+If you get prompted to leave a review
+
+14:45.420 --> 14:48.570
+and you're enjoying the course, then please do that,
+
+14:48.570 --> 14:49.770
+because it helps other students
+
+14:49.770 --> 14:51.690
+and it helps me make the course better.
+
+14:51.690 --> 14:54.140
+Let me know how I can improve the course as well.

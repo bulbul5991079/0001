@@ -1,0 +1,583 @@
+WEBVTT
+
+00:00.150 --> 00:02.970
+-: Information may be segmented
+
+00:02.970 --> 00:05.190
+or broken up into smaller chunks
+
+00:05.190 --> 00:07.920
+for transmission across a physical medium.
+
+00:07.920 --> 00:10.920
+The maximum transmission unit, or MTU
+
+00:10.920 --> 00:15.000
+of an outgoing interface depends on the physical medium.
+
+00:15.000 --> 00:20.000
+As an example, the MTU of fast ethernet is 1,500 bytes.
+
+00:20.730 --> 00:25.063
+However, TCP can theoretically support 65,495 bytes
+
+00:27.900 --> 00:29.340
+in a single packet.
+
+00:29.340 --> 00:33.000
+When that is sent to the lower layers of the OSI model,
+
+00:33.000 --> 00:35.460
+that will need to be broken up into fragments
+
+00:35.460 --> 00:38.640
+for transmission across the physical medium,
+
+00:38.640 --> 00:42.210
+which, for example, only supports 1,500 bytes.
+
+00:42.210 --> 00:45.870
+Data is therefore broken up into smaller chunks,
+
+00:45.870 --> 00:48.840
+and the receiver, using TCP, will need
+
+00:48.840 --> 00:51.390
+to put those fragments back together again.
+
+00:51.390 --> 00:54.300
+The maximum segment size, or MSS,
+
+00:54.300 --> 00:57.240
+is the largest amount of data in bytes
+
+00:57.240 --> 01:00.480
+that TCP is willing to send in a single segment.
+
+01:00.480 --> 01:04.440
+For best performance, the MSS should be set small enough
+
+01:04.440 --> 01:06.420
+to avoid IP fragmentation,
+
+01:06.420 --> 01:08.520
+which can lead to excessive retransmissions
+
+01:08.520 --> 01:09.753
+if there's packet loss.
+
+01:11.010 --> 01:14.760
+TCP supports something called maximum segment size,
+
+01:14.760 --> 01:17.250
+and path MTU discovery,
+
+01:17.250 --> 01:20.550
+or path maximum transmission unit discovery,
+
+01:20.550 --> 01:22.380
+where the sender and the receiver
+
+01:22.380 --> 01:25.110
+can automatically determine what the maximum
+
+01:25.110 --> 01:29.280
+transmission unit is on a path between them,
+
+01:29.280 --> 01:33.150
+and TCP will only put enough data into a single packet
+
+01:33.150 --> 01:35.400
+that fits that MTU,
+
+01:35.400 --> 01:38.940
+thus avoiding fragmentation of packets,
+
+01:38.940 --> 01:42.720
+and thus avoiding the overhead associated with fragmentation
+
+01:42.720 --> 01:45.750
+and the putting together of the IP fragments.
+
+01:45.750 --> 01:49.050
+Path MTU discovery is optional in IPv4,
+
+01:50.130 --> 01:53.730
+but has now become mandatory in IPv6
+
+01:53.730 --> 01:56.370
+because of the efficiencies that it brings
+
+01:56.370 --> 01:58.530
+to the TCP transmission,
+
+01:58.530 --> 02:03.330
+and the fact that IPv6 does not support fragmentation
+
+02:03.330 --> 02:06.573
+on routers along the path between two hosts.
+
+02:08.397 --> 02:09.900
+UDP does not support this,
+
+02:09.900 --> 02:12.420
+and requires high layer protocols
+
+02:12.420 --> 02:14.013
+to sort out the fragments.
+
+02:15.810 --> 02:17.040
+Flow control.
+
+02:17.040 --> 02:20.370
+TCP uses end-to-end flow control
+
+02:20.370 --> 02:23.610
+to avoid having the sender send data too quickly
+
+02:23.610 --> 02:27.450
+for the receiver to receive it and process it reliably.
+
+02:27.450 --> 02:29.520
+If the sender transmits data faster
+
+02:29.520 --> 02:31.530
+than the receiver can handle,
+
+02:31.530 --> 02:33.390
+the receiver will drop the data,
+
+02:33.390 --> 02:35.610
+which will require retransmission.
+
+02:35.610 --> 02:39.600
+Retransmissions will waste time and network resources,
+
+02:39.600 --> 02:42.150
+which is why most flow control mechanisms
+
+02:42.150 --> 02:45.540
+try to maximize the transfer rate
+
+02:45.540 --> 02:48.423
+while minimizing the requirements to retransmit.
+
+02:49.350 --> 02:53.490
+You may, as an example, have a PC with a powerful CPU
+
+02:53.490 --> 02:56.580
+sending data to a handheld PDA,
+
+02:56.580 --> 03:00.330
+which can only process data at a much lower rate.
+
+03:00.330 --> 03:03.090
+The PDA should therefore regulate the data flow
+
+03:03.090 --> 03:05.310
+so it's not overwhelmed.
+
+03:05.310 --> 03:08.700
+In TCP, basic flow control is implemented
+
+03:08.700 --> 03:11.160
+by acknowledgements from the receiver
+
+03:11.160 --> 03:13.143
+in receipt of data transmitted.
+
+03:14.070 --> 03:17.160
+TCP uses something called a sliding window
+
+03:17.160 --> 03:19.380
+to control the flow of data.
+
+03:19.380 --> 03:21.510
+Windowing will allow a receiving computer
+
+03:21.510 --> 03:24.780
+to advertise how much data it's able to receive
+
+03:24.780 --> 03:26.490
+before transmitting an acknowledgement
+
+03:26.490 --> 03:28.680
+to the sending computer.
+
+03:28.680 --> 03:32.700
+In each TCP segment, the receiver will specify
+
+03:32.700 --> 03:35.190
+in the receive window field the amount
+
+03:35.190 --> 03:38.280
+of additional receive data in bytes
+
+03:38.280 --> 03:40.980
+that it is willing to buffer for the connection.
+
+03:40.980 --> 03:44.880
+The sending host can only send up to that amount of data
+
+03:44.880 --> 03:47.790
+before it must wait for an acknowledgement
+
+03:47.790 --> 03:50.853
+and window size update from the receiving host.
+
+03:51.960 --> 03:54.513
+UDP does not implement flow control,
+
+03:55.380 --> 03:59.820
+and in a VoIP environment, as an example, which uses UDP,
+
+03:59.820 --> 04:01.620
+even though there's no physical connection
+
+04:01.620 --> 04:05.160
+between two handsets involved in a telephone call,
+
+04:05.160 --> 04:07.470
+the call will stay up, and the sender
+
+04:07.470 --> 04:11.070
+will merrily continue sending huge amounts of data,
+
+04:11.070 --> 04:15.120
+even though the receiver cannot process the received data.
+
+04:15.120 --> 04:18.000
+UDP relies on high layer protocols
+
+04:18.000 --> 04:20.370
+to implement flow control.
+
+04:20.370 --> 04:23.640
+Once again, TCP is connection orientated,
+
+04:23.640 --> 04:25.950
+and UDP is connectionless.
+
+04:25.950 --> 04:29.190
+TCP will establish the session connection,
+
+04:29.190 --> 04:32.970
+and maintain the connection during the entire transmission.
+
+04:32.970 --> 04:37.200
+Once a transmission is complete, the session is terminated.
+
+04:37.200 --> 04:39.810
+UDP does not set up sessions,
+
+04:39.810 --> 04:42.270
+and will just send the data in the hope
+
+04:42.270 --> 04:43.970
+that the receiver will receive it.
+
+04:45.060 --> 04:48.210
+Once again, TCP implements reliability
+
+04:48.210 --> 04:51.960
+where every segment transmitted is acknowledged,
+
+04:51.960 --> 04:55.500
+and if the segment went missing, it is retransmitted.
+
+04:56.490 --> 04:59.100
+UDP does not implement reliability,
+
+04:59.100 --> 05:01.950
+and once again, relies on high layer protocols
+
+05:01.950 --> 05:05.610
+to implement any reliability if required.
+
+05:05.610 --> 05:09.780
+In certain cases, such as Voice over IP,
+
+05:09.780 --> 05:13.050
+or video transmitted over an IP infrastructure,
+
+05:13.050 --> 05:15.480
+reliability is not required.
+
+05:15.480 --> 05:18.663
+There is no point retransmitting lost voice packets.
+
+05:19.980 --> 05:24.840
+So a quick comparison between UDP and TCP,
+
+05:24.840 --> 05:27.840
+or a reliable protocol and a best effort,
+
+05:27.840 --> 05:29.643
+or unreliable protocol.
+
+05:30.900 --> 05:33.990
+TCP, once again, is connection orientated.
+
+05:33.990 --> 05:38.280
+No data is transmitted before a session is established.
+
+05:38.280 --> 05:40.590
+A three-way handshake takes place
+
+05:40.590 --> 05:42.840
+before any data is transmitted.
+
+05:42.840 --> 05:45.690
+There are acknowledgements of data received,
+
+05:45.690 --> 05:49.410
+and sequence numbers to track transmission of data.
+
+05:49.410 --> 05:51.510
+UDP, on the other hand, is connectionless,
+
+05:52.620 --> 05:54.600
+and does not track data,
+
+05:54.600 --> 05:56.763
+and does not ensure delivery of data.
+
+05:57.780 --> 06:01.413
+TCP uses sequence numbers, UDP does not.
+
+06:02.370 --> 06:07.370
+Applications that use TCP include HTTP, email, and FTP.
+
+06:09.240 --> 06:12.540
+Applications that use UDP include voice streaming
+
+06:12.540 --> 06:14.880
+applications like Voice over IP,
+
+06:14.880 --> 06:17.190
+and video streaming applications.
+
+06:17.190 --> 06:20.430
+Because of the nature of VoIP or video,
+
+06:20.430 --> 06:22.320
+there is no reason to retransmit.
+
+06:22.320 --> 06:27.270
+In a VoIP environment, the talker will be required
+
+06:27.270 --> 06:29.640
+to repeat what they said if the listener
+
+06:29.640 --> 06:34.320
+was unable to decipher what was communicated.
+
+06:34.320 --> 06:36.930
+If you've ever used Skype, at times,
+
+06:36.930 --> 06:41.160
+it may sound like the person speaking is underwater,
+
+06:41.160 --> 06:43.380
+or they sound more like a machine
+
+06:43.380 --> 06:45.243
+than the person you know speaking,
+
+06:46.170 --> 06:49.740
+but you may still be able to understand what they've said,
+
+06:49.740 --> 06:52.050
+and thus, even though data went missing,
+
+06:52.050 --> 06:54.090
+the conversation can continue,
+
+06:54.090 --> 06:57.480
+or if it gets bad enough, you would ask the speaker
+
+06:57.480 --> 06:59.400
+to repeat what they said.
+
+06:59.400 --> 07:02.190
+In a video streaming environment, you may notice
+
+07:02.190 --> 07:05.790
+that part of the image is not refreshed properly,
+
+07:05.790 --> 07:07.710
+but you're still able to follow
+
+07:07.710 --> 07:09.660
+what's happening in the video.
+
+07:09.660 --> 07:13.920
+Because of the time-sensitive nature of voice and video,
+
+07:13.920 --> 07:16.380
+it is pointless retransmitting data,
+
+07:16.380 --> 07:19.260
+and thus, TCP is not used in these environments,
+
+07:19.260 --> 07:20.643
+UDP is used.
+
+07:21.900 --> 07:24.690
+So UDP is a transport layer protocol.
+
+07:24.690 --> 07:27.333
+It resides at layer four in the OSI model.
+
+07:28.440 --> 07:32.220
+It provides applications with access to the network layer,
+
+07:32.220 --> 07:34.860
+or layer three, without the overhead
+
+07:34.860 --> 07:37.140
+of reliability mechanisms
+
+07:37.140 --> 07:40.290
+As discussed, this is ideal for Voice over IP
+
+07:40.290 --> 07:42.420
+or video applications.
+
+07:42.420 --> 07:45.750
+It's connectionless, where a one-way datagram
+
+07:45.750 --> 07:49.380
+is sent to a destination without advanced notification
+
+07:49.380 --> 07:51.390
+to the destination device.
+
+07:51.390 --> 07:55.710
+There is no communication before transmission of data.
+
+07:55.710 --> 07:58.260
+The data just arrives at the receiver,
+
+07:58.260 --> 08:01.920
+and it's expected that the receiver handle that data.
+
+08:01.920 --> 08:06.150
+UDP is capable of providing very limited error checking.
+
+08:06.150 --> 08:09.990
+The UDP datagram does include an optional checksum value,
+
+08:09.990 --> 08:11.730
+which the receiving device can use
+
+08:11.730 --> 08:13.713
+to test the integrity of the data.
+
+08:14.670 --> 08:19.670
+The UDP header also includes a destination port number,
+
+08:19.950 --> 08:22.680
+and if that datagram is directed to an inactive port
+
+08:22.680 --> 08:24.690
+on the receiving device,
+
+08:24.690 --> 08:27.090
+a return message can be transmitted
+
+08:27.090 --> 08:29.790
+to indicate that that port is unreachable.
+
+08:29.790 --> 08:32.970
+I'm gonna discuss port numbers in more detail in a moment.
+
+08:32.970 --> 08:36.060
+It's a very important concept to understand.
+
+08:36.060 --> 08:39.060
+UDP provides best effort delivery.
+
+08:39.060 --> 08:42.510
+There is no guarantee that data is delivered.
+
+08:42.510 --> 08:45.720
+Packets may be misdirected, duplicated,
+
+08:45.720 --> 08:48.750
+or lost on their way to the destination.
+
+08:48.750 --> 08:51.060
+There is no guarantee of receipt.
+
+08:51.060 --> 08:55.890
+Higher layer protocols will need implement reliability
+
+08:55.890 --> 08:57.003
+if required.
+
+08:57.930 --> 09:01.470
+There are also no data recovery features in UDP.
+
+09:01.470 --> 09:04.770
+Once again, high layer protocols will need to recover
+
+09:04.770 --> 09:07.860
+from lost or corrupted packets.
+
+09:07.860 --> 09:11.040
+TFTP, as an example, has a built-in mechanism
+
+09:11.040 --> 09:13.140
+to handle data loss,
+
+09:13.140 --> 09:18.140
+and TFTP, using UDP, has its own built-in sequencing
+
+09:19.110 --> 09:21.150
+and retransmission mechanisms,
+
+09:21.150 --> 09:25.380
+as it cannot rely on UDP to implement reliability.
+
+09:25.380 --> 09:27.720
+The UDP header is very simple.
+
+09:27.720 --> 09:30.000
+It has a 16-bit source port number,
+
+09:30.000 --> 09:32.823
+a 16-bit port destination number,
+
+09:33.840 --> 09:37.740
+so these specify the port number used by the source
+
+09:37.740 --> 09:40.890
+and a port number used by the destination.
+
+09:40.890 --> 09:43.440
+It has a 16-bit UDP length field
+
+09:43.440 --> 09:47.400
+that specifies the length in bytes of the entire datagram,
+
+09:47.400 --> 09:49.770
+in other words, the header and the data.
+
+09:49.770 --> 09:53.400
+The minimum length for UDP datagram is eight bytes,
+
+09:53.400 --> 09:55.920
+because that's the length of the header.
+
+09:55.920 --> 10:00.920
+Theoretically, the maximum size is 65,535 bytes,
+
+10:01.620 --> 10:06.487
+but IPv4 will impose a maximum limit of 65,507 bytes.
+
+10:09.003 --> 10:13.830
+Optionally, A UDP checksum can be used for error checking.
+
+10:13.830 --> 10:18.510
+This is optional in IPv4, but is not optional in IPv6.

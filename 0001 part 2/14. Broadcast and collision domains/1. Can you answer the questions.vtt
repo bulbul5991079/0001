@@ -1,0 +1,145 @@
+WEBVTT
+
+0
+00:19.630 --> 00:28.740
+This is one of multiple CCNA quiz based videos, these quizzes are practical and use packet
+
+1
+00:28.790 --> 00:36.160
+tracer to help you test and verify your knowledge of CCNA topics.
+
+2
+00:36.310 --> 00:43.630
+So download the attached packet tracer file and see if you can practically answer the questions
+
+3
+00:43.660 --> 00:45.020
+in this quiz.
+
+4
+00:45.130 --> 00:55.020
+So don't just answer the questions prove it by using the packet tracer simulation mode. So assume
+
+5
+00:55.230 --> 01:01.590
+that for these questions that all devices have just rebooted you can simulate this by clicking the
+
+6
+01:01.590 --> 01:05.920
+power cycle devices button in Packet Tracer.
+
+7
+01:05.980 --> 01:12.440
+In other words, you can click this button here to power cycle the devices.
+
+8
+01:12.640 --> 01:16.930
+Again don't just answer these questions prove it.
+
+9
+01:16.930 --> 01:24.100
+The first question is, when PC 1 pings PC 4 in network 1
+
+10
+01:24.160 --> 01:27.770
+what type of packet is sent to the Hub initially?
+
+11
+01:27.790 --> 01:28.680
+Can you prove it?
+
+12
+01:29.630 --> 01:31.670
+Who received the packet?
+
+13
+01:31.910 --> 01:34.980
+Who received the return traffic from PC 4 to 
+
+14
+01:34.970 --> 01:45.090
+PC 1 and when ping traffic is sent from PC 1 to PC 4 who receives that traffic? For question
+
+15
+01:45.090 --> 01:46.530
+5 to 8
+
+16
+01:46.530 --> 01:53.140
+assume that the switches and MAC address table is empty so assume that this layer 2 switch
+
+17
+01:53.140 --> 01:59.450
+network 2 has just rebooted and that its MAC address table is empty.
+
+18
+01:59.610 --> 02:02.600
+When PC 5 pings PC 8,
+
+19
+02:02.850 --> 02:09.330
+in other words this PC here pings the IP address of PC 8 what type of packet is sent initially to
+
+20
+02:09.330 --> 02:10.350
+the switch
+
+21
+02:10.500 --> 02:12.110
+and can you prove it?
+
+22
+02:12.210 --> 02:19.500
+And then again who receives the initial packet and who receives the return traffic from PC 8 to PC 
+
+23
+02:19.500 --> 02:29.930
+5? And then when ICMP traffic or ping traffic is sent from PC 5 to PC 8 who received the traffic? Question
+
+24
+02:29.930 --> 02:36.270
+9 10 and 11 ask about broadcast and collision domains.
+
+25
+02:36.350 --> 02:41.460
+How many broadcast domains are there in network one and can you prove it?
+
+26
+02:41.480 --> 02:46.390
+How many broadcast domains are there in network 2 and can you prove it?
+
+27
+02:46.400 --> 02:50.570
+How many collision domains are there in network 1 and network 2
+
+28
+02:51.020 --> 02:58.610
+and again can you prove that? You don't have to answer these questions from Question 1 to question eleven.
+
+29
+02:58.700 --> 03:05.240
+You may wanna answer questions 9 10 and 11 first and then answer the other questions.
+
+30
+03:05.240 --> 03:13.460
+But by the time you finished you should be able to answer these 11 questions and be able to prove the
+
+31
+03:13.460 --> 03:15.230
+answers practically.
+
+32
+03:15.350 --> 03:21.980
+So download the attached packet tracer file and see if you can answer the questions yourself.
+
+33
+03:22.250 --> 03:26.930
+But I'm now gonna go through the answers to these questions.
+
+34
+03:27.110 --> 03:29.840
+I'm gonna answer the questions practically now.
+
+35
+03:29.840 --> 03:32.930
+So either pause the video or continue watching.

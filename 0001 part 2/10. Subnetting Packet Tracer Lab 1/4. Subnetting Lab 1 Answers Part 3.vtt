@@ -1,0 +1,185 @@
+WEBVTT
+
+0
+00:06.370 --> 00:12.800
+Okay, so the next subnet is 1 9 2 1 6 8 1 64 slash 26.
+
+1
+00:12.800 --> 00:19.540
+I'll copy the previous example but remember this is actually a different subnet now.
+
+2
+00:19.540 --> 00:29.900
+The subnet address is slash 64, so we'll need to update these values in the last octet.
+
+3
+00:30.010 --> 00:37.420
+So to work out the first host you simply add 1 to the subnet portion, subnet portion is 64.
+
+4
+00:37.510 --> 00:40.880
+So 1 added to that is 65.
+
+5
+00:41.050 --> 00:44.830
+The next subnet is 128.
+
+6
+00:44.830 --> 00:49.300
+So going back to our original example, this is the second subnet.
+
+7
+00:49.300 --> 00:52.890
+This is the third subnet, 128.
+
+8
+00:52.940 --> 00:59.320
+That means that the broadcast for the subnet is 127 because 128 minus one equals 127.
+
+9
+00:59.770 --> 01:09.940
+This is the next subnet minus one gives us our broadcast for the current subnet, last IP address in the
+
+10
+01:09.940 --> 01:11.820
+subnet is 126.
+
+11
+01:11.830 --> 01:13.990
+Next one is 125.
+
+12
+01:13.990 --> 01:17.220
+Next one is 124.
+
+13
+01:17.260 --> 01:24.360
+So there is our subnet broadcast for second last host and third last host.
+
+14
+01:24.400 --> 01:26.230
+I haven't rechecked the binary.
+
+15
+01:26.230 --> 01:28.280
+You could do that if you wanted to.
+
+16
+01:28.300 --> 01:34.450
+I'm simply using a quick method to work out the IP addresses so this router needs to be configured with
+
+17
+01:34.450 --> 01:47.440
+the first IP address on the serial interface, so interface serial 0 1 0, no shut,  IP address 1 9 2 1 6
+
+18
+01:47.440 --> 01:53.670
+8 165 uses that subnet mask.
+
+19
+01:53.770 --> 02:01.420
+So again it's just one more than the broadcast address, show IP interface brief there's the IP address
+
+20
+02:01.450 --> 02:11.920
+on the serial interface on the Internet router, we need to use one less than the next subnet so 127, show
+
+21
+02:11.920 --> 02:23.160
+IP interface brief on the first serial interface, interface serial 0 1 0, no shut, IP address 1 9 2 1 6
+
+22
+02:23.160 --> 02:36.440
+8 1 126 with the subnet mask, 127 is the broadcast one less than that gives us our last IP address, So
+
+23
+02:36.440 --> 02:40.880
+can we ping 1 9 2 1 6 8 1 65? Yes, we can.
+
+24
+02:41.150 --> 02:42.760
+So that's great.
+
+25
+02:42.920 --> 02:51.230
+We have IP connectivity between this router and the Internet router and notice an OSPF neighbour relationship
+
+26
+02:51.230 --> 02:58.910
+has come up, the routers were pre-configured with OSPF, so hopefully this router can now ping the
+
+27
+02:58.910 --> 03:10.070
+DNS server on the Internet and notice it can. On PC 1, can it ping the DNS server? Yes, it can.
+
+28
+03:10.310 --> 03:20.990
+If I trace to the DNS server traffic is going to router 1 on the Ethernet interface then it's going
+
+29
+03:20.990 --> 03:25.580
+to the Internet router on the serial interface then to the Internet.
+
+30
+03:25.580 --> 03:33.500
+The reason it works is, this router has been pre-configured with OSPF but is also being pre-configured
+
+31
+03:33.500 --> 03:40.910
+with Network Address Translation. This lab is concentrating on subnetting so I pre-configured the NAT
+
+32
+03:41.030 --> 03:45.760
+and routing protocols so that you didn't have to worry about that.
+
+33
+03:45.860 --> 03:47.660
+Can we get to cisco.com?
+
+34
+03:47.810 --> 03:49.130
+Yes, we can.
+
+35
+03:49.130 --> 03:51.040
+Can we get to facebook
+
+36
+03:51.080 --> 03:54.020
+.com? Yes, we can.
+
+37
+03:54.050 --> 03:56.610
+So that works on PC 0.
+
+38
+03:56.630 --> 04:01.360
+What about PC 2, can we get to cisco.com?
+
+39
+04:01.370 --> 04:02.750
+Yes, we can.
+
+40
+04:02.750 --> 04:05.060
+Can we get to facebook.com?
+
+41
+04:05.090 --> 04:06.810
+Yes, we can.
+
+42
+04:06.810 --> 04:13.010
+So I'm hoping you're ready at this point, you've learnt a lot about IP addressing, subnetting, how to configure
+
+43
+04:13.010 --> 04:17.990
+it and how to make it practical in a network. In the next video
+
+44
+04:17.990 --> 04:24.170
+I'm just going to continue doing something very similar for the other subnets and I'm going to speed
+
+45
+04:24.170 --> 04:27.020
+it up by using tricks rather than binary.

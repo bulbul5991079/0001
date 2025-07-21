@@ -1,0 +1,493 @@
+WEBVTT
+
+0
+00:06.650 --> 00:13.420
+Okay so that means I need to configure router 4 and the Internet router so I'll do router 4 first
+
+1
+00:24.140 --> 00:25.230
+interface serial
+
+2
+00:25.280 --> 00:27.190
+010
+
+3
+00:27.320 --> 00:29.440
+that's this interface.
+
+4
+00:31.670 --> 00:37.810
+Now in the real world you could use commands such as Show CDP neighbors to verify neighbor connectivity.
+
+5
+00:37.930 --> 00:44.050
+If you're not sure how interfaces are connected and you wanna verify interface connectivity.
+
+6
+00:44.050 --> 00:50.200
+So this is definitely the local interface connected to the Internet router.
+
+7
+00:50.680 --> 01:00.820
+So on that interface, interface serial 010 IP address 192 168 1 117 first IP address and subnet
+
+8
+01:00.850 --> 01:03.820
+is one more than the subnet address
+
+9
+01:07.180 --> 01:14.480
+and because this is a slash 30 the last IP address is simply the next IP address in that subnet interface
+
+10
+01:14.490 --> 01:15.170
+serial.
+
+11
+01:15.220 --> 01:19.300
+020 IP address 192 168.
+
+12
+01:19.400 --> 01:30.910
+We're in the subnet so it would be 118 1 118 slash 30 mask.
+
+13
+01:30.940 --> 01:35.950
+So can we ping the other side.
+
+14
+01:36.010 --> 01:41.030
+Yes, we can and we can see that on OSPF neighbor relationship has been established.
+
+15
+01:41.200 --> 01:43.840
+So back on router 4
+
+16
+01:46.860 --> 01:49.390
+OSPF neighbor relationship is established.
+
+17
+01:49.560 --> 01:59.580
+We've learnt a default route via the Internet router so IP domain lookup, IP name server is gonna be
+
+18
+01:59.580 --> 02:10.350
+Google ping Cisco.com, we can ping Cisco.com, can we ping Facebook.com, yes, we can. So I've
+
+19
+02:10.350 --> 02:18.540
+configured the WAN links and updated them per the new subnets that we have the next step is to configure
+
+20
+02:19.200 --> 02:35.030
+the subnet. So we need to use this subnet for this local area network now the way that you work out first
+
+21
+02:35.030 --> 02:46.890
+host, last host broadcast is once again first host is simply the next IP address after the subnet. So
+
+22
+02:46.910 --> 02:53.750
+binary it would look like that, host portion is set to zeros except for the last bit which is set to
+
+23
+02:53.750 --> 03:02.840
+1 but in decimal it's simply add 1 to the network portion. The broadcast would be one less than the next
+
+24
+03:02.840 --> 03:14.630
+subnet so the next subnet is 80 so the broadcast would be 79 and to work out the broadcast
+
+25
+03:14.630 --> 03:19.340
+portion you fill the host portion with binary ones
+
+26
+03:22.290 --> 03:33.630
+and again we can verify that we've done a right 79 it looks like this in binary so 0100 followed
+
+27
+03:33.630 --> 03:44.040
+by four ones, so that's correct and then the last hosts in the subnet is 1 less than the broadcast address
+
+28
+03:44.060 --> 03:51.210
+so 78 and if you want to work it out in binary you set the host portion to binary ones except for the
+
+29
+03:51.210 --> 03:58.860
+last bit which is set to zero, host portion for subnet looks like that filled with zeros broadcast is
+
+30
+03:58.860 --> 04:05.910
+filled with ones, first host is filled with zeros except for the last bit which is set to 1, the last host
+
+31
+04:06.630 --> 04:12.720
+has it filled with ones except for the last bit which is set to 0 so the last IP address in this subnet
+
+32
+04:12.750 --> 04:15.750
+which we need to use on router 4 is 79.
+
+33
+04:15.840 --> 04:18.590
+So 192 168 1 79
+
+34
+04:21.370 --> 04:30.970
+so on the Ethernet interface connecting to the switch gigabit 000 IP address 192 168 1
+
+35
+04:31.210 --> 04:33.550
+and again it should be 78.
+
+36
+04:36.040 --> 04:46.330
+Subnet is a slash 28, so slash 28 equals 8 plus 8 plus 8
+
+37
+04:49.660 --> 04:54.550
+plus 1 2 3 4 binary ones.
+
+38
+04:57.370 --> 05:08.740
+So it's 255 255 255, four binary ones in an octet would look like that followed by four zeros which gives
+
+39
+05:08.740 --> 05:11.560
+us 240, so this is 240
+
+40
+05:15.740 --> 05:20.990
+if you wanna verify it again in our calculator, 240 looks like that
+
+41
+05:25.390 --> 05:28.240
+switch needs to be configured with the
+
+42
+05:31.350 --> 05:38.160
+second last IP address. I didn't do that here but it's essentially one less than the last IP address
+
+43
+05:38.640 --> 05:40.950
+so the switch needs to be configured with 77
+
+44
+05:48.290 --> 05:53.010
+so CONF T interface VLAN 1 IP address 192 168 1
+
+45
+05:56.670 --> 06:14.150
+77 slash 28. Can we ping 192 168 1 78 so can the switch ping the router make sure that I've done
+
+46
+06:14.150 --> 06:16.850
+it right, so show IP interface brief
+
+47
+06:19.740 --> 06:22.370
+switch should hopefully be able to ping itself,
+
+48
+06:27.100 --> 06:28.530
+can ping itself.
+
+49
+06:28.540 --> 06:30.340
+Let's see if we can ping the router again
+
+50
+06:39.480 --> 06:48.400
+on the router show IP interface brief, can we ping ourselves, can we ping the switch.
+
+51
+06:59.010 --> 07:01.820
+Now notice the switch has some old configuration on it.
+
+52
+07:11.700 --> 07:18.510
+So that may be causing problems sometimes in packet tracer when you make changes things break you may
+
+53
+07:18.510 --> 07:24.940
+have to restart packet tracer let's just make sure that I haven't done something dumb that all looks
+
+54
+07:24.940 --> 07:33.280
+right, that all looks right shows CDP neighbor details we can see the Internet router
+
+55
+07:36.340 --> 07:40.300
+we can also see the switch with the correct IP address.
+
+56
+07:43.650 --> 07:52.820
+Local port is this, port on the other side is that, on the side shows CDP neighbors we can see the router
+
+57
+07:53.210 --> 08:02.150
+on gigabit 101 that looks good let's see if I've done something wrong, what I'm gonna do at this point
+
+58
+08:02.150 --> 08:09.530
+is save packet trace and started up again and see if that solves the problem otherwise, I'll check if
+
+59
+08:09.530 --> 08:15.410
+I made a mistake, packet tracer has booted up again here's the router
+
+60
+08:18.790 --> 08:30.850
+router 4, show run just to confirm that this IP address 192 168 1 78 slash 240 is configured on the
+
+61
+08:30.850 --> 08:31.330
+router
+
+62
+08:35.340 --> 08:38.460
+and on the switch, switch 3
+
+63
+08:45.850 --> 08:58.390
+show run this IP address 192 168 1 77  slash 28 is configured on the switch that's the
+
+64
+08:59.020 --> 09:08.260
+second last IP address so ping 192 168 1 77 switch can ping itself cannot ping the router
+
+65
+09:11.480 --> 09:12.770
+still having problems.
+
+66
+09:19.910 --> 09:22.520
+I'm gonna remove this default gateway command.
+
+67
+09:22.600 --> 09:24.430
+Change it IP default gateway
+
+68
+09:28.930 --> 09:34.220
+192 168 1 78
+
+69
+09:34.380 --> 09:37.020
+Let's see if that solves the problems
+
+70
+09:39.630 --> 09:41.520
+and it did, on the real world.
+
+71
+09:41.520 --> 09:44.070
+That's not correct, in the real world
+
+72
+09:44.160 --> 09:50.970
+you don't need a default gateway to access a local device but that's a problem in packet tracer.
+
+73
+09:50.970 --> 09:55.930
+So the issue here was the switch wasn't working per 
+
+74
+09:56.070 --> 10:02.460
+a real switch in the real world you wouldn't have to do that even though the default gateway is wrong
+
+75
+10:03.390 --> 10:06.180
+because they are on the same subnet,
+
+76
+10:06.630 --> 10:10.100
+they would still work.
+
+77
+10:10.950 --> 10:13.580
+In other words they'd still be able to ping each other.
+
+78
+10:13.770 --> 10:16.660
+Can the switch now ping Cisco.com.
+
+79
+10:16.830 --> 10:26.890
+Now I've rebooted Packet Tracer so it may take it a while to sort itself out, packet tracer is great
+
+80
+10:27.130 --> 10:35.350
+but it does sometimes do things that are not real-world and sometimes has weird issues but at least
+
+81
+10:35.350 --> 10:38.580
+it gives us the ability to test things and to learn.
+
+82
+10:39.430 --> 10:41.710
+Okay, so the switch can now ping Cisco.com
+
+83
+10:41.710 --> 10:42.760
+So that's good,
+
+84
+10:42.790 --> 10:46.600
+We have IP connectivity from the switch to the Internet.
+
+85
+10:46.600 --> 10:53.920
+We then need to configure the PCs with the first IP addresses in the subnet.
+
+86
+10:54.020 --> 10:57.500
+So on the PC FastEthernet zero interface
+
+87
+10:57.760 --> 11:01.420
+192 168 1
+
+88
+11:01.690 --> 11:06.550
+IP address is gonna be 65, first IP address in the subnet.
+
+89
+11:06.550 --> 11:21.100
+So 65 subnet mask is 255 255 255 240, default gateway is gonna be 192 168 1 78 DNS server
+
+90
+11:21.610 --> 11:24.750
+is gonna be Google.
+
+91
+11:24.970 --> 11:31.140
+So hopefully this PC should be able to ping Cisco.com which it can and hopefully should be
+
+92
+11:31.140 --> 11:36.670
+able to browse to Cisco.com which it can
+
+93
+11:36.720 --> 11:40.050
+and what about facebook.com.
+
+94
+11:40.050 --> 11:43.890
+You can also browse to facebook.com so that works well.
+
+95
+11:44.160 --> 11:57.470
+Next PC, IP address is gonna be statically configured 192 168 1, it's gonna be 66 next IP address in
+
+96
+11:57.470 --> 12:11.370
+the subnet 255 255 255 240 default gateway is gonna be 192 168 1 78, so can it ping Cisco.com
+
+97
+12:11.370 --> 12:14.370
+spelled that wrong
+
+98
+12:17.350 --> 12:22.670
+can't find the domain name let's just check that I configured the DNS forgot to do that.
+
+99
+12:22.670 --> 12:33.350
+So DNS needs to be configured it can ping Cisco.com can it get to Cisco.com? Yes, it can.
+
+100
+12:33.470 --> 12:35.760
+Can it get to facebook.com?
+
+101
+12:35.780 --> 12:37.180
+Yes, it can.
+
+102
+12:37.370 --> 12:50.970
+And then the last PC in that subnet needs a static IP address of 192 168 1 67, 255 255 255
+
+103
+12:50.970 --> 13:05.200
+240, default gateways 192 168 1 78, DNS server is Google we should be able to ping Cisco.com
+
+104
+13:05.320 --> 13:13.210
+which we can and hopefully at this point we'll be able to browse to Cisco which we can and browse to
+
+105
+13:13.210 --> 13:15.760
+facebook.com which we can.
+
+106
+13:15.760 --> 13:19.670
+So I've successfully completed this lab.
+
+107
+13:20.080 --> 13:30.220
+I've taken the subnet and broken it up into as many subnets as possible each having 8 hosts per subnet.
+
+108
+13:30.220 --> 13:31.840
+That's what we did there.
+
+109
+13:31.930 --> 13:41.530
+Then I took the last subnet and subnet ID it again and used these two subnets for the WAN links.
+
+110
+13:41.680 --> 13:50.500
+Notice we still have these two subnets available and these two subnets available, so we've conserved
+
+111
+13:50.530 --> 13:56.500
+IP addresses in our network rather than using a slash 26 which is very wasteful.
+
+112
+13:56.500 --> 14:05.230
+On a WAN link we're using slash 30s on two WAN links and we've used one of the subnets for a site and
+
+113
+14:05.230 --> 14:06.280
+we've got more spare.
+
+114
+14:06.610 --> 14:10.040
+So what we should do is subnet this one as well.
+
+115
+14:10.120 --> 14:15.580
+So what you would do in the real world is make this a slash 30 and better utilize your IP addresses
+
+116
+14:16.420 --> 14:18.250
+but that's okay for this lab.
+
+117
+14:18.340 --> 14:19.990
+I've completed this lab.
+
+118
+14:20.020 --> 14:21.100
+How did you do?
+
+119
+14:21.100 --> 14:24.300
+Were you able to complete the lab yourself.
+
+120
+14:24.310 --> 14:27.850
+IP subnetting is really important for the CCNA exam.
+
+121
+14:27.880 --> 14:34.750
+Make sure you understand how to use variable length, subnet masks like I've done here.
+
+122
+14:34.750 --> 14:40.090
+Make sure that you understand how to subnet and how to allocate IP addresses to devices in subnets.

@@ -1,0 +1,349 @@
+WEBVTT
+
+0
+00:11.350 --> 00:17.190
+In the previous vlog, I explained why you would use a loopback interface and I gave you one reason.
+
+1
+00:17.560 --> 00:20.630
+Let's look at another reason.
+
+2
+00:26.120 --> 00:31.910
+Another reason why you wanna use a loopback is because routing protocols such as OSPF use the loopback
+
+3
+00:32.510 --> 00:36.890
+to determine the router IDs of the routers in the OSPF network.
+
+4
+00:37.270 --> 00:38.300
+So on these routers
+
+5
+00:40.930 --> 00:42.940
+show IP interface brief.
+
+6
+00:44.080 --> 00:50.260
+I've configured loopback 0 with this IP address and I've also configured the loopbacks on each
+
+7
+00:50.260 --> 00:58.130
+router, so router 1 is 192 168 1.1, router 2 is .2, router 3 is .3
+
+8
+00:58.150 --> 00:59.680
+Now why is that important?
+
+9
+00:59.680 --> 01:01.510
+It's important for routing protocols.
+
+10
+01:01.570 --> 01:09.860
+So when we enable a routing protocol such as OSPF it selects a router ID for itself.
+
+11
+01:10.330 --> 01:18.970
+So I'm gonna enable OSPF on all interfaces on this router and just simply put them in area 0.
+
+12
+01:19.540 --> 01:33.190
+So show IP OSPF interface brief, OSPF is enabled on all interfaces on the router show IP OSPF interface.
+
+13
+01:33.540 --> 01:35.510
+Notice here show loopback is 0
+
+14
+01:35.650 --> 01:44.280
+has this IP address configured in area 0 but the router ID is 192 168 1.2.
+
+15
+01:44.290 --> 01:49.670
+In other words, the router ID selected is the highest IP address of any interface
+
+16
+01:49.750 --> 01:54.230
+and if they are loopbacks the loopback override the physical interfaces.
+
+17
+01:54.310 --> 01:58.420
+So the router ID is selected on the highest loopback address.
+
+18
+01:58.420 --> 02:01.250
+In this case 192 168 1.2.
+
+19
+02:01.270 --> 02:08.620
+Now that's important because in OSPF a router is identified by its router ID it's kinda like your name.
+
+20
+02:08.620 --> 02:09.820
+So my name is David.
+
+21
+02:10.120 --> 02:14.050
+It would be terrible if my name changed every day, whenever there was a problem.
+
+22
+02:14.260 --> 02:15.800
+And that's the issue with OSPF.
+
+23
+02:16.000 --> 02:21.820
+If you don't use a loopback interface and the router ID was selected off a physical interface and that
+
+24
+02:21.820 --> 02:26.590
+interface went down the router ID would change but here it's consistent.
+
+25
+02:26.680 --> 02:35.110
+Notice on gigabit 01 the router ID is still 192 168 1.2
+
+26
+02:35.160 --> 02:36.590
+So let's have a look at the problem.
+
+27
+02:36.880 --> 02:38.750
+On router 1
+
+28
+02:39.150 --> 02:45.110
+we've got two IP addresses configured on physical interfaces and then we've got these loopback interfaces.
+
+29
+02:45.150 --> 02:50.350
+But what I'm gonna do now is remove the loopback interfaces of router 1.
+
+30
+02:50.730 --> 02:56.850
+So show IP interface brief, do that again.
+
+31
+02:56.850 --> 03:00.670
+We only have IP addresses on the physical interfaces.
+
+32
+03:01.080 --> 03:13.110
+So now router, OSPF, 1 network and I'll just enable OSPF on all interfaces once again, notice a neighbor relationship
+
+33
+03:13.110 --> 03:14.080
+has established.
+
+34
+03:14.130 --> 03:15.170
+We've actually got two.
+
+35
+03:15.510 --> 03:24.480
+But notice the neighbor ID is 192 168 1.2 whereas on this side the neighbor I.D. is 10.1.
+
+36
+03:24.580 --> 03:29.100
+2.1 the highest IP address of a physical interface.
+
+37
+03:29.310 --> 03:39.670
+This loopback doesn't exist on router 1, so on router 2 show IP OSPF neighbor, neighbor relationship
+
+38
+03:39.670 --> 03:47.030
+is full and established to 10.1.2.1, on router 1 show IP OSPF neighbor notice the difference.
+
+39
+03:47.170 --> 03:54.890
+Neighbor ID is 192 168 1.2 IP address on the interface that the neighbor is using is 10.1
+
+40
+03:54.900 --> 03:56.130
+.2.2
+
+41
+03:56.410 --> 04:01.110
+and on this interface gigabit 00, it's 10.1.1.2.
+
+42
+04:01.510 --> 04:04.290
+So the same neighbor ID the loopback
+
+43
+04:04.470 --> 04:12.620
+and just to make sure that it's not confusing I'll add that here as well, we've got this loopback configured on
+
+44
+04:12.620 --> 04:13.340
+router 2
+
+45
+04:13.340 --> 04:20.580
+in addition to 2.2.2.2. On router 2 now, when we look at the neighbor relationship 
+
+46
+04:20.580 --> 04:26.070
+with router 1, neighbor ID is 10.1.2.1 that's this interface
+
+47
+04:26.080 --> 04:33.010
+gigabit 01 the IP addresses and the physical interfaces are those on router 1.
+
+48
+04:33.120 --> 04:36.330
+So why is the router ID important?
+
+49
+04:36.330 --> 04:43.140
+Well when an interface goes down and the routers rebooted the router ID will change and in certain cases
+
+50
+04:43.140 --> 04:49.950
+in OSPF we specify the router ID in commands. One of those cases which you don't need to know
+
+51
+04:49.950 --> 04:54.260
+for CCNA is a virtual links. In this command
+
+52
+04:54.410 --> 05:03.340
+we're specifying the router ID of a remote router. A virtual link allows us to create a virtual transit
+
+53
+05:03.700 --> 05:05.290
+across an area.
+
+54
+05:05.590 --> 05:11.650
+In this example a backbone area is on the left, area 1 is in the middle and area 2 is on the right.
+
+55
+05:12.310 --> 05:12.630
+Area 2
+
+56
+05:12.640 --> 05:20.740
+is separated from the backbone area by area 1 but a virtual link allows us to tunnel area 0
+
+57
+05:20.950 --> 05:27.460
+across area 1 and fulfill one of the requirements of OSPF which states that all areas have to
+
+58
+05:27.460 --> 05:29.630
+be adjacent to area 0.
+
+59
+05:29.950 --> 05:40.230
+Now the problem is in our topology at the moment on router 1, show IP OSPF  interface
+
+60
+05:40.440 --> 05:44.720
+notice the router ID is 10.1.2.1.
+
+61
+05:44.800 --> 05:51.200
+So that's the router ID of the router and you can see that on both interfaces. What I'm gonna do however
+
+62
+05:51.230 --> 05:52.450
+is shut gigabit
+
+63
+05:52.810 --> 06:04.460
+01 down so currently show IP OSPF interface shows that this is the router ID. If the router
+
+64
+06:04.910 --> 06:09.610
+rebooted the router ID would change and instead of rebooting the router.
+
+65
+06:09.680 --> 06:16.250
+I'm gonna type clear IP OSPF, process and I'm gonna clear all OSPF processes
+
+66
+06:18.960 --> 06:22.460
+so show IP OSPF interface.
+
+67
+06:22.710 --> 06:25.350
+In this case the router ID didn't change
+
+68
+06:25.650 --> 06:31.650
+so what I'll do is save the configuration and reboot the router.
+
+69
+06:31.670 --> 06:33.090
+So why is that a problem.
+
+70
+06:33.290 --> 06:39.710
+If the interface that you're using was selected by the router at the router ID and you configured that
+
+71
+06:39.710 --> 06:45.710
+router ID in this command and the interface went down and the router rebooted this command would no
+
+72
+06:45.710 --> 06:49.040
+longer work because the router ID had changed.
+
+73
+06:49.180 --> 06:55.010
+Notice Cisco tell you the router ID is usually the highest IP address on the box or the highest loopback
+
+74
+06:55.010 --> 06:56.370
+address if one exists.
+
+75
+06:57.230 --> 07:03.300
+The router ID is only calculated at boot time or at any time when the OSPF process is restarted.
+
+76
+07:03.710 --> 07:05.010
+So what's the recommendation.
+
+77
+07:06.160 --> 07:11.790
+For OSPF specify a loopback address and then manually configure the router ID.
+
+78
+07:12.140 --> 07:17.710
+So the routers rebooted, show IP OSPF interface.
+
+79
+07:17.760 --> 07:19.790
+Notice the router ID has changed.
+
+80
+07:19.860 --> 07:26.700
+It's now 10.1.1.1 that means if you're using a virtual link as an example the virtual
+
+81
+07:26.700 --> 07:29.860
+link would break and your network would break.
+
+82
+07:30.340 --> 07:32.710
+OK that concludes this vlog entry.
+
+83
+07:33.000 --> 07:34.920
+Thanks Pedro for the question.
+
+84
+07:34.920 --> 07:38.310
+Please feel free to send me questions and I'll do my best to answer all of them.
+
+85
+07:38.630 --> 07:39.680
+I'll see you tomorrow.
+
+86
+07:40.020 --> 07:40.740
+All the very best.
